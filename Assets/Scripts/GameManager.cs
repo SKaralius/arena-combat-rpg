@@ -6,12 +6,23 @@ public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
 public class GameManager : MonoBehaviour
 {
-    public BattleState state;
+    private BattleState state;
     private GameObject player;
     private Unit playerUnit;
     private GameObject opponent;
     private Unit opponentUnit;
-    // Start is called before the first frame update
+
+    public static GameManager instance;
+    #region Singleton logic
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+    }
+    #endregion
+
     void Start()
     {
         player = GameObject.Find("PlayerUnit");
@@ -19,11 +30,11 @@ public class GameManager : MonoBehaviour
 
         opponent = GameObject.Find("Unit");
         opponentUnit = opponent.GetComponent<Unit>();
-        state = BattleState.START;
+        BattleStateChange(BattleState.START);
         // Opponent introduction
         // Start a coroutine to give some time for the player to take in what's happening
         // Change state to player turn in the coroutine and call playerturn function
-        state = BattleState.PLAYERTURN;
+        BattleStateChange(BattleState.PLAYERTURN);
     }
 
     void PlayerTurn()
@@ -38,22 +49,22 @@ public class GameManager : MonoBehaviour
         float remainingHealth = playerUnit.TakeDamage(25f);
         if (remainingHealth <= 0)
         {
-            state = BattleState.LOST;
+            BattleStateChange(BattleState.LOST);
         }
         else
         {
-            state = BattleState.PLAYERTURN;
+            BattleStateChange(BattleState.PLAYERTURN);
         }
     }
 
     IEnumerator PlayerAttack()
     {
-        state = BattleState.ENEMYTURN;
+        BattleStateChange(BattleState.ENEMYTURN);
         float remainingHealth = opponentUnit.TakeDamage(player.GetComponent<Stats>().GetDamage());
         yield return new WaitForSeconds(1f);
         if (remainingHealth <= 0)
         {
-            state = BattleState.WON;
+            BattleStateChange(BattleState.WON);
         } else
         {
             StartCoroutine(EnemyTurn());
@@ -68,5 +79,10 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(PlayerAttack());
         }
+    }
+    public void BattleStateChange(BattleState bs)
+    {
+        state = bs;
+        EventManager.BattleStateChanged(bs);
     }
 }

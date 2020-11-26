@@ -5,6 +5,7 @@ using UnityEngine;
 public class Stats : MonoBehaviour
 {
     public float damage = 10f;
+    public float moveSpeed = 0.5f;
     private EquippedItems eqItems;
     private void Awake()
     {

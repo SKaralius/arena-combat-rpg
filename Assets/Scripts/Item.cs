@@ -17,6 +17,14 @@ public interface IEquipable
 {
     EquipSlot Slot { get; }
 }
+public interface IStats
+{
+    float Damage { get; }
+    float Armor { get; }
+    float MoveSpeed { get; }
+    float Health { get; }
+    float HealthRegen { get; }
+}
 public class Weapon : IItem, IEquipable
 {
     // IItem

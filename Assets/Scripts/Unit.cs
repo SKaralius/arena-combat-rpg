@@ -7,10 +7,12 @@ public class Unit : MonoBehaviour
     public GameObject healthBarPrefab;
     public GameObject cam = null;
     private GameObject healthBar;
+    private HealthBar hb;
     private float health = 100f;
     private void Awake()
     {
         healthBar = Instantiate(healthBarPrefab, transform);
+        hb = healthBar.GetComponent<HealthBar>();
         healthBar.transform.position = new Vector2(transform.position.x, transform.position.y);
         healthBar.transform.localPosition = new Vector2(healthBar.transform.localPosition.x - 0.2f, healthBar.transform.localPosition.y + 0.15f);
         // If unit is player
@@ -26,7 +28,7 @@ public class Unit : MonoBehaviour
         {
             Die();
         }
-        healthBar.GetComponent<HealthBar>().UpdateHealthBar(health);
+        hb.UpdateHealthBar(health);
         return health;
     }
 

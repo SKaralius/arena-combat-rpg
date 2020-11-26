@@ -17,6 +17,9 @@ public class EventManager : MonoBehaviour
     public delegate void StatsEventHandler();
     public static event StatsEventHandler OnStatsChanged;
 
+    public delegate void BattleStateEventHandler(BattleState state);
+    public static event BattleStateEventHandler OnBattleStateChange;
+
     //public delegate void PlayerLevelEventHandler();
     //public static event PlayerLevelEventHandler OnPlayerLevelChange;
 
@@ -53,6 +56,11 @@ public class EventManager : MonoBehaviour
     public static void HealthChanged(int currentHealth, int maxHealth)
     {
         OnPlayerHealthChanged?.Invoke(currentHealth, maxHealth);
+    }
+
+    public static void BattleStateChanged(BattleState state)
+    {
+        OnBattleStateChange?.Invoke(state);
     }
 
     //public static void StatsChanged()
