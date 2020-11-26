@@ -17,15 +17,14 @@ public interface IEquipable
 {
     EquipSlot Slot { get; }
 }
+
+public enum EStats
+{ Damage, Armor, MoveSpeed, Health, HealthRegen, Evasion }
 public interface IStats
 {
-    float Damage { get; }
-    float Armor { get; }
-    float MoveSpeed { get; }
-    float Health { get; }
-    float HealthRegen { get; }
+    float[] Stats { get; set; }
 }
-public class Weapon : IItem, IEquipable
+public abstract class EquipableItem : IItem, IStats, IEquipable
 {
     // IItem
     public string Name { get; }
@@ -35,16 +34,61 @@ public class Weapon : IItem, IEquipable
         Debug.Log($"{Name} is sold.");
     }
     // IEquipable
-    public EquipSlot Slot { get; } = EquipSlot.RightWeapon;
+    public abstract EquipSlot Slot { get; }
+    // Stats
 
-    // Weapon
+    public float[] Stats { get; set; }
 
-    public float Damage { get; }
-
-    public Weapon(string _name, float _sellPrice, float _damage)
+    public EquipableItem(string _name, float _sellPrice, float _damage = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0)
     {
+        Stats = new float[6];
         Name = _name;
         SellPrice = _sellPrice;
-        Damage = _damage;
+        Stats[(int)EStats.Damage] = _damage;
+        Stats[(int)EStats.MoveSpeed] = _moveSpeed;
+        Stats[(int)EStats.Health] = _health;
+        Stats[(int)EStats.HealthRegen] = _healthRegen;
+        Stats[(int)EStats.Evasion] = _evasion;
+    }
+}
+public class Head : EquipableItem
+{
+    public override EquipSlot Slot { get; } = EquipSlot.Head;
+
+    public Head(string _name, float _sellPrice, float _damage = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0) : base(_name, _sellPrice, _damage, _moveSpeed, _health, _healthRegen, _evasion)
+    {
+    }
+}
+public class RightWeapon : EquipableItem
+{
+    public override EquipSlot Slot { get; } = EquipSlot.RightWeapon;
+
+    public RightWeapon(string _name, float _sellPrice, float _damage = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0) : base(_name, _sellPrice, _damage, _moveSpeed, _health, _healthRegen, _evasion)
+    {
+    }
+}
+public class LeftWeapon : EquipableItem
+{
+    public override EquipSlot Slot { get; } = EquipSlot.LeftWeapon;
+
+    public LeftWeapon(string _name, float _sellPrice, float _damage = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0) : base(_name, _sellPrice, _damage, _moveSpeed, _health, _healthRegen, _evasion)
+    {
+    }
+}
+public class Chest : EquipableItem
+{
+    public override EquipSlot Slot { get; } = EquipSlot.Chest;
+
+    public Chest(string _name, float _sellPrice, float _damage = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0) : base(_name, _sellPrice, _damage, _moveSpeed, _health, _healthRegen, _evasion)
+    {
+    }
+}
+
+public class Legs : EquipableItem
+{
+    public override EquipSlot Slot { get; } = EquipSlot.Legs;
+
+    public Legs(string _name, float _sellPrice, float _damage = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0) : base(_name, _sellPrice, _damage, _moveSpeed, _health, _healthRegen, _evasion)
+    {
     }
 }

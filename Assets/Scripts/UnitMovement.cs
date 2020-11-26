@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class UnitMovement : MonoBehaviour
 {
-    private Stats playerStats;
+    private UnitStats playerStats;
     private void Awake()
     {
-        playerStats = GetComponent<Stats>();
+        playerStats = GetComponent<UnitStats>();
     }
     public void MoveUnit(int isRight)
     {
-        transform.Translate(new Vector3((playerStats.moveSpeed * isRight), 0, 0 ));
+        transform.Translate(new Vector3((playerStats.GetMoveSpeed() * isRight), 0, 0 ));
     }
 }

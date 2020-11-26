@@ -22,8 +22,11 @@ public class InventoryManager : MonoBehaviour
     #endregion
     private void Start()
     {
-        AddItemToInventory(new Weapon("Cool Sword", 69, 50));
-        AddItemToInventory(new Weapon("Lame Sword", 69, 5));
+        AddItemToInventory(new RightWeapon("Cool Sword", 69, 50));
+        AddItemToInventory(new LeftWeapon("Lame Sword", 69, 5));
+        AddItemToInventory(new Chest("Cool Chest", 69, _health: 20, _damage: 17));
+        AddItemToInventory(new Legs("Cool Legs", 69, _health: 20, _damage: 40));
+        AddItemToInventory(new Head("Cool Head", 69, _health: 20, _damage: 40));
     }
     public void AddItemToInventory(IItem item)
     {

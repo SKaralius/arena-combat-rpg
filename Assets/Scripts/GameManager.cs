@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     IEnumerator PlayerAttack()
     {
         BattleStateChange(BattleState.ENEMYTURN);
-        float remainingHealth = opponentUnit.TakeDamage(player.GetComponent<Stats>().GetDamage());
+        float remainingHealth = opponentUnit.TakeDamage(player.GetComponent<UnitStats>().GetDamage());
         yield return new WaitForSeconds(1f);
         if (remainingHealth <= 0)
         {
