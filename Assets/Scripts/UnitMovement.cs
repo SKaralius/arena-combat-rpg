@@ -11,6 +11,6 @@ public class UnitMovement : MonoBehaviour
     }
     public void MoveUnit(int isRight)
     {
-        transform.Translate(new Vector3((playerStats.GetMoveSpeed() * isRight), 0, 0 ));
+        transform.Translate(new Vector3((playerStats.GetStat(EStats.MoveSpeed) * isRight), 0, 0 ));
     }
 }

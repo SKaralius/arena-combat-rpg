@@ -22,11 +22,15 @@ public class InventoryManager : MonoBehaviour
     #endregion
     private void Start()
     {
-        AddItemToInventory(new RightWeapon("Cool Sword", 69, 50));
-        AddItemToInventory(new LeftWeapon("Lame Sword", 69, 5));
-        AddItemToInventory(new Chest("Cool Chest", 69, _health: 20, _damage: 17));
-        AddItemToInventory(new Legs("Cool Legs", 69, _health: 20, _damage: 40));
-        AddItemToInventory(new Head("Cool Head", 69, _health: 20, _damage: 40));
+        EventManager.OnItemEquipped += RemoveItemFromInventory;
+        EventManager.OnItemUnequipped += AddItemToInventory;
+        AddItemToInventory(new EquipableItem(EquipSlot.RightWeapon, "Cool Sword", 69, 50));
+        AddItemToInventory(new EquipableItem(EquipSlot.LeftWeapon, "Lame Sword", 69, 5));
+        AddItemToInventory(new EquipableItem(EquipSlot.Chest, "Cool Chest", 69, _health: 20, _damage: 17));
+        AddItemToInventory(new EquipableItem(EquipSlot.Legs, "Cool Legs", 69, _health: 20, _damage: 40));
+        AddItemToInventory(new EquipableItem(EquipSlot.Head, "Cool Head", 69, _health: 20, _damage: 40));
+        AddItemToInventory(new EquipableItem(EquipSlot.Chest, "Evasion Garb", 69, _evasion: 40));
+        AddItemToInventory(new EquipableItem(EquipSlot.Chest, "Health Garb", 69, _health: 500));
     }
     public void AddItemToInventory(IItem item)
     {

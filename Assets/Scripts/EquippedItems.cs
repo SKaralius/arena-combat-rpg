@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EquippedItems : MonoBehaviour
 {
+    public bool isPlayer;
     public IEquipable[] equipedItems = new IEquipable[5];
     public bool IsItemEquipped(IEquipable item)
     {
@@ -28,16 +29,17 @@ public class EquippedItems : MonoBehaviour
         }
         equipedItems[(int)item.Slot] = item;
         IItem i = (IItem)item;
-        InventoryManager.instance.RemoveItemFromInventory(i);
-        EventManager.ItemEquipped();
+        Debug.Log(isPlayer);
+        if (isPlayer)
+            EventManager.ItemEquipped(i);
         MessageSystem.Print($"{i.Name} is equiped.");
     }
     public void Unequip(EquipSlot Slot)
     {
         IItem item = (IItem)equipedItems[(int)Slot];
         equipedItems[(int)Slot] = null;
-        InventoryManager.instance.AddItemToInventory(item);
-        EventManager.ItemUnequipped();
+        if (isPlayer)
+            EventManager.ItemUnequipped(item);
         MessageSystem.Print($"{item.Name} is unequiped.");
     }
 }

@@ -264,6 +264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 148062934}
   - component: {fileID: 148062933}
+  - component: {fileID: 148062935}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -283,6 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5969871ca673bc0499e29d87d190224e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!4 &148062934
 Transform:
   m_ObjectHideFlags: 0
@@ -290,13 +292,27 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148062932}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.37307405, y: -0.13917452, z: -12.761719}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.0394413, y: 0.27166107, z: -12.761719}
+  m_LocalScale: {x: 0.14992504, y: 0.09699321, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 1231116848}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &148062935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148062932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa6d951bea42ad846894dac0d350e95a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 407570644}
+  Enemy: {fileID: 556017691}
 --- !u!1 &235711278
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,16 +512,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266777619}
   m_CullTransparentMesh: 0
---- !u!114 &587175333 stripped
+--- !u!114 &407570644 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6874231896946712115, guid: 76c4bbd3186640849b6152d8afd7146a,
+  m_CorrespondingSourceObject: {fileID: 7516630910503097844, guid: 76c4bbd3186640849b6152d8afd7146a,
     type: 3}
   m_PrefabInstance: {fileID: 1845611728}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b6b03a0d5e39d4b8891169b2a0474e, type: 3}
+  m_Script: {fileID: 11500000, guid: b26f1566afab47f46be99b27928b2108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &556017691 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7516630910503097844, guid: 76c4bbd3186640849b6152d8afd7146a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2005086924}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b26f1566afab47f46be99b27928b2108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1150272537
@@ -931,6 +959,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3877057220045094700, guid: 76c4bbd3186640849b6152d8afd7146a,
+        type: 3}
+      propertyPath: isPlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6076900758618781929, guid: 76c4bbd3186640849b6152d8afd7146a,
         type: 3}
       propertyPath: moveSpeed
@@ -1091,8 +1124,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 587175333}
-        m_MethodName: MoveUnit
+      - m_Target: {fileID: 148062935}
+        m_MethodName: OnMoveButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1146,6 +1179,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3877057220045094700, guid: 76c4bbd3186640849b6152d8afd7146a,
+        type: 3}
+      propertyPath: isPlayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7516630910503097842, guid: 76c4bbd3186640849b6152d8afd7146a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1296,8 +1334,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 587175333}
-        m_MethodName: MoveUnit
+      - m_Target: {fileID: 148062935}
+        m_MethodName: OnMoveButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1387,7 +1425,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 148062933}
+      - m_Target: {fileID: 148062935}
         m_MethodName: OnAttackButton
         m_Mode: 1
         m_Arguments:

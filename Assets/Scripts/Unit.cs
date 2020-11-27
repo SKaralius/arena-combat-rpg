@@ -5,31 +5,40 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     public GameObject healthBarPrefab;
-    public GameObject cam = null;
     private GameObject healthBar;
     private HealthBar hb;
-    private float health = 100f;
+    private float health;
+    private UnitStats myStats;
     private void Awake()
     {
+        myStats = GetComponent<UnitStats>();
         healthBar = Instantiate(healthBarPrefab, transform);
         hb = healthBar.GetComponent<HealthBar>();
+        EventManager.OnItemEquipped += (IItem item) => { hb.UpdateHealthBar(health); };
         healthBar.transform.position = new Vector2(transform.position.x, transform.position.y);
         healthBar.transform.localPosition = new Vector2(healthBar.transform.localPosition.x - 0.2f, healthBar.transform.localPosition.y + 0.15f);
-        // If unit is player
-        if (cam)
-        {
-            Instantiate(cam, transform);
-        }
+    }
+    private void Start()
+    {
+        health = myStats.GetStat(EStats.Health);
     }
     public float TakeDamage(float _damage)
     {
-        health -= _damage;
-        if (health <= 0)
+        bool evaded = Random.Range(0, 100) < myStats.GetStat(EStats.Evasion);
+        if (evaded)
         {
-            Die();
+            MessageSystem.Print("Attack was evaded");
+            return health;
+        } else
+        {
+            health -= Mathf.Clamp((_damage - myStats.GetStat(EStats.Armor)), 0, 999);
+            if (health <= 0)
+            {
+                Die();
+            }
+            hb.UpdateHealthBar(health);
+            return health;
         }
-        hb.UpdateHealthBar(health);
-        return health;
     }
 
     private void Die()

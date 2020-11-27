@@ -12,10 +12,12 @@ public class InventorySlot : MonoBehaviour
     public Button equip;
     public Button unequip;
     private EquippedItems eqItems;
+    private BattleSystem battleSystem;
     private void Awake()
     {
         // TODO: Find by tag?
         player = GameObject.Find("PlayerUnit");
+        battleSystem = GameObject.Find("GameManager").GetComponent<BattleSystem>();
         eqItems = player.GetComponent<EquippedItems>();
     }
     public void RenderUI()
@@ -40,7 +42,7 @@ public class InventorySlot : MonoBehaviour
             {
                 equip.gameObject.SetActive(true);
                 equip.onClick.RemoveAllListeners();
-                equip.onClick.AddListener(() => { eqItems.Equip(equipable); });
+                equip.onClick.AddListener(() => { battleSystem.OnItemEquipButton(equipable); });
             }
         }
     }

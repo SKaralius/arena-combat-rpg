@@ -12,6 +12,7 @@ public class ActionsUI : MonoBehaviour
     private void UpdateActionUI(BattleState state)
     {
         GameObject actions = transform.GetChild(0).gameObject;
+        Debug.Log(state);
         if (state == BattleState.ENEMYTURN)
         {
             actions.SetActive(false);
