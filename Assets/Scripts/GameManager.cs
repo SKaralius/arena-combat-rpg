@@ -25,12 +25,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("PlayerUnit");
+        player = GameObject.FindGameObjectWithTag("Player");
         playerUnit = player.GetComponent<Unit>();
 
         opponent = GameObject.Find("Unit");
         opponentUnit = opponent.GetComponent<Unit>();
-
         opponent.GetComponent<EquippedItems>().Equip(new EquipableItem(EquipSlot.Head, "NPC armor", 54f, _armor: 100));
         opponent.GetComponent<EquippedItems>().Equip(new EquipableItem(EquipSlot.Chest, "NPC armor", 54f, _health: 100));
     }

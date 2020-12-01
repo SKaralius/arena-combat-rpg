@@ -15,7 +15,7 @@ public class PlayerTurn : State
     {
         BattleSystem.SetState(new ActionChosen(BattleSystem));
         float remainingHealth = BattleSystem.Enemy.TakeDamage(BattleSystem.Player.GetComponent<UnitStats>().GetStat(EStats.Damage));
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         //EventManager.BattleStateChanged(BattleState.ENEMYTURN);
         if (remainingHealth <= 0)
         {
@@ -29,6 +29,7 @@ public class PlayerTurn : State
     public override IEnumerator Move(int i)
     {
         BattleSystem.SetState(new ActionChosen(BattleSystem));
+        
         BattleSystem.Player.GetComponent<UnitMovement>().MoveUnit(i);
         BattleSystem.SetState(new EnemyTurn(BattleSystem));
         yield break;

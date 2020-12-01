@@ -15,8 +15,7 @@ public class InventorySlot : MonoBehaviour
     private BattleSystem battleSystem;
     private void Awake()
     {
-        // TODO: Find by tag?
-        player = GameObject.Find("PlayerUnit");
+        player = GameObject.FindGameObjectWithTag("Player");
         battleSystem = GameObject.Find("GameManager").GetComponent<BattleSystem>();
         eqItems = player.GetComponent<EquippedItems>();
     }

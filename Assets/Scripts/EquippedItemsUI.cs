@@ -9,7 +9,7 @@ public class EquippedItemsUI : MonoBehaviour
     private EquippedItems eqItems;
     void Awake()
     {
-        eqItems = GameObject.Find("PlayerUnit").GetComponent<EquippedItems>();
+        eqItems = GameObject.FindGameObjectWithTag("Player").GetComponent<EquippedItems>();
         EventManager.OnItemEquipped += UpdateUI;
         EventManager.OnItemUnequipped += UpdateUI;
         for (int i = 0; i < equipSlots.Length; i++)
