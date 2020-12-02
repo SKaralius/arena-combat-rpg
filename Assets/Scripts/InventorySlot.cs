@@ -28,6 +28,7 @@ public class InventorySlot : MonoBehaviour
         {
             itemName.text = "Empty";
             equip.gameObject.SetActive(false);
+            unequip.gameObject.SetActive(false);
         }
         if (item is IEquipable equipable)
         {
@@ -39,6 +40,7 @@ public class InventorySlot : MonoBehaviour
             }
             else
             {
+                unequip.gameObject.SetActive(false);
                 equip.gameObject.SetActive(true);
                 equip.onClick.RemoveAllListeners();
                 equip.onClick.AddListener(() => { battleSystem.OnItemEquipButton(equipable); });

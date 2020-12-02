@@ -15,8 +15,10 @@ public class PlayerTurn : State
     {
         BattleSystem.SetState(new ActionChosen(BattleSystem));
         float remainingHealth = BattleSystem.Enemy.TakeDamage(BattleSystem.Player.GetComponent<UnitStats>().GetStat(EStats.Damage));
-        yield return new WaitForSeconds(1f);
+        BattleSystem.Player.GetComponent<Animator>().SetBool("isAttacking", true);
+        yield return new WaitForSeconds(0.3f);
         //EventManager.BattleStateChanged(BattleState.ENEMYTURN);
+        BattleSystem.Player.GetComponent<Animator>().SetBool("isAttacking", false);
         if (remainingHealth <= 0)
         {
             BattleSystem.SetState(new Won(BattleSystem));
@@ -29,10 +31,11 @@ public class PlayerTurn : State
     public override IEnumerator Move(int i)
     {
         BattleSystem.SetState(new ActionChosen(BattleSystem));
-        
+        BattleSystem.Player.GetComponent<Animator>().SetBool("isWalking", true);
         BattleSystem.Player.GetComponent<UnitMovement>().MoveUnit(i);
+        yield return new WaitForSeconds(1f);
+        BattleSystem.Player.GetComponent<Animator>().SetBool("isWalking", false);
         BattleSystem.SetState(new EnemyTurn(BattleSystem));
-        yield break;
     }
     public override IEnumerator Equip(IEquipable equipable)
     {

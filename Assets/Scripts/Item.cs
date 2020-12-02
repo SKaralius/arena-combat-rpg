@@ -16,6 +16,7 @@ public interface IItem
 public interface IEquipable
 {
     EquipSlot Slot { get; }
+    (string, string) SpriteCategoryLabel { get; }
 }
 
 public enum EStats
@@ -28,6 +29,7 @@ public class EquipableItem : IItem, IStats, IEquipable
 {
     // IItem
     public string Name { get; }
+    public (string, string) SpriteCategoryLabel { get; }
     public float SellPrice { get; }
     public void Sell()
     {
@@ -39,9 +41,10 @@ public class EquipableItem : IItem, IStats, IEquipable
 
     public float[] Stats { get; set; }
 
-    public EquipableItem(EquipSlot slot ,string _name, float _sellPrice, float _damage = 0, float _armor = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0)
+    public EquipableItem(EquipSlot slot ,string _name, (string, string) spriteCategoryLabel, float _sellPrice, float _damage = 0, float _armor = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0)
     {
         Slot = slot;
+        SpriteCategoryLabel = spriteCategoryLabel;
         Stats = new float[6];
         Name = _name;
         SellPrice = _sellPrice;
@@ -53,44 +56,3 @@ public class EquipableItem : IItem, IStats, IEquipable
         Stats[(int)EStats.Evasion] = _evasion;
     }
 }
-//public class Head : EquipableItem
-//{
-//    public override EquipSlot Slot { get; } = EquipSlot.Head;
-
-//    public Head(string _name, float _sellPrice, float _damage = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0) : base(_name, _sellPrice, _damage, _moveSpeed, _health, _healthRegen, _evasion)
-//    {
-//    }
-//}
-//public class RightWeapon : EquipableItem
-//{
-//    public override EquipSlot Slot { get; } = EquipSlot.RightWeapon;
-
-//    public RightWeapon(string _name, float _sellPrice, float _damage = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0) : base(_name, _sellPrice, _damage, _moveSpeed, _health, _healthRegen, _evasion)
-//    {
-//    }
-//}
-//public class LeftWeapon : EquipableItem
-//{
-//    public override EquipSlot Slot { get; } = EquipSlot.LeftWeapon;
-
-//    public LeftWeapon(string _name, float _sellPrice, float _damage = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0) : base(_name, _sellPrice, _damage, _moveSpeed, _health, _healthRegen, _evasion)
-//    {
-//    }
-//}
-//public class Chest : EquipableItem
-//{
-//    public override EquipSlot Slot { get; } = EquipSlot.Chest;
-
-//    public Chest(string _name, float _sellPrice, float _damage = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0) : base(_name, _sellPrice, _damage, _moveSpeed, _health, _healthRegen, _evasion)
-//    {
-//    }
-//}
-
-//public class Legs : EquipableItem
-//{
-//    public override EquipSlot Slot { get; } = EquipSlot.Legs;
-
-//    public Legs(string _name, float _sellPrice, float _damage = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0) : base(_name, _sellPrice, _damage, _moveSpeed, _health, _healthRegen, _evasion)
-//    {
-//    }
-//}

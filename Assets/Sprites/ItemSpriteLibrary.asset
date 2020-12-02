@@ -16,11 +16,124 @@ MonoBehaviour:
   - m_Name: Weapon
     m_Hash: 1855955664
     m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: Sword
+      m_Hash: 1529145355
+      m_Sprite: {fileID: -3753491434264659939, guid: 4179c2f91026f644798f769c0d4779a7,
+        type: 3}
     - m_Name: Staff
       m_Hash: -2085626730
       m_Sprite: {fileID: 3730551363722196761, guid: 6167c008dc49b854088024df7b07e575,
         type: 3}
-    - m_Name: Sword
-      m_Hash: 1529145355
-      m_Sprite: {fileID: -3753491434264659939, guid: 4179c2f91026f644798f769c0d4779a7,
+  - m_Name: Helmet
+    m_Hash: 2097605520
+    m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: First
+      m_Hash: 1404092755
+      m_Sprite: {fileID: 3251893266372806981, guid: 01d035d61a16d4a4d8786587b38cbe9e,
+        type: 3}
+  - m_Name: Chest
+    m_Hash: 981834931
+    m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: First
+      m_Hash: 1404092755
+      m_Sprite: {fileID: -6073033595809815343, guid: 01d035d61a16d4a4d8786587b38cbe9e,
+        type: 3}
+  - m_Name: Right_Arm
+    m_Hash: 533823759
+    m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: First
+      m_Hash: 1404092755
+      m_Sprite: {fileID: -7296068628108137542, guid: 01d035d61a16d4a4d8786587b38cbe9e,
+        type: 3}
+  - m_Name: Right_Hand
+    m_Hash: 1077446588
+    m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: First
+      m_Hash: 1404092755
+      m_Sprite: {fileID: -7020002823420119577, guid: 01d035d61a16d4a4d8786587b38cbe9e,
+        type: 3}
+  - m_Name: Left_Arm
+    m_Hash: -597868717
+    m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: First
+      m_Hash: 1404092755
+      m_Sprite: {fileID: -7036491553697919875, guid: 01d035d61a16d4a4d8786587b38cbe9e,
+        type: 3}
+  - m_Name: Left_Hand
+    m_Hash: 572921565
+    m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: First
+      m_Hash: 1404092755
+      m_Sprite: {fileID: -7919208554501539805, guid: 01d035d61a16d4a4d8786587b38cbe9e,
+        type: 3}
+  - m_Name: Pelvis
+    m_Hash: -1339949736
+    m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: First
+      m_Hash: 1404092755
+      m_Sprite: {fileID: -2552567330557913962, guid: 01d035d61a16d4a4d8786587b38cbe9e,
+        type: 3}
+  - m_Name: Right_Leg
+    m_Hash: -228622380
+    m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: First
+      m_Hash: 1404092755
+      m_Sprite: {fileID: 9183642528577328972, guid: 01d035d61a16d4a4d8786587b38cbe9e,
+        type: 3}
+  - m_Name: Right_Foot
+    m_Hash: -1361707872
+    m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: First
+      m_Hash: 1404092755
+      m_Sprite: {fileID: -4408275354885521341, guid: 01d035d61a16d4a4d8786587b38cbe9e,
+        type: 3}
+  - m_Name: Left_Leg
+    m_Hash: 835961224
+    m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: First
+      m_Hash: 1404092755
+      m_Sprite: {fileID: 2909653788293671279, guid: 01d035d61a16d4a4d8786587b38cbe9e,
+        type: 3}
+  - m_Name: Left_Foot
+    m_Hash: -859083327
+    m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: First
+      m_Hash: 1404092755
+      m_Sprite: {fileID: -6473511483031733441, guid: 01d035d61a16d4a4d8786587b38cbe9e,
         type: 3}

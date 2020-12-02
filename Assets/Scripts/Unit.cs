@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour
         myStats = GetComponent<UnitStats>();
         healthBar = Instantiate(healthBarPrefab, transform);
         hb = healthBar.GetComponent<HealthBar>();
-        EventManager.OnItemEquipped += (IItem item) => { hb.UpdateHealthBar(health); };
+        EventManager.OnItemEquipped += (IItem item, int who) => { hb.UpdateHealthBar(health); };
         healthBar.transform.position = new Vector2(transform.position.x, transform.position.y);
         healthBar.transform.localPosition = new Vector2(healthBar.transform.localPosition.x - 0.2f, healthBar.transform.localPosition.y + 0.15f);
     }

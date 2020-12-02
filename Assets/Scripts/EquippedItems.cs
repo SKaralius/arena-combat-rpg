@@ -29,17 +29,14 @@ public class EquippedItems : MonoBehaviour
         }
         equipedItems[(int)item.Slot] = item;
         IItem i = (IItem)item;
-        Debug.Log(isPlayer);
-        if (isPlayer)
-            EventManager.ItemEquipped(i);
+        EventManager.ItemEquipped(i, gameObject.GetHashCode());
         MessageSystem.Print($"{i.Name} is equiped.");
     }
     public void Unequip(EquipSlot Slot)
     {
         IItem item = (IItem)equipedItems[(int)Slot];
         equipedItems[(int)Slot] = null;
-        if (isPlayer)
-            EventManager.ItemUnequipped(item);
+        EventManager.ItemUnequipped(item, gameObject.GetHashCode());
         MessageSystem.Print($"{item.Name} is unequiped.");
     }
 }

@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.U2D.Animation;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
     private GameObject player;
     private Unit playerUnit;
     private GameObject opponent;
     private Unit opponentUnit;
+    public SpriteLibraryAsset itemSpriteLibrary;
 
     public static GameManager instance;
     #region Singleton logic
@@ -28,15 +29,12 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerUnit = player.GetComponent<Unit>();
 
-        opponent = GameObject.Find("Unit");
+        opponent = GameObject.FindWithTag("Enemy");
         opponentUnit = opponent.GetComponent<Unit>();
-        opponent.GetComponent<EquippedItems>().Equip(new EquipableItem(EquipSlot.Head, "NPC armor", 54f, _armor: 100));
-        opponent.GetComponent<EquippedItems>().Equip(new EquipableItem(EquipSlot.Chest, "NPC armor", 54f, _health: 100));
-    }
 
-    void PlayerTurn()
-    {
-        // Display skills, or make it clear that player can make a choice now otherwise
-        Debug.Log("Hello world");
+        opponent.GetComponent<EquippedItems>().Equip(new EquipableItem(EquipSlot.LeftWeapon, "Left Sword", ("Weapon", "Sword"), _sellPrice: 69, _damage: 5, _evasion: 30));
+        //List<string> spriteNames = new List<string>(itemSpriteLibrary.GetCategoryNames());
+        //spriteNames.ForEach((name) => Debug.Log(name));
+        //Sprite staffSprite = itemSpriteLibrary.GetSprite("Weapon", "Staff");
     }
 }

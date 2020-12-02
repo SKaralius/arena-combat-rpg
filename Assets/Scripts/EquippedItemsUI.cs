@@ -17,7 +17,7 @@ public class EquippedItemsUI : MonoBehaviour
             equipSlots[i] = Instantiate(inventorySlotPrefab, transform.GetChild(1)).GetComponent<InventorySlot>();
         }
     }
-    private void UpdateUI(IItem l)
+    private void UpdateUI(IItem l, int who)
     {
         for (int i = 0; i < equipSlots.Length; i++)
         {

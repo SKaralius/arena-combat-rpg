@@ -12,7 +12,7 @@ public class Begin : State
     public override IEnumerator Start()
     {
         MessageSystem.Print("The battle has begun");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.1f);
         BattleSystem.SetState(new PlayerTurn(BattleSystem));
     }
 

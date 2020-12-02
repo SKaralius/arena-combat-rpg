@@ -9,6 +9,7 @@ using System;
 public class InventoryManager : MonoBehaviour
 {
     public List<IItem> inventory = new List<IItem>();
+    private GameObject player;
     
     public static InventoryManager instance;
     #region Singleton logic
@@ -22,18 +23,20 @@ public class InventoryManager : MonoBehaviour
     #endregion
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         EventManager.OnItemEquipped += RemoveItemFromInventory;
         EventManager.OnItemUnequipped += AddItemToInventory;
-        AddItemToInventory(new EquipableItem(EquipSlot.RightWeapon, "Cool Sword", 69, 50));
-        AddItemToInventory(new EquipableItem(EquipSlot.LeftWeapon, "Lame Sword", 69, 5));
-        AddItemToInventory(new EquipableItem(EquipSlot.Chest, "Cool Chest", 69, _health: 20, _damage: 17));
-        AddItemToInventory(new EquipableItem(EquipSlot.Legs, "Cool Legs", 69, _health: 20, _damage: 40));
-        AddItemToInventory(new EquipableItem(EquipSlot.Head, "Cool Head", 69, _health: 20, _damage: 40));
-        AddItemToInventory(new EquipableItem(EquipSlot.Chest, "Evasion Garb", 69, _evasion: 40));
-        AddItemToInventory(new EquipableItem(EquipSlot.Chest, "Health Garb", 69, _health: 500));
+        AddItemToInventory(new EquipableItem(EquipSlot.RightWeapon, "Cool Sword", ("Weapon", "Sword"), 69, 50), player.GetHashCode());
+        AddItemToInventory(new EquipableItem(EquipSlot.RightWeapon, "Lame Staff", ("Weapon", "Staff"), 69, 5), player.GetHashCode());
+        AddItemToInventory(new EquipableItem(EquipSlot.Head, "First Helmet", ("Helmet", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
+        AddItemToInventory(new EquipableItem(EquipSlot.Chest, "First Chest", ("Chest", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
+        AddItemToInventory(new EquipableItem(EquipSlot.Legs, "First Legs", ("Pelvis", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
+        AddItemToInventory(new EquipableItem(EquipSlot.LeftWeapon, "Left Sword", ("Weapon", "Sword"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
     }
-    public void AddItemToInventory(IItem item)
+    public void AddItemToInventory(IItem item, int who)
     {
+        if (who != player.GetHashCode())
+            return;
         if (inventory.Count < 12)
         {
             inventory.Add(item);
@@ -45,8 +48,10 @@ public class InventoryManager : MonoBehaviour
         }
 
     }
-    public void RemoveItemFromInventory(IItem item)
+    public void RemoveItemFromInventory(IItem item, int who)
     {
+        if (who != player.GetHashCode())
+            return;
         inventory.Remove(item);
         EventManager.ItemRemovedFromInventory();
         MessageSystem.Print($"{item.Name} was removed from inventory");

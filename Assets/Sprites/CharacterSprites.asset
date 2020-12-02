@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: CharacterSprites
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: Head
+    m_Hash: 130111906
+    m_CategoryList:
+    - m_Name: Skeleton_White
+      m_Hash: 2044959302
+      m_Sprite: {fileID: -5916718999312741218, guid: 8280deec63dc38a4da67237961f369a5,
+        type: 3}
+    - m_Name: Skeleton_Red
+      m_Hash: 1070797734
+      m_Sprite: {fileID: 9029470547483281350, guid: 5c0efb5124e2d8f46a2645c881eb7f07,
+        type: 3}
+    - m_Name: 
+      m_Hash: 0
+      m_Sprite: {fileID: 0}

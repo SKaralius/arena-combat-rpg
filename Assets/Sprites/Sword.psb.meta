@@ -32,7 +32,7 @@ ScriptedImporter:
     alignment: 9
     spritePivot: {x: 0.016650995, y: 0.39872763}
     spritePixelsToUnits: 100
-    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteBorder: {x: 0, y: 438, z: 0, w: 541}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
     cubemapConvolution: 0
@@ -67,7 +67,7 @@ ScriptedImporter:
     originalName: 
     pivot: {x: 0.016650995, y: 0.39872763}
     alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0, y: 438, z: 0, w: 541}
     rect:
       serializedVersion: 2
       x: 0
