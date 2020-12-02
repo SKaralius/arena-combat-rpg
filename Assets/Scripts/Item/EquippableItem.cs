@@ -2,30 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EquipSlot
-{
-    Head, Chest, Legs, LeftWeapon, RightWeapon
-}
-public interface IItem
-{
-    string Name { get; }
-        
-    float SellPrice { get; }
-    void Sell();
-}
-public interface IEquipable
-{
-    EquipSlot Slot { get; }
-    (string, string) SpriteCategoryLabel { get; }
-}
-
-public enum EStats
-{ Damage, Armor, MoveSpeed, Health, HealthRegen, Evasion }
-public interface IStats
-{
-    float[] Stats { get; set; }
-}
-public class EquipableItem : IItem, IStats, IEquipable
+public class EquippableItem : IItem, IStats, IEquipable
 {
     // IItem
     public string Name { get; }
@@ -41,7 +18,7 @@ public class EquipableItem : IItem, IStats, IEquipable
 
     public float[] Stats { get; set; }
 
-    public EquipableItem(EquipSlot slot ,string _name, (string, string) spriteCategoryLabel, float _sellPrice, float _damage = 0, float _armor = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0)
+    public EquippableItem(EquipSlot slot, string _name, (string, string) spriteCategoryLabel, float _sellPrice, float _damage = 0, float _armor = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0)
     {
         Slot = slot;
         SpriteCategoryLabel = spriteCategoryLabel;

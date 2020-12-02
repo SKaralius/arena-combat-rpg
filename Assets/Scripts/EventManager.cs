@@ -16,8 +16,8 @@ public class EventManager : MonoBehaviour
     public delegate void PlayerHealthEventHandler(int currentHealth, int maxHealth);
     public static event PlayerHealthEventHandler OnPlayerHealthChanged;
 
-    public delegate void StatsEventHandler();
-    public static event StatsEventHandler OnStatsChanged;
+    //public delegate void StatsEventHandler();
+    //public static event StatsEventHandler OnStatsChanged;
 
     public delegate void BattleStateEventHandler(BattleState state);
     public static event BattleStateEventHandler OnBattleStateChange;
@@ -34,17 +34,6 @@ public class EventManager : MonoBehaviour
     {
         OnItemRemovedFromInventory?.Invoke();
     }
-
-    //public static void ItemAddedToInventory(List<Item> items)
-    //{
-    //    if (OnItemAddedToInventory != null)
-    //    {
-    //        foreach (Item item in items)
-    //        {
-    //            OnItemAddedToInventory(item);
-    //        }
-    //    }
-    //}
 
     public static void ItemEquipped(IItem item, int who)
     {

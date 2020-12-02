@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.U2D.Animation;
+using Unit;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
 public class GameManager : MonoBehaviour
 {
     private GameObject player;
-    private Unit playerUnit;
+    private Controller playerUnit;
     private GameObject opponent;
-    private Unit opponentUnit;
+    private Controller opponentUnit;
     public SpriteLibraryAsset itemSpriteLibrary;
 
     public static GameManager instance;
@@ -27,12 +28,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerUnit = player.GetComponent<Unit>();
+        playerUnit = player.GetComponent<Controller>();
 
         opponent = GameObject.FindWithTag("Enemy");
-        opponentUnit = opponent.GetComponent<Unit>();
+        opponentUnit = opponent.GetComponent<Controller>();
 
-        opponent.GetComponent<EquippedItems>().Equip(new EquipableItem(EquipSlot.LeftWeapon, "Left Sword", ("Weapon", "Sword"), _sellPrice: 69, _damage: 5, _evasion: 30));
         //List<string> spriteNames = new List<string>(itemSpriteLibrary.GetCategoryNames());
         //spriteNames.ForEach((name) => Debug.Log(name));
         //Sprite staffSprite = itemSpriteLibrary.GetSprite("Weapon", "Staff");

@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TurnFSM;
+using Unit;
 
 public class BattleSystem : StateMachine
 {
-    public Unit Player;
-    public Unit Enemy;
+    public Controller Player;
+    public Controller Enemy;
 
     // Start is called before the first frame update
     void Start()
