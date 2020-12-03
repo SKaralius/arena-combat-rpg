@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace TurnFSM
 {
@@ -10,6 +11,7 @@ namespace TurnFSM
         public override IEnumerator Start()
         {
             MessageSystem.Print("Player has won the match");
+            SceneManager.LoadScene(1);
             return base.Start();
         }
     }

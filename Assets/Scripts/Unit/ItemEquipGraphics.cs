@@ -79,5 +79,10 @@ namespace Unit
             Sprite sprite = GameManager.instance.itemSpriteLibrary.GetSprite(category, label: label);
             return sprite;
         }
+        private void OnDestroy()
+        {
+            EventManager.OnItemEquipped -= EquipItem;
+            EventManager.OnItemUnequipped -= UnequipItem;
+        }
     }
 }

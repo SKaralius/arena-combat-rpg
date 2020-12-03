@@ -37,4 +37,9 @@ public class EquippedItemsUI : MonoBehaviour
     {
         gameObject.SetActive(!gameObject.activeSelf);
     }
+    private void OnDestroy()
+    {
+        EventManager.OnItemEquipped -= UpdateUI;
+        EventManager.OnItemUnequipped -= UpdateUI;
+    }
 }

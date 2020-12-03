@@ -37,5 +37,10 @@ namespace Inventory
         {
             gameObject.SetActive(!gameObject.activeSelf);
         }
+        private void OnDestroy()
+        {
+            EventManager.OnItemAddedToInventory -= UpdateUI;
+            EventManager.OnItemRemovedFromInventory -= UpdateUI;
+        }
     }
 }
