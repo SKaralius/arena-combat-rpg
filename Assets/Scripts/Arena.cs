@@ -7,6 +7,7 @@ public class Arena : MonoBehaviour
 {
     public void StartFight()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadSceneAsync(0, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(1);
     }
 }

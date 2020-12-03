@@ -7,8 +7,10 @@ public class MainMenu : MonoBehaviour
 {
     public void StartGame()
     {
-        DontDestroyOnLoad(this);
+        // Load town
         SceneManager.LoadScene(1);
+        // Load player and player systems
+        SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
     }
     public void QuitGame()
     {

@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
 {
     private GameObject player;
     private Controller playerUnit;
-    private GameObject opponent;
-    private Controller opponentUnit;
     public SpriteLibraryAsset itemSpriteLibrary;
 
     public static GameManager instance;
@@ -29,12 +27,5 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerUnit = player.GetComponent<Controller>();
-
-        opponent = GameObject.FindWithTag("Enemy");
-        opponentUnit = opponent.GetComponent<Controller>();
-
-        //List<string> spriteNames = new List<string>(itemSpriteLibrary.GetCategoryNames());
-        //spriteNames.ForEach((name) => Debug.Log(name));
-        //Sprite staffSprite = itemSpriteLibrary.GetSprite("Weapon", "Staff");
     }
 }

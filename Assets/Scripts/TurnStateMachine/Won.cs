@@ -11,7 +11,8 @@ namespace TurnFSM
         public override IEnumerator Start()
         {
             MessageSystem.Print("Player has won the match");
-            SceneManager.LoadScene(1);
+            SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync(0);
             return base.Start();
         }
     }

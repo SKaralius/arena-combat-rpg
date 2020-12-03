@@ -14,6 +14,7 @@ public class BattleSystem : StateMachine
     {
         SetState(new Begin(this));
         EventManager.OnItemEquipped += OnItemEquipButton;
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
     }
 
     public void OnAttackButton()
