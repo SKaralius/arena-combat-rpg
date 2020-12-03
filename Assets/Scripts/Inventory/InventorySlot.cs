@@ -14,11 +14,9 @@ namespace Inventory
         public Button equip;
         public Button unequip;
         private EquippedItems eqItems;
-        private BattleSystem battleSystem;
         private void Awake()
         {
             player = GameObject.FindGameObjectWithTag("Player");
-            battleSystem = GameObject.Find("GameManager").GetComponent<BattleSystem>();
             eqItems = player.GetComponent<EquippedItems>();
         }
         public void RenderUI()
@@ -46,7 +44,7 @@ namespace Inventory
                     unequip.gameObject.SetActive(false);
                     equip.gameObject.SetActive(true);
                     equip.onClick.RemoveAllListeners();
-                    equip.onClick.AddListener(() => { battleSystem.OnItemEquipButton(equipable); });
+                    equip.onClick.AddListener(() => { eqItems.Equip(equipable); });
                 }
             }
         }

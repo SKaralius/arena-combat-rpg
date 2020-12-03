@@ -23,6 +23,7 @@ public class EquippedItems : MonoBehaviour
     }
     public void Equip(IEquipable item)
     {
+        Debug.Log(equipedItems[(int)item.Slot]);
         if(equipedItems[(int)item.Slot] != null)
         {
             Unequip(item.Slot);

@@ -39,10 +39,9 @@ namespace TurnFSM
             BattleSystem.Player.GetComponent<Animator>().SetBool("isWalking", false);
             BattleSystem.SetState(new EnemyTurn(BattleSystem));
         }
-        public override IEnumerator Equip(IEquipable equipable)
+        public override IEnumerator Equip(IItem equipable)
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
-            BattleSystem.Player.GetComponent<EquippedItems>().Equip(equipable);
             BattleSystem.SetState(new EnemyTurn(BattleSystem));
             yield break;
         }

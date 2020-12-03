@@ -13,6 +13,7 @@ public class BattleSystem : StateMachine
     void Start()
     {
         SetState(new Begin(this));
+        EventManager.OnItemEquipped += OnItemEquipButton;
     }
 
     public void OnAttackButton()
@@ -23,8 +24,12 @@ public class BattleSystem : StateMachine
     {
         StartCoroutine(State.Move(i));
     }
-    public void OnItemEquipButton(IEquipable equipable)
+    public void OnItemEquipButton(IItem item, int who)
     {
-        StartCoroutine(State.Equip(equipable));
+        StartCoroutine(State.Equip(item));
+    }
+    private void OnDestroy()
+    {
+        EventManager.OnItemEquipped -= OnItemEquipButton;
     }
 }

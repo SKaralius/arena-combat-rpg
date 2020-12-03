@@ -50,7 +50,6 @@ namespace Unit
                 equipSlots[(int)SpriteRenderSlots.LeftLeg].sprite = RetrieveSprite("Left_Leg", equipableItem.SpriteCategoryLabel.Item2);
                 equipSlots[(int)SpriteRenderSlots.LeftFoot].sprite = RetrieveSprite("Left_Foot", equipableItem.SpriteCategoryLabel.Item2);
             }
-            MessageSystem.Print($"{name} equips item");
         }
         private void UnequipItem(IItem item, int who)
         {
@@ -72,7 +71,6 @@ namespace Unit
                 equipSlots[(int)SpriteRenderSlots.LeftLeg].sprite = null;
                 equipSlots[(int)SpriteRenderSlots.LeftFoot].sprite = null;
             }
-            MessageSystem.Print($"{name} unequips item");
         }
         private Sprite RetrieveSprite(string category, string label)
         {
