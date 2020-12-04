@@ -151,6 +151,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6953383155091133224, guid: fc5fa25d361438b419dc38811001318e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953383155091133226, guid: fc5fa25d361438b419dc38811001318e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -215,11 +220,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 605931492678025968, guid: b0d4fd347783e8d4296dc4f037b5881e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7113650573600425558, guid: b0d4fd347783e8d4296dc4f037b5881e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -329,11 +329,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 7113650574116290771, guid: b0d4fd347783e8d4296dc4f037b5881e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0d4fd347783e8d4296dc4f037b5881e, type: 3}

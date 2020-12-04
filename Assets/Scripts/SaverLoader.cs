@@ -71,12 +71,6 @@ public class SaverLoader : MonoBehaviour
         }
         myFile.Dispose();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void SaveInventory()
     {
         myFile.AddBinary("inventory", InventoryManager.instance.inventory);
