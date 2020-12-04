@@ -37,12 +37,28 @@ public class SaverLoader : MonoBehaviour
                     MessageSystem.Print("Loaded Null");
                 } else
                 {
-
-                MessageSystem.Print("File Loaded Successfully");
+                    MessageSystem.Print("File Loaded Successfully");
                 }
                 foreach (EquippableItem item in itemToAdd)
                 {
                     InventoryManager.instance.AddItemToInventory(item, Player.GetHashCode());
+                }
+
+                EquippableItem[] eqItemsToAdd = myFile.GetBinary("eqItems") as EquippableItem[];
+                if (eqItemsToAdd == null)
+                {
+                    MessageSystem.Print("Loaded Null");
+                }
+                else
+                {
+                    MessageSystem.Print("File Loaded Successfully");
+                }
+                foreach (EquippableItem eqItem in eqItemsToAdd)
+                {
+                    if(eqItem != null)
+                    {
+                        Player.GetComponent<EquippedItems>().Equip(eqItem);
+                    }
                 }
             }
             else
@@ -60,6 +76,7 @@ public class SaverLoader : MonoBehaviour
     public void SaveInventory()
     {
         myFile.AddBinary("inventory", InventoryManager.instance.inventory);
+        myFile.AddBinary("eqItems", Player.GetComponent<EquippedItems>().equipedItems);
         myFile.Save();
     }
 }

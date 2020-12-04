@@ -29,12 +29,12 @@ namespace Inventory
             player = GameObject.FindGameObjectWithTag("Player");
             EventManager.OnItemEquipped += RemoveItemFromInventory;
             EventManager.OnItemUnequipped += AddItemToInventory;
-            AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "Cool Sword", ("Weapon", "Sword"), 69, 50), player.GetHashCode());
-            AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "Lame Staff", ("Weapon", "Staff"), 69, 5), player.GetHashCode());
-            AddItemToInventory(new EquippableItem(EquipSlot.Head, "First Helmet", ("Helmet", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
-            AddItemToInventory(new EquippableItem(EquipSlot.Chest, "First Chest", ("Chest", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
-            AddItemToInventory(new EquippableItem(EquipSlot.Legs, "First Legs", ("Pelvis", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
-            AddItemToInventory(new EquippableItem(EquipSlot.LeftWeapon, "Left Sword", ("Weapon", "Sword"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
+            //AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "Cool Sword", ("Weapon", "Sword"), 69, 50), player.GetHashCode());
+            //AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "Lame Staff", ("Weapon", "Staff"), 69, 5), player.GetHashCode());
+            //AddItemToInventory(new EquippableItem(EquipSlot.Head, "First Helmet", ("Helmet", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
+            //AddItemToInventory(new EquippableItem(EquipSlot.Chest, "First Chest", ("Chest", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
+            //AddItemToInventory(new EquippableItem(EquipSlot.Legs, "First Legs", ("Pelvis", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
+            //AddItemToInventory(new EquippableItem(EquipSlot.LeftWeapon, "Left Sword", ("Weapon", "Sword"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
         }
         public void AddItemToInventory(EquippableItem item, int who)
         {
