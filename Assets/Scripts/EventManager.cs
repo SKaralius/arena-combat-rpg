@@ -9,7 +9,7 @@ public class EventManager : MonoBehaviour
     public static event ItemEventHandler OnItemAddedToInventory;
     public static event ItemEventHandler OnItemRemovedFromInventory;
 
-    public delegate void ItemEquipHandler(IItem item, int who);
+    public delegate void ItemEquipHandler(EquippableItem item, int who);
     public static event ItemEquipHandler OnItemEquipped;
     public static event ItemEquipHandler OnItemUnequipped;
 
@@ -35,11 +35,11 @@ public class EventManager : MonoBehaviour
         OnItemRemovedFromInventory?.Invoke();
     }
 
-    public static void ItemEquipped(IItem item, int who)
+    public static void ItemEquipped(EquippableItem item, int who)
     {
         OnItemEquipped?.Invoke(item, who);
     }
-    public static void ItemUnequipped(IItem item, int who)
+    public static void ItemUnequipped(EquippableItem item, int who)
     {
         OnItemUnequipped?.Invoke(item, who);
     }

@@ -31,7 +31,7 @@ namespace Inventory
                 equip.gameObject.SetActive(false);
                 unequip.gameObject.SetActive(false);
             }
-            if (item is IEquipable equipable)
+            if (item is EquippableItem equipable)
             {
                 if (eqItems.IsItemEquipped(equipable))
                 {

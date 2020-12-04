@@ -17,7 +17,7 @@ namespace Unit
             myStats = GetComponent<UnitStats>();
             healthBar = Instantiate(healthBarPrefab, transform);
             hb = healthBar.GetComponent<HealthBar>();
-            healthBarHandler = (IItem item, int who) => { hb.UpdateHealthBar(health); };
+            healthBarHandler = (EquippableItem item, int who) => { hb.UpdateHealthBar(health); };
             EventManager.OnItemEquipped += healthBarHandler;
             healthBar.transform.position = new Vector2(transform.position.x, transform.position.y);
             healthBar.transform.localPosition = new Vector2(healthBar.transform.localPosition.x - 0.2f, healthBar.transform.localPosition.y + 0.15f);

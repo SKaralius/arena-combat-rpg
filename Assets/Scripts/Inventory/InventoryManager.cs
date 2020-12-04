@@ -10,7 +10,8 @@ namespace Inventory
 {
     public class InventoryManager : MonoBehaviour
     {
-        public List<IItem> inventory = new List<IItem>();
+        [HideInInspector]
+        public List<EquippableItem> inventory = new List<EquippableItem>();
         private GameObject player;
 
         public static InventoryManager instance;
@@ -35,7 +36,7 @@ namespace Inventory
             AddItemToInventory(new EquippableItem(EquipSlot.Legs, "First Legs", ("Pelvis", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
             AddItemToInventory(new EquippableItem(EquipSlot.LeftWeapon, "Left Sword", ("Weapon", "Sword"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
         }
-        public void AddItemToInventory(IItem item, int who)
+        public void AddItemToInventory(EquippableItem item, int who)
         {
             if (who != player.GetHashCode())
                 return;
@@ -51,7 +52,7 @@ namespace Inventory
             }
 
         }
-        public void RemoveItemFromInventory(IItem item, int who)
+        public void RemoveItemFromInventory(EquippableItem item, int who)
         {
             if (who != player.GetHashCode())
                 return;
