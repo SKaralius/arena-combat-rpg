@@ -26,7 +26,7 @@ namespace Inventory
                 inventorySlots[i].RenderUI();
             }
             int k = 0;
-            foreach (IItem item in InventoryManager.instance.inventory)
+            foreach (EquippableItem item in InventoryManager.instance.inventory)
             {
                 inventorySlots[k].item = item;
                 inventorySlots[k].RenderUI();

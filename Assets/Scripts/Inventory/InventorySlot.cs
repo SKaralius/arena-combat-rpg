@@ -1,51 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Inventory
 {
-    public class InventorySlot : MonoBehaviour
+    public class InventorySlot : ItemSlot
     {
         private GameObject player;
-        public IItem item = null;
-        public TextMeshProUGUI itemName;
-        public Button equip;
-        public Button unequip;
         private EquippedItems eqItems;
         private void Awake()
         {
             player = GameObject.FindGameObjectWithTag("Player");
             eqItems = player.GetComponent<EquippedItems>();
+            RenameButton("Equip");
         }
-        public void RenderUI()
+        public sealed override void RenderUI()
         {
-            if (item != null)
+            if (_item != null)
             {
-                itemName.text = item.Name;
+                itemName.text = _item.Name;
             }
             else
             {
                 itemName.text = "Empty";
-                equip.gameObject.SetActive(false);
-                unequip.gameObject.SetActive(false);
+                itemImage.sprite = null;
+                button.gameObject.SetActive(false);
             }
-            if (item is EquippableItem equipable)
+            if (_item is EquippableItem equipable)
             {
-                if (eqItems.IsItemEquipped(equipable))
-                {
-                    unequip.gameObject.SetActive(true);
-                    unequip.onClick.RemoveAllListeners();
-                    unequip.onClick.AddListener(() => { eqItems.Unequip(equipable.Slot); });
-                }
-                else
-                {
-                    unequip.gameObject.SetActive(false);
-                    equip.gameObject.SetActive(true);
-                    equip.onClick.RemoveAllListeners();
-                    equip.onClick.AddListener(() => { eqItems.Equip(equipable); });
-                }
+                    button.gameObject.SetActive(true);
+                    button.onClick.RemoveAllListeners();
+                    button.onClick.AddListener(() => { eqItems.Equip(equipable); });
             }
         }
     }
