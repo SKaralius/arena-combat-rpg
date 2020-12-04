@@ -16,11 +16,14 @@ public class EventManager : MonoBehaviour
     public delegate void PlayerHealthEventHandler(int currentHealth, int maxHealth);
     public static event PlayerHealthEventHandler OnPlayerHealthChanged;
 
+    public delegate void GoldHandler(int amountToAdd);
+    public static event GoldHandler OnGoldChange;
+
     //public delegate void StatsEventHandler();
     //public static event StatsEventHandler OnStatsChanged;
 
-    public delegate void BattleStateEventHandler(BattleState state);
-    public static event BattleStateEventHandler OnBattleStateChange;
+    //public delegate void BattleStateEventHandler(BattleState state);
+    //public static event BattleStateEventHandler OnBattleStateChange;
 
     //public delegate void PlayerLevelEventHandler();
     //public static event PlayerLevelEventHandler OnPlayerLevelChange;
@@ -49,10 +52,15 @@ public class EventManager : MonoBehaviour
         OnPlayerHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
-    public static void BattleStateChanged(BattleState state)
+    public static void GoldChanged(int amountToAdd)
     {
-        OnBattleStateChange?.Invoke(state);
+        OnGoldChange?.Invoke(amountToAdd);
     }
+
+    //public static void BattleStateChanged(BattleState state)
+    //{
+    //    OnBattleStateChange?.Invoke(state);
+    //}
 
     //public static void StatsChanged()
     //{

@@ -31,6 +31,7 @@ public class SaverLoader : MonoBehaviour
         {
             if (myFile.Load())
             {
+                // Inventory items
                 List<EquippableItem> itemToAdd = myFile.GetBinary("inventory") as List<EquippableItem>;
                 if (itemToAdd == null)
                 {
@@ -43,7 +44,7 @@ public class SaverLoader : MonoBehaviour
                 {
                     InventoryManager.instance.AddItemToInventory(item, Player.GetHashCode());
                 }
-
+                // Equip items
                 EquippableItem[] eqItemsToAdd = myFile.GetBinary("eqItems") as EquippableItem[];
                 if (eqItemsToAdd == null)
                 {
@@ -60,12 +61,15 @@ public class SaverLoader : MonoBehaviour
                         Player.GetComponent<EquippedItems>().Equip(eqItem);
                     }
                 }
+                // Gold
+                EventManager.GoldChanged(myFile.GetInt("gold", defaultValue: 0));
             }
             else
             {
                 MessageSystem.Print("Load Failed!");
             }
         }
+        myFile.Dispose();
     }
 
     // Update is called once per frame
@@ -77,6 +81,7 @@ public class SaverLoader : MonoBehaviour
     {
         myFile.AddBinary("inventory", InventoryManager.instance.inventory);
         myFile.AddBinary("eqItems", Player.GetComponent<EquippedItems>().equipedItems);
+        myFile.Add("gold", Gold.instance.Wealth);
         myFile.Save();
     }
 }

@@ -29,6 +29,8 @@ namespace Inventory
             player = GameObject.FindGameObjectWithTag("Player");
             EventManager.OnItemEquipped += RemoveItemFromInventory;
             EventManager.OnItemUnequipped += AddItemToInventory;
+            Gold.instance.Wealth = 10;
+            EventManager.GoldChanged(50);
             //AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "Cool Sword", ("Weapon", "Sword"), 69, 50), player.GetHashCode());
             //AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "Lame Staff", ("Weapon", "Staff"), 69, 5), player.GetHashCode());
             //AddItemToInventory(new EquippableItem(EquipSlot.Head, "First Helmet", ("Helmet", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());

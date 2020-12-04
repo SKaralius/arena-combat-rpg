@@ -217,6 +217,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Equipment
       objectReference: {fileID: 0}
+    - target: {fileID: 2870212586685789983, guid: d75f609ff8448a243bdb713233282535,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d75f609ff8448a243bdb713233282535, type: 3}
 --- !u!224 &7113650574116290770 stripped
@@ -359,6 +364,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 7113650574116290767}
+    - target: {fileID: 6449181156844576536, guid: b32d294ac23bb064aa1094dd215bd668,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b32d294ac23bb064aa1094dd215bd668, type: 3}
 --- !u!224 &7113650572601913683 stripped
