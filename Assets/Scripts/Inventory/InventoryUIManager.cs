@@ -22,14 +22,12 @@ namespace Inventory
         {
             for (int i = 0; i < inventorySlots.Length; i++)
             {
-                inventorySlots[i].item = null;
-                inventorySlots[i].RenderUI();
+                inventorySlots[i].RenderUI(null);
             }
             int k = 0;
             foreach (EquippableItem item in InventoryManager.instance.inventory)
             {
-                inventorySlots[k].item = item;
-                inventorySlots[k].RenderUI();
+                inventorySlots[k].RenderUI(item);
                 k++;
             }
         }

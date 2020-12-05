@@ -25,7 +25,7 @@ public class BattleSystem : StateMachine
     {
         StartCoroutine(State.Move(i));
     }
-    public void OnItemEquipButton(IItem item, int who)
+    public void OnItemEquipButton(EquippableItem item, int who)
     {
         StartCoroutine(State.Equip(item));
     }

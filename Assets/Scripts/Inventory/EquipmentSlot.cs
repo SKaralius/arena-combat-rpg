@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 public class EquipmentSlot : ItemSlot
 {
-    private EquippedItems eqItems;
     private void Awake()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        eqItems = player.GetComponent<EquippedItems>();
         RenameButton("Unequip");
     }
-    public  sealed override void RenderUI()
+    public  sealed override void RenderUI(EquippableItem item)
     {
-        if (_item != null)
+        if (item != null)
         {
-            itemName.text = _item.Name;
+            itemName.text = item.Name;
+            button.gameObject.SetActive(true);
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(() => { InventoryEquipmentMediator.instance.Unequip(item); });
         }
         else
         {
@@ -24,8 +24,5 @@ public class EquipmentSlot : ItemSlot
             itemImage.sprite = null;
             button.gameObject.SetActive(false);
         }
-        button.gameObject.SetActive(true);
-        button.onClick.RemoveAllListeners();
-        button.onClick.AddListener(() => { eqItems.Unequip(_item.Slot); });
     }
 }

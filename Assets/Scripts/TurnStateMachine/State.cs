@@ -25,10 +25,10 @@ namespace TurnFSM
         {
             yield break;
         }
-        public virtual IEnumerator Equip(IItem item)
+        public virtual IEnumerator Equip(EquippableItem item)
         {
-            IEquipable equipableItem = (IEquipable)item;
-            BattleSystem.Player.GetComponent<EquippedItems>().Unequip(equipableItem.Slot);
+            // Base implementation reverts the actions, if it's not the player's turn.
+            InventoryEquipmentMediator.instance.Unequip(item);
             MessageSystem.Print("Not player turn");
             yield break;
         }

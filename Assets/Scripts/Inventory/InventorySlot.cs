@@ -8,19 +8,15 @@ namespace Inventory
 {
     public class InventorySlot : ItemSlot
     {
-        private GameObject player;
-        private EquippedItems eqItems;
         private void Awake()
         {
-            player = GameObject.FindGameObjectWithTag("Player");
-            eqItems = player.GetComponent<EquippedItems>();
             RenameButton("Equip");
         }
-        public sealed override void RenderUI()
+        public sealed override void RenderUI(EquippableItem item)
         {
-            if (_item != null)
+            if (item != null)
             {
-                itemName.text = _item.Name;
+                itemName.text = item.Name;
             }
             else
             {
@@ -28,11 +24,11 @@ namespace Inventory
                 itemImage.sprite = null;
                 button.gameObject.SetActive(false);
             }
-            if (_item is EquippableItem equipable)
+            if (item is EquippableItem equipable)
             {
                     button.gameObject.SetActive(true);
                     button.onClick.RemoveAllListeners();
-                    button.onClick.AddListener(() => { eqItems.Equip(equipable); });
+                    button.onClick.AddListener(() => { InventoryEquipmentMediator.instance.Equip(item); });
             }
         }
     }

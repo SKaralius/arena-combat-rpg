@@ -14,8 +14,8 @@ namespace Inventory
         public List<EquippableItem> inventory = new List<EquippableItem>();
         private GameObject player;
 
-        public static InventoryManager instance;
         #region Singleton logic
+        public static InventoryManager instance;
         private void Awake()
         {
             if (instance == null)
@@ -27,8 +27,8 @@ namespace Inventory
         private void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player");
-            EventManager.OnItemEquipped += RemoveItemFromInventory;
-            EventManager.OnItemUnequipped += AddItemToInventory;
+            //EventManager.OnItemEquipped += RemoveItemFromInventory;
+            //EventManager.OnItemUnequipped += AddItemToInventory;
             Gold.instance.Wealth = 10;
             EventManager.GoldChanged(50);
             //AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "Cool Sword", ("Weapon", "Sword"), 69, 50), player.GetHashCode());

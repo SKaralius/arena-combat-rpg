@@ -22,14 +22,12 @@ public class EquippedItemsUI : MonoBehaviour
     {
         for (int i = 0; i < equipSlots.Length; i++)
         {
-            equipSlots[i].item = null;
-            equipSlots[i].RenderUI();
+            equipSlots[i].RenderUI(null);
         }
         int k = 0;
         foreach (EquippableItem item in eqItems.equipedItems)
         {
-            equipSlots[k].item = item;
-            equipSlots[k].RenderUI();
+            equipSlots[k].RenderUI(item);
             k++;
         }
     }

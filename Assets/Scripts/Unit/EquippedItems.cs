@@ -5,7 +5,7 @@ using UnityEngine;
 public class EquippedItems : MonoBehaviour
 {
     public bool isPlayer;
-    [HideInInspector]
+    [System.NonSerialized]
     public EquippableItem[] equipedItems = new EquippableItem[5];
     private void Awake()
     {
@@ -32,10 +32,10 @@ public class EquippedItems : MonoBehaviour
     }
     public void Equip(EquippableItem item)
     {
-        if(equipedItems[(int)item.Slot] != null)
-        {
-            Unequip(item.Slot);
-        }
+        //if(equipedItems[(int)item.Slot] != null)
+        //{
+        //    Unequip(item.Slot);
+        //}
         equipedItems[(int)item.Slot] = item;
         EventManager.ItemEquipped(item, gameObject.GetHashCode());
         MessageSystem.Print($"{item.Name} is equiped.");
