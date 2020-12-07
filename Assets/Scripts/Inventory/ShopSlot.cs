@@ -16,7 +16,7 @@ public class ShopSlot : ItemSlot
             itemName.text = item.Name;
             button.gameObject.SetActive(true);
             button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() => { MessageSystem.Print("Buying item placeholder"); });
+            button.onClick.AddListener(() => { Shop.instance.BuyItem(item); });
         }
         else
         {

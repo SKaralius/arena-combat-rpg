@@ -21,6 +21,9 @@ public class EventManager : MonoBehaviour
     public delegate void GoldHandler(int amountToAdd);
     public static event GoldHandler OnGoldChange;
 
+    public delegate void ShopHandler();
+    public static event ShopHandler OnShopToggle;
+
     //public delegate void StatsEventHandler();
     //public static event StatsEventHandler OnStatsChanged;
 
@@ -29,6 +32,11 @@ public class EventManager : MonoBehaviour
 
     //public delegate void PlayerLevelEventHandler();
     //public static event PlayerLevelEventHandler OnPlayerLevelChange;
+
+    public static void ShopToggled()
+    {
+        OnShopToggle?.Invoke();
+    }
 
     public static void ItemAddedToInventory()
     {

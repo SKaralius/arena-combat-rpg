@@ -8,9 +8,10 @@ namespace Inventory
 {
     public class InventorySlot : ItemSlot
     {
+        GameObject shop;
         private void Awake()
         {
-            RenameButton("Equip");
+            shop = GameObject.Find("ShopPanel");
         }
         public sealed override void RenderUI(EquippableItem item)
         {
@@ -29,6 +30,16 @@ namespace Inventory
                     button.gameObject.SetActive(true);
                     button.onClick.RemoveAllListeners();
                     button.onClick.AddListener(() => { InventoryEquipmentMediator.instance.Equip(item); });
+            }
+            if (shop.activeSelf == true)
+            {
+                RenameButton("Sell");
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() => { InventoryManager.instance.SellItem(item); });
+            } 
+            else
+            {
+                RenameButton("Equip");
             }
         }
     }

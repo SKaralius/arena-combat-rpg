@@ -41,7 +41,7 @@ namespace Inventory
         public void AddItemToInventory(EquippableItem item, int who)
         {
             if (who != player.GetHashCode())
-                return;
+                Debug.LogWarning("RemoveItemFromInventory called not by player");
             if (inventory.Count < 12)
             {
                 inventory.Add(item);
@@ -57,10 +57,15 @@ namespace Inventory
         public void RemoveItemFromInventory(EquippableItem item, int who)
         {
             if (who != player.GetHashCode())
-                return;
+                Debug.LogWarning("RemoveItemFromInventory called not by player");
             inventory.Remove(item);
             EventManager.ItemRemovedFromInventory();
             MessageSystem.Print($"{item.Name} was removed from inventory");
+        }
+        public void SellItem(EquippableItem item)
+        {
+            RemoveItemFromInventory(item, 0);
+            Gold.instance.Wealth = (int)item.SellPrice;
         }
     }
 }

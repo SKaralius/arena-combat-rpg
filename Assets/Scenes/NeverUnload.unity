@@ -252,6 +252,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -387
       objectReference: {fileID: 0}
+    - target: {fileID: 605931491328747853, guid: b0d4fd347783e8d4296dc4f037b5881e,
+        type: 3}
+      propertyPath: m_Spacing.x
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 605931492678025965, guid: b0d4fd347783e8d4296dc4f037b5881e,
         type: 3}
       propertyPath: inventorySlotPrefab
@@ -487,6 +492,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3be01adda1f0a140af2d7a991c258f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1453644313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8900143293606028105, guid: b0d4fd347783e8d4296dc4f037b5881e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1307315003}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1453644315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453644313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bc65d7e5e136941bf59c517d353f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSlotPrefab: {fileID: 7524250008172214483, guid: 3ba75e8621bfb194186a59eab13120a6,
+    type: 3}
 --- !u!1001 &1878443758
 PrefabInstance:
   m_ObjectHideFlags: 0

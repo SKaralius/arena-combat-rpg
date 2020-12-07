@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Inventory;
 
 public class Shop : MonoBehaviour
 {
@@ -37,15 +38,37 @@ public class Shop : MonoBehaviour
     }
     public void RemoveItemFromShop(EquippableItem item)
     {
-
+        inventory.Remove(item);
+        EventManager.ItemRemovedFromShop();
     }
     public void ToggleShop()
     {
         MessageSystem.Print("Shop opened");
         gameObject.SetActive(!gameObject.activeSelf);
+        EventManager.ShopToggled();
     }
     public void GenerateItems()
     {
         MessageSystem.Print("Items generated");
+    }
+    public void BuyItem(EquippableItem item)
+    {
+        if (InventoryManager.instance.inventory.Count >= 12)
+        {
+            MessageSystem.Print("Not enough space in inventory.");
+            return;
+        }
+
+        int BuyPrice = (int)item.SellPrice * 2;
+        if (Gold.instance.Wealth >= BuyPrice)
+        {
+            RemoveItemFromShop(item);
+            Gold.instance.Wealth = -BuyPrice;
+            InventoryManager.instance.AddItemToInventory(item, 0);
+        }
+        else
+        {
+            MessageSystem.Print("Not enough gold!");
+        }
     }
 }

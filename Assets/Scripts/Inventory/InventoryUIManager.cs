@@ -11,6 +11,7 @@ namespace Inventory
         {
             EventManager.OnItemAddedToInventory += UpdateUI;
             EventManager.OnItemRemovedFromInventory += UpdateUI;
+            EventManager.OnShopToggle += UpdateUI;
             CreateSlot(12);
         }
         protected void UpdateUI()
@@ -30,6 +31,7 @@ namespace Inventory
         {
             EventManager.OnItemAddedToInventory -= UpdateUI;
             EventManager.OnItemRemovedFromInventory -= UpdateUI;
+            EventManager.OnShopToggle -= UpdateUI;
         }
     }
 }
