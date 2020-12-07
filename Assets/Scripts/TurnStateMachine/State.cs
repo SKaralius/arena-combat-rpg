@@ -17,6 +17,10 @@ namespace TurnFSM
         {
             yield break;
         }
+        public virtual IEnumerator UseSkill(BattleSystem.UseSkillHanlder skill)
+        {
+            yield break;
+        }
         public virtual IEnumerator Attack()
         {
             yield break;

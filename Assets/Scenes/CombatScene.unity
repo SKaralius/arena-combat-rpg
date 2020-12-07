@@ -717,6 +717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 730842596}
   - component: {fileID: 730842595}
+  - component: {fileID: 730842597}
   m_Layer: 0
   m_Name: BattleSystem
   m_TagString: Untagged
@@ -752,6 +753,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &730842597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730842594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b4a8c230785394398e71c5db248f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &946304667 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4724521249905576081, guid: 8bec4ca5e9bfc8d4bad52d80707a6e80,
@@ -891,6 +904,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1987856862}
     m_Modifications:
+    - target: {fileID: 1716689813834659613, guid: 5dbc19fcf1d15c14a91d37a1187e05ae,
+        type: 3}
+      propertyPath: battleSystem
+      value: 
+      objectReference: {fileID: 730842595}
     - target: {fileID: 7641149711252423664, guid: 5dbc19fcf1d15c14a91d37a1187e05ae,
         type: 3}
       propertyPath: m_Name
@@ -954,12 +972,12 @@ PrefabInstance:
     - target: {fileID: 7641149711252423667, guid: 5dbc19fcf1d15c14a91d37a1187e05ae,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -403
+      value: -91
       objectReference: {fileID: 0}
     - target: {fileID: 7641149711252423667, guid: 5dbc19fcf1d15c14a91d37a1187e05ae,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -200
+      value: -351
       objectReference: {fileID: 0}
     - target: {fileID: 7641149711252423667, guid: 5dbc19fcf1d15c14a91d37a1187e05ae,
         type: 3}

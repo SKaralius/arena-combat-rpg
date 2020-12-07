@@ -13,6 +13,12 @@ namespace TurnFSM
             MessageSystem.Print("Player Turn");
             yield break;
         }
+        public override IEnumerator UseSkill(BattleSystem.UseSkillHanlder skill)
+        {
+            skill();
+            yield return new WaitForSeconds(1f);
+            BattleSystem.SetState(new EnemyTurn(BattleSystem));
+        }
         public override IEnumerator Attack()
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
