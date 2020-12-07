@@ -8,6 +8,8 @@ public class EventManager : MonoBehaviour
     public delegate void ItemEventHandler();
     public static event ItemEventHandler OnItemAddedToInventory;
     public static event ItemEventHandler OnItemRemovedFromInventory;
+    public static event ItemEventHandler OnItemAddedToShop;
+    public static event ItemEventHandler OnItemRemovedFromShop;
 
     public delegate void ItemEquipHandler(EquippableItem item, int who);
     public static event ItemEquipHandler OnItemEquipped;
@@ -36,6 +38,16 @@ public class EventManager : MonoBehaviour
     public static void ItemRemovedFromInventory()
     {
         OnItemRemovedFromInventory?.Invoke();
+    }
+
+    public static void ItemAddedToShop()
+    {
+        OnItemAddedToShop?.Invoke();
+    }
+
+    public static void ItemRemovedFromShop()
+    {
+        OnItemRemovedFromShop?.Invoke();
     }
 
     public static void ItemEquipped(EquippableItem item, int who)

@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace Inventory
 {
-    public class InventoryUIManager : PanelUI
+    public class ShopUI : PanelUI
     {
         void Awake()
         {
-            EventManager.OnItemAddedToInventory += UpdateUI;
-            EventManager.OnItemRemovedFromInventory += UpdateUI;
+            EventManager.OnItemAddedToShop += UpdateUI;
+            EventManager.OnItemRemovedFromShop += UpdateUI;
             CreateSlot(12);
         }
         protected void UpdateUI()
@@ -20,7 +19,7 @@ namespace Inventory
                 itemSlots[i].RenderUI(null);
             }
             int k = 0;
-            foreach (EquippableItem item in InventoryManager.instance.inventory)
+            foreach (EquippableItem item in GetComponent<Shop>().inventory)
             {
                 itemSlots[k].RenderUI(item);
                 k++;
@@ -28,8 +27,8 @@ namespace Inventory
         }
         private void OnDestroy()
         {
-            EventManager.OnItemAddedToInventory -= UpdateUI;
-            EventManager.OnItemRemovedFromInventory -= UpdateUI;
+            EventManager.OnItemAddedToShop -= UpdateUI;
+            EventManager.OnItemRemovedFromShop -= UpdateUI;
         }
     }
 }
