@@ -35,8 +35,14 @@ public class SkillManager : MonoBehaviour
         int i = 0;
         foreach (Skills.ESkills skill in characterSkills.characterSkills)
         {
+            skillSlots[i].gameObject.SetActive(true);
             skillSlots[i].GetComponent<Button>().onClick.RemoveAllListeners();
             skillSlots[i].GetComponent<Button>().onClick.AddListener(() => battleSystem.OnSkillButton(Skills.instance.skillsList[skill].effect));
+            i++;
+        }
+        while (i < skillSlots.Length)
+        {
+            skillSlots[i].gameObject.SetActive(false);
             i++;
         }
     }
