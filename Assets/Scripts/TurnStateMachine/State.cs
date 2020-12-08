@@ -17,7 +17,7 @@ namespace TurnFSM
         {
             yield break;
         }
-        public virtual IEnumerator UseSkill(BattleSystem.UseSkillHanlder skill)
+        public virtual IEnumerator UseSkill(Skills.UseSkillHandler skill)
         {
             yield break;
         }
@@ -35,6 +35,10 @@ namespace TurnFSM
             InventoryEquipmentMediator.instance.Unequip(item);
             MessageSystem.Print("Not player turn");
             yield break;
+        }
+        protected virtual void DecideNextState()
+        {
+            return;
         }
     }
 }

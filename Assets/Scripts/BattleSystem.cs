@@ -8,7 +8,6 @@ public class BattleSystem : StateMachine
 {
     public Controller Player;
     public Controller Enemy;
-    public delegate void UseSkillHanlder();
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +25,7 @@ public class BattleSystem : StateMachine
     {
         StartCoroutine(State.Move(i));
     }
-    public void OnSkillButton(UseSkillHanlder skill)
+    public void OnSkillButton(Skills.UseSkillHandler skill)
     {
         StartCoroutine(State.UseSkill(skill));
     }

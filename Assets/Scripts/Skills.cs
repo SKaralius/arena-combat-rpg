@@ -1,9 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unit;
 
 public class Skills : MonoBehaviour
 {
+    public enum ESkills
+    {
+        None,
+        HitTwice,
+        SetOnFire,
+        Jump
+    }
+    public delegate IEnumerator UseSkillHandler(BattleSystem battleSystem,Controller current, Controller opponent);
+    public Dictionary<ESkills, UseSkillHandler> skillsList = new Dictionary<ESkills, UseSkillHandler>();
     #region Singleton logic
     public static Skills instance;
     private void Awake()
@@ -14,16 +24,32 @@ public class Skills : MonoBehaviour
             Destroy(gameObject);
     }
     #endregion
-    public void HitTwice()
+    private void Start()
     {
-        MessageSystem.Print("Hit Twice");
+        skillsList[ESkills.HitTwice] = HitTwice;
+        //skillsList[ESkills.SetOnFire] = SetOnFire;
+        //skillsList[ESkills.Jump] = Jump;
+
     }
-    public void SetOnFire()
+    public IEnumerator BasicAttack(BattleSystem battleSystem, float wait, Controller current, Controller opponent)
     {
-        MessageSystem.Print("On Fire");
+        yield return new WaitForSeconds(wait);
+        opponent.TakeDamage(battleSystem.Player);
+        current.GetComponent<Animator>().SetBool("isAttacking", true);
+        yield return new WaitForSeconds(wait + 0.3f);
+        current.GetComponent<Animator>().SetBool("isAttacking", false);
     }
-    public void Jump()
+    public IEnumerator HitTwice(BattleSystem battleSystem, Controller current, Controller opponent)
     {
-        MessageSystem.Print("Jump");
+        StartCoroutine(BasicAttack(battleSystem, 0f, current, opponent));
+        yield return StartCoroutine(BasicAttack(battleSystem, 0.6f, current, opponent));
     }
+    //public void SetOnFire()
+    //{
+    //    MessageSystem.Print("On Fire");
+    //}
+    //public void Jump()
+    //{
+    //    MessageSystem.Print("Jump");
+    //}
 }

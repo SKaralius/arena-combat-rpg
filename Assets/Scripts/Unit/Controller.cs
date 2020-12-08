@@ -9,7 +9,7 @@ namespace Unit
         public GameObject healthBarPrefab;
         private GameObject healthBar;
         private HealthBar hb;
-        private float health;
+        public float Health { get; private set; }
         private UnitStats myStats;
         private EventManager.ItemEquipHandler healthBarHandler;
         private void Awake()
@@ -17,14 +17,14 @@ namespace Unit
             myStats = GetComponent<UnitStats>();
             healthBar = Instantiate(healthBarPrefab, transform);
             hb = healthBar.GetComponent<HealthBar>();
-            healthBarHandler = (EquippableItem item, int who) => { hb.UpdateHealthBar(health); };
+            healthBarHandler = (EquippableItem item, int who) => { hb.UpdateHealthBar(Health); };
             EventManager.OnItemEquipped += healthBarHandler;
             healthBar.transform.position = new Vector2(transform.position.x, transform.position.y);
             healthBar.transform.localPosition = new Vector2(healthBar.transform.localPosition.x - 0.2f, healthBar.transform.localPosition.y + 0.15f);
         }
         private void Start()
         {
-            health = myStats.GetStat(EStats.Health);
+            Health = myStats.GetStat(EStats.Health);
         }
         public float TakeDamage(Controller attacker)
         {
@@ -33,17 +33,18 @@ namespace Unit
             if (evaded)
             {
                 MessageSystem.Print("Attack was evaded");
-                return health;
+                return Health;
             }
             else
             {
-                health -= Mathf.Clamp((stats.GetStat(EStats.Damage) - myStats.GetStat(EStats.Armor)), 0, 999);
-                if (health <= 0)
+                Health -= Mathf.Clamp((stats.GetStat(EStats.Damage) - myStats.GetStat(EStats.Armor)), 0, 999);
+                if (Health <= 0)
                 {
+                    Health = 0;
                     Die();
                 }
-                hb.UpdateHealthBar(health);
-                return health;
+                hb.UpdateHealthBar(Health);
+                return Health;
             }
         }
 
@@ -54,7 +55,8 @@ namespace Unit
 
         private void Die()
         {
-            Destroy(gameObject);
+            MessageSystem.Print("Enemy is dead");
+            //Destroy(gameObject);
         }
         private void OnDestroy()
         {

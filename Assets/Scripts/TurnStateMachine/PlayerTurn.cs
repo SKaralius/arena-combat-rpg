@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Unit;
 
 namespace TurnFSM
 {
@@ -13,28 +14,20 @@ namespace TurnFSM
             MessageSystem.Print("Player Turn");
             yield break;
         }
-        public override IEnumerator UseSkill(BattleSystem.UseSkillHanlder skill)
+        public override IEnumerator UseSkill(Skills.UseSkillHandler skill)
         {
-            skill();
-            yield return new WaitForSeconds(1f);
-            BattleSystem.SetState(new EnemyTurn(BattleSystem));
+            BattleSystem.SetState(new ActionChosen(BattleSystem));
+            yield return BattleSystem.StartCoroutine(skill(BattleSystem, BattleSystem.Player, BattleSystem.Enemy));
+
+            DecideNextState();
         }
         public override IEnumerator Attack()
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
-            float remainingHealth = BattleSystem.Enemy.TakeDamage(BattleSystem.Player);
-            BattleSystem.Player.GetComponent<Animator>().SetBool("isAttacking", true);
-            yield return new WaitForSeconds(0.3f);
-            //EventManager.BattleStateChanged(BattleState.ENEMYTURN);
-            BattleSystem.Player.GetComponent<Animator>().SetBool("isAttacking", false);
-            if (remainingHealth <= 0)
-            {
-                BattleSystem.SetState(new Won(BattleSystem));
-            }
-            else
-            {
-                BattleSystem.SetState(new EnemyTurn(BattleSystem));
-            }
+
+            yield return BattleSystem.StartCoroutine(Skills.instance.BasicAttack(BattleSystem, 0, BattleSystem.Player, BattleSystem.Enemy));
+
+            DecideNextState();
         }
         public override IEnumerator Move(int i)
         {
@@ -50,6 +43,17 @@ namespace TurnFSM
             BattleSystem.SetState(new ActionChosen(BattleSystem));
             BattleSystem.SetState(new EnemyTurn(BattleSystem));
             yield break;
+        }
+        protected override void DecideNextState()
+        {
+            if (BattleSystem.Enemy.GetComponent<Controller>().Health <= 0)
+            {
+                BattleSystem.SetState(new Won(BattleSystem));
+            }
+            else
+            {
+                BattleSystem.SetState(new EnemyTurn(BattleSystem));
+            }
         }
     }
 }
