@@ -7,7 +7,7 @@ namespace Unit
 { 
     public class UnitStats : MonoBehaviour, IStats
     {
-        public float[] Stats { get; set; } = { 5,5,5,100,5,5 };
+        public float[] Stats { get; set; } = { 5,5,5,100, 5, 5, 5 };
         private EquippedItems eqItems;
         private void Awake()
         {

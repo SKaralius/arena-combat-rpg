@@ -17,7 +17,7 @@ namespace TurnFSM
         {
             yield break;
         }
-        public virtual IEnumerator UseSkill(Skills.UseSkillHandler skill)
+        public virtual IEnumerator UseSkill(Skill.UseSkillHandler skill)
         {
             yield break;
         }

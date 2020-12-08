@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Unit;
+using UnityEngine.UI;
 
 namespace TurnFSM
 {
@@ -11,10 +12,22 @@ namespace TurnFSM
         }
         public override IEnumerator Start()
         {
+            float distance = Mathf.Abs(BattleSystem.Player.gameObject.transform.position.x - BattleSystem.Enemy.gameObject.transform.position.x);
+            BattleSystem.enemyInPlayersAttackRange = distance < BattleSystem.Player.GetComponent<UnitStats>().GetStat(EStats.AttackRange);
+            if (BattleSystem.enemyInPlayersAttackRange)
+            {
+                GameObject.Find("Attack").GetComponent<Image>().color = Color.black;
+                SkillManager.instance.EnableAllSkills();
+            }
+            else
+            {
+                GameObject.Find("Attack").GetComponent<Image>().color = Color.red;
+                SkillManager.instance.DisableOutOfRangeSkills();
+            }
             MessageSystem.Print("Player Turn");
             yield break;
         }
-        public override IEnumerator UseSkill(Skills.UseSkillHandler skill)
+        public override IEnumerator UseSkill(Skill.UseSkillHandler skill)
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
             yield return BattleSystem.StartCoroutine(skill(BattleSystem, BattleSystem.Player, BattleSystem.Enemy));

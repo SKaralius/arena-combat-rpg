@@ -8,6 +8,8 @@ public class BattleSystem : StateMachine
 {
     public Controller Player;
     public Controller Enemy;
+    public bool enemyInPlayersAttackRange = false;
+    public bool playerInEnemysAttackRange = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,13 +21,20 @@ public class BattleSystem : StateMachine
 
     public void OnAttackButton()
     {
-        StartCoroutine(State.Attack());
+        if (enemyInPlayersAttackRange)
+        { 
+            StartCoroutine(State.Attack());
+        }
+        else
+        {
+            MessageSystem.Print("Out of range");
+        }
     }
     public void OnMoveButton(int i)
     {
         StartCoroutine(State.Move(i));
     }
-    public void OnSkillButton(Skills.UseSkillHandler skill)
+    public void OnSkillButton(Skill.UseSkillHandler skill)
     {
         StartCoroutine(State.UseSkill(skill));
     }

@@ -12,8 +12,8 @@ public class Skills : MonoBehaviour
         SetOnFire,
         Jump
     }
-    public delegate IEnumerator UseSkillHandler(BattleSystem battleSystem,Controller current, Controller opponent);
-    public Dictionary<ESkills, UseSkillHandler> skillsList = new Dictionary<ESkills, UseSkillHandler>();
+    
+    public Dictionary<ESkills, Skill> skillsList = new Dictionary<ESkills, Skill>();
     #region Singleton logic
     public static Skills instance;
     private void Awake()
@@ -26,7 +26,7 @@ public class Skills : MonoBehaviour
     #endregion
     private void Start()
     {
-        skillsList[ESkills.HitTwice] = HitTwice;
+        skillsList[ESkills.HitTwice] = new Skill(_effect: HitTwice, _isAffectedByRange: true);
         //skillsList[ESkills.SetOnFire] = SetOnFire;
         //skillsList[ESkills.Jump] = Jump;
 

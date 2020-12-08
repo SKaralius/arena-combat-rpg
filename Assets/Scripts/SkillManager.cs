@@ -36,7 +36,35 @@ public class SkillManager : MonoBehaviour
         foreach (Skills.ESkills skill in characterSkills.characterSkills)
         {
             skillSlots[i].GetComponent<Button>().onClick.RemoveAllListeners();
-            skillSlots[i].GetComponent<Button>().onClick.AddListener(() => battleSystem.OnSkillButton(Skills.instance.skillsList[skill]));
+            skillSlots[i].GetComponent<Button>().onClick.AddListener(() => battleSystem.OnSkillButton(Skills.instance.skillsList[skill].effect));
+            i++;
+        }
+    }
+    public void DisableOutOfRangeSkills()
+    {
+        int i = 0;
+        foreach (Skills.ESkills skill in characterSkills.characterSkills)
+        {
+            if (Skills.instance.skillsList[skill].isAffectedByRange)
+            {
+                skillSlots[i].GetComponent<Image>().color = Color.red;
+                skillSlots[i].GetComponent<Button>().onClick.RemoveAllListeners();
+                skillSlots[i].GetComponent<Button>().onClick.AddListener(() => MessageSystem.Print("Out of range"));
+            }
+            i++;
+        }
+    }
+    public void EnableAllSkills()
+    {
+        int i = 0;
+        foreach (Skills.ESkills skill in characterSkills.characterSkills)
+        {
+            if (Skills.instance.skillsList[skill].isAffectedByRange)
+            {
+                skillSlots[i].GetComponent<Image>().color = Color.black;
+                skillSlots[i].GetComponent<Button>().onClick.RemoveAllListeners();
+                skillSlots[i].GetComponent<Button>().onClick.AddListener(() => battleSystem.OnSkillButton(Skills.instance.skillsList[skill].effect));
+            }
             i++;
         }
     }
