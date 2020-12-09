@@ -13,16 +13,16 @@ namespace TurnFSM
 
         public override IEnumerator Start()
         {
-            if (BattleSystem.IsOpponentWithinAttackRange(BattleSystem.Player))
-            {
-                GameObject.Find("Attack").GetComponent<Image>().color = Color.black;
-                SkillManager.instance.EnableAllSkills();
-            }
-            else
-            {
-                GameObject.Find("Attack").GetComponent<Image>().color = Color.red;
-                SkillManager.instance.DisableOutOfRangeSkills();
-            }
+            //if (BattleSystem.IsOpponentWithinAttackRange(BattleSystem.Player))
+            //{
+            //    GameObject.Find("Attack").GetComponent<Image>().color = Color.black;
+            //    SkillManager.instance.EnableAllSkills();
+            //}
+            //else
+            //{
+            //    GameObject.Find("Attack").GetComponent<Image>().color = Color.red;
+            //    SkillManager.instance.DisableOutOfRangeSkills();
+            //}
             MessageSystem.Print("Player Turn");
             yield break;
         }
@@ -39,19 +39,9 @@ namespace TurnFSM
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
 
-            yield return BattleSystem.StartCoroutine(Skills.instance.BasicAttack(BattleSystem, 0, BattleSystem.Player, BattleSystem.Enemy));
+            yield return BattleSystem.StartCoroutine(Skills.instance.BasicAttack(BattleSystem, BattleSystem.Player, BattleSystem.Enemy, 0));
 
             DecideNextState();
-        }
-
-        public override IEnumerator Move(int i)
-        {
-            BattleSystem.SetState(new ActionChosen(BattleSystem));
-            BattleSystem.Player.GetComponent<Animator>().SetBool("isWalking", true);
-            BattleSystem.Player.MoveUnit(i);
-            yield return new WaitForSeconds(1f);
-            BattleSystem.Player.GetComponent<Animator>().SetBool("isWalking", false);
-            BattleSystem.SetState(new EnemyTurn(BattleSystem));
         }
 
         public override IEnumerator Equip(EquippableItem equipable)

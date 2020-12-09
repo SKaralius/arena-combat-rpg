@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unit;
 
 namespace TurnFSM
 {
@@ -20,7 +21,7 @@ namespace TurnFSM
             //orderList[AIOrders.Attack] = Attack;
             //orderList[AIOrders.UseSkill] = UseSkill();
             MessageSystem.Print("Enemy Turn");
-            Skill.UseSkillHandler order = EnemyAI.DecideOrder(BattleSystem);
+            Skill.UseSkillHandler order = BattleSystem.Enemy.GetComponent<EnemyAI>().DecideOrder(BattleSystem);
             yield return order(BattleSystem, BattleSystem.Enemy, BattleSystem.Player);
             DecideNextState();
         }
@@ -37,7 +38,7 @@ namespace TurnFSM
 
         public override IEnumerator Attack()
         {
-            yield return BattleSystem.StartCoroutine(Skills.instance.BasicAttack(BattleSystem, 0, BattleSystem.Enemy, BattleSystem.Player));
+            yield return BattleSystem.StartCoroutine(Skills.instance.BasicAttack(BattleSystem, BattleSystem.Enemy, BattleSystem.Player, 0));
             BattleSystem.SetState(new PlayerTurn(BattleSystem));
         }
         public override IEnumerator UseSkill(Skill.UseSkillHandler skill)
@@ -45,6 +46,18 @@ namespace TurnFSM
             yield return BattleSystem.StartCoroutine(skill(BattleSystem, BattleSystem.Enemy, BattleSystem.Player));
 
             DecideNextState();
+        }
+        protected override void DecideNextState()
+        {
+            if (BattleSystem.Player.GetComponent<Controller>().Health <= 0)
+            {
+                // TODO: Implement a Lost State
+                //BattleSystem.SetState(new Lost(BattleSystem));
+            }
+            else
+            {
+                BattleSystem.SetState(new PlayerTurn(BattleSystem));
+            }
         }
     }
 }

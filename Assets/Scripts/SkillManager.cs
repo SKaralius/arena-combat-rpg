@@ -7,7 +7,7 @@ public class SkillManager : MonoBehaviour
     public BattleSystem battleSystem;
     public GameObject skillPrefab;
     private CharacterSkills characterSkills;
-    private GameObject[] skillSlots = new GameObject[4];
+    private GameObject[] skillSlots = new GameObject[7];
 
     #region Singleton logic
 

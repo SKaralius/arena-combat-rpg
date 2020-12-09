@@ -11,6 +11,10 @@ namespace Unit
         {
             EventManager.OnItemEquipped += AddToSkillList;
             EventManager.OnItemUnequipped += RemoveFromSkillList;
+            // Add default skills that should be available to all characters.
+            characterSkills.Add(Skills.ESkills.MoveBackwards);
+            characterSkills.Add(Skills.ESkills.BasicAttack);
+            characterSkills.Add(Skills.ESkills.MoveForwards);
         }
 
         public void AddToSkillList(EquippableItem item, int who)

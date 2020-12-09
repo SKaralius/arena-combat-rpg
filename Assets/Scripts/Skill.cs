@@ -3,7 +3,7 @@ using Unit;
 
 public class Skill
 {
-    public delegate IEnumerator UseSkillHandler(BattleSystem battleSystem, Controller current, Controller opponent);
+    public delegate IEnumerator UseSkillHandler(BattleSystem battleSystem, Controller current, Controller opponent = null);
 
     public UseSkillHandler effect;
     public bool isAffectedByRange;

@@ -29,15 +29,12 @@ namespace Inventory
             player = GameObject.FindGameObjectWithTag("Player");
             //EventManager.OnItemEquipped += RemoveItemFromInventory;
             //EventManager.OnItemUnequipped += AddItemToInventory;
-            Gold.instance.Wealth = 10;
-            EventManager.GoldChanged(50);
+            //Gold.instance.Wealth = 10;
+            //EventManager.GoldChanged(50);
             //AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "Cool Sword", ("Weapon", "Sword"), _sellPrice: 50, _attackRange: 5, _damage:20), player.GetHashCode());
-            AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "Knockbacking Staff", ("Weapon", "Staff"), _sellPrice: 69, _attackRange: 10, _damage: 5, _evasion: 5, _skill: Skills.ESkills.Knockback), player.GetHashCode());
-            AddItemToInventory(new EquippableItem(EquipSlot.Head, "Twice Helmet", ("Helmet", "First"), _sellPrice: 69, _damage: 5, _evasion: 30, _skill: Skills.ESkills.HitTwice), player.GetHashCode());
-            //AddItemToInventory(new EquippableItem(EquipSlot.Legs, "First Jump Legs", ("Legs", "First"), _sellPrice: 69, _damage: 5, _evasion: 30, _skill: Skills.ESkills.Jump), player.GetHashCode());
-            //AddItemToInventory(new EquippableItem(EquipSlot.Chest, "First Chest", ("Chest", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
-            //AddItemToInventory(new EquippableItem(EquipSlot.Legs, "First Legs", ("Pelvis", "First"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
-            //AddItemToInventory(new EquippableItem(EquipSlot.LeftWeapon, "Left Sword", ("Weapon", "Sword"), _sellPrice: 69, _damage: 5, _evasion: 30), player.GetHashCode());
+            //AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "Knockbacking Staff", ("Weapon", "Staff"), _sellPrice: 69, _attackRange: 10, _damage: 5, _evasion: 5, _skill: Skills.ESkills.Knockback), player.GetHashCode());
+            //AddItemToInventory(new EquippableItem(EquipSlot.Head, "Twice Helmet", ("Helmet", "First"), _sellPrice: 69, _damage: 5, _evasion: 30, _skill: Skills.ESkills.HitTwice), player.GetHashCode());
+            //AddItemToInventory(new EquippableItem(EquipSlot.Legs, "First Jump Legs", ("Legs", "First"), _sellPrice: 69, _damage: 5, _evasion: 30, _skill: Skills.ESkills.Jump),
         }
 
         public void AddItemToInventory(EquippableItem item, int who)
