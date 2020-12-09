@@ -11,6 +11,7 @@ namespace Unit
         public float Health { get; private set; }
         private UnitStats myStats;
         private EventManager.ItemEquipHandler healthBarHandler;
+        public Cooldowns characterCooldowns;
 
         private void Awake()
         {

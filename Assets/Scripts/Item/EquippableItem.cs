@@ -9,7 +9,7 @@ public class EquippableItem : IItem, IStats, IEquipable
 
     public (string, string) SpriteCategoryLabel { get; }
     public float SellPrice { get; }
-    public Skills.ESkills Skill;
+    public ESkills Skill;
 
     public void Sell()
     {
@@ -25,7 +25,7 @@ public class EquippableItem : IItem, IStats, IEquipable
 
     public float attackRange;
 
-    public EquippableItem(EquipSlot slot, string _name, (string, string) spriteCategoryLabel, float _sellPrice, float _attackRange = 0, float _damage = 0, float _armor = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0, Skills.ESkills _skill = 0)
+    public EquippableItem(EquipSlot slot, string _name, (string, string) spriteCategoryLabel, float _sellPrice, float _attackRange = 0, float _damage = 0, float _armor = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0, ESkills _skill = 0)
     {
         Slot = slot;
         SpriteCategoryLabel = spriteCategoryLabel;

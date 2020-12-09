@@ -5,16 +5,16 @@ namespace Unit
 {
     public class CharacterSkills : MonoBehaviour
     {
-        public List<Skills.ESkills> characterSkills = new List<Skills.ESkills>();
+        public List<ESkills> characterSkills = new List<ESkills>();
 
         private void Start()
         {
             EventManager.OnItemEquipped += AddToSkillList;
             EventManager.OnItemUnequipped += RemoveFromSkillList;
             // Add default skills that should be available to all characters.
-            characterSkills.Add(Skills.ESkills.MoveBackwards);
-            characterSkills.Add(Skills.ESkills.BasicAttack);
-            characterSkills.Add(Skills.ESkills.MoveForwards);
+            characterSkills.Add(ESkills.MoveBackwards);
+            characterSkills.Add(ESkills.BasicAttack);
+            characterSkills.Add(ESkills.MoveForwards);
             if (SkillManager.instance && GetComponent<EquippedItems>().isPlayer)
                 SkillManager.instance.RenderSkillSlots();
         }
@@ -23,7 +23,7 @@ namespace Unit
         {
             if (who != gameObject.GetHashCode())
                 return;
-            if (item.Skill != Skills.ESkills.None)
+            if (item.Skill != ESkills.None)
             {
                 characterSkills.Add(item.Skill);
                 if (SkillManager.instance && GetComponent<EquippedItems>().isPlayer)
@@ -35,7 +35,7 @@ namespace Unit
         {
             if (who != gameObject.GetHashCode())
                 return;
-            if (item.Skill != Skills.ESkills.None)
+            if (item.Skill != ESkills.None)
             {
                 characterSkills.Remove(item.Skill);
                 if (SkillManager.instance && GetComponent<EquippedItems>().isPlayer)

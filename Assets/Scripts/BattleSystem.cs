@@ -7,12 +7,15 @@ public class BattleSystem : StateMachine
     public Controller Player;
     public Controller Enemy;
 
+    private void Awake()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
+    }
     // Start is called before the first frame update
     private void Start()
     {
         SetState(new Begin(this));
         EventManager.OnItemEquipped += OnItemEquipButton;
-        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
     }
 
     public void OnAttackButton()

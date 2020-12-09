@@ -13,8 +13,8 @@ namespace Unit
         {
             if (!isPlayer)
             {
-                Equip(new EquippableItem(EquipSlot.RightWeapon, "Knockbacking Staff", ("Weapon", "Staff"), _sellPrice: 69, _attackRange: 10, _damage: 5, _evasion: 5, _skill: Skills.ESkills.Knockback));
-                Equip(new EquippableItem(EquipSlot.LeftWeapon, "Twice Sword", ("Weapon", "Sword"), _sellPrice: 69, _damage: 5, _evasion: 5, _skill: Skills.ESkills.HitTwice));
+                Equip(new EquippableItem(EquipSlot.RightWeapon, "Knockbacking Staff", ("Weapon", "Staff"), _sellPrice: 69, _attackRange: 10, _damage: 5, _evasion: 5, _skill: ESkills.Knockback));
+                Equip(new EquippableItem(EquipSlot.LeftWeapon, "Twice Sword", ("Weapon", "Sword"), _sellPrice: 69, _damage: 5, _evasion: 5, _skill: ESkills.HitTwice));
             }
         }
 

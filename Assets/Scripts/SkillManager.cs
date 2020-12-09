@@ -34,12 +34,14 @@ public class SkillManager : MonoBehaviour
         }
         characterSkills = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterSkills>();
         RenderSkillSlots();
+        battleSystem.Player.characterCooldowns = new Cooldowns();
+        battleSystem.Enemy.characterCooldowns = new Cooldowns();
     }
 
     public void RenderSkillSlots()
     {
         int i = 0;
-        foreach (Skills.ESkills skill in characterSkills.characterSkills)
+        foreach (ESkills skill in characterSkills.characterSkills)
         {
             skillSlots[i].gameObject.SetActive(true);
             skillSlots[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = Skills.instance.skillsList[skill].Name;
@@ -57,7 +59,7 @@ public class SkillManager : MonoBehaviour
     public void DisableOutOfRangeSkills()
     {
         int i = 0;
-        foreach (Skills.ESkills skill in characterSkills.characterSkills)
+        foreach (ESkills skill in characterSkills.characterSkills)
         {
             if (Skills.instance.skillsList[skill].IsAffectedByRange)
             {
@@ -72,7 +74,7 @@ public class SkillManager : MonoBehaviour
     public void EnableAllSkills()
     {
         int i = 0;
-        foreach (Skills.ESkills skill in characterSkills.characterSkills)
+        foreach (ESkills skill in characterSkills.characterSkills)
         {
             if (Skills.instance.skillsList[skill].IsAffectedByRange)
             {
@@ -82,5 +84,25 @@ public class SkillManager : MonoBehaviour
             }
             i++;
         }
+    }
+    public void RenderSkillCooldowns()
+    {
+        int i = 0;
+        foreach (ESkills skill in characterSkills.characterSkills)
+        {
+            int cooldown = battleSystem.Player.characterCooldowns.cooldowns[skill];
+            if (cooldown > 0)
+            {
+                skillSlots[i].GetComponent<Image>().color = Color.grey;
+                skillSlots[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = cooldown.ToString();
+            }
+            else
+            {
+                skillSlots[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = Skills.instance.skillsList[skill].Name;
+                skillSlots[i].GetComponent<Image>().color = Color.black;
+            }
+            i++;
+        }
+            
     }
 }

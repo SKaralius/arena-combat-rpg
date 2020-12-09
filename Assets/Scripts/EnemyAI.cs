@@ -13,17 +13,17 @@ public enum AIOrders
 
 public class EnemyAI : MonoBehaviour
 {
-    private List<Skills.ESkills> enemySkills;
+    private List<ESkills> enemySkills;
     private void Start()
     {
         enemySkills = GetComponent<CharacterSkills>().characterSkills;
     }
     public Skill.UseSkillHandler DecideOrder(BattleSystem battleSystem)
     {
-        List<Skills.ESkills> distanceSensitiveSkills = new List<Skills.ESkills>();
-        foreach (Skills.ESkills skill in enemySkills)
+        List<ESkills> distanceSensitiveSkills = new List<ESkills>();
+        foreach (ESkills skill in enemySkills)
         {
-            if (Skills.instance.skillsList[skill].IsAffectedByRange)
+            if (Skills.instance.skillsList[skill].IsAffectedByRange && battleSystem.Enemy.characterCooldowns.cooldowns[skill] == 0)
             {
                 distanceSensitiveSkills.Add(skill);
             }
