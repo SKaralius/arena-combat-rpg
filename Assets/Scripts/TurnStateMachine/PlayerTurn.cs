@@ -13,16 +13,14 @@ namespace TurnFSM
 
         public override IEnumerator Start()
         {
-            //if (BattleSystem.IsOpponentWithinAttackRange(BattleSystem.Player))
-            //{
-            //    GameObject.Find("Attack").GetComponent<Image>().color = Color.black;
-            //    SkillManager.instance.EnableAllSkills();
-            //}
-            //else
-            //{
-            //    GameObject.Find("Attack").GetComponent<Image>().color = Color.red;
-            //    SkillManager.instance.DisableOutOfRangeSkills();
-            //}
+            if (BattleSystem.IsOpponentWithinAttackRange(BattleSystem.Player))
+            {
+                SkillManager.instance.EnableAllSkills();
+            }
+            else
+            {
+                SkillManager.instance.DisableOutOfRangeSkills();
+            }
             MessageSystem.Print("Player Turn");
             yield break;
         }
@@ -37,11 +35,12 @@ namespace TurnFSM
 
         public override IEnumerator Attack()
         {
-            BattleSystem.SetState(new ActionChosen(BattleSystem));
+            yield break;
+            //BattleSystem.SetState(new ActionChosen(BattleSystem));
 
-            yield return BattleSystem.StartCoroutine(Skills.instance.BasicAttack(BattleSystem, BattleSystem.Player, BattleSystem.Enemy, 0));
+            //yield return BattleSystem.StartCoroutine(Skills.instance.BasicAttack(BattleSystem, BattleSystem.Player, BattleSystem.Enemy, 0));
 
-            DecideNextState();
+            //DecideNextState();
         }
 
         public override IEnumerator Equip(EquippableItem equipable)

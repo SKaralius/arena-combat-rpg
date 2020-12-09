@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Unit
 {
@@ -47,11 +48,6 @@ namespace Unit
                 hb.UpdateHealthBar(Health);
                 return Health;
             }
-        }
-
-        public void MoveUnit(int i)
-        {
-            GetComponent<UnitMovement>().MoveUnit(i);
         }
 
         private void Die()

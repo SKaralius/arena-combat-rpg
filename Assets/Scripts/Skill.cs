@@ -5,12 +5,15 @@ public class Skill
 {
     public delegate IEnumerator UseSkillHandler(BattleSystem battleSystem, Controller current, Controller opponent = null);
 
-    public UseSkillHandler effect;
-    public bool isAffectedByRange;
+    public string Name { get; }
+    public UseSkillHandler Effect { get; }
+    public bool IsAffectedByRange { get; }
 
-    public Skill(UseSkillHandler _effect, bool _isAffectedByRange = false)
+
+    public Skill(UseSkillHandler _effect, string _name, bool _isAffectedByRange = false)
     {
-        effect = _effect;
-        isAffectedByRange = _isAffectedByRange;
+        Effect = _effect;
+        Name = _name;
+        IsAffectedByRange = _isAffectedByRange;
     }
 }

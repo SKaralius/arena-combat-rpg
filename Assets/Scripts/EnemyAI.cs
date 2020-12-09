@@ -23,18 +23,18 @@ public class EnemyAI : MonoBehaviour
         List<Skills.ESkills> distanceSensitiveSkills = new List<Skills.ESkills>();
         foreach (Skills.ESkills skill in enemySkills)
         {
-            if (Skills.instance.skillsList[skill].isAffectedByRange)
+            if (Skills.instance.skillsList[skill].IsAffectedByRange)
             {
                 distanceSensitiveSkills.Add(skill);
             }
         }
         if (battleSystem.IsOpponentWithinAttackRange(battleSystem.Enemy))
         {
-            return Skills.instance.skillsList[distanceSensitiveSkills[UnityEngine.Random.Range(0, distanceSensitiveSkills.Count)]].effect;
+            return Skills.instance.skillsList[distanceSensitiveSkills[UnityEngine.Random.Range(0, distanceSensitiveSkills.Count)]].Effect;
         }
         else
         {
-            return Skills.instance.skillsList[enemySkills[2]].effect;
+            return Skills.instance.skillsList[enemySkills[2]].Effect;
         }
     }
 }

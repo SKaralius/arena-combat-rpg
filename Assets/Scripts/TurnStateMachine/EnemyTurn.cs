@@ -30,15 +30,17 @@ namespace TurnFSM
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
             BattleSystem.Enemy.GetComponent<Animator>().SetBool("isWalking", true);
-            BattleSystem.Enemy.MoveUnit(i);
-            yield return new WaitForSeconds(1f);
+
+            yield return BattleSystem.StartCoroutine(BattleSystem.Enemy.GetComponent<UnitMovement>().MoveUnit(
+                (int)Mathf.Sign(BattleSystem.Enemy.transform.localScale.x) * i
+                ));
             BattleSystem.Enemy.GetComponent<Animator>().SetBool("isWalking", false);
             BattleSystem.SetState(new PlayerTurn(BattleSystem));
         }
 
         public override IEnumerator Attack()
         {
-            yield return BattleSystem.StartCoroutine(Skills.instance.BasicAttack(BattleSystem, BattleSystem.Enemy, BattleSystem.Player, 0));
+            yield return BattleSystem.StartCoroutine(Skills.instance.BasicAttack(BattleSystem, BattleSystem.Enemy, BattleSystem.Player));
             BattleSystem.SetState(new PlayerTurn(BattleSystem));
         }
         public override IEnumerator UseSkill(Skill.UseSkillHandler skill)

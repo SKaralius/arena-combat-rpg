@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Unit;
+using TMPro;
 
 public class SkillManager : MonoBehaviour
 {
@@ -41,8 +42,9 @@ public class SkillManager : MonoBehaviour
         foreach (Skills.ESkills skill in characterSkills.characterSkills)
         {
             skillSlots[i].gameObject.SetActive(true);
+            skillSlots[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = Skills.instance.skillsList[skill].Name;
             skillSlots[i].GetComponent<Button>().onClick.RemoveAllListeners();
-            skillSlots[i].GetComponent<Button>().onClick.AddListener(() => battleSystem.OnSkillButton(Skills.instance.skillsList[skill].effect));
+            skillSlots[i].GetComponent<Button>().onClick.AddListener(() => battleSystem.OnSkillButton(Skills.instance.skillsList[skill].Effect));
             i++;
         }
         while (i < skillSlots.Length)
@@ -57,7 +59,7 @@ public class SkillManager : MonoBehaviour
         int i = 0;
         foreach (Skills.ESkills skill in characterSkills.characterSkills)
         {
-            if (Skills.instance.skillsList[skill].isAffectedByRange)
+            if (Skills.instance.skillsList[skill].IsAffectedByRange)
             {
                 skillSlots[i].GetComponent<Image>().color = Color.red;
                 skillSlots[i].GetComponent<Button>().onClick.RemoveAllListeners();
@@ -72,11 +74,11 @@ public class SkillManager : MonoBehaviour
         int i = 0;
         foreach (Skills.ESkills skill in characterSkills.characterSkills)
         {
-            if (Skills.instance.skillsList[skill].isAffectedByRange)
+            if (Skills.instance.skillsList[skill].IsAffectedByRange)
             {
                 skillSlots[i].GetComponent<Image>().color = Color.black;
                 skillSlots[i].GetComponent<Button>().onClick.RemoveAllListeners();
-                skillSlots[i].GetComponent<Button>().onClick.AddListener(() => battleSystem.OnSkillButton(Skills.instance.skillsList[skill].effect));
+                skillSlots[i].GetComponent<Button>().onClick.AddListener(() => battleSystem.OnSkillButton(Skills.instance.skillsList[skill].Effect));
             }
             i++;
         }

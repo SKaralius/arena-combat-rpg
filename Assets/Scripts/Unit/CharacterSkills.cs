@@ -15,6 +15,8 @@ namespace Unit
             characterSkills.Add(Skills.ESkills.MoveBackwards);
             characterSkills.Add(Skills.ESkills.BasicAttack);
             characterSkills.Add(Skills.ESkills.MoveForwards);
+            if (SkillManager.instance && GetComponent<EquippedItems>().isPlayer)
+                SkillManager.instance.RenderSkillSlots();
         }
 
         public void AddToSkillList(EquippableItem item, int who)
