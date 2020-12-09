@@ -28,14 +28,14 @@ namespace Unit
             Health = myStats.GetStat(EStats.Health);
         }
 
-        public float TakeDamage(Controller attacker)
+        public bool TakeDamage(Controller attacker)
         {
             UnitStats stats = attacker.GetComponent<UnitStats>();
             bool evaded = Random.Range(0, 100) < myStats.GetStat(EStats.Evasion);
             if (evaded)
             {
                 MessageSystem.Print("Attack was evaded");
-                return Health;
+                return evaded;
             }
             else
             {
@@ -46,7 +46,7 @@ namespace Unit
                     Die();
                 }
                 hb.UpdateHealthBar(Health);
-                return Health;
+                return evaded;
             }
         }
 

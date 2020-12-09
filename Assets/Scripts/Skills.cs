@@ -50,7 +50,7 @@ public class Skills : MonoBehaviour
 
     public IEnumerator BasicAttack(BattleSystem battleSystem, Controller current, Controller opponent)
     {
-        opponent.TakeDamage(battleSystem.Player);
+        opponent.TakeDamage(opponent);
         current.GetComponent<Animator>().SetBool("isAttacking", true);
         yield return new WaitForSeconds(0.3f);
         current.GetComponent<Animator>().SetBool("isAttacking", false);
@@ -78,8 +78,20 @@ public class Skills : MonoBehaviour
 
     public IEnumerator Knockback(BattleSystem battleSystem, Controller current, Controller opponent)
     {
-        StartCoroutine(BasicAttack(battleSystem, current, opponent));
-        yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit((int)Mathf.Sign(current.transform.localScale.x) * -1));
+        bool hasEvaded = opponent.TakeDamage(opponent);
+        if (hasEvaded)
+        {
+            current.GetComponent<Animator>().SetBool("isAttacking", true);
+            yield return new WaitForSeconds(0.3f);
+            current.GetComponent<Animator>().SetBool("isAttacking", false);
+        }
+        else
+        {
+            current.GetComponent<Animator>().SetBool("isAttacking", true);
+            yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit((int)Mathf.Sign(current.transform.localScale.x) * -1));
+            yield return new WaitForSeconds(0.3f);
+            current.GetComponent<Animator>().SetBool("isAttacking", false);
+        }
     }
 
     //public void SetOnFire()
