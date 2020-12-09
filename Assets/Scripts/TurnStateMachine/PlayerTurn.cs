@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using UnityEngine;
 using Unit;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace TurnFSM
@@ -10,6 +10,7 @@ namespace TurnFSM
         public PlayerTurn(BattleSystem battleSystem) : base(battleSystem)
         {
         }
+
         public override IEnumerator Start()
         {
             float distance = Mathf.Abs(BattleSystem.Player.gameObject.transform.position.x - BattleSystem.Enemy.gameObject.transform.position.x);
@@ -27,6 +28,7 @@ namespace TurnFSM
             MessageSystem.Print("Player Turn");
             yield break;
         }
+
         public override IEnumerator UseSkill(Skill.UseSkillHandler skill)
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
@@ -34,6 +36,7 @@ namespace TurnFSM
 
             DecideNextState();
         }
+
         public override IEnumerator Attack()
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
@@ -42,6 +45,7 @@ namespace TurnFSM
 
             DecideNextState();
         }
+
         public override IEnumerator Move(int i)
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
@@ -51,12 +55,14 @@ namespace TurnFSM
             BattleSystem.Player.GetComponent<Animator>().SetBool("isWalking", false);
             BattleSystem.SetState(new EnemyTurn(BattleSystem));
         }
+
         public override IEnumerator Equip(EquippableItem equipable)
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
             BattleSystem.SetState(new EnemyTurn(BattleSystem));
             yield break;
         }
+
         protected override void DecideNextState()
         {
             if (BattleSystem.Enemy.GetComponent<Controller>().Health <= 0)

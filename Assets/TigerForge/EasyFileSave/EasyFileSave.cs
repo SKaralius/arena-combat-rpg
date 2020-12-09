@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters.Binary;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
-using System.Xml.Serialization;
-using UnityEngine.Events;
-using System;
+using System.IO.Compression;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
-using System.IO.Compression;
+using System.Xml.Serialization;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace TigerForge
 {
@@ -16,7 +16,6 @@ namespace TigerForge
     /// </summary>
     public class EasyFileSave
     {
-
         #region " VARIABLES & PROPERTIES "
 
         // The file internal storage.
@@ -28,7 +27,7 @@ namespace TigerForge
         public string Error = "";
 
         /// <summary>
-        /// Disable the warning messages shown in the Console. 
+        /// Disable the warning messages shown in the Console.
         /// </summary>
         public bool suppressWarning = true;
 
@@ -138,11 +137,9 @@ namespace TigerForge
                     return false;
                 }
             }
-
         }
 
-        #endregion
-
+        #endregion " VARIABLES & PROPERTIES "
 
         #region " CONSTRUCTOR "
 
@@ -170,8 +167,7 @@ namespace TigerForge
             customs.Start();
         }
 
-        #endregion
-        
+        #endregion " CONSTRUCTOR "
 
         #region " SAVE, APPEND, LOAD, ADD "
 
@@ -191,17 +187,17 @@ namespace TigerForge
                     saveFile.Close();
                     Dispose();
                     return true;
-                } else
+                }
+                else
                 {
                     return SaveSecure(password);
-                }                
+                }
             }
             catch (System.Exception e)
             {
                 Error = "[Easy File Save] This system exeption has been thrown during saving: " + e.Message;
                 return false;
             }
-            
         }
 
         /// <summary>
@@ -226,7 +222,8 @@ namespace TigerForge
                         FileStream openFile = File.Open(fileName, FileMode.Open);
                         fileStorage = (Dictionary<string, object>)bf2.Deserialize(openFile);
                         openFile.Close();
-                    } else
+                    }
+                    else
                     {
                         var loadPassword = (password + "easyfilesavesecure1234").Substring(0, 16);
                         byte[] key = Encoding.UTF8.GetBytes(loadPassword);
@@ -258,7 +255,6 @@ namespace TigerForge
                             fileStorage.Add(item.Key, item.Value);
                         }
                     }
-
                 }
                 else
                 {
@@ -272,7 +268,8 @@ namespace TigerForge
                     bf.Serialize(saveFile, fileStorage);
                     saveFile.Close();
                     Dispose();
-                } else
+                }
+                else
                 {
                     var savePassword = (password + "easyfilesavesecure1234").Substring(0, 16);
                     byte[] key = Encoding.UTF8.GetBytes(savePassword);
@@ -293,7 +290,6 @@ namespace TigerForge
                     }
                 }
 
-
                 return true;
             }
             catch (System.Exception e)
@@ -301,8 +297,6 @@ namespace TigerForge
                 Error = "[Easy File Save] This system exeption has been thrown during append data: " + e.Message;
                 return false;
             }
-
-            
         }
 
         /// <summary>
@@ -328,18 +322,17 @@ namespace TigerForge
                     storage = (Dictionary<string, object>)bf.Deserialize(loadFile);
                     loadFile.Close();
                     return true;
-                } else
+                }
+                else
                 {
                     return LoadSecure(password);
                 }
-                
             }
             catch (System.Exception e)
             {
                 Error = "[Easy File Save] This system exeption has been thrown during loading: " + e.Message;
                 return false;
             }
-
         }
 
         /// <summary>
@@ -368,8 +361,7 @@ namespace TigerForge
             }
         }
 
-        #endregion
-
+        #endregion " SAVE, APPEND, LOAD, ADD "
 
         #region " SAVE, APPEND, LOAD WITH AES "
 
@@ -384,7 +376,6 @@ namespace TigerForge
 
             try
             {
-
                 byte[] key = Encoding.UTF8.GetBytes(password);
                 byte[] iv = Encoding.UTF8.GetBytes(password);
 
@@ -408,7 +399,7 @@ namespace TigerForge
             }
             catch (System.Exception e)
             {
-                Error = "[Easy File Save] This system exeption has been thrown during SaveSecure: " + e.Message;Debug.Log(e.Message);
+                Error = "[Easy File Save] This system exeption has been thrown during SaveSecure: " + e.Message; Debug.Log(e.Message);
                 return false;
             }
         }
@@ -451,8 +442,7 @@ namespace TigerForge
             }
         }
 
-        #endregion
-
+        #endregion " SAVE, APPEND, LOAD WITH AES "
 
         #region " UTILITY METHODS "
 
@@ -577,7 +567,6 @@ namespace TigerForge
                     Debug.Log("[Easy File Save] >> TEST #2 NOT PASSED: there is a problem loading data!\n");
                     Debug.Log(Error);
                 }
-
             }
             else
             {
@@ -588,11 +577,9 @@ namespace TigerForge
             Debug.Log("====================================================================================\n");
 
             return false;
-
         }
 
-        #endregion
-
+        #endregion " UTILITY METHODS "
 
         #region " GETTERS (DEFAULT DATA-TYPES) "
 
@@ -877,7 +864,7 @@ namespace TigerForge
         {
             try
             {
-                if (storage.ContainsKey(key)) return (T[]) storage[key]; else return Array.Empty<T>();
+                if (storage.ContainsKey(key)) return (T[])storage[key]; else return Array.Empty<T>();
             }
             catch (System.Exception)
             {
@@ -925,8 +912,7 @@ namespace TigerForge
             }
         }
 
-        #endregion
-
+        #endregion " GETTERS (DEFAULT DATA-TYPES) "
 
         #region " SPECIAL TYPES (SETTERS & GETTERS) "
 
@@ -987,9 +973,8 @@ namespace TigerForge
         {
             try
             {
-                
-                if (storage.ContainsKey(key)) {
-
+                if (storage.ContainsKey(key))
+                {
                     if (!customs.mapping.ContainsKey(extensionName))
                     {
                         Debug.LogWarning("[Easy File Save] GetCustom: an extension with name '" + extensionName + "' doesn't exist.");
@@ -1022,7 +1007,7 @@ namespace TigerForge
                     {
                         customData.Add(mapping[i], new CustomData { data = dataToLoad[i] });
                     }
-                    
+
                     return customData;
                 }
             }
@@ -1072,10 +1057,9 @@ namespace TigerForge
             return null;
         }
 
-        #endregion
+        #endregion " SPECIAL TYPES (SETTERS & GETTERS) "
 
-
-        #region  " UNITY TYPES (SETTERS & GETTERS) "       
+        #region " UNITY TYPES (SETTERS & GETTERS) "
 
         /// <summary>
         /// Return the Vector2 data for the given key (or the defined defaultValue if nothing found).
@@ -1276,7 +1260,6 @@ namespace TigerForge
                         newData.xMin = dataList[15];
                         newData.yMax = dataList[16];
                         newData.yMin = dataList[17];
-
                     }
                     return newData;
                 }
@@ -1288,8 +1271,7 @@ namespace TigerForge
             return defaultValue;
         }
 
-        #endregion
-
+        #endregion " UNITY TYPES (SETTERS & GETTERS) "
 
         #region " STATIC FUNCTIONS "
 
@@ -1350,14 +1332,12 @@ namespace TigerForge
             return result;
         }
 
-        #endregion
-
+        #endregion " STATIC FUNCTIONS "
 
         #region " CONVERTERS "
 
         public class Converter
         {
-
             /// <summary>
             /// Cast the object into integer value.
             /// </summary>
@@ -1421,11 +1401,9 @@ namespace TigerForge
                     return false;
                 }
             }
-
         }
 
-        #endregion
-
+        #endregion " CONVERTERS "
 
         #region " HELPERS "
 
@@ -1565,9 +1543,6 @@ namespace TigerForge
             if (!suppressWarning) Debug.LogWarning(message);
         }
 
-        #endregion
-
+        #endregion " HELPERS "
     }
 }
-
-

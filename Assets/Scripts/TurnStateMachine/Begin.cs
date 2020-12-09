@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TurnFSM
@@ -8,8 +7,8 @@ namespace TurnFSM
     {
         public Begin(BattleSystem battleSystem) : base(battleSystem)
         {
-
         }
+
         public override IEnumerator Start()
         {
             MessageSystem.Print("The battle has begun");

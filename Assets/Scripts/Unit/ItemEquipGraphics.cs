@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Unit
 {
@@ -22,14 +20,17 @@ namespace Unit
             LeftLeg,
             LeftFoot
         }
+
         private EquippedItems eqItems;
         public SpriteRenderer[] equipSlots = new SpriteRenderer[13];
-        void Awake()
+
+        private void Awake()
         {
             eqItems = GetComponent<EquippedItems>();
             EventManager.OnItemEquipped += EquipItem;
             EventManager.OnItemUnequipped += UnequipItem;
         }
+
         private void EquipItem(IItem item, int who)
         {
             if (who != gameObject.GetHashCode())
@@ -51,6 +52,7 @@ namespace Unit
                 equipSlots[(int)SpriteRenderSlots.LeftFoot].sprite = RetrieveSprite("Left_Foot", equipableItem.SpriteCategoryLabel.Item2);
             }
         }
+
         private void UnequipItem(IItem item, int who)
         {
             if (who != gameObject.GetHashCode())
@@ -72,11 +74,13 @@ namespace Unit
                 equipSlots[(int)SpriteRenderSlots.LeftFoot].sprite = null;
             }
         }
+
         private Sprite RetrieveSprite(string category, string label)
         {
             Sprite sprite = GameManager.instance.itemSpriteLibrary.GetSprite(category, label: label);
             return sprite;
         }
+
         private void OnDestroy()
         {
             EventManager.OnItemEquipped -= EquipItem;

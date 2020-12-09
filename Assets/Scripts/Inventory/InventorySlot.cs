@@ -1,18 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace Inventory
 {
     public class InventorySlot : ItemSlot
     {
-        GameObject shop;
+        private GameObject shop;
+
         private void Awake()
         {
             shop = GameObject.Find("ShopPanel");
         }
+
         public sealed override void RenderUI(EquippableItem item)
         {
             if (item != null)
@@ -27,16 +25,16 @@ namespace Inventory
             }
             if (item is EquippableItem equipable)
             {
-                    button.gameObject.SetActive(true);
-                    button.onClick.RemoveAllListeners();
-                    button.onClick.AddListener(() => { InventoryEquipmentMediator.instance.Equip(item); });
+                button.gameObject.SetActive(true);
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() => { InventoryEquipmentMediator.instance.Equip(item); });
             }
             if (shop.activeSelf == true)
             {
                 RenameButton("Sell");
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(() => { InventoryManager.instance.SellItem(item); });
-            } 
+            }
             else
             {
                 RenameButton("Equip");

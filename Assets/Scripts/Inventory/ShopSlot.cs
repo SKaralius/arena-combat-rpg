@@ -1,28 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class ShopSlot : ItemSlot
+﻿namespace Inventory
 {
-    private void Awake()
+    public class ShopSlot : ItemSlot
     {
-        RenameButton("Buy");
-    }
-    public sealed override void RenderUI(EquippableItem item)
-    {
-        if (item != null)
+        private void Awake()
         {
-            itemName.text = item.Name;
-            button.gameObject.SetActive(true);
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() => { Shop.instance.BuyItem(item); });
+            RenameButton("Buy");
         }
-        else
+
+        public sealed override void RenderUI(EquippableItem item)
         {
-            itemName.text = "Empty";
-            itemImage.sprite = null;
-            button.gameObject.SetActive(false);
+            if (item != null)
+            {
+                itemName.text = item.Name;
+                button.gameObject.SetActive(true);
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() => { Shop.instance.BuyItem(item); });
+            }
+            else
+            {
+                itemName.text = "Empty";
+                itemImage.sprite = null;
+                button.gameObject.SetActive(false);
+            }
         }
-    }
+    } 
 }

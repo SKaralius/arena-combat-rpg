@@ -1,5 +1,5 @@
-﻿    public interface IEquipable
-    {
-        EquipSlot Slot { get; }
-        (string, string) SpriteCategoryLabel { get; }
-    }
+﻿public interface IEquipable
+{
+    EquipSlot Slot { get; }
+    (string, string) SpriteCategoryLabel { get; }
+}

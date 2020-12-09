@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 namespace Unit
-{ 
+{
     public class UnitStats : MonoBehaviour, IStats
     {
-        public float[] Stats { get; set; } = { 5,5,5,100, 5, 5, 5 };
+        public float[] Stats { get; set; } = { 5, 5, 5, 100, 5, 5, 5 };
         private EquippedItems eqItems;
+
         private void Awake()
         {
             eqItems = GetComponent<EquippedItems>();
         }
+
         public float GetStat(EStats stat)
         {
             float tempStat = Stats[(int)stat];

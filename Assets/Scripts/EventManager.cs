@@ -1,27 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-
     public delegate void ItemEventHandler();
+
     public static event ItemEventHandler OnItemAddedToInventory;
+
     public static event ItemEventHandler OnItemRemovedFromInventory;
+
     public static event ItemEventHandler OnItemAddedToShop;
+
     public static event ItemEventHandler OnItemRemovedFromShop;
 
     public delegate void ItemEquipHandler(EquippableItem item, int who);
+
     public static event ItemEquipHandler OnItemEquipped;
+
     public static event ItemEquipHandler OnItemUnequipped;
 
     public delegate void PlayerHealthEventHandler(int currentHealth, int maxHealth);
+
     public static event PlayerHealthEventHandler OnPlayerHealthChanged;
 
     public delegate void GoldHandler(int amountToAdd);
+
     public static event GoldHandler OnGoldChange;
 
     public delegate void ShopHandler();
+
     public static event ShopHandler OnShopToggle;
 
     //public delegate void StatsEventHandler();
@@ -62,6 +68,7 @@ public class EventManager : MonoBehaviour
     {
         OnItemEquipped?.Invoke(item, who);
     }
+
     public static void ItemUnequipped(EquippableItem item, int who)
     {
         OnItemUnequipped?.Invoke(item, who);

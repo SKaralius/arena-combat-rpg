@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Unit
@@ -8,15 +7,18 @@ namespace Unit
     {
         private float lerpDuration = 1f;
         private UnitStats playerStats;
+
         private void Awake()
         {
             playerStats = GetComponent<UnitStats>();
         }
+
         public void MoveUnit(int isRight)
         {
             StartCoroutine(MoveUnitCoroutine(isRight));
         }
-        IEnumerator MoveUnitCoroutine(int isRight)
+
+        private IEnumerator MoveUnitCoroutine(int isRight)
         {
             float timeElapsed = 0;
             Vector2 startValue = transform.position;

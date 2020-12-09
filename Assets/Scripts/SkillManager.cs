@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using Unit;
 
 public class SkillManager : MonoBehaviour
 {
@@ -9,8 +8,11 @@ public class SkillManager : MonoBehaviour
     public GameObject skillPrefab;
     private CharacterSkills characterSkills;
     private GameObject[] skillSlots = new GameObject[4];
+
     #region Singleton logic
+
     public static SkillManager instance;
+
     private void Awake()
     {
         if (instance == null)
@@ -18,8 +20,10 @@ public class SkillManager : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
     }
-    #endregion
-    void Start()
+
+    #endregion Singleton logic
+
+    private void Start()
     {
         int i = 0;
         foreach (Transform skillLocation in transform)
@@ -30,6 +34,7 @@ public class SkillManager : MonoBehaviour
         characterSkills = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterSkills>();
         RenderSkillSlots();
     }
+
     public void RenderSkillSlots()
     {
         int i = 0;
@@ -46,6 +51,7 @@ public class SkillManager : MonoBehaviour
             i++;
         }
     }
+
     public void DisableOutOfRangeSkills()
     {
         int i = 0;
@@ -60,6 +66,7 @@ public class SkillManager : MonoBehaviour
             i++;
         }
     }
+
     public void EnableAllSkills()
     {
         int i = 0;

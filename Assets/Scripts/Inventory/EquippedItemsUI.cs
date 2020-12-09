@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Unit;
 using UnityEngine;
 
 namespace Inventory
@@ -7,7 +6,8 @@ namespace Inventory
     public class EquippedItemsUI : PanelUI
     {
         private EquippedItems eqItems;
-        void Awake()
+
+        private void Awake()
         {
             eqItems = GameObject.FindGameObjectWithTag("Player").GetComponent<EquippedItems>();
             EventManager.OnItemEquipped += UpdateUI;
@@ -19,6 +19,7 @@ namespace Inventory
         {
             itemSlots[(int)item.Slot].RenderUI(eqItems.equipedItems[(int)item.Slot]);
         }
+
         private void OnDestroy()
         {
             EventManager.OnItemEquipped -= UpdateUI;

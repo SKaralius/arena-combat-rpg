@@ -1,4 +1,4 @@
-﻿    public enum EquipSlot
-    {
-        Head, Chest, Legs, LeftWeapon, RightWeapon
-    }
+﻿public enum EquipSlot
+{
+    Head, Chest, Legs, LeftWeapon, RightWeapon
+}

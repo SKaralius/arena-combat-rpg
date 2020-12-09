@@ -1,19 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
-namespace Inventory
+﻿namespace Inventory
 {
     public class InventoryUIManager : PanelUI
     {
-        void Awake()
+        private void Awake()
         {
             EventManager.OnItemAddedToInventory += UpdateUI;
             EventManager.OnItemRemovedFromInventory += UpdateUI;
             EventManager.OnShopToggle += UpdateUI;
             CreateSlot(12);
         }
+
         protected void UpdateUI()
         {
             for (int i = 0; i < itemSlots.Length; i++)
@@ -27,6 +23,7 @@ namespace Inventory
                 k++;
             }
         }
+
         private void OnDestroy()
         {
             EventManager.OnItemAddedToInventory -= UpdateUI;

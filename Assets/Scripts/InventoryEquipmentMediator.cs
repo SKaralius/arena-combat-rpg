@@ -1,14 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Inventory;
+using Unit;
 using UnityEngine;
-using Inventory;
 
 public class InventoryEquipmentMediator : MonoBehaviour
 {
-    GameObject Player;
-    EquippedItems eqItems;
+    private GameObject Player;
+    private EquippedItems eqItems;
+
     #region Singleton logic
+
     public static InventoryEquipmentMediator instance;
+
     private void Awake()
     {
         if (instance == null)
@@ -16,7 +18,9 @@ public class InventoryEquipmentMediator : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
     }
-    #endregion
+
+    #endregion Singleton logic
+
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -36,6 +40,7 @@ public class InventoryEquipmentMediator : MonoBehaviour
         {
             EquippableItem previouslyEquippedItem;
             previouslyEquippedItem = eqItems.equipedItems[(int)item.Slot];
+            eqItems.Unequip(previouslyEquippedItem.Slot);
             // Sets the previously equipped item, to the slot in inventory.
             eqItems.Equip(item);
             InventoryManager.instance.inventory[InventoryManager.instance.inventory.IndexOf(item)] = previouslyEquippedItem;

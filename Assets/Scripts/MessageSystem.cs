@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MessageSystem : MonoBehaviour
 {
@@ -8,6 +6,7 @@ public class MessageSystem : MonoBehaviour
     {
         Debug.Log(msg);
     }
+
     public static void Print(object obj)
     {
         Debug.Log(obj);

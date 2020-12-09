@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Inventory
 {
@@ -8,7 +6,9 @@ namespace Inventory
     {
         [SerializeField]
         protected GameObject itemSlotPrefab;
+
         protected ItemSlot[] itemSlots;
+
         protected virtual void CreateSlot(int numberOfSlots)
         {
             itemSlots = new ItemSlot[numberOfSlots];
@@ -17,6 +17,7 @@ namespace Inventory
                 itemSlots[i] = Instantiate(itemSlotPrefab, transform.GetChild(1)).GetComponent<ItemSlot>();
             }
         }
+
         public void TogglePanel()
         {
             gameObject.SetActive(!gameObject.activeSelf);

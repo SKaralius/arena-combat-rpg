@@ -1,28 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class EasyFileSaveExtension
 {
-
     // ----------------------------------------
     // Add new extension inside this function.
     // ----------------------------------------
 
     public void Start()
     {
-
         // AddExtension method required parameters:
         // - Name of this extension
         // - CallBack function to execute when this extension save data
         // - An array of unique keys, where each key corresponds to each saved value
         AddExtension(
-            "BoxCollider", 
-            BoxColliderExtension, 
+            "BoxCollider",
+            BoxColliderExtension,
             new string[] { "centerX", "centerY", "centerZ", "sizeX", "sizeY", "sizeZ", "enabled", "isTrigger", "contactOffset" }
             );
-
     }
 
     // ----------------------------------------
@@ -30,7 +26,7 @@ public class EasyFileSaveExtension
     // ----------------------------------------
 
     // This extension allow Easy File Save to easily save BoxCollider data.
-    void BoxColliderExtension()
+    private void BoxColliderExtension()
     {
         // The boxCollider object data received by the AddCustom() method.
         var data = GetData("BoxCollider");
@@ -50,21 +46,7 @@ public class EasyFileSaveExtension
             bc.isTrigger,
             bc.contactOffset
             );
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // ******************************************************
     //       DON'T MODIFY ANYTHING UNDER THIS COMMENT:
@@ -111,6 +93,5 @@ public class EasyFileSaveExtension
         pars[extensionName] = new List<object>(parameters);
     }
 
-    #endregion
-
+    #endregion " EXTENSIONS ENGINE "
 }

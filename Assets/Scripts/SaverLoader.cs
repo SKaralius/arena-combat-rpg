@@ -1,15 +1,18 @@
-﻿using System.Collections;
+﻿using Inventory;
 using System.Collections.Generic;
-using UnityEngine;
 using TigerForge;
-using Inventory;
+using Unit;
+using UnityEngine;
 
 public class SaverLoader : MonoBehaviour
 {
-    EasyFileSave myFile;
+    private EasyFileSave myFile;
     private GameObject Player;
+
     #region Singleton logic
+
     public static SaverLoader instance;
+
     private void Awake()
     {
         if (instance == null)
@@ -17,9 +20,11 @@ public class SaverLoader : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
     }
-    #endregion
+
+    #endregion Singleton logic
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         myFile = new EasyFileSave("Items")
         {
@@ -36,7 +41,8 @@ public class SaverLoader : MonoBehaviour
                 if (itemToAdd == null)
                 {
                     MessageSystem.Print("Loaded Null");
-                } else
+                }
+                else
                 {
                     MessageSystem.Print("File Loaded Successfully");
                 }
@@ -56,7 +62,7 @@ public class SaverLoader : MonoBehaviour
                 }
                 foreach (EquippableItem eqItem in eqItemsToAdd)
                 {
-                    if(eqItem != null)
+                    if (eqItem != null)
                     {
                         Player.GetComponent<EquippedItems>().Equip(eqItem);
                     }
@@ -71,6 +77,7 @@ public class SaverLoader : MonoBehaviour
         }
         myFile.Dispose();
     }
+
     public void SaveInventory()
     {
         myFile.AddBinary("inventory", InventoryManager.instance.inventory);

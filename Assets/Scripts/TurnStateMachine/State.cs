@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace TurnFSM
 {
@@ -12,23 +10,28 @@ namespace TurnFSM
         {
             BattleSystem = battleSystem;
         }
+
         // Start is called before the first frame update
         public virtual IEnumerator Start()
         {
             yield break;
         }
+
         public virtual IEnumerator UseSkill(Skill.UseSkillHandler skill)
         {
             yield break;
         }
+
         public virtual IEnumerator Attack()
         {
             yield break;
         }
+
         public virtual IEnumerator Move(int i)
         {
             yield break;
         }
+
         public virtual IEnumerator Equip(EquippableItem item)
         {
             // Base implementation reverts the actions, if it's not the player's turn.
@@ -36,6 +39,7 @@ namespace TurnFSM
             MessageSystem.Print("Not player turn");
             yield break;
         }
+
         protected virtual void DecideNextState()
         {
             return;

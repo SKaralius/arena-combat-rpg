@@ -1,8 +1,8 @@
-﻿
-    public interface IItem
-    {
-        string Name { get; }
+﻿public interface IItem
+{
+    string Name { get; }
 
-        float SellPrice { get; }
-        void Sell();
-    }
+    float SellPrice { get; }
+
+    void Sell();
+}

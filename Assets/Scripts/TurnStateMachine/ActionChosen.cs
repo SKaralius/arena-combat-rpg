@@ -7,6 +7,7 @@ namespace TurnFSM
         public ActionChosen(BattleSystem battleSystem) : base(battleSystem)
         {
         }
+
         public override IEnumerator Start()
         {
             MessageSystem.Print("Action chosen");

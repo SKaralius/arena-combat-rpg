@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Unit;
 using UnityEngine;
 
 [System.Serializable]
@@ -7,15 +6,19 @@ public class EquippableItem : IItem, IStats, IEquipable
 {
     // IItem
     public string Name { get; }
+
     public (string, string) SpriteCategoryLabel { get; }
     public float SellPrice { get; }
     public Skills.ESkills Skill;
+
     public void Sell()
     {
         Debug.Log($"{Name} is sold.");
     }
+
     // IEquipable
     public EquipSlot Slot { get; }
+
     // Stats
 
     public float[] Stats { get; set; }

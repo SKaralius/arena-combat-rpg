@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using TigerForge;
+using UnityEngine;
 
 public class Demo : MonoBehaviour
 {
-
     // Instance of Easy File Save
 
-    EasyFileSave myFile;
+    private EasyFileSave myFile;
 
     // Item class
 
@@ -20,19 +19,19 @@ public class Demo : MonoBehaviour
 
     // Variables for this Demo.
 
-    string character;
-    string nickname;
-    int age;
-    float strenght;
-    bool has_sword;
-    bool has_bow;
-    int[] skills;
-    List<string> equipment;
-    Vector3 initialLocation;
-    Dictionary<string, int> coins;
-    List<Item> items;
+    private string character;
+    private string nickname;
+    private int age;
+    private float strenght;
+    private bool has_sword;
+    private bool has_bow;
+    private int[] skills;
+    private List<string> equipment;
+    private Vector3 initialLocation;
+    private Dictionary<string, int> coins;
+    private List<Item> items;
 
-    void Start()
+    private void Start()
     {
         // Start a new instance of Easy File Save. The file name is not specified, so a default name will be used.
 
@@ -44,12 +43,10 @@ public class Demo : MonoBehaviour
         myFile.Delete();
 
         Debug.Log(">> HELLO! I'M READY!" + "\n");
-
     }
 
-    void Update()
+    private void Update()
     {
-        
         // When [S] key is pressed: SAVE.
         if (Input.GetKeyUp(KeyCode.S))
         {
@@ -100,12 +97,12 @@ public class Demo : MonoBehaviour
             items.Add(new Item { name = "Potions", quantity = 10 });
 
             myFile.AddSerialized("items", items);
-            
+
             // Custom Extension for managing BoxCollider
 
             myFile.AddCustom("collider", gameObject.GetComponent<BoxCollider>(), "BoxCollider");
 
-            // Save all the collected data. 
+            // Save all the collected data.
             // At the end of the process, stored data is cleared to free memory.
 
             myFile.Save();
@@ -120,7 +117,6 @@ public class Demo : MonoBehaviour
             // Load data from file.
             if (myFile.Load())
             {
-
                 Debug.Log(">> I'M GOING TO USE LOADED DATA!" + "\n");
 
                 // Simple data.
@@ -157,7 +153,7 @@ public class Demo : MonoBehaviour
                 var thisBoxColllider = gameObject.GetComponent<BoxCollider>();
                 thisBoxColllider.center = new Vector3 { x = bc["centerX"].ToFloat(), y = bc["centerY"].ToFloat(), z = bc["centerZ"].ToFloat() };
                 thisBoxColllider.isTrigger = bc["isTrigger"].ToBool();
- 
+
                 // Loaded data has been used as needed.
                 // Stored data is manually cleared to free memory.
 
@@ -171,7 +167,6 @@ public class Demo : MonoBehaviour
         // When [A] key is pressed: APPEND.
         if (Input.GetKeyUp(KeyCode.A))
         {
-
             // Simple data.
 
             myFile.Add("nickname", "The Warrior");
@@ -191,7 +186,6 @@ public class Demo : MonoBehaviour
         // When [Del] key is pressed: FILE DELETE.
         if (Input.GetKeyUp(KeyCode.Delete))
         {
-
             // Delete this file.
             // This method clears stored data as well.
 
@@ -203,7 +197,6 @@ public class Demo : MonoBehaviour
         // When [T] key is pressed: SAVING AND LOADING DATA TEST.
         if (Input.GetKeyUp(KeyCode.T))
         {
-
             // Perform a test of writing and loading data.
             // -------------------------------------------
 
@@ -248,13 +241,12 @@ public class Demo : MonoBehaviour
             if (myFile.TestDataSaveLoad())
             {
                 Debug.Log("<color=green>GOOD!</color>\n");
-            } else
+            }
+            else
             {
                 Debug.Log("<color=red>OPS! SOMETHING WENT WRONG!</color>\n");
             }
-
         }
-
     }
 
     private void ShowData()
@@ -275,5 +267,4 @@ public class Demo : MonoBehaviour
         foreach (KeyValuePair<string, int> item in coins) Debug.Log("Coin - Type: " + item.Key + " Quantity: " + item.Value + "\n");
         foreach (var item in items) Debug.Log("Item - Name: " + item.name + " Quantity: " + item.quantity + "\n");
     }
-
 }
