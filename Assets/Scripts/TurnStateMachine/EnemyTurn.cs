@@ -15,14 +15,14 @@ namespace TurnFSM
 
         public override IEnumerator Start()
         {
-            orderList[AIOrders.MoveLeft] = () => Move(-1);
-            orderList[AIOrders.MoveRight] = () => Move(1);
-            orderList[AIOrders.Attack] = Attack;
-            // attack player, check if dead, if dead, set a lost state
-            // if not, set player turn state
+            //orderList[AIOrders.MoveLeft] = () => Move(-1);
+            //orderList[AIOrders.MoveRight] = () => Move(1);
+            //orderList[AIOrders.Attack] = Attack;
+            //orderList[AIOrders.UseSkill] = UseSkill();
             MessageSystem.Print("Enemy Turn");
-            AIOrders order = EnemyAI.DecideOrder(BattleSystem);
-            yield return orderList[order]();
+            Skill.UseSkillHandler order = EnemyAI.DecideOrder(BattleSystem);
+            yield return order(BattleSystem, BattleSystem.Enemy, BattleSystem.Player);
+            DecideNextState();
         }
 
         public override IEnumerator Move(int i)
@@ -39,6 +39,12 @@ namespace TurnFSM
         {
             yield return BattleSystem.StartCoroutine(Skills.instance.BasicAttack(BattleSystem, 0, BattleSystem.Enemy, BattleSystem.Player));
             BattleSystem.SetState(new PlayerTurn(BattleSystem));
+        }
+        public override IEnumerator UseSkill(Skill.UseSkillHandler skill)
+        {
+            yield return BattleSystem.StartCoroutine(skill(BattleSystem, BattleSystem.Enemy, BattleSystem.Player));
+
+            DecideNextState();
         }
     }
 }

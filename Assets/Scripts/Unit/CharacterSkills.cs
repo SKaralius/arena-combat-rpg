@@ -15,20 +15,24 @@ namespace Unit
 
         public void AddToSkillList(EquippableItem item, int who)
         {
+            if (who != gameObject.GetHashCode())
+                return;
             if (item.Skill != Skills.ESkills.None)
             {
                 characterSkills.Add(item.Skill);
-                if (SkillManager.instance)
+                if (SkillManager.instance && GetComponent<EquippedItems>().isPlayer)
                     SkillManager.instance.RenderSkillSlots();
             }
         }
 
         public void RemoveFromSkillList(EquippableItem item, int who)
         {
+            if (who != gameObject.GetHashCode())
+                return;
             if (item.Skill != Skills.ESkills.None)
             {
                 characterSkills.Remove(item.Skill);
-                if (SkillManager.instance)
+                if (SkillManager.instance && GetComponent<EquippedItems>().isPlayer)
                     SkillManager.instance.RenderSkillSlots();
             }
         }

@@ -9,13 +9,12 @@ namespace Unit
         [System.NonSerialized]
         public EquippableItem[] equipedItems = new EquippableItem[5];
 
-        private void Awake()
+        private void Start()
         {
-            equipedItems[0] = null;
-            equipedItems[1] = null;
-            equipedItems[2] = null;
-            equipedItems[3] = null;
-            equipedItems[4] = null;
+            if (!isPlayer)
+            {
+                Equip(new EquippableItem(EquipSlot.RightWeapon, "Knockbacking Staff", ("Weapon", "Staff"), _sellPrice: 69, _attackRange: 10, _damage: 5, _evasion: 5, _skill: Skills.ESkills.Knockback));
+            }
         }
 
         public bool IsItemEquipped(EquippableItem item)

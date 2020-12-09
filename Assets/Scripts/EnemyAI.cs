@@ -1,4 +1,7 @@
-﻿public enum AIOrders
+﻿using System;
+using System.Collections;
+using Unit;
+public enum AIOrders
 {
     MoveLeft,
     MoveRight,
@@ -8,8 +11,8 @@
 
 public static class EnemyAI
 {
-    public static AIOrders DecideOrder(BattleSystem battleSystem)
+    public static Skill.UseSkillHandler DecideOrder(BattleSystem battleSystem)
     {
-        return AIOrders.Attack;
+            return Skills.instance.skillsList[battleSystem.Enemy.GetComponent<CharacterSkills>().characterSkills[0]].effect;
     }
 }

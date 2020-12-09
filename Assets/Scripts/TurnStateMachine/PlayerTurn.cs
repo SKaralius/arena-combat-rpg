@@ -13,9 +13,7 @@ namespace TurnFSM
 
         public override IEnumerator Start()
         {
-            float distance = Mathf.Abs(BattleSystem.Player.gameObject.transform.position.x - BattleSystem.Enemy.gameObject.transform.position.x);
-            BattleSystem.enemyInPlayersAttackRange = distance < BattleSystem.Player.GetComponent<UnitStats>().GetStat(EStats.AttackRange);
-            if (BattleSystem.enemyInPlayersAttackRange)
+            if (BattleSystem.IsOpponentWithinAttackRange(BattleSystem.Player))
             {
                 GameObject.Find("Attack").GetComponent<Image>().color = Color.black;
                 SkillManager.instance.EnableAllSkills();

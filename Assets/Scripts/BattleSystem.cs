@@ -6,8 +6,6 @@ public class BattleSystem : StateMachine
 {
     public Controller Player;
     public Controller Enemy;
-    public bool enemyInPlayersAttackRange = false;
-    public bool playerInEnemysAttackRange = false;
 
     // Start is called before the first frame update
     private void Start()
@@ -19,7 +17,7 @@ public class BattleSystem : StateMachine
 
     public void OnAttackButton()
     {
-        if (enemyInPlayersAttackRange)
+        if (IsOpponentWithinAttackRange(Player))
         {
             StartCoroutine(State.Attack());
         }
@@ -42,6 +40,17 @@ public class BattleSystem : StateMachine
     public void OnItemEquipButton(EquippableItem item, int who)
     {
         StartCoroutine(State.Equip(item));
+    }
+
+    public float GetDistanceBetweenFighters()
+    {
+        return Mathf.Abs(Player.gameObject.transform.position.x - Enemy.gameObject.transform.position.x);
+    }
+
+    public bool IsOpponentWithinAttackRange(Controller current)
+    {
+        float distance = GetDistanceBetweenFighters();
+        return distance < current.GetComponent<UnitStats>().GetStat(EStats.AttackRange);
     }
 
     private void OnDestroy()
