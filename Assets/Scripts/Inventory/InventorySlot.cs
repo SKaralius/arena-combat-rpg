@@ -16,9 +16,12 @@ namespace Inventory
             if (item != null)
             {
                 itemName.text = item.Name;
+                tooltipButton.gameObject.SetActive(true);
+                RenderTooltip(item);
             }
             else
             {
+                tooltipButton.gameObject.SetActive(false);
                 itemName.text = "Empty";
                 itemImage.sprite = null;
                 button.gameObject.SetActive(false);
