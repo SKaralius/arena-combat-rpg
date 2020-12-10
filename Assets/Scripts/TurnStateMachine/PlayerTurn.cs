@@ -15,10 +15,10 @@ namespace TurnFSM
         {
             BattleSystem.Player.characterCooldowns.ReduceAllCooldownsByOne();
             BattleSystem.Enemy.characterCooldowns.ReduceAllCooldownsByOne();
-            SkillManager.instance.RenderSkillCooldowns();
             if (BattleSystem.IsOpponentWithinAttackRange(BattleSystem.Player))
             {
-                SkillManager.instance.EnableAllSkills();
+                //SkillManager.instance.EnableAllSkills();
+                SkillManager.instance.RenderSkillCooldowns();
             }
             else
             {

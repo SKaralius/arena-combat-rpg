@@ -61,7 +61,7 @@ public class Skills : MonoBehaviour
 
     public IEnumerator Knockback(BattleSystem battleSystem, Controller current, Controller opponent)
     {
-        current.characterCooldowns.AddCooldownToSkill(ESkills.Knockback, 2);
+        current.characterCooldowns.AddCooldownToSkill(ESkills.Knockback, 5);
         SkillManager.instance.RenderSkillCooldowns();
         bool hasEvaded = opponent.TakeDamage(opponent);
         if (hasEvaded)
