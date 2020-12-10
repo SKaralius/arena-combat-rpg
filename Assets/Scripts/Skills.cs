@@ -30,7 +30,8 @@ public class Skills : MonoBehaviour
 
     public IEnumerator BasicAttack(BattleSystem battleSystem, Controller current, Controller opponent)
     {
-        opponent.TakeDamage(opponent);
+        if(!EvadeCheck(opponent))
+            opponent.TakeDamage(opponent);
         current.GetComponent<Animator>().SetBool("isAttacking", true);
         yield return new WaitForSeconds(0.3f);
         current.GetComponent<Animator>().SetBool("isAttacking", false);
@@ -63,20 +64,24 @@ public class Skills : MonoBehaviour
     {
         current.characterCooldowns.AddCooldownToSkill(ESkills.Knockback, 5);
         SkillManager.instance.RenderSkillCooldowns();
-        bool hasEvaded = opponent.TakeDamage(opponent);
-        if (hasEvaded)
-        {
-            current.GetComponent<Animator>().SetBool("isAttacking", true);
-            yield return new WaitForSeconds(0.3f);
-            current.GetComponent<Animator>().SetBool("isAttacking", false);
-        }
-        else
-        {
-            current.GetComponent<Animator>().SetBool("isAttacking", true);
+        bool evaded = EvadeCheck(opponent);
+
+        if(!evaded)
+            opponent.TakeDamage(opponent);
+        current.GetComponent<Animator>().SetBool("isAttacking", true);
+        yield return new WaitForSeconds(0.3f);
+        if(!evaded)
             yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit((int)Mathf.Sign(current.transform.localScale.x) * -1));
-            yield return new WaitForSeconds(0.3f);
-            current.GetComponent<Animator>().SetBool("isAttacking", false);
+        current.GetComponent<Animator>().SetBool("isAttacking", false);
+    }
+    private bool EvadeCheck(Controller opponent)
+    {
+        bool evaded = Random.Range(0, 100) < opponent.GetComponent<UnitStats>().GetStat(EStats.Evasion);
+        if (evaded)
+        {
+            MessageSystem.Print("Attack was evaded");
         }
+        return evaded;
     }
 
     //public void SetOnFire()

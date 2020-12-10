@@ -29,26 +29,16 @@ namespace Unit
             Health = myStats.GetStat(EStats.Health);
         }
 
-        public bool TakeDamage(Controller attacker)
+        public void TakeDamage(Controller attacker)
         {
             UnitStats stats = attacker.GetComponent<UnitStats>();
-            bool evaded = Random.Range(0, 100) < myStats.GetStat(EStats.Evasion);
-            if (evaded)
+            Health -= Mathf.Clamp((stats.GetStat(EStats.Damage) - myStats.GetStat(EStats.Armor)), 0, 999);
+            if (Health <= 0)
             {
-                MessageSystem.Print("Attack was evaded");
-                return evaded;
+                Health = 0;
+                Die();
             }
-            else
-            {
-                Health -= Mathf.Clamp((stats.GetStat(EStats.Damage) - myStats.GetStat(EStats.Armor)), 0, 999);
-                if (Health <= 0)
-                {
-                    Health = 0;
-                    Die();
-                }
-                hb.UpdateHealthBar(Health);
-                return evaded;
-            }
+            hb.UpdateHealthBar(Health);
         }
 
         private void Die()
