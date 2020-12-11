@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine.SceneManagement;
+using Unit;
 
 namespace TurnFSM
 {
@@ -12,6 +13,11 @@ namespace TurnFSM
         public override IEnumerator Start()
         {
             MessageSystem.Print("Player has won the match");
+            BattleSystem.Player.GetComponent<UnitStats>().ResetModifiers();
+            BattleSystem.Player.GetComponent<CharacterActiveEffects>().Reset();
+            BattleSystem.Enemy.GetComponent<UnitStats>().ResetModifiers();
+            BattleSystem.Enemy.GetComponent<CharacterActiveEffects>().Reset();
+
             SaverLoader.instance.SaveInventory();
             SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync(0);

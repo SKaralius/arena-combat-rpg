@@ -21,5 +21,9 @@ namespace Unit
         {
             activeEffectList.Add(effect);
         }
+        public void Reset()
+        {
+            activeEffectList = new List<Effect>();
+        }
     } 
 }

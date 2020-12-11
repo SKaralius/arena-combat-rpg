@@ -24,5 +24,9 @@ namespace Unit
             tempStat += StatModifiers[(int)stat];
             return tempStat;
         }
+        public void ResetModifiers()
+        {
+            StatModifiers = new float[] {0,0,0,0,0,0,0};
+        }
     }
 }
