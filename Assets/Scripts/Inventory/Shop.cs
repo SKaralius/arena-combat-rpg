@@ -8,6 +8,7 @@ namespace Inventory
         [HideInInspector]
         public List<EquippableItem> inventory = new List<EquippableItem>();
         private InventoryManager inventoryManager;
+        private Gold gold;
 
         #region Singleton logic
 
@@ -25,7 +26,9 @@ namespace Inventory
 
         private void Start()
         {
-            inventoryManager = GameObject.Find("InventoryPanel").GetComponent<InventoryManager>();
+            GameObject inventoryPanel = GameObject.Find("InventoryPanel");
+            inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
+            gold = inventoryPanel.GetComponentInChildren<Gold>();
             AddItemToShop(new EquippableItem(EquipSlot.RightWeapon, "Cool Sword", ("Weapon", "Sword"), 69, 50));
         }
 
@@ -62,10 +65,10 @@ namespace Inventory
             }
 
             int BuyPrice = (int)item.SellPrice * 2;
-            if (Gold.instance.Wealth >= BuyPrice)
+            if (gold.Wealth >= BuyPrice)
             {
                 RemoveItemFromShop(item);
-                Gold.instance.Wealth = -BuyPrice;
+                gold.Wealth = -BuyPrice;
                 inventoryManager.AddItemToInventory(item, 0);
             }
             else

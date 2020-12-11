@@ -151,6 +151,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b4a8c230785394398e71c5db248f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &335495004 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8316395833358589788, guid: b0d4fd347783e8d4296dc4f037b5881e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1307315003}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce14077e9ffdb2249b21a3648e99c046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &548316715 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6992547828772378299, guid: fb279dfd7a4c3ba4eb1879182df8883c,
@@ -271,6 +283,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 335495004}
+    - target: {fileID: 605931492812116563, guid: b0d4fd347783e8d4296dc4f037b5881e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: TogglePanel
       objectReference: {fileID: 0}
     - target: {fileID: 7113650573600425558, guid: b0d4fd347783e8d4296dc4f037b5881e,
         type: 3}

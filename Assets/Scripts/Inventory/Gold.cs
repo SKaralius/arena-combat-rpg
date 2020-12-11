@@ -17,25 +17,9 @@ namespace Inventory
             }
         }
 
-        public static Gold instance;
-        // Start is called before the first frame update
-
-        #region Singleton logic
-
-        private void Awake()
-        {
-            if (instance == null)
-                instance = this;
-            else if (instance != this)
-                Destroy(gameObject);
-        }
-
-        #endregion Singleton logic
-
         private void Start()
         {
             wealthText = GetComponent<TextMeshProUGUI>();
-            EventManager.OnGoldChange += ChangeGold;
         }
 
         private void ChangeGold(int amount)

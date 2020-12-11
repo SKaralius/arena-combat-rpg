@@ -9,11 +9,13 @@ namespace Inventory
         public List<EquippableItem> inventory = new List<EquippableItem>();
         private GameObject player;
         private InventoryUIManager inventoryUIManager;
+        private Gold gold;
 
 
         private void Start()
         {
             inventoryUIManager = GetComponent<InventoryUIManager>();
+            gold = GetComponentInChildren<Gold>();
             player = GameObject.FindGameObjectWithTag("Player");
             //EventManager.OnItemEquipped += RemoveItemFromInventory;
             //EventManager.OnItemUnequipped += AddItemToInventory;
@@ -54,7 +56,7 @@ namespace Inventory
         public void SellItem(EquippableItem item)
         {
             RemoveItemFromInventory(item, 0);
-            Gold.instance.Wealth = (int)item.SellPrice;
+            gold.Wealth = (int)item.SellPrice;
         }
     }
 }

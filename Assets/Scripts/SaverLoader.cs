@@ -9,6 +9,7 @@ public class SaverLoader : MonoBehaviour
     private EasyFileSave myFile;
     private GameObject Player;
     private InventoryManager inventoryManager;
+    private Gold gold;
     // TODO: Clean this up, cache components.
 
     #region Singleton logic
@@ -28,7 +29,9 @@ public class SaverLoader : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        inventoryManager = GameObject.Find("InventoryPanel").GetComponent<InventoryManager>();
+        GameObject inventoryPanel = GameObject.Find("InventoryPanel");
+        inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
+        gold = inventoryPanel.GetComponentInChildren<Gold>();
         myFile = new EasyFileSave("Items")
         {
             suppressWarning = false
@@ -71,7 +74,7 @@ public class SaverLoader : MonoBehaviour
                     }
                 }
                 // Gold
-                EventManager.GoldChanged(myFile.GetInt("gold", defaultValue: 0));
+                gold.Wealth = (myFile.GetInt("gold", defaultValue: 0));
             }
             else
             {
@@ -85,7 +88,7 @@ public class SaverLoader : MonoBehaviour
     {
         myFile.AddBinary("inventory", inventoryManager.inventory);
         myFile.AddBinary("eqItems", Player.GetComponent<PlayerEquippedItems>().equippedItems);
-        myFile.Add("gold", Gold.instance.Wealth);
+        myFile.Add("gold", gold.Wealth);
         myFile.Save();
     }
 }
