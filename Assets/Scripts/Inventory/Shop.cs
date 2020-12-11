@@ -7,6 +7,7 @@ namespace Inventory
     {
         [HideInInspector]
         public List<EquippableItem> inventory = new List<EquippableItem>();
+        private InventoryManager inventoryManager;
 
         #region Singleton logic
 
@@ -24,6 +25,7 @@ namespace Inventory
 
         private void Start()
         {
+            inventoryManager = GameObject.Find("InventoryPanel").GetComponent<InventoryManager>();
             AddItemToShop(new EquippableItem(EquipSlot.RightWeapon, "Cool Sword", ("Weapon", "Sword"), 69, 50));
         }
 
@@ -46,13 +48,6 @@ namespace Inventory
             EventManager.ItemRemovedFromShop();
         }
 
-        public void ToggleShop()
-        {
-            MessageSystem.Print("Shop opened");
-            gameObject.SetActive(!gameObject.activeSelf);
-            EventManager.ShopToggled();
-        }
-
         public void GenerateItems()
         {
             MessageSystem.Print("Items generated");
@@ -60,7 +55,7 @@ namespace Inventory
 
         public void BuyItem(EquippableItem item)
         {
-            if (InventoryManager.instance.inventory.Count >= 12)
+            if (inventoryManager.inventory.Count >= 12)
             {
                 MessageSystem.Print("Not enough space in inventory.");
                 return;
@@ -71,7 +66,7 @@ namespace Inventory
             {
                 RemoveItemFromShop(item);
                 Gold.instance.Wealth = -BuyPrice;
-                InventoryManager.instance.AddItemToInventory(item, 0);
+                inventoryManager.AddItemToInventory(item, 0);
             }
             else
             {

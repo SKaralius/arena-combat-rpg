@@ -5,9 +5,11 @@ namespace Inventory
     public class InventorySlot : ItemSlot
     {
         private GameObject shop;
+        private InventoryManager inventoryManager;
 
         private void Awake()
         {
+            inventoryManager = GameObject.Find("InventoryPanel").GetComponent<InventoryManager>();
             shop = GameObject.Find("ShopPanel");
         }
 
@@ -36,7 +38,7 @@ namespace Inventory
             {
                 RenameButton("Sell");
                 button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => { InventoryManager.instance.SellItem(item); });
+                button.onClick.AddListener(() => { inventoryManager.SellItem(item); });
             }
             else
             {

@@ -6,6 +6,8 @@ public class InventoryEquipmentMediator : MonoBehaviour
 {
     private GameObject Player;
     private EquippedItems eqItems;
+    private InventoryManager inventoryManager;
+    private InventoryUIManager InventoryUIManager;
 
     #region Singleton logic
 
@@ -23,6 +25,9 @@ public class InventoryEquipmentMediator : MonoBehaviour
 
     private void Start()
     {
+        GameObject inventoryPanelGO = GameObject.Find("InventoryPanel");
+        inventoryManager = inventoryPanelGO.GetComponent<InventoryManager>();
+        InventoryUIManager = inventoryPanelGO.GetComponent<InventoryUIManager>();
         Player = GameObject.FindGameObjectWithTag("Player");
         eqItems = Player.GetComponent<EquippedItems>();
     }
@@ -33,7 +38,7 @@ public class InventoryEquipmentMediator : MonoBehaviour
         if (eqItems.equippedItems[(int)item.Slot] == null)
         {
             eqItems.Equip(item);
-            InventoryManager.instance.RemoveItemFromInventory(item, Player.GetHashCode());
+            inventoryManager.RemoveItemFromInventory(item, Player.GetHashCode());
         }
         // If there is an item already equiped
         else
@@ -43,8 +48,7 @@ public class InventoryEquipmentMediator : MonoBehaviour
             eqItems.Unequip(previouslyEquippedItem.Slot);
             // Sets the previously equipped item, to the slot in inventory.
             eqItems.Equip(item);
-            InventoryManager.instance.inventory[InventoryManager.instance.inventory.IndexOf(item)] = previouslyEquippedItem;
-            EventManager.ItemAddedToInventory();
+            inventoryManager.inventory[inventoryManager.inventory.IndexOf(item)] = previouslyEquippedItem;
         }
         GameObject battleSystemGO = GameObject.Find("BattleSystem");
         if (battleSystemGO)
@@ -52,14 +56,15 @@ public class InventoryEquipmentMediator : MonoBehaviour
             BattleSystem battleSystem = battleSystemGO.GetComponent<BattleSystem>();
             battleSystem.OnItemEquipButton(item);
         }
+            InventoryUIManager.UpdateUI();
     }
 
     public void Unequip(EquippableItem item)
     {
-        if (InventoryManager.instance.inventory.Count < 12)
+        if (inventoryManager.inventory.Count < 12)
         {
             eqItems.Unequip(item.Slot);
-            InventoryManager.instance.AddItemToInventory(item, Player.GetHashCode());
+            inventoryManager.AddItemToInventory(item, Player.GetHashCode());
         }
         else
         {

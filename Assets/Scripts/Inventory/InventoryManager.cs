@@ -7,25 +7,13 @@ namespace Inventory
     {
         [HideInInspector]
         public List<EquippableItem> inventory = new List<EquippableItem>();
-
         private GameObject player;
+        private InventoryUIManager inventoryUIManager;
 
-        #region Singleton logic
-
-        public static InventoryManager instance;
-
-        private void Awake()
-        {
-            if (instance == null)
-                instance = this;
-            else if (instance != this)
-                Destroy(gameObject);
-        }
-
-        #endregion Singleton logic
 
         private void Start()
         {
+            inventoryUIManager = GetComponent<InventoryUIManager>();
             player = GameObject.FindGameObjectWithTag("Player");
             //EventManager.OnItemEquipped += RemoveItemFromInventory;
             //EventManager.OnItemUnequipped += AddItemToInventory;
@@ -45,7 +33,7 @@ namespace Inventory
             if (inventory.Count < 12)
             {
                 inventory.Add(item);
-                EventManager.ItemAddedToInventory();
+                inventoryUIManager.UpdateUI();
                 MessageSystem.Print($"{item.Name} was added to inventory");
             }
             else
@@ -59,7 +47,7 @@ namespace Inventory
             if (who != player.GetHashCode())
                 Debug.LogWarning("RemoveItemFromInventory called not by player");
             inventory.Remove(item);
-            EventManager.ItemRemovedFromInventory();
+            inventoryUIManager.UpdateUI();
             MessageSystem.Print($"{item.Name} was removed from inventory");
         }
 

@@ -4,10 +4,6 @@ public class EventManager : MonoBehaviour
 {
     public delegate void ItemEventHandler();
 
-    public static event ItemEventHandler OnItemAddedToInventory;
-
-    public static event ItemEventHandler OnItemRemovedFromInventory;
-
     public static event ItemEventHandler OnItemAddedToShop;
 
     public static event ItemEventHandler OnItemRemovedFromShop;
@@ -22,10 +18,6 @@ public class EventManager : MonoBehaviour
 
     public static event GoldHandler OnGoldChange;
 
-    public delegate void ShopHandler();
-
-    public static event ShopHandler OnShopToggle;
-
     //public delegate void StatsEventHandler();
     //public static event StatsEventHandler OnStatsChanged;
 
@@ -34,21 +26,6 @@ public class EventManager : MonoBehaviour
 
     //public delegate void PlayerLevelEventHandler();
     //public static event PlayerLevelEventHandler OnPlayerLevelChange;
-
-    public static void ShopToggled()
-    {
-        OnShopToggle?.Invoke();
-    }
-
-    public static void ItemAddedToInventory()
-    {
-        OnItemAddedToInventory?.Invoke();
-    }
-
-    public static void ItemRemovedFromInventory()
-    {
-        OnItemRemovedFromInventory?.Invoke();
-    }
 
     public static void ItemAddedToShop()
     {
@@ -69,21 +46,4 @@ public class EventManager : MonoBehaviour
     {
         OnGoldChange?.Invoke(amountToAdd);
     }
-
-    //public static void BattleStateChanged(BattleState state)
-    //{
-    //    OnBattleStateChange?.Invoke(state);
-    //}
-
-    //public static void StatsChanged()
-    //{
-    //    if (OnStatsChanged != null)
-    //        OnStatsChanged();
-    //}
-
-    //public static void PlayerLevelChanged()
-    //{
-    //    if (OnPlayerLevelChange != null)
-    //        OnPlayerLevelChange();
-    //}
 }

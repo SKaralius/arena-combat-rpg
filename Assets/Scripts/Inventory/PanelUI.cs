@@ -18,7 +18,7 @@ namespace Inventory
             }
         }
 
-        public void TogglePanel()
+        public virtual void TogglePanel()
         {
             gameObject.SetActive(!gameObject.activeSelf);
         }

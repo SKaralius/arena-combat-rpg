@@ -1,9 +1,13 @@
-﻿namespace Inventory
+﻿using UnityEngine;
+
+namespace Inventory
 {
     public class ShopUI : PanelUI
     {
+        private InventoryUIManager inventoryUIManager;
         private void Awake()
         {
+            inventoryUIManager = GameObject.Find("InventoryPanel").GetComponent<InventoryUIManager>();
             EventManager.OnItemAddedToShop += UpdateUI;
             EventManager.OnItemRemovedFromShop += UpdateUI;
             CreateSlot(12);
@@ -27,6 +31,11 @@
         {
             EventManager.OnItemAddedToShop -= UpdateUI;
             EventManager.OnItemRemovedFromShop -= UpdateUI;
+        }
+        public override void TogglePanel()
+        {
+            base.TogglePanel();
+            inventoryUIManager.UpdateUI();
         }
     }
 }

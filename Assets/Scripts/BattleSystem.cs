@@ -57,7 +57,6 @@ public class BattleSystem : StateMachine
     }
     private void OnDestroy()
     {
-        Debug.Log("Disable SM");
         Player.gameObject.GetComponent<SkillManager>().enabled = false;
     }
 }
