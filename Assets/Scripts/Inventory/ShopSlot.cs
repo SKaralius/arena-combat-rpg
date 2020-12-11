@@ -1,10 +1,14 @@
-﻿namespace Inventory
+﻿using UnityEngine;
+
+namespace Inventory
 {
     public class ShopSlot : ItemSlot
     {
+        private Shop shop;
         private void Awake()
         {
             RenameButton("Buy");
+            shop = GameObject.Find("ShopPanel").GetComponent<Shop>();
         }
 
         public sealed override void RenderUI(EquippableItem item)
@@ -15,7 +19,7 @@
                 itemName.text = item.Name;
                 button.gameObject.SetActive(true);
                 button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => { Shop.instance.BuyItem(item); });
+                button.onClick.AddListener(() => { shop.BuyItem(item); });
                 RenderTooltip(item);
             }
             else

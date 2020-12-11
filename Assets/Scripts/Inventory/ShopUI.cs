@@ -8,12 +8,10 @@ namespace Inventory
         private void Awake()
         {
             inventoryUIManager = GameObject.Find("InventoryPanel").GetComponent<InventoryUIManager>();
-            EventManager.OnItemAddedToShop += UpdateUI;
-            EventManager.OnItemRemovedFromShop += UpdateUI;
             CreateSlot(12);
         }
 
-        protected void UpdateUI()
+        public void UpdateUI()
         {
             for (int i = 0; i < itemSlots.Length; i++)
             {
@@ -25,12 +23,6 @@ namespace Inventory
                 itemSlots[k].RenderUI(item);
                 k++;
             }
-        }
-
-        private void OnDestroy()
-        {
-            EventManager.OnItemAddedToShop -= UpdateUI;
-            EventManager.OnItemRemovedFromShop -= UpdateUI;
         }
         public override void TogglePanel()
         {

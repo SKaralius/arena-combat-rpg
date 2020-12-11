@@ -10,22 +10,11 @@ namespace Inventory
         private InventoryManager inventoryManager;
         private Gold gold;
 
-        #region Singleton logic
-
-        public static Shop instance;
-
-        private void Awake()
-        {
-            if (instance == null)
-                instance = this;
-            else if (instance != this)
-                Destroy(gameObject);
-        }
-
-        #endregion Singleton logic
+        private ShopUI shopUI;
 
         private void Start()
         {
+            shopUI = GetComponent<ShopUI>();
             GameObject inventoryPanel = GameObject.Find("InventoryPanel");
             inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
             gold = inventoryPanel.GetComponentInChildren<Gold>();
@@ -37,7 +26,7 @@ namespace Inventory
             if (inventory.Count < 12)
             {
                 inventory.Add(item);
-                EventManager.ItemAddedToShop();
+                shopUI.UpdateUI();
             }
             else
             {
@@ -48,7 +37,7 @@ namespace Inventory
         public void RemoveItemFromShop(EquippableItem item)
         {
             inventory.Remove(item);
-            EventManager.ItemRemovedFromShop();
+            shopUI.UpdateUI();
         }
 
         public void GenerateItems()
