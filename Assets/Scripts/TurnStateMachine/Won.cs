@@ -19,8 +19,8 @@ namespace TurnFSM
             BattleSystem.Enemy.GetComponent<CharacterActiveEffects>().Reset();
 
             SaverLoader.instance.SaveInventory();
-            SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
-            SceneManager.UnloadSceneAsync(0);
+            SceneManager.LoadSceneAsync("TownScene", LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync("CombatScene");
             return base.Start();
         }
     }

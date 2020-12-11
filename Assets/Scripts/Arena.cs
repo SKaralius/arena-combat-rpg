@@ -5,7 +5,7 @@ public class Arena : MonoBehaviour
 {
     public void StartFight()
     {
-        SceneManager.LoadSceneAsync(0, LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync(1);
+        SceneManager.LoadSceneAsync("CombatScene", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("TownScene");
     }
 }

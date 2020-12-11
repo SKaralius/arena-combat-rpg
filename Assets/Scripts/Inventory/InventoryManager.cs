@@ -32,7 +32,7 @@ namespace Inventory
             //Gold.instance.Wealth = 10;
             //EventManager.GoldChanged(50);
             //AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "Cool Sword", ("Weapon", "Sword"), _sellPrice: 50, _attackRange: 5, _damage:20), player.GetHashCode());
-            AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "DOT Staff", ("Weapon", "Staff"), _sellPrice: 69, _attackRange: 10, _damage: 5, _evasion: 5, _skill: ESkills.DamageOverTime), player.GetHashCode());
+            AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "DOT Staff", ("Weapon", "Staff"), _sellPrice: 69, _attackRange: 10, _damage: 5, _evasion: 5), player.GetHashCode());
             AddItemToInventory(new EquippableItem(EquipSlot.Legs, "Evasion Legs", ("Pelvis", "First"), _sellPrice: 69, _evasion: 5, _skill: ESkills.BuffEvasion), player.GetHashCode());
             //AddItemToInventory(new EquippableItem(EquipSlot.Head, "Twice Helmet", ("Helmet", "First"), _sellPrice: 69, _damage: 5, _evasion: 30, _skill: ESkills.HitTwice), player.GetHashCode());
             //AddItemToInventory(new EquippableItem(EquipSlot.Legs, "First Jump Legs", ("Legs", "First"), _sellPrice: 69, _damage: 5, _evasion: 30, _skill: ESkills.Jump),
