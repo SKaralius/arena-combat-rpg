@@ -14,10 +14,6 @@ public class EventManager : MonoBehaviour
 
     public delegate void ItemEquipHandler(EquippableItem item, int who);
 
-    public static event ItemEquipHandler OnItemEquipped;
-
-    public static event ItemEquipHandler OnItemUnequipped;
-
     public delegate void PlayerHealthEventHandler(int currentHealth, int maxHealth);
 
     public static event PlayerHealthEventHandler OnPlayerHealthChanged;
@@ -62,16 +58,6 @@ public class EventManager : MonoBehaviour
     public static void ItemRemovedFromShop()
     {
         OnItemRemovedFromShop?.Invoke();
-    }
-
-    public static void ItemEquipped(EquippableItem item, int who)
-    {
-        OnItemEquipped?.Invoke(item, who);
-    }
-
-    public static void ItemUnequipped(EquippableItem item, int who)
-    {
-        OnItemUnequipped?.Invoke(item, who);
     }
 
     public static void HealthChanged(int currentHealth, int maxHealth)

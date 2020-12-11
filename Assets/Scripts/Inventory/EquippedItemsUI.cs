@@ -11,27 +11,17 @@ namespace Inventory
         private UnitStats unitStats;
         private EquippedItems eqItems;
 
-        #region Singleton logic
-        public static EquippedItemsUI instance;
         private void Awake()
         {
-            if (instance == null)
-                instance = this;
-            else if (instance != this)
-                Destroy(gameObject);
-        #endregion Singleton logic
-
             player = GameObject.FindGameObjectWithTag("Player");
             eqItems = player.GetComponent<EquippedItems>();
             unitStats = player.GetComponent<UnitStats>();
-            EventManager.OnItemEquipped += UpdateUI;
-            EventManager.OnItemUnequipped += UpdateUI;
             CreateSlot(5);
         }
 
-        protected void UpdateUI(EquippableItem item, int who)
+        public void UpdateUI(EquipSlot slot)
         {
-            itemSlots[(int)item.Slot].RenderUI(eqItems.equipedItems[(int)item.Slot]);
+            itemSlots[(int)slot].RenderUI(eqItems.equippedItems[(int)slot]);
             RenderPlayerStats();
         }
 
@@ -43,12 +33,6 @@ namespace Inventory
                 statDisplay.text += unitStats.GetStat(stat).ToString();
                 statDisplay.text += "\n";
             }
-        }
-
-        private void OnDestroy()
-        {
-            EventManager.OnItemEquipped -= UpdateUI;
-            EventManager.OnItemUnequipped -= UpdateUI;
         }
     }
 }

@@ -1,41 +1,34 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using TMPro;
 using Unit;
-using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillManager : MonoBehaviour
 {
-    public BattleSystem battleSystem;
-    public GameObject skillPrefab;
+    private BattleSystem battleSystem;
+    [SerializeField] private GameObject skillPrefab;
     private CharacterSkills characterSkills;
     private GameObject[] skillSlots = new GameObject[7];
+    private GameObject skillsContainer;
 
-    #region Singleton logic
-
-    public static SkillManager instance;
-
-    private void Awake()
+    private void OnEnable()
     {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
-    }
-
-    #endregion Singleton logic
-
-    private void Start()
-    {
+        characterSkills = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterSkills>();
+        battleSystem = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+        skillsContainer = GameObject.Find("Skills");
         int i = 0;
-        foreach (Transform skillLocation in transform)
+        foreach (Transform skillLocation in skillsContainer.transform)
         {
             skillSlots[i] = Instantiate(skillPrefab, skillLocation);
             i++;
         }
-        characterSkills = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterSkills>();
         RenderSkillSlots();
         battleSystem.Player.characterCooldowns = new Cooldowns();
         battleSystem.Enemy.characterCooldowns = new Cooldowns();
+    }
+
+    private void Start()
+    {
     }
 
     public void RenderSkillSlots()
@@ -76,20 +69,6 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    //public void EnableAllSkills()
-    //{
-    //    int i = 0;
-    //    foreach (ESkills skill in characterSkills.characterSkills)
-    //    {
-    //        if (Skills.instance.skillsList[skill].IsAffectedByRange)
-    //        {
-    //            skillSlots[i].GetComponent<Image>().color = Color.black;
-    //            skillSlots[i].GetComponent<Button>().onClick.RemoveAllListeners();
-    //            skillSlots[i].GetComponent<Button>().onClick.AddListener(() => battleSystem.OnSkillButton(Skills.instance.skillsList[skill].Effect));
-    //        }
-    //        i++;
-    //    }
-    //}
     public void RenderSkillCooldowns()
     {
         int i = 0;
@@ -113,4 +92,19 @@ public class SkillManager : MonoBehaviour
             i++;
         }
     }
+
+    //public void EnableAllSkills()
+    //{
+    //    int i = 0;
+    //    foreach (ESkills skill in characterSkills.characterSkills)
+    //    {
+    //        if (Skills.instance.skillsList[skill].IsAffectedByRange)
+    //        {
+    //            skillSlots[i].GetComponent<Image>().color = Color.black;
+    //            skillSlots[i].GetComponent<Button>().onClick.RemoveAllListeners();
+    //            skillSlots[i].GetComponent<Button>().onClick.AddListener(() => battleSystem.OnSkillButton(Skills.instance.skillsList[skill].Effect));
+    //        }
+    //        i++;
+    //    }
+    //}
 }

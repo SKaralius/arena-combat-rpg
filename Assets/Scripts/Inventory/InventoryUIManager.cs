@@ -26,6 +26,9 @@
 
         private void OnDestroy()
         {
+
+
+
             EventManager.OnItemAddedToInventory -= UpdateUI;
             EventManager.OnItemRemovedFromInventory -= UpdateUI;
             EventManager.OnShopToggle -= UpdateUI;

@@ -10,7 +10,6 @@ namespace Unit
         private HealthBar hb;
         public float Health { get; private set; }
         private UnitStats myStats;
-        private EventManager.ItemEquipHandler healthBarHandler;
         public Cooldowns characterCooldowns;
 
         private void Awake()
@@ -18,14 +17,13 @@ namespace Unit
             myStats = GetComponent<UnitStats>();
             healthBar = Instantiate(healthBarPrefab, transform);
             hb = healthBar.GetComponent<HealthBar>();
-            healthBarHandler = (EquippableItem item, int who) => { hb.UpdateHealthBar(Health); };
-            EventManager.OnItemEquipped += healthBarHandler;
             healthBar.transform.position = new Vector2(transform.position.x, transform.position.y);
             healthBar.transform.localPosition = new Vector2(healthBar.transform.localPosition.x - 0.2f, healthBar.transform.localPosition.y + 0.15f);
         }
 
         private void Start()
         {
+            characterCooldowns = new Cooldowns();
             Health = myStats.GetStat(EStats.Health);
         }
 
@@ -44,11 +42,6 @@ namespace Unit
         {
             MessageSystem.Print("Enemy is dead");
             //Destroy(gameObject);
-        }
-
-        private void OnDestroy()
-        {
-            EventManager.OnItemEquipped -= healthBarHandler;
         }
     }
 }

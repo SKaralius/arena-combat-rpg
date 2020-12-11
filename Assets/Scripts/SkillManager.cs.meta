@@ -3,7 +3,10 @@ guid: 7d1262fd4eae1f74a8d962267397313c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - battleSystem: {instanceID: 0}
+  - skillPrefab: {fileID: 4008483197195791302, guid: f6a002815d577da43ad680bd4d9633c2,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

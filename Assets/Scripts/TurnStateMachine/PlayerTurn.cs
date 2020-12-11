@@ -20,11 +20,11 @@ namespace TurnFSM
             if (BattleSystem.IsOpponentWithinAttackRange(BattleSystem.Player))
             {
                 //SkillManager.instance.EnableAllSkills();
-                SkillManager.instance.RenderSkillCooldowns();
+                BattleSystem.Player.GetComponent<SkillManager>().RenderSkillCooldowns();
             }
             else
             {
-                SkillManager.instance.DisableOutOfRangeSkills();
+                BattleSystem.Player.GetComponent<SkillManager>().DisableOutOfRangeSkills();
             }
             MessageSystem.Print("Player Turn");
             yield break;

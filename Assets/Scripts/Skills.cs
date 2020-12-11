@@ -57,7 +57,9 @@ public class Skills : MonoBehaviour
     public IEnumerator HitTwice(BattleSystem battleSystem, Controller current, Controller opponent)
     {
         current.characterCooldowns.AddCooldownToSkill(ESkills.HitTwice, 2);
-        SkillManager.instance.RenderSkillCooldowns();
+        SkillManager skillManager = current.GetComponent<SkillManager>();
+        if (skillManager != null)
+            skillManager.RenderSkillCooldowns();
         yield return StartCoroutine(BasicAttack(battleSystem, current, opponent));
         yield return StartCoroutine(BasicAttack(battleSystem, current, opponent));
     }
@@ -65,7 +67,9 @@ public class Skills : MonoBehaviour
     public IEnumerator Knockback(BattleSystem battleSystem, Controller current, Controller opponent)
     {
         current.characterCooldowns.AddCooldownToSkill(ESkills.Knockback, 5);
-        SkillManager.instance.RenderSkillCooldowns();
+        SkillManager skillManager = current.GetComponent<SkillManager>();
+        if (skillManager != null)
+            skillManager.RenderSkillCooldowns();
         bool evaded = EvadeCheck(opponent);
 
         if(!evaded)
@@ -79,7 +83,9 @@ public class Skills : MonoBehaviour
     public IEnumerator DamageOverTime(BattleSystem battleSystem, Controller current, Controller opponent)
     {
         current.characterCooldowns.AddCooldownToSkill(ESkills.DamageOverTime, 2);
-        SkillManager.instance.RenderSkillCooldowns();
+                SkillManager skillManager = current.GetComponent<SkillManager>();
+        if (skillManager != null)
+            skillManager.RenderSkillCooldowns();
         bool evaded = EvadeCheck(opponent);
 
         if (!evaded)
@@ -94,7 +100,9 @@ public class Skills : MonoBehaviour
     public IEnumerator BuffEvasion(BattleSystem battleSystem, Controller current, Controller opponent)
     {
         current.characterCooldowns.AddCooldownToSkill(ESkills.BuffEvasion, 2);
-        SkillManager.instance.RenderSkillCooldowns();
+                SkillManager skillManager = current.GetComponent<SkillManager>();
+        if (skillManager != null)
+            skillManager.RenderSkillCooldowns();
         current.GetComponent<CharacterActiveEffects>().AddEffect(new StatChangeEffect(2, EStats.Evasion, 80));
         yield break;
     }

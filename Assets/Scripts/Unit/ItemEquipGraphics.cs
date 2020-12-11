@@ -20,22 +20,11 @@ namespace Unit
             LeftLeg,
             LeftFoot
         }
-
-        private EquippedItems eqItems;
         public SpriteRenderer[] equipSlots = new SpriteRenderer[13];
 
-        private void Awake()
+        public void EquipItem(EquippableItem item)
         {
-            eqItems = GetComponent<EquippedItems>();
-            EventManager.OnItemEquipped += EquipItem;
-            EventManager.OnItemUnequipped += UnequipItem;
-        }
-
-        private void EquipItem(IItem item, int who)
-        {
-            if (who != gameObject.GetHashCode())
-                return;
-            IEquipable equipableItem = (IEquipable)item;
+            EquippableItem equipableItem = item;
             equipSlots[(int)equipableItem.Slot].sprite = RetrieveSprite(equipableItem.SpriteCategoryLabel.Item1, equipableItem.SpriteCategoryLabel.Item2);
             if (equipableItem.Slot == EquipSlot.Chest)
             {
@@ -53,20 +42,17 @@ namespace Unit
             }
         }
 
-        private void UnequipItem(IItem item, int who)
+        public void UnequipItem(EquipSlot slot)
         {
-            if (who != gameObject.GetHashCode())
-                return;
-            IEquipable equipableItem = (IEquipable)item;
-            equipSlots[(int)equipableItem.Slot].sprite = null;
-            if (equipableItem.Slot == EquipSlot.Chest)
+            equipSlots[(int)slot].sprite = null;
+            if (slot == EquipSlot.Chest)
             {
                 equipSlots[(int)SpriteRenderSlots.ChestRightArm].sprite = null;
                 equipSlots[(int)SpriteRenderSlots.ChestRightHand].sprite = null;
                 equipSlots[(int)SpriteRenderSlots.ChestLeftArm].sprite = null;
                 equipSlots[(int)SpriteRenderSlots.ChestLeftHand].sprite = null;
             }
-            else if (equipableItem.Slot == EquipSlot.Legs)
+            else if (slot == EquipSlot.Legs)
             {
                 equipSlots[(int)SpriteRenderSlots.RightLeg].sprite = null;
                 equipSlots[(int)SpriteRenderSlots.RightFoot].sprite = null;
@@ -79,12 +65,6 @@ namespace Unit
         {
             Sprite sprite = GameManager.instance.itemSpriteLibrary.GetSprite(category, label: label);
             return sprite;
-        }
-
-        private void OnDestroy()
-        {
-            EventManager.OnItemEquipped -= EquipItem;
-            EventManager.OnItemUnequipped -= UnequipItem;
         }
     }
 }

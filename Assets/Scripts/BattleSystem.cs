@@ -10,12 +10,12 @@ public class BattleSystem : StateMachine
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
+        Player.gameObject.GetComponent<SkillManager>().enabled = true;
     }
     // Start is called before the first frame update
     private void Start()
     {
         SetState(new Begin(this));
-        EventManager.OnItemEquipped += OnItemEquipButton;
     }
 
     public void OnAttackButton()
@@ -40,7 +40,7 @@ public class BattleSystem : StateMachine
         StartCoroutine(State.UseSkill(skill));
     }
 
-    public void OnItemEquipButton(EquippableItem item, int who)
+    public void OnItemEquipButton(EquippableItem item)
     {
         StartCoroutine(State.Equip(item));
     }
@@ -55,9 +55,9 @@ public class BattleSystem : StateMachine
         float distance = GetDistanceBetweenFighters();
         return distance < current.GetComponent<UnitStats>().GetStat(EStats.AttackRange);
     }
-
     private void OnDestroy()
     {
-        EventManager.OnItemEquipped -= OnItemEquipButton;
+        Debug.Log("Disable SM");
+        Player.gameObject.GetComponent<SkillManager>().enabled = false;
     }
 }

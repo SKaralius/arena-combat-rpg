@@ -25,6 +25,7 @@ namespace TurnFSM
             if (BattleSystem.Enemy.Health <= 0)
             {
                 BattleSystem.SetState(new Won(BattleSystem));
+                yield break;
             }
             Skill.UseSkillHandler order = BattleSystem.Enemy.GetComponent<EnemyAI>().DecideOrder(BattleSystem);
             yield return order(BattleSystem, BattleSystem.Enemy, BattleSystem.Player);

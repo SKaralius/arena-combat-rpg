@@ -8,6 +8,7 @@ public class SaverLoader : MonoBehaviour
 {
     private EasyFileSave myFile;
     private GameObject Player;
+    // TODO: Clean this up, cache components.
 
     #region Singleton logic
 
@@ -64,7 +65,7 @@ public class SaverLoader : MonoBehaviour
                 {
                     if (eqItem != null)
                     {
-                        Player.GetComponent<EquippedItems>().Equip(eqItem);
+                        Player.GetComponent<PlayerEquippedItems>().Equip(eqItem);
                     }
                 }
                 // Gold
@@ -81,7 +82,7 @@ public class SaverLoader : MonoBehaviour
     public void SaveInventory()
     {
         myFile.AddBinary("inventory", InventoryManager.instance.inventory);
-        myFile.AddBinary("eqItems", Player.GetComponent<EquippedItems>().equipedItems);
+        myFile.AddBinary("eqItems", Player.GetComponent<PlayerEquippedItems>().equippedItems);
         myFile.Add("gold", Gold.instance.Wealth);
         myFile.Save();
     }

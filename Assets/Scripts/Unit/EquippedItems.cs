@@ -2,55 +2,44 @@
 
 namespace Unit
 {
-    public class EquippedItems : MonoBehaviour
+    public abstract class EquippedItems : MonoBehaviour
     {
-        public bool isPlayer;
+        public EquippableItem[] equippedItems { get; protected set; } = new EquippableItem[5];
+        protected ItemEquipGraphics itemEquipGraphics;
+        protected CharacterSkills characterSkills;
+        protected HealthBar healthBar;
 
-        [System.NonSerialized]
-        public EquippableItem[] equipedItems = new EquippableItem[5];
-
-        private void Start()
+        protected void Start()
         {
-            if (!isPlayer)
-            {
-                //Equip(new EquippableItem(EquipSlot.RightWeapon, "Knockbacking Staff", ("Weapon", "Staff"), _sellPrice: 69, _attackRange: 10, _damage: 5, _evasion: 5, _skill: ESkills.Knockback));
-                Equip(new EquippableItem(EquipSlot.LeftWeapon, "Twice Sword", ("Weapon", "Sword"), _sellPrice: 69, _damage: 5, _evasion: 5, _skill: ESkills.HitTwice));
-            }
-        }
-
-        public bool IsItemEquipped(EquippableItem item)
-        {
-            foreach (IEquipable equipable in equipedItems)
-            {
-                if (equipable == null || item == null)
-                {
-                    continue;
-                }
-                if (equipable == item)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public void Equip(EquippableItem item)
-        {
-            //if(equipedItems[(int)item.Slot] != null)
+            itemEquipGraphics = GetComponent<ItemEquipGraphics>();
+            characterSkills = GetComponent<CharacterSkills>();
+            healthBar = GetComponent<HealthBar>();
+            //if (!isPlayer)
             //{
-            //    Unequip(item.Slot);
+            //    //Equip(new EquippableItem(EquipSlot.RightWeapon, "Knockbacking Staff", ("Weapon", "Staff"), _sellPrice: 69, _attackRange: 10, _damage: 5, _evasion: 5, _skill: ESkills.Knockback));
+            //    Equip(new EquippableItem(EquipSlot.LeftWeapon, "Twice Sword", ("Weapon", "Sword"), _sellPrice: 69, _damage: 5, _evasion: 5, _skill: ESkills.HitTwice));
             //}
-            equipedItems[(int)item.Slot] = item;
-            EventManager.ItemEquipped(item, gameObject.GetHashCode());
-            MessageSystem.Print($"{item.Name} is equiped.");
         }
 
-        public void Unequip(EquipSlot Slot)
+        public virtual void Equip(EquippableItem item)
         {
-            EquippableItem item = equipedItems[(int)Slot];
-            equipedItems[(int)Slot] = null;
-            EventManager.ItemUnequipped(item, gameObject.GetHashCode());
-            MessageSystem.Print($"{item.Name} is unequiped.");
+            equippedItems[(int)item.Slot] = item;
+            MessageSystem.Print($"{item.Name} is equiped on {gameObject.name}.");
+            itemEquipGraphics.EquipItem(item);
+            characterSkills.AddToSkillList(item);
+            if (healthBar)
+                healthBar.UpdateHealthBar(GetComponent<Controller>().Health);
+        }
+
+        public virtual void Unequip(EquipSlot Slot)
+        {
+            EquippableItem item = equippedItems[(int)Slot];
+            equippedItems[(int)Slot] = null;
+            MessageSystem.Print($"{item.Name} is unequiped on {gameObject.name}.");
+            itemEquipGraphics.UnequipItem(Slot);
+            characterSkills.RemoveFromSkillList(item);
+            if (healthBar)
+                healthBar.UpdateHealthBar(GetComponent<Controller>().Health);
         }
     }
 }

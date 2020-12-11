@@ -30,7 +30,7 @@ public class InventoryEquipmentMediator : MonoBehaviour
     public void Equip(EquippableItem item)
     {
         // If equip slot is empty
-        if (eqItems.equipedItems[(int)item.Slot] == null)
+        if (eqItems.equippedItems[(int)item.Slot] == null)
         {
             eqItems.Equip(item);
             InventoryManager.instance.RemoveItemFromInventory(item, Player.GetHashCode());
@@ -39,12 +39,18 @@ public class InventoryEquipmentMediator : MonoBehaviour
         else
         {
             EquippableItem previouslyEquippedItem;
-            previouslyEquippedItem = eqItems.equipedItems[(int)item.Slot];
+            previouslyEquippedItem = eqItems.equippedItems[(int)item.Slot];
             eqItems.Unequip(previouslyEquippedItem.Slot);
             // Sets the previously equipped item, to the slot in inventory.
             eqItems.Equip(item);
             InventoryManager.instance.inventory[InventoryManager.instance.inventory.IndexOf(item)] = previouslyEquippedItem;
             EventManager.ItemAddedToInventory();
+        }
+        GameObject battleSystemGO = GameObject.Find("BattleSystem");
+        if (battleSystemGO)
+        {
+            BattleSystem battleSystem = battleSystemGO.GetComponent<BattleSystem>();
+            battleSystem.OnItemEquipButton(item);
         }
     }
 

@@ -9,44 +9,26 @@ namespace Unit
 
         private void Start()
         {
-            EventManager.OnItemEquipped += AddToSkillList;
-            EventManager.OnItemUnequipped += RemoveFromSkillList;
             // Add default skills that should be available to all characters.
             characterSkills.Add(ESkills.MoveBackwards);
             characterSkills.Add(ESkills.BasicAttack);
             characterSkills.Add(ESkills.MoveForwards);
-            if (SkillManager.instance && GetComponent<EquippedItems>().isPlayer)
-                SkillManager.instance.RenderSkillSlots();
         }
 
-        public void AddToSkillList(EquippableItem item, int who)
+        public void AddToSkillList(EquippableItem item)
         {
-            if (who != gameObject.GetHashCode())
-                return;
             if (item.Skill != ESkills.None)
             {
                 characterSkills.Add(item.Skill);
-                if (SkillManager.instance && GetComponent<EquippedItems>().isPlayer)
-                    SkillManager.instance.RenderSkillSlots();
             }
         }
 
-        public void RemoveFromSkillList(EquippableItem item, int who)
+        public void RemoveFromSkillList(EquippableItem item)
         {
-            if (who != gameObject.GetHashCode())
-                return;
             if (item.Skill != ESkills.None)
             {
                 characterSkills.Remove(item.Skill);
-                if (SkillManager.instance && GetComponent<EquippedItems>().isPlayer)
-                    SkillManager.instance.RenderSkillSlots();
             }
-        }
-
-        private void OnDestroy()
-        {
-            EventManager.OnItemEquipped -= AddToSkillList;
-            EventManager.OnItemUnequipped -= RemoveFromSkillList;
         }
     } 
 }
