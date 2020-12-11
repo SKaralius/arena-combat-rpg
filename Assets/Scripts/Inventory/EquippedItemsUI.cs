@@ -11,8 +11,16 @@ namespace Inventory
         private UnitStats unitStats;
         private EquippedItems eqItems;
 
+        #region Singleton logic
+        public static EquippedItemsUI instance;
         private void Awake()
         {
+            if (instance == null)
+                instance = this;
+            else if (instance != this)
+                Destroy(gameObject);
+        #endregion Singleton logic
+
             player = GameObject.FindGameObjectWithTag("Player");
             eqItems = player.GetComponent<EquippedItems>();
             unitStats = player.GetComponent<UnitStats>();
@@ -27,7 +35,7 @@ namespace Inventory
             RenderPlayerStats();
         }
 
-        private void RenderPlayerStats()
+        public void RenderPlayerStats()
         {
             statDisplay.text = "";
             foreach (EStats stat in System.Enum.GetValues(typeof(EStats)))

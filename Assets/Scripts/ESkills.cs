@@ -7,5 +7,7 @@
     HitTwice,
     SetOnFire,
     Jump,
-    Knockback
+    Knockback,
+    DamageOverTime,
+    BuffEvasion
 }

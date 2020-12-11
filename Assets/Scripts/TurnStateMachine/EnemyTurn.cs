@@ -21,6 +21,11 @@ namespace TurnFSM
             //orderList[AIOrders.Attack] = Attack;
             //orderList[AIOrders.UseSkill] = UseSkill();
             MessageSystem.Print("Enemy Turn");
+            BattleSystem.Enemy.GetComponent<CharacterActiveEffects>().TriggerEffects();
+            if (BattleSystem.Enemy.Health <= 0)
+            {
+                BattleSystem.SetState(new Won(BattleSystem));
+            }
             Skill.UseSkillHandler order = BattleSystem.Enemy.GetComponent<EnemyAI>().DecideOrder(BattleSystem);
             yield return order(BattleSystem, BattleSystem.Enemy, BattleSystem.Player);
             DecideNextState();

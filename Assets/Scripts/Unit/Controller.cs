@@ -29,10 +29,9 @@ namespace Unit
             Health = myStats.GetStat(EStats.Health);
         }
 
-        public void TakeDamage(Controller attacker)
+        public void TakeDamage(float _damage)
         {
-            UnitStats stats = attacker.GetComponent<UnitStats>();
-            Health -= Mathf.Clamp((stats.GetStat(EStats.Damage) - myStats.GetStat(EStats.Armor)), 0, 999);
+            Health -= Mathf.Clamp((_damage - myStats.GetStat(EStats.Armor)), 0, 999);
             if (Health <= 0)
             {
                 Health = 0;
