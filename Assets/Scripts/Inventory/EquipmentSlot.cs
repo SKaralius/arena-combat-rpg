@@ -1,9 +1,14 @@
-﻿namespace Inventory
+﻿using Unit;
+using UnityEngine;
+
+namespace Inventory
 {
     public class EquipmentSlot : ItemSlot
     {
+        private PlayerEquippedItems equippedItems;
         private void Awake()
         {
+            equippedItems = GameObject.Find("Player").GetComponent<PlayerEquippedItems>();
             RenameButton("Unequip");
         }
 
@@ -16,7 +21,7 @@
                 itemName.text = item.Name;
                 button.gameObject.SetActive(true);
                 button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => { InventoryEquipmentMediator.instance.Unequip(item); });
+                button.onClick.AddListener(() => { equippedItems.Unequip(item.Slot); });
                 RenderTooltip(item);
             }
             else

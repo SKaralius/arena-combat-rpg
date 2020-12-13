@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2870212585709994105}
   - component: {fileID: 2870212585709994102}
   m_Layer: 5
-  m_Name: EquipedItems
+  m_Name: EquippedItems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,7 +241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2870212586685789982}
-  - component: {fileID: 2870212586685789955}
+  - component: {fileID: 8316395833358589788}
   m_Layer: 5
   m_Name: Equipment
   m_TagString: Untagged
@@ -256,9 +256,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2870212586685789983}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3429375, y: 0.50664073, z: 1}
+  m_LocalScale: {x: 0.2739202, y: 0.40467766, z: 0.79874676}
   m_Children:
   - {fileID: 2870212585842819369}
   - {fileID: 2870212585709994103}
@@ -271,7 +271,7 @@ RectTransform:
   m_AnchoredPosition: {x: -439.99988, y: 1.999939}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2870212586685789955
+--- !u!114 &8316395833358589788
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,9 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce14077e9ffdb2249b21a3648e99c046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSlotPrefab: {fileID: 5521229240153024006, guid: a5597fcd0ca53eb4b9a8b71c9754f0f6,
-    type: 3}
-  statDisplay: {fileID: 2391804673280744828}
+  itemSlotPrefab: {fileID: 0}
+  statDisplay: {fileID: 0}
 --- !u!1 &7293820271253606118
 GameObject:
   m_ObjectHideFlags: 0

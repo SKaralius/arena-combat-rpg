@@ -7,8 +7,8 @@ namespace Inventory
         private Shop shop;
         private void Awake()
         {
-            RenameButton("Buy");
             shop = GameObject.Find("ShopPanel").GetComponent<Shop>();
+            RenameButton("Buy");
         }
 
         public sealed override void RenderUI(EquippableItem item)

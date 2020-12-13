@@ -8,7 +8,7 @@ namespace Inventory
         private void Awake()
         {
             inventoryUIManager = GameObject.Find("InventoryPanel").GetComponent<InventoryUIManager>();
-            CreateSlot(12);
+            CreateSlot(12);            
         }
 
         public void UpdateUI()

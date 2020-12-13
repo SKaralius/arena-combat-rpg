@@ -22,28 +22,28 @@ public class SaverLoader : MonoBehaviour
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-    }
-
     #endregion Singleton logic
-
-    // Start is called before the first frame update
-    private void Start()
-    {
         GameObject inventoryPanel = GameObject.Find("InventoryPanel");
         inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
         gold = inventoryPanel.GetComponentInChildren<Gold>();
+        Player = GameObject.FindGameObjectWithTag("Player");
         myFile = new EasyFileSave("Items")
         {
             suppressWarning = false
         };
+    }
+
+
+    // Start is called before the first frame update
+    private void Start()
+    {
         //myFile.Delete();
-        Player = GameObject.FindGameObjectWithTag("Player");
         if (myFile.FileExists())
         {
             if (myFile.Load())
             {
                 // Inventory items
-                List<EquippableItem> itemToAdd = myFile.GetBinary("inventory") as List<EquippableItem>;
+                List<EquippableItem> itemToAdd = (List<EquippableItem>)myFile.GetDeserialized("inventory", typeof(List<EquippableItem>));
                 if (itemToAdd == null)
                 {
                     MessageSystem.Print("Loaded Null");
@@ -54,10 +54,10 @@ public class SaverLoader : MonoBehaviour
                 }
                 foreach (EquippableItem item in itemToAdd)
                 {
-                    inventoryManager.AddItemToInventory(item, Player.GetHashCode());
+                    inventoryManager.AddItemToInventory(item);
                 }
                 // Equip items
-                EquippableItem[] eqItemsToAdd = myFile.GetBinary("eqItems") as EquippableItem[];
+                EquippableItem[] eqItemsToAdd = (EquippableItem[])myFile.GetDeserialized("eqItems", typeof(EquippableItem[]));
                 if (eqItemsToAdd == null)
                 {
                     MessageSystem.Print("Loaded Null");
@@ -70,7 +70,7 @@ public class SaverLoader : MonoBehaviour
                 {
                     if (eqItem != null)
                     {
-                        Player.GetComponent<PlayerEquippedItems>().Equip(eqItem);
+                        Player.GetComponent<PlayerEquippedItems>().ForceEquip(eqItem);
                     }
                 }
                 // Gold
@@ -86,8 +86,8 @@ public class SaverLoader : MonoBehaviour
 
     public void SaveInventory()
     {
-        myFile.AddBinary("inventory", inventoryManager.inventory);
-        myFile.AddBinary("eqItems", Player.GetComponent<PlayerEquippedItems>().equippedItems);
+        myFile.AddSerialized("inventory", inventoryManager.inventory);
+        myFile.AddSerialized("eqItems", Player.GetComponent<PlayerEquippedItems>().EquippedItemsArray);
         myFile.Add("gold", gold.Wealth);
         myFile.Save();
     }

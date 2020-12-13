@@ -27,7 +27,7 @@ public class Skills : MonoBehaviour
         skillsList[ESkills.MoveForwards] = new Skill(_effect: MoveForwards, _name: "Forwards");
         skillsList[ESkills.BasicAttack] = new Skill(_effect: BasicAttack, _name: "Attack", _isAffectedByRange: true);
         skillsList[ESkills.DamageOverTime] = new Skill(_effect: DamageOverTime, _name: "Damage Over Time");
-        skillsList[ESkills.BuffEvasion] = new Skill(_effect: BuffEvasion, _name: "Crippling Strike");
+        skillsList[ESkills.BuffEvasion] = new Skill(_effect: BuffEvasion, _name: "Evade");
     }
 
     public IEnumerator BasicAttack(BattleSystem battleSystem, Controller current, Controller opponent)
@@ -83,7 +83,7 @@ public class Skills : MonoBehaviour
     public IEnumerator DamageOverTime(BattleSystem battleSystem, Controller current, Controller opponent)
     {
         current.characterCooldowns.AddCooldownToSkill(ESkills.DamageOverTime, 2);
-                SkillManager skillManager = current.GetComponent<SkillManager>();
+        SkillManager skillManager = current.GetComponent<SkillManager>();
         if (skillManager != null)
             skillManager.RenderSkillCooldowns();
         bool evaded = EvadeCheck(opponent);

@@ -2,7 +2,5 @@
 {
     string Name { get; }
 
-    float SellPrice { get; }
-
-    void Sell();
+    int SellPrice { get; }
 }

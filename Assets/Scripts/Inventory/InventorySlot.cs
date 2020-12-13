@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Unit;
 
 namespace Inventory
 {
@@ -6,9 +7,11 @@ namespace Inventory
     {
         private GameObject shop;
         private InventoryManager inventoryManager;
+        private EquippedItems equippedItems;
 
         private void Awake()
         {
+            equippedItems = GameObject.Find("Player").GetComponent<EquippedItems>();
             inventoryManager = GameObject.Find("InventoryPanel").GetComponent<InventoryManager>();
             shop = GameObject.Find("ShopPanel");
         }
@@ -32,7 +35,7 @@ namespace Inventory
             {
                 button.gameObject.SetActive(true);
                 button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => { InventoryEquipmentMediator.instance.Equip(item); });
+                button.onClick.AddListener(() => { equippedItems.Equip(item); });
             }
             if (shop.activeSelf == true)
             {

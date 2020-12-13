@@ -16,7 +16,7 @@ namespace Unit
         public float GetStat(EStats stat)
         {
             float tempStat = Stats[(int)stat];
-            foreach (IStats item in eqItems.equippedItems)
+            foreach (IStats item in eqItems.EquippedItemsArray)
             {
                 if (item != null)
                     tempStat += item.Stats[(int)stat];

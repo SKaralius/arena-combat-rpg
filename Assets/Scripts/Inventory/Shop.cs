@@ -12,12 +12,16 @@ namespace Inventory
 
         private ShopUI shopUI;
 
-        private void Start()
+        private void Awake()
         {
             shopUI = GetComponent<ShopUI>();
             GameObject inventoryPanel = GameObject.Find("InventoryPanel");
             inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
             gold = inventoryPanel.GetComponentInChildren<Gold>();
+        }
+
+        private void Start()
+        {
             AddItemToShop(new EquippableItem(EquipSlot.RightWeapon, "Cool Sword", ("Weapon", "Sword"), 69, 50));
         }
 
@@ -58,7 +62,7 @@ namespace Inventory
             {
                 RemoveItemFromShop(item);
                 gold.Wealth = -BuyPrice;
-                inventoryManager.AddItemToInventory(item, 0);
+                inventoryManager.AddItemToInventory(item);
             }
             else
             {

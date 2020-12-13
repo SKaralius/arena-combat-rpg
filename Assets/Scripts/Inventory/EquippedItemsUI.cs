@@ -6,7 +6,7 @@ namespace Inventory
 {
     public class EquippedItemsUI : PanelUI
     {
-        [SerializeField] private TextMeshProUGUI statDisplay;
+        [SerializeField] private TextMeshProUGUI statDisplay = default;
         private GameObject player;
         private UnitStats unitStats;
         private EquippedItems eqItems;
@@ -21,7 +21,7 @@ namespace Inventory
 
         public void UpdateUI(EquipSlot slot)
         {
-            itemSlots[(int)slot].RenderUI(eqItems.equippedItems[(int)slot]);
+            itemSlots[(int)slot].RenderUI(eqItems.EquippedItemsArray[(int)slot]);
             RenderPlayerStats();
         }
 

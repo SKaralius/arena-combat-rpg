@@ -17,7 +17,7 @@ namespace Inventory
             }
         }
 
-        private void Start()
+        private void Awake()
         {
             wealthText = GetComponent<TextMeshProUGUI>();
         }

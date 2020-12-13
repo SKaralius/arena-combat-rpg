@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unit;
 
 namespace TurnFSM
 {
@@ -35,7 +36,7 @@ namespace TurnFSM
         public virtual IEnumerator Equip(EquippableItem item)
         {
             // Base implementation reverts the actions, if it's not the player's turn.
-            InventoryEquipmentMediator.instance.Unequip(item);
+            BattleSystem.Player.GetComponent<PlayerEquippedItems>().Unequip(item.Slot);
             MessageSystem.Print("Not player turn");
             yield break;
         }

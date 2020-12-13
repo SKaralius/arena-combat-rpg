@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SkillManager : MonoBehaviour
 {
     private BattleSystem battleSystem;
-    [SerializeField] private GameObject skillPrefab;
+    [SerializeField] private GameObject skillPrefab = default;
     private CharacterSkills characterSkills;
     private GameObject[] skillSlots = new GameObject[7];
     private GameObject skillsContainer;
@@ -25,10 +25,6 @@ public class SkillManager : MonoBehaviour
         RenderSkillSlots();
         battleSystem.Player.characterCooldowns = new Cooldowns();
         battleSystem.Enemy.characterCooldowns = new Cooldowns();
-    }
-
-    private void Start()
-    {
     }
 
     public void RenderSkillSlots()

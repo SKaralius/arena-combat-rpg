@@ -2,12 +2,8 @@
 using UnityEngine;
 using UnityEngine.Experimental.U2D.Animation;
 
-public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
-
 public class GameManager : MonoBehaviour
 {
-    private GameObject player;
-    private Controller playerUnit;
     public SpriteLibraryAsset itemSpriteLibrary;
 
     public static GameManager instance;
@@ -23,10 +19,4 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion Singleton logic
-
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerUnit = player.GetComponent<Controller>();
-    }
 }

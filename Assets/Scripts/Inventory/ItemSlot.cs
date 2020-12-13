@@ -25,8 +25,6 @@ namespace Inventory
             itemTooltipText.text = "";
             itemTooltipText.text += item.Name;
             itemTooltipText.text += "\n";
-            itemTooltipText.text += item.attackRange;
-            itemTooltipText.text += "\n";
             if (Skills.instance && item.Skill != ESkills.None)
             {
                 itemTooltipText.text += Skills.instance.skillsList[item.Skill].Name;

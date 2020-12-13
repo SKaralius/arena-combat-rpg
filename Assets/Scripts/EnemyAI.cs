@@ -14,7 +14,7 @@ public enum AIOrders
 public class EnemyAI : MonoBehaviour
 {
     private List<ESkills> enemySkills;
-    private void Start()
+    private void Awake()
     {
         enemySkills = GetComponent<CharacterSkills>().characterSkills;
     }
