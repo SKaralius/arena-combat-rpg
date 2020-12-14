@@ -43,15 +43,31 @@ public class Skills : MonoBehaviour
     public IEnumerator MoveBackwards(BattleSystem battleSystem, Controller current, Controller opponent)
     {
         current.GetComponent<Animator>().SetBool("isWalking", true);
-        yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit((int)Mathf.Sign(current.transform.localScale.x) * -1));
+        float positionX = current.transform.position.x + (current.GetComponent<UnitStats>().GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x) * -1);
+        yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit(positionX));
         current.GetComponent<Animator>().SetBool("isWalking", false);
     }
 
     public IEnumerator MoveForwards(BattleSystem battleSystem, Controller current, Controller opponent)
     {
+        float margin = 10f;
         current.GetComponent<Animator>().SetBool("isWalking", true);
-        yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit((int)Mathf.Sign(current.transform.localScale.x)));
-        current.GetComponent<Animator>().SetBool("isWalking", false);
+        float moveDistanceAndDirection = (current.GetComponent<UnitStats>().GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x));
+        float distanceToOpponent = Mathf.Abs(current.transform.position.x - opponent.transform.position.x);
+        float finalPositionX;
+        if ((distanceToOpponent - margin) < Mathf.Abs(moveDistanceAndDirection))
+        {
+            if (distanceToOpponent > margin)
+                finalPositionX = current.transform.position.x + (distanceToOpponent - margin) * (int)Mathf.Sign(current.transform.localScale.x);
+            else
+                finalPositionX = current.transform.position.x;
+        }
+        else
+        {
+            finalPositionX = current.transform.position.x + moveDistanceAndDirection;
+        }
+        yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit(finalPositionX));
+        current.GetComponent<Animator>().SetBool("isWalking", false);   
     }
 
     public IEnumerator HitTwice(BattleSystem battleSystem, Controller current, Controller opponent)
@@ -77,7 +93,8 @@ public class Skills : MonoBehaviour
         current.GetComponent<Animator>().SetBool("isAttacking", true);
         yield return new WaitForSeconds(0.3f);
         if(!evaded)
-            yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit((int)Mathf.Sign(current.transform.localScale.x) * -1));
+            yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit((current.GetComponent<UnitStats>().GetStat(EStats.MoveSpeed) * 
+                (int)Mathf.Sign(current.transform.localScale.x)) * -1 + current.transform.position.x));
         current.GetComponent<Animator>().SetBool("isAttacking", false);
     }
     public IEnumerator DamageOverTime(BattleSystem battleSystem, Controller current, Controller opponent)

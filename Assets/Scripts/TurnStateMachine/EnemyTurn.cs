@@ -8,7 +8,7 @@ namespace TurnFSM
 {
     public class EnemyTurn : State
     {
-        private Dictionary<AIOrders, Func<IEnumerator>> orderList = new Dictionary<AIOrders, Func<IEnumerator>>();
+        //private Dictionary<AIOrders, Func<IEnumerator>> orderList = new Dictionary<AIOrders, Func<IEnumerator>>();
 
         public EnemyTurn(BattleSystem battleSystem) : base(battleSystem)
         {
