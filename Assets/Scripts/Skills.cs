@@ -32,26 +32,29 @@ public class Skills : MonoBehaviour
 
     public IEnumerator BasicAttack(BattleSystem battleSystem, Controller current, Controller opponent)
     {
+        Animator currentAnimator = current.GetComponentInChildren<Animator>();
         if(!EvadeCheck(opponent))
             opponent.TakeDamage(current.GetComponent<UnitStats>().GetStat(EStats.Damage));
-        current.GetComponent<Animator>().SetBool("isAttacking", true);
+        currentAnimator.SetBool("isAttacking", true);
         yield return new WaitForSeconds(0.3f);
-        current.GetComponent<Animator>().SetBool("isAttacking", false);
+        currentAnimator.SetBool("isAttacking", false);
         yield return new WaitForSeconds(0.3f);
     }
 
     public IEnumerator MoveBackwards(BattleSystem battleSystem, Controller current, Controller opponent)
     {
-        current.GetComponent<Animator>().SetBool("isWalking", true);
+        Animator currentAnimator = current.GetComponentInChildren<Animator>();
+        currentAnimator.SetBool("isWalking", true);
         float positionX = current.transform.position.x + (current.GetComponent<UnitStats>().GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x) * -1);
         yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit(positionX));
-        current.GetComponent<Animator>().SetBool("isWalking", false);
+        currentAnimator.SetBool("isWalking", false);
     }
 
     public IEnumerator MoveForwards(BattleSystem battleSystem, Controller current, Controller opponent)
     {
+        Animator currentAnimator = current.GetComponentInChildren<Animator>();
         float margin = 10f;
-        current.GetComponent<Animator>().SetBool("isWalking", true);
+        currentAnimator.SetBool("isWalking", true);
         float moveDistanceAndDirection = (current.GetComponent<UnitStats>().GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x));
         float distanceToOpponent = Mathf.Abs(current.transform.position.x - opponent.transform.position.x);
         float finalPositionX;
@@ -67,7 +70,7 @@ public class Skills : MonoBehaviour
             finalPositionX = current.transform.position.x + moveDistanceAndDirection;
         }
         yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit(finalPositionX));
-        current.GetComponent<Animator>().SetBool("isWalking", false);   
+        currentAnimator.SetBool("isWalking", false);   
     }
 
     public IEnumerator HitTwice(BattleSystem battleSystem, Controller current, Controller opponent)
@@ -82,6 +85,7 @@ public class Skills : MonoBehaviour
 
     public IEnumerator Knockback(BattleSystem battleSystem, Controller current, Controller opponent)
     {
+        Animator currentAnimator = current.GetComponentInChildren<Animator>();
         current.characterCooldowns.AddCooldownToSkill(ESkills.Knockback, 5);
         SkillManager skillManager = current.GetComponent<SkillManager>();
         if (skillManager != null)
@@ -90,15 +94,16 @@ public class Skills : MonoBehaviour
 
         if(!evaded)
             opponent.TakeDamage(current.GetComponent<UnitStats>().GetStat(EStats.Damage));
-        current.GetComponent<Animator>().SetBool("isAttacking", true);
+        currentAnimator.SetBool("isAttacking", true);
         yield return new WaitForSeconds(0.3f);
         if(!evaded)
             yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit((current.GetComponent<UnitStats>().GetStat(EStats.MoveSpeed) * 
                 (int)Mathf.Sign(current.transform.localScale.x)) * -1 + current.transform.position.x));
-        current.GetComponent<Animator>().SetBool("isAttacking", false);
+        currentAnimator.SetBool("isAttacking", false);
     }
     public IEnumerator DamageOverTime(BattleSystem battleSystem, Controller current, Controller opponent)
     {
+        Animator currentAnimator = current.GetComponentInChildren<Animator>();
         current.characterCooldowns.AddCooldownToSkill(ESkills.DamageOverTime, 2);
         SkillManager skillManager = current.GetComponent<SkillManager>();
         if (skillManager != null)
@@ -110,9 +115,9 @@ public class Skills : MonoBehaviour
             opponent.TakeDamage(current.GetComponent<UnitStats>().GetStat(EStats.Damage));
             opponent.GetComponent<CharacterActiveEffects>().AddEffect(new CurrentHealthEffect(2, 20));
         }
-        current.GetComponent<Animator>().SetBool("isAttacking", true);
+        currentAnimator.SetBool("isAttacking", true);
         yield return new WaitForSeconds(0.3f);
-        current.GetComponent<Animator>().SetBool("isAttacking", false);
+        currentAnimator.SetBool("isAttacking", false);
     }
     public IEnumerator BuffEvasion(BattleSystem battleSystem, Controller current, Controller opponent)
     {
