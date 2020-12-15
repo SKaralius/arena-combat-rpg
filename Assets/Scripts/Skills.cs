@@ -96,10 +96,9 @@ public class Skills : MonoBehaviour
             opponent.TakeDamage(current.GetComponent<UnitStats>().GetStat(EStats.Damage));
         currentAnimator.SetBool("isAttacking", true);
         yield return new WaitForSeconds(0.3f);
-        if(!evaded)
-            yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit((current.GetComponent<UnitStats>().GetStat(EStats.MoveSpeed) * 
-                (int)Mathf.Sign(current.transform.localScale.x)) * -1 + current.transform.position.x));
         currentAnimator.SetBool("isAttacking", false);
+        if(!evaded)
+            yield return StartCoroutine(opponent.GetComponent<UnitMovement>().MoveUnit(((int)Mathf.Sign(opponent.transform.localScale.x) * -1 * 5f) + opponent.transform.position.x));
     }
     public IEnumerator DamageOverTime(BattleSystem battleSystem, Controller current, Controller opponent)
     {
