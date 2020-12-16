@@ -34,5 +34,16 @@ namespace Inventory
                 statDisplay.text += "\n";
             }
         }
+        protected override void CreateSlot(int numberOfSlots)
+        {
+            itemSlots = new ItemSlot[numberOfSlots];
+            int i = 0;
+            foreach (Transform itemLocation in transform.GetChild(0))
+            {
+                itemSlots[i] = Instantiate(itemSlotPrefab, itemLocation).GetComponent<ItemSlot>();
+                UpdateUI((EquipSlot)i);
+                i++;
+            }
+        }
     }
 }

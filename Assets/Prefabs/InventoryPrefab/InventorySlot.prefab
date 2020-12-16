@@ -24,6 +24,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1405624064462222943, guid: a4059b5a2ccdc2a489d4132e5756209e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199860282189428704, guid: a4059b5a2ccdc2a489d4132e5756209e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199860282189428704, guid: a4059b5a2ccdc2a489d4132e5756209e,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199860282189428704, guid: a4059b5a2ccdc2a489d4132e5756209e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 31.299995
+      objectReference: {fileID: 0}
     - target: {fileID: 2315136227340571284, guid: a4059b5a2ccdc2a489d4132e5756209e,
         type: 3}
       propertyPath: m_Name
@@ -134,10 +154,45 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2615662230070682731, guid: a4059b5a2ccdc2a489d4132e5756209e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0676306
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615662230070682731, guid: a4059b5a2ccdc2a489d4132e5756209e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -39.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619611616141801705, guid: a4059b5a2ccdc2a489d4132e5756209e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619611616141801705, guid: a4059b5a2ccdc2a489d4132e5756209e,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5724953891409021289, guid: a4059b5a2ccdc2a489d4132e5756209e,
         type: 3}
       propertyPath: equip
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294529159450584042, guid: a4059b5a2ccdc2a489d4132e5756209e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294529159450584042, guid: a4059b5a2ccdc2a489d4132e5756209e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -7.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8117881836431388090, guid: a4059b5a2ccdc2a489d4132e5756209e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4059b5a2ccdc2a489d4132e5756209e, type: 3}

@@ -33,7 +33,8 @@ namespace Inventory
             if (inventory.Count < 12)
             {
                 inventory.Add(item);
-                inventoryUIManager.UpdateUI();
+                if (inventoryUIManager)
+                    inventoryUIManager.UpdateUI();
                 MessageSystem.Print($"{item.Name} was added to inventory");
             }
             else

@@ -5,21 +5,16 @@ namespace Unit
 {
     public class PlayerEquippedItems : EquippedItems
     {
-        private EquippedItemsUI equippedItemsUI;
+        [SerializeField] private EquippedItemsUI equippedItemsUI;
         protected InventoryManager inventoryManager;
         protected InventoryUIManager inventoryUIManager;
+        [SerializeField] private GameObject inventoryPanelGO;
 
         new private void Awake()
         {
             base.Awake();
-            GameObject inventoryPanelGO = GameObject.Find("InventoryPanel");
             inventoryManager = inventoryPanelGO.GetComponent<InventoryManager>();
             inventoryUIManager = inventoryPanelGO.GetComponent<InventoryUIManager>();
-            equippedItemsUI = GameObject.Find("Equipment").GetComponent<EquippedItemsUI>();   
-        }
-        private void Start()
-        {
-            inventoryUIManager.UpdateUI();
         }
 
         public override void Equip(EquippableItem item)
@@ -67,7 +62,8 @@ namespace Unit
         public override void ForceEquip(EquippableItem item)
         {
             base.ForceEquip(item);
-            equippedItemsUI.UpdateUI(item.Slot);
+            if (equippedItemsUI.gameObject.activeSelf == true)
+                equippedItemsUI.UpdateUI(item.Slot);
         }
 
         public void Unequip(EquipSlot Slot)

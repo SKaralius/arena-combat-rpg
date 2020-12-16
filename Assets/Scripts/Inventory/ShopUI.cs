@@ -4,10 +4,10 @@ namespace Inventory
 {
     public class ShopUI : PanelUI
     {
-        private InventoryUIManager inventoryUIManager;
+        [SerializeField] private InventoryUIManager inventoryUIManager;
+        [SerializeField] private GameObject equipmentPanel;
         private void Awake()
         {
-            inventoryUIManager = GameObject.Find("InventoryPanel").GetComponent<InventoryUIManager>();
             CreateSlot(12);            
         }
 
@@ -27,7 +27,14 @@ namespace Inventory
         public override void TogglePanel()
         {
             base.TogglePanel();
-            inventoryUIManager.UpdateUI();
+            if (gameObject.activeSelf == true)
+            {
+                inventoryUIManager.gameObject.SetActive(true);
+                inventoryUIManager.UpdateUI();
+            } else
+            {
+                inventoryUIManager.gameObject.SetActive(false);
+            }
         }
     }
 }

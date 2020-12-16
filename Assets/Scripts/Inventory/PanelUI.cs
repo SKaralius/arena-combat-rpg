@@ -14,7 +14,7 @@ namespace Inventory
             itemSlots = new ItemSlot[numberOfSlots];
             for (int i = 0; i < numberOfSlots; i++)
             {
-                itemSlots[i] = Instantiate(itemSlotPrefab, transform.GetChild(1)).GetComponent<ItemSlot>();
+                itemSlots[i] = Instantiate(itemSlotPrefab, transform.GetChild(0)).GetComponent<ItemSlot>();
             }
         }
 

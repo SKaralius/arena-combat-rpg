@@ -8,6 +8,10 @@
             inventoryManager = GetComponent<InventoryManager>();
             CreateSlot(12);
         }
+        private void Start()
+        {
+            UpdateUI();
+        }
 
         public void UpdateUI()
         {

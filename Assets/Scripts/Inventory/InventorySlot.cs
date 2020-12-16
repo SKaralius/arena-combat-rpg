@@ -13,11 +13,11 @@ namespace Inventory
         {
             equippedItems = GameObject.Find("Player").GetComponent<EquippedItems>();
             inventoryManager = GameObject.Find("InventoryPanel").GetComponent<InventoryManager>();
-            shop = GameObject.Find("ShopPanel");
         }
 
         public sealed override void RenderUI(EquippableItem item)
         {
+            shop = GameObject.Find("ShopPanel");
             if (item != null)
             {
                 itemName.text = item.Name;
@@ -37,7 +37,7 @@ namespace Inventory
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(() => { equippedItems.Equip(item); });
             }
-            if (shop.activeSelf == true)
+            if (shop != null && shop.activeSelf == true)
             {
                 RenameButton("Sell");
                 button.onClick.RemoveAllListeners();

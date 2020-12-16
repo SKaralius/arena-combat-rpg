@@ -8,7 +8,8 @@ public class SaverLoader : MonoBehaviour
 {
     private EasyFileSave myFile;
     private GameObject Player;
-    private InventoryManager inventoryManager;
+    [SerializeField] private InventoryManager inventoryManager;
+    [SerializeField] private GameObject inventoryPanel;
     private Gold gold;
     // TODO: Clean this up, cache components.
 
@@ -23,8 +24,6 @@ public class SaverLoader : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
     #endregion Singleton logic
-        GameObject inventoryPanel = GameObject.Find("InventoryPanel");
-        inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
         gold = inventoryPanel.GetComponentInChildren<Gold>();
         Player = GameObject.FindGameObjectWithTag("Player");
         myFile = new EasyFileSave("Items")

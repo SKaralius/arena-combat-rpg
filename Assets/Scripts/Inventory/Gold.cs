@@ -25,7 +25,8 @@ namespace Inventory
         private void ChangeGold(int amount)
         {
             _wealth += amount;
-            wealthText.text = Wealth.ToString();
+            if (wealthText)
+                wealthText.text = Wealth.ToString();
         }
     } 
 }

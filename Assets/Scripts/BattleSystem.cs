@@ -57,6 +57,7 @@ public class BattleSystem : StateMachine
     }
     private void OnDestroy()
     {
-        Player.gameObject.GetComponent<SkillManager>().enabled = false;
+        if (Player)
+            Player.gameObject.GetComponent<SkillManager>().enabled = false;
     }
 }

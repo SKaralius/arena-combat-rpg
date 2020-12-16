@@ -11,11 +11,11 @@ namespace Inventory
         private Gold gold;
 
         private ShopUI shopUI;
+        [SerializeField] GameObject inventoryPanel;
 
         private void Awake()
         {
             shopUI = GetComponent<ShopUI>();
-            GameObject inventoryPanel = GameObject.Find("InventoryPanel");
             inventoryManager = inventoryPanel.GetComponent<InventoryManager>();
             gold = inventoryPanel.GetComponentInChildren<Gold>();
         }
