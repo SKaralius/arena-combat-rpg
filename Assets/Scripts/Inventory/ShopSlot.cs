@@ -16,7 +16,7 @@ namespace Inventory
             if (item != null)
             {
                 tooltipButton.gameObject.SetActive(true);
-                itemName.text = item.Name;
+                //itemName.text = item.Name;
                 button.gameObject.SetActive(true);
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(() => { shop.BuyItem(item); });
@@ -25,8 +25,8 @@ namespace Inventory
             else
             {
                 tooltipButton.gameObject.SetActive(false);
-                itemName.text = "Empty";
-                itemImage.sprite = null;
+                //itemName.text = "Empty";
+                //itemImage.sprite = null;
                 button.gameObject.SetActive(false);
             }
         }

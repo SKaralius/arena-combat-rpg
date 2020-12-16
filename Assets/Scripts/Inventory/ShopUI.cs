@@ -5,6 +5,7 @@ namespace Inventory
     public class ShopUI : PanelUI
     {
         [SerializeField] private InventoryUIManager inventoryUIManager;
+        [SerializeField] private GameObject inventoryButtonGO;
         [SerializeField] private GameObject equipmentPanel;
         private void Awake()
         {
@@ -31,6 +32,7 @@ namespace Inventory
             {
                 inventoryUIManager.gameObject.SetActive(true);
                 inventoryUIManager.UpdateUI();
+                inventoryButtonGO.SetActive(false);
             } else
             {
                 inventoryUIManager.gameObject.SetActive(false);

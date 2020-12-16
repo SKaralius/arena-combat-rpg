@@ -18,7 +18,7 @@ namespace Inventory
             {
                 tooltipButton.gameObject.SetActive(true);
 
-                itemName.text = item.Name;
+                //itemName.text = item.Name;
                 button.gameObject.SetActive(true);
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(() => { equippedItems.Unequip(item.Slot); });
@@ -28,8 +28,8 @@ namespace Inventory
             {
                 tooltipButton.gameObject.SetActive(false);
 
-                itemName.text = "Empty";
-                itemImage.sprite = null;
+                //itemName.text = "Empty";
+                //itemImage.sprite = null;
                 button.gameObject.SetActive(false);
             }
         }

@@ -20,15 +20,15 @@ namespace Inventory
             shop = GameObject.Find("ShopPanel");
             if (item != null)
             {
-                itemName.text = item.Name;
+                //itemName.text = item.Name;
                 tooltipButton.gameObject.SetActive(true);
                 RenderTooltip(item);
             }
             else
             {
                 tooltipButton.gameObject.SetActive(false);
-                itemName.text = "Empty";
-                itemImage.sprite = null;
+                //itemName.text = "Empty";
+                //itemImage.sprite = null;
                 button.gameObject.SetActive(false);
             }
             if (item is EquippableItem equipable)
