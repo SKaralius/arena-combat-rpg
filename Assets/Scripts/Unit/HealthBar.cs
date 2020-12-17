@@ -15,13 +15,14 @@ namespace Unit
 
         private void Start()
         {
-            maxHealth = unitStats.GetStat(EStats.Health);
             heightOfFill = healthFillImage.sprite.rect.height;
+            maxHealth = unitStats.GetStat(EStats.Health);
             UpdateHealthBar(maxHealth);
         }
 
         public void UpdateHealthBar(float currentHealth)
         {
+            maxHealth = unitStats.GetStat(EStats.Health);
             float currentHPasPercent = currentHealth / maxHealth * 100;
             float distanceToMoveMask = heightOfFill / 100 * (100 - currentHPasPercent);
             SetParentOfHealthItems(null);

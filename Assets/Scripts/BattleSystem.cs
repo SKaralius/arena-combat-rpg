@@ -60,4 +60,5 @@ public class BattleSystem : StateMachine
         if (Player)
             Player.gameObject.GetComponent<SkillManager>().enabled = false;
     }
+
 }

@@ -44,6 +44,11 @@ namespace Unit
             healthBar.UpdateHealthBar(Health);
         }
 
+        public void ResetHealth()
+        {
+            Health = myStats.GetStat(EStats.Health);
+        }
+
         private void Die()
         {
             MessageSystem.Print("Enemy is dead");
