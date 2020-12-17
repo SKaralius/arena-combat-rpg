@@ -25,16 +25,16 @@ namespace Unit
             maxHealth = unitStats.GetStat(EStats.Health);
             float currentHPasPercent = currentHealth / maxHealth * 100;
             float distanceToMoveMask = heightOfFill / 100 * (100 - currentHPasPercent);
-            SetParentOfHealthItems(null);
+            SetParentOfHealthItems(transform.parent);
             transform.localPosition = new Vector2(transform.localPosition.x, -distanceToMoveMask);
             SetParentOfHealthItems(transform);
         }
         private void SetParentOfHealthItems(Transform transform)
         {
             // Order matters, to preserve sorting
-            background.transform.SetParent(transform);
-            fill.transform.SetParent(transform);
-            outline.transform.SetParent(transform);
+            background.transform.SetParent(transform, true);
+            fill.transform.SetParent(transform, true);
+            outline.transform.SetParent(transform, true);
         }
     }
 }

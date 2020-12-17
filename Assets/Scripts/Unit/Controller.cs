@@ -20,8 +20,8 @@ namespace Unit
             if (transform.localScale.x < 0)
             {
                 healthBarGO.transform.position = new Vector2(healthBarGO.transform.position.x * -1, healthBarGO.transform.position.y);
-                healthBarGO.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
-                healthBarGO.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
+                healthBarGO.GetComponent<RectTransform>().anchorMin = new Vector2(1, 1);
+                healthBarGO.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
             }
             healthBar = healthBarGO.GetComponentInChildren<HealthBar>();
             healthBar.unitStats = myStats;
