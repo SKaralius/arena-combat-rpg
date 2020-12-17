@@ -17,6 +17,7 @@ namespace TurnFSM
             BattleSystem.Player.GetComponent<CharacterActiveEffects>().Reset();
             BattleSystem.Enemy.GetComponent<UnitStats>().ResetModifiers();
             BattleSystem.Enemy.GetComponent<CharacterActiveEffects>().Reset();
+            CleanScene();
 
             SaverLoader.instance.SaveInventory();
             SceneManager.LoadSceneAsync("TownScene", LoadSceneMode.Additive);

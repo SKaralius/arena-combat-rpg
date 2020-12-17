@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Unit;
+using UnityEngine;
 
 namespace TurnFSM
 {
@@ -44,6 +45,14 @@ namespace TurnFSM
         protected virtual void DecideNextState()
         {
             return;
+        }
+        protected void CleanScene()
+        {
+            HealthBar[] healthBars = Object.FindObjectsOfType<HealthBar>();
+            foreach (HealthBar healthBar in healthBars)
+            {
+                Object.Destroy(healthBar.transform.parent.gameObject);
+            }
         }
     }
 }

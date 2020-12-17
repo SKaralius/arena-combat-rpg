@@ -6,9 +6,7 @@ namespace Unit
 {
     public class Controller : MonoBehaviour
     {
-        public GameObject healthBarPrefab;
-        private GameObject healthBarGO;
-        private HealthBar healthBar;
+        public HealthBar healthBar;
         public float Health { get; private set; }
         private UnitStats myStats;
         public Cooldowns characterCooldowns;
@@ -16,15 +14,6 @@ namespace Unit
         private void Awake()
         {
             myStats = GetComponent<UnitStats>();
-            healthBarGO = Instantiate(healthBarPrefab, GameObject.Find("UI").transform);
-            if (transform.localScale.x < 0)
-            {
-                healthBarGO.transform.position = new Vector2(healthBarGO.transform.position.x * -1, healthBarGO.transform.position.y);
-                healthBarGO.GetComponent<RectTransform>().anchorMin = new Vector2(1, 1);
-                healthBarGO.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
-            }
-            healthBar = healthBarGO.GetComponentInChildren<HealthBar>();
-            healthBar.unitStats = myStats;
         }
 
         private void Start()

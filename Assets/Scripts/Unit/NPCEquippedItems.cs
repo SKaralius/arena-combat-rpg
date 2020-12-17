@@ -8,7 +8,7 @@ namespace Unit
     {
         private void Start()
         {
-            Equip(new EquippableItem(EquipSlot.Chest, "Health Chest", ("Chest", "First"), _sellPrice: 69, _health: 500));
+            Equip(new EquippableItem(EquipSlot.Chest, "Health Chest", ("Chest", "First"), _sellPrice: 69, _health: 0));
         }
     }
 
