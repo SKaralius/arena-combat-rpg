@@ -1,27 +1,39 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Unit
 {
     public class HealthBar : MonoBehaviour
     {
-        private GameObject healthFill;
-        private UnitStats myStats;
-
-        // Start is called before the first frame update
-        private void Awake()
-        {
-            healthFill = transform.Find("Fill").gameObject;
-            myStats = transform.parent.GetComponent<UnitStats>();
-        }
+        public UnitStats unitStats;
+        [SerializeField] Image healthFillImage;
+        [SerializeField] GameObject background;
+        [SerializeField] GameObject fill;
+        [SerializeField] GameObject outline;
+        private float maxHealth;
+        private float heightOfFill;
 
         private void Start()
         {
-            UpdateHealthBar(myStats.GetStat(EStats.Health));
+            maxHealth = unitStats.GetStat(EStats.Health);
+            heightOfFill = healthFillImage.sprite.rect.height;
+            UpdateHealthBar(maxHealth);
         }
 
         public void UpdateHealthBar(float currentHealth)
         {
-            healthFill.transform.localScale = new Vector2(transform.Find("Background").transform.localScale.x / myStats.GetStat(EStats.Health) * currentHealth, healthFill.transform.localScale.y);
+            float currentHPasPercent = currentHealth / maxHealth * 100;
+            float distanceToMoveMask = heightOfFill / 100 * (100 - currentHPasPercent);
+            SetParentOfHealthItems(null);
+            transform.localPosition = new Vector2(transform.localPosition.x, -distanceToMoveMask);
+            SetParentOfHealthItems(transform);
+        }
+        private void SetParentOfHealthItems(Transform transform)
+        {
+            // Order matters, to preserve sorting
+            background.transform.SetParent(transform);
+            fill.transform.SetParent(transform);
+            outline.transform.SetParent(transform);
         }
     }
 }

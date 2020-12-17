@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Unit
 {
     public class Controller : MonoBehaviour
     {
         public GameObject healthBarPrefab;
-        private GameObject healthBar;
-        private HealthBar hb;
+        private GameObject healthBarGO;
+        private HealthBar healthBar;
         public float Health { get; private set; }
         private UnitStats myStats;
         public Cooldowns characterCooldowns;
@@ -15,10 +16,15 @@ namespace Unit
         private void Awake()
         {
             myStats = GetComponent<UnitStats>();
-            healthBar = Instantiate(healthBarPrefab, transform);
-            hb = healthBar.GetComponent<HealthBar>();
-            healthBar.transform.position = new Vector2(transform.position.x, transform.position.y);
-            healthBar.transform.localPosition = new Vector2(healthBar.transform.localPosition.x - 0.2f, healthBar.transform.localPosition.y + 0.15f);
+            healthBarGO = Instantiate(healthBarPrefab, GameObject.Find("UI").transform);
+            if (transform.localScale.x < 0)
+            {
+                healthBarGO.transform.position = new Vector2(healthBarGO.transform.position.x * -1, healthBarGO.transform.position.y);
+                healthBarGO.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
+                healthBarGO.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
+            }
+            healthBar = healthBarGO.GetComponentInChildren<HealthBar>();
+            healthBar.unitStats = myStats;
         }
 
         private void Start()
@@ -35,7 +41,7 @@ namespace Unit
                 Health = 0;
                 Die();
             }
-            hb.UpdateHealthBar(Health);
+            healthBar.UpdateHealthBar(Health);
         }
 
         private void Die()

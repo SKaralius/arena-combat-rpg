@@ -2033,7 +2033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26f1566afab47f46be99b27928b2108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarPrefab: {fileID: 7425032828187608492, guid: 9ca3c1f727aa37644adcfddead183fc4,
+  healthBarPrefab: {fileID: 6092902497128669447, guid: 0da9cb2a41a90e54e91f9f54b96b6364,
     type: 3}
 --- !u!114 &5980360860607718828
 MonoBehaviour:

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4083d9ea94404db4c934110a76257272
+guid: d9f8b833fcc4a3844a02e46276a2be65
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -26,12 +26,12 @@ ScriptedImporter:
     streamingMipmapsPriority: 0
     nPOTScale: 1
     sRGBTexture: 1
-    spriteMode: 1
+    spriteMode: 2
     spriteExtrude: 1
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 20
+    spritePixelsToUnits: 2
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -63,18 +63,18 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   spriteImportData:
-  - name: bg_1
+  - name: 
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1786
-      height: 633
-    spriteID: bdb175d555a54b04ebefa3d88240e649
+      width: 0
+      height: 0
+    spriteID: 
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -87,73 +87,7 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
-  - name: Layer 1
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 645
-      width: 1786
-      height: 629
-    spriteID: f59f853ef294b5c40bb323c20c78a452
-    internalID: 0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 4, y: 645}
-  - name: bg
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 1913
-      width: 1676
-      height: 571
-    spriteID: d394635380e7b354190c3445c4d163f6
-    internalID: 0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 4, y: 1913}
-  - name: wall
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 1282
-      width: 1786
-      height: 623
-    spriteID: 3c99587cf0e04d34ca8dfd4c29bd5dfd
-    internalID: 0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 4, y: 1272}
-  - name: Background
+  - name: outline
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -162,9 +96,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 1786
-      height: 633
-    spriteID: b5a33f30fff759a469f7521b616f380f
+      width: 370
+      height: 369
+    spriteID: dff8f2e324ae4be438f755b12b07fc36
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -174,61 +108,116 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 4, y: 4}
-  platformSettings: []
+    uvTransform: {x: -7, y: -11}
+  - name: hpFill
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 382
+      y: 4
+      width: 324
+      height: 324
+    spriteID: d2d1874a57ce3ea449169e195cc9e4a4
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 348, y: -34}
+  - name: hpBackground
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 381
+      width: 324
+      height: 324
+    spriteID: 53cdaf2030d6f0b46b0be88fde4e6205
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -30, y: 343}
+  platformSettings:
+  - name: Default
+    overridden: 1
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
   mosaicLayers: 1
   documentPivot: {x: 0, y: 0}
   documentAlignment: 7
   importHiddenLayers: 0
-  importedTextureWidth: 1024
-  importedTextureHeight: 2048
-  documentSize: {x: 1786, y: 633}
+  importedTextureWidth: 512
+  importedTextureHeight: 512
+  documentSize: {x: 402, y: 400}
   paperDollMode: 0
   keepDupilcateSpriteName: 0
   spriteCategoryList:
     categories: []
-  textureActualWidth: 1786
-  textureActualHeight: 633
+  textureActualWidth: 1024
+  textureActualHeight: 1024
   spritePackingTag: 
   resliceFromLayer: 0
   characterMode: 1
   mosaicPSDLayers: []
   rigPSDLayers:
-  - name: Layer 1
-    spriteName: Layer 1
-    isGroup: 0
+  - name: HealthBar
+    spriteName: 
+    isGroup: 1
     parentIndex: -1
-    spriteID: f59f853ef294b5c40bb323c20c78a452
-    layerID: 5
-    mosaicPosition: {x: 4, y: 645}
-  - name: bg
-    spriteName: bg
+    spriteID: 00000000000000000000000000000000
+    layerID: 8
+    mosaicPosition: {x: 0, y: 0}
+  - name: outline
+    spriteName: outline
     isGroup: 0
-    parentIndex: -1
-    spriteID: d394635380e7b354190c3445c4d163f6
-    layerID: 4
-    mosaicPosition: {x: 4, y: 1913}
-  - name: wall
-    spriteName: wall
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 3c99587cf0e04d34ca8dfd4c29bd5dfd
-    layerID: 3
-    mosaicPosition: {x: 4, y: 1282}
-  - name: Background
-    spriteName: Background
-    isGroup: 0
-    parentIndex: -1
-    spriteID: b5a33f30fff759a469f7521b616f380f
-    layerID: 2
+    parentIndex: 0
+    spriteID: dff8f2e324ae4be438f755b12b07fc36
+    layerID: 7
     mosaicPosition: {x: 4, y: 4}
+  - name: hpFill
+    spriteName: hpFill
+    isGroup: 0
+    parentIndex: 0
+    spriteID: d2d1874a57ce3ea449169e195cc9e4a4
+    layerID: 6
+    mosaicPosition: {x: 382, y: 4}
+  - name: hpBackground
+    spriteName: hpBackground
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 53cdaf2030d6f0b46b0be88fde4e6205
+    layerID: 4
+    mosaicPosition: {x: 4, y: 381}
   characterData:
     bones: []
     parts: []
     dimension: {x: 0, y: 0}
     characterGroups: []
   generateGOHierarchy: 0
-  textureAssetName: bg Texture
-  prefabAssetName: bg Prefab
-  spriteLibAssetName: bg Sprite Lib
+  textureAssetName: HealthBar Texture
+  prefabAssetName: HealthBar Prefab
+  spriteLibAssetName: HealthBar Sprite Lib
   secondarySpriteTextures: []
