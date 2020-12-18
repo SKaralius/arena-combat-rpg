@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Unit;
 
@@ -12,6 +13,12 @@ namespace Inventory
         [SerializeField] protected Button button;
         [SerializeField] protected Button tooltipButton;
         [SerializeField] protected TextMeshProUGUI itemTooltipText;
+        protected TooltipManager tooltipManager;
+        protected void Awake()
+        {
+            GameObject UIGO = GameObject.Find("UI");
+            tooltipManager = UIGO.GetComponent<TooltipManager>();
+        }
 
         // Start is called before the first frame update
         public abstract void RenderUI(EquippableItem item);
@@ -36,6 +43,23 @@ namespace Inventory
                 itemTooltipText.text += "\n";
             }
         }
-
+        protected void PrepareTooltipButton()
+        {
+            tooltipButton.gameObject.SetActive(true);
+            tooltipButton.onClick.AddListener(() => tooltipManager.tooltip.SetActive(true));
+        }
+        protected void SetUpButton(UnityAction action)
+        {
+            button.gameObject.SetActive(true);
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(action);
+        }
+        protected void SetSlotEmpty()
+        {
+            tooltipButton.gameObject.SetActive(false);
+            //itemName.text = "Empty";
+            //itemImage.sprite = null;
+            button.gameObject.SetActive(false);
+        }
     } 
 }

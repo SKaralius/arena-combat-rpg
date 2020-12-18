@@ -5,8 +5,9 @@ namespace Inventory
     public class ShopSlot : ItemSlot
     {
         private Shop shop;
-        private void Awake()
+        private new void Awake()
         {
+            base.Awake();
             shop = GameObject.Find("ShopPanel").GetComponent<Shop>();
             RenameButton("Buy");
         }
@@ -15,19 +16,14 @@ namespace Inventory
         {
             if (item != null)
             {
-                tooltipButton.gameObject.SetActive(true);
+                PrepareTooltipButton();
                 //itemName.text = item.Name;
-                button.gameObject.SetActive(true);
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => { shop.BuyItem(item); });
-                RenderTooltip(item);
+
+                SetUpButton(() => shop.BuyItem(item));
             }
             else
             {
-                tooltipButton.gameObject.SetActive(false);
-                //itemName.text = "Empty";
-                //itemImage.sprite = null;
-                button.gameObject.SetActive(false);
+                SetSlotEmpty();
             }
         }
     } 

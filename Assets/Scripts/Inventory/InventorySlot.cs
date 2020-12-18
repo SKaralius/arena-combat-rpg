@@ -9,8 +9,9 @@ namespace Inventory
         private InventoryManager inventoryManager;
         private EquippedItems equippedItems;
 
-        private void Awake()
+        private new void Awake()
         {
+            base.Awake();
             equippedItems = GameObject.Find("Player").GetComponent<EquippedItems>();
             inventoryManager = GameObject.Find("InventoryPanel").GetComponent<InventoryManager>();
         }
@@ -21,27 +22,20 @@ namespace Inventory
             if (item != null)
             {
                 //itemName.text = item.Name;
-                tooltipButton.gameObject.SetActive(true);
-                RenderTooltip(item);
+                PrepareTooltipButton();
             }
             else
             {
-                tooltipButton.gameObject.SetActive(false);
-                //itemName.text = "Empty";
-                //itemImage.sprite = null;
-                button.gameObject.SetActive(false);
+                SetSlotEmpty();
             }
             if (item is EquippableItem equipable)
             {
-                button.gameObject.SetActive(true);
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => { equippedItems.Equip(item); });
+                SetUpButton(() => equippedItems.Equip(item));
             }
             if (shop != null && shop.activeSelf == true)
             {
                 RenameButton("Sell");
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => { inventoryManager.SellItem(item); });
+                SetUpButton(() => inventoryManager.SellItem(item));
             }
             else
             {

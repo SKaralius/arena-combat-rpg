@@ -6,8 +6,9 @@ namespace Inventory
     public class EquipmentSlot : ItemSlot
     {
         private PlayerEquippedItems equippedItems;
-        private void Awake()
+        private new void Awake()
         {
+            base.Awake();
             equippedItems = GameObject.Find("Player").GetComponent<PlayerEquippedItems>();
             RenameButton("Unequip");
         }
@@ -16,21 +17,14 @@ namespace Inventory
         {
             if (item != null)
             {
-                tooltipButton.gameObject.SetActive(true);
+                PrepareTooltipButton();
 
                 //itemName.text = item.Name;
-                button.gameObject.SetActive(true);
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => { equippedItems.Unequip(item.Slot); });
-                RenderTooltip(item);
+                SetUpButton(() => equippedItems.Unequip(item.Slot));
             }
             else
             {
-                tooltipButton.gameObject.SetActive(false);
-
-                //itemName.text = "Empty";
-                //itemImage.sprite = null;
-                button.gameObject.SetActive(false);
+                SetSlotEmpty();
             }
         }
     } 
