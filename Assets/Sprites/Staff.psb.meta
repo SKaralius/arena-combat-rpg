@@ -26,7 +26,7 @@ ScriptedImporter:
     streamingMipmapsPriority: 0
     nPOTScale: 1
     sRGBTexture: 1
-    spriteMode: 1
+    spriteMode: 2
     spriteExtrude: 1
     spriteMeshType: 1
     alignment: 9
@@ -89,8 +89,8 @@ ScriptedImporter:
   rigSpriteImportData:
   - name: Staff
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.11011804, y: 0.15118651}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -132,8 +132,8 @@ ScriptedImporter:
   keepDupilcateSpriteName: 0
   spriteCategoryList:
     categories: []
-  textureActualWidth: 462
-  textureActualHeight: 1163
+  textureActualWidth: 512
+  textureActualHeight: 512
   spritePackingTag: 
   resliceFromLayer: 0
   characterMode: 1

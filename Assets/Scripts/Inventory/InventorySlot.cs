@@ -22,7 +22,8 @@ namespace Inventory
             if (item != null)
             {
                 //itemName.text = item.Name;
-                PrepareTooltipButton();
+                SetUpTooltipButton(item);
+                SetUpSprite(item);
             }
             else
             {
@@ -32,7 +33,7 @@ namespace Inventory
             {
                 SetUpButton(() => equippedItems.Equip(item));
             }
-            if (shop != null && shop.activeSelf == true)
+            if (shop != null && shop.activeSelf == true && item is EquippableItem)
             {
                 RenameButton("Sell");
                 SetUpButton(() => inventoryManager.SellItem(item));

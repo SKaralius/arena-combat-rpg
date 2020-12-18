@@ -17,9 +17,8 @@ namespace Inventory
         {
             if (item != null)
             {
-                PrepareTooltipButton();
-
-                //itemName.text = item.Name;
+                SetUpTooltipButton(item);
+                SetUpSprite(item);
                 SetUpButton(() => equippedItems.Unequip(item.Slot));
             }
             else

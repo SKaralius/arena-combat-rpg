@@ -21,11 +21,11 @@ MonoBehaviour:
       m_Sprite: {fileID: 0}
     - m_Name: Sword
       m_Hash: 1529145355
-      m_Sprite: {fileID: -3753491434264659939, guid: 4179c2f91026f644798f769c0d4779a7,
+      m_Sprite: {fileID: 3003036487046069908, guid: 4179c2f91026f644798f769c0d4779a7,
         type: 3}
     - m_Name: Staff
       m_Hash: -2085626730
-      m_Sprite: {fileID: 3730551363722196761, guid: 6167c008dc49b854088024df7b07e575,
+      m_Sprite: {fileID: 8411208498006016154, guid: 6167c008dc49b854088024df7b07e575,
         type: 3}
   - m_Name: Helmet
     m_Hash: 2097605520

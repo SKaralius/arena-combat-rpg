@@ -9,10 +9,9 @@ namespace Inventory
     public abstract class ItemSlot : MonoBehaviour
     {
         [SerializeField] protected TextMeshProUGUI itemName;
-        [SerializeField] protected Image itemImage;
         [SerializeField] protected Button button;
         [SerializeField] protected Button tooltipButton;
-        [SerializeField] protected TextMeshProUGUI itemTooltipText;
+        [SerializeField] protected Image itemSprite;
         protected TooltipManager tooltipManager;
         protected void Awake()
         {
@@ -27,26 +26,37 @@ namespace Inventory
         {
             button.GetComponentInChildren<TextMeshProUGUI>().text = name;
         }
-        protected virtual void RenderTooltip(EquippableItem item)
+        private void RenderTooltip(EquippableItem item)
         {
-            itemTooltipText.text = "";
-            itemTooltipText.text += item.Name;
-            itemTooltipText.text += "\n";
+            tooltipManager.textComp.text = "";
+            tooltipManager.textComp.text += item.Name;
+            tooltipManager.textComp.text += "\n";
             if (Skills.instance && item.Skill != ESkills.None)
             {
-                itemTooltipText.text += Skills.instance.skillsList[item.Skill].Name;
-                itemTooltipText.text += "\n";
+                tooltipManager.textComp.text += Skills.instance.skillsList[item.Skill].Name;
+                tooltipManager.textComp.text += "\n";
             }
             foreach (float stat in item.Stats)
             {
-                itemTooltipText.text += stat.ToString();
-                itemTooltipText.text += "\n";
+                tooltipManager.textComp.text += stat.ToString();
+                tooltipManager.textComp.text += "\n";
             }
         }
-        protected void PrepareTooltipButton()
+        protected void SetUpSprite(EquippableItem item)
+        {
+            Color temp = itemSprite.color;
+            temp.a = 1;
+            itemSprite.color = temp;
+            itemSprite.sprite = ItemEquipGraphics.RetrieveSprite(item.SpriteCategoryLabel.Item1, item.SpriteCategoryLabel.Item2);
+        }
+        protected void SetUpTooltipButton(EquippableItem item)
         {
             tooltipButton.gameObject.SetActive(true);
-            tooltipButton.onClick.AddListener(() => tooltipManager.tooltip.SetActive(true));
+            tooltipButton.onClick.AddListener(() => {
+                tooltipManager.tooltip.SetActive(true);
+                RenderTooltip(item);
+                }
+            );
         }
         protected void SetUpButton(UnityAction action)
         {
@@ -56,9 +66,11 @@ namespace Inventory
         }
         protected void SetSlotEmpty()
         {
+            Color temp = itemSprite.color;
+            temp.a = 0;
+            itemSprite.color = temp;
+            itemSprite.sprite = null;
             tooltipButton.gameObject.SetActive(false);
-            //itemName.text = "Empty";
-            //itemImage.sprite = null;
             button.gameObject.SetActive(false);
         }
     } 

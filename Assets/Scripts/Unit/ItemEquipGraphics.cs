@@ -4,7 +4,7 @@ namespace Unit
 {
     public class ItemEquipGraphics : MonoBehaviour
     {
-        private enum SpriteRenderSlots
+        public enum SpriteRenderSlots
         {
             Helmet,
             ChestMain,
@@ -61,7 +61,7 @@ namespace Unit
             }
         }
 
-        private Sprite RetrieveSprite(string category, string label)
+        public static Sprite RetrieveSprite(string category, string label)
         {
             Sprite sprite = GameManager.instance.itemSpriteLibrary.GetSprite(category, label: label);
             return sprite;
