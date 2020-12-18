@@ -2,8 +2,6 @@
 
 namespace Unit
 {
-    public class ItemEquipGraphics : MonoBehaviour
-    {
         public enum SpriteRenderSlots
         {
             Helmet,
@@ -20,25 +18,26 @@ namespace Unit
             LeftLeg,
             LeftFoot
         }
+    public class ItemEquipGraphics : MonoBehaviour
+    {
         public SpriteRenderer[] equipSlots = new SpriteRenderer[13];
 
         public void EquipItem(EquippableItem item)
         {
-            EquippableItem equipableItem = item;
-            equipSlots[(int)equipableItem.Slot].sprite = RetrieveSprite(equipableItem.SpriteCategoryLabel.Item1, equipableItem.SpriteCategoryLabel.Item2);
-            if (equipableItem.Slot == EquipSlot.Chest)
+            equipSlots[(int)item.Slot].sprite = RetrieveSprite(item.SpriteCategoryLabel.Item1, item.SpriteCategoryLabel.Item2);
+            if (item.Slot == EquipSlot.Chest)
             {
-                equipSlots[(int)SpriteRenderSlots.ChestRightArm].sprite = RetrieveSprite("Right_Arm", equipableItem.SpriteCategoryLabel.Item2);
-                equipSlots[(int)SpriteRenderSlots.ChestRightHand].sprite = RetrieveSprite("Right_Hand", equipableItem.SpriteCategoryLabel.Item2);
-                equipSlots[(int)SpriteRenderSlots.ChestLeftArm].sprite = RetrieveSprite("Left_Arm", equipableItem.SpriteCategoryLabel.Item2);
-                equipSlots[(int)SpriteRenderSlots.ChestLeftHand].sprite = RetrieveSprite("Left_Hand", equipableItem.SpriteCategoryLabel.Item2);
+                equipSlots[(int)SpriteRenderSlots.ChestRightArm].sprite = RetrieveSprite("Right_Arm", item.SpriteCategoryLabel.Item2);
+                equipSlots[(int)SpriteRenderSlots.ChestRightHand].sprite = RetrieveSprite("Right_Hand", item.SpriteCategoryLabel.Item2);
+                equipSlots[(int)SpriteRenderSlots.ChestLeftArm].sprite = RetrieveSprite("Left_Arm", item.SpriteCategoryLabel.Item2);
+                equipSlots[(int)SpriteRenderSlots.ChestLeftHand].sprite = RetrieveSprite("Left_Hand", item.SpriteCategoryLabel.Item2);
             }
-            else if (equipableItem.Slot == EquipSlot.Legs)
+            else if (item.Slot == EquipSlot.Legs)
             {
-                equipSlots[(int)SpriteRenderSlots.RightLeg].sprite = RetrieveSprite("Right_Leg", equipableItem.SpriteCategoryLabel.Item2);
-                equipSlots[(int)SpriteRenderSlots.RightFoot].sprite = RetrieveSprite("Right_Foot", equipableItem.SpriteCategoryLabel.Item2);
-                equipSlots[(int)SpriteRenderSlots.LeftLeg].sprite = RetrieveSprite("Left_Leg", equipableItem.SpriteCategoryLabel.Item2);
-                equipSlots[(int)SpriteRenderSlots.LeftFoot].sprite = RetrieveSprite("Left_Foot", equipableItem.SpriteCategoryLabel.Item2);
+                equipSlots[(int)SpriteRenderSlots.RightLeg].sprite = RetrieveSprite("Right_Leg", item.SpriteCategoryLabel.Item2);
+                equipSlots[(int)SpriteRenderSlots.RightFoot].sprite = RetrieveSprite("Right_Foot", item.SpriteCategoryLabel.Item2);
+                equipSlots[(int)SpriteRenderSlots.LeftLeg].sprite = RetrieveSprite("Left_Leg", item.SpriteCategoryLabel.Item2);
+                equipSlots[(int)SpriteRenderSlots.LeftFoot].sprite = RetrieveSprite("Left_Foot", item.SpriteCategoryLabel.Item2);
             }
         }
 

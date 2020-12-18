@@ -17,7 +17,6 @@ namespace Inventory
             if (item != null)
             {
                 SetUpTooltipButton(item);
-                //itemName.text = item.Name;
                 SetUpSprite(item);
                 SetUpButton(() => shop.BuyItem(item));
             }

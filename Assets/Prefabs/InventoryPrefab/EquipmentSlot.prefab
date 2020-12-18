@@ -16,6 +16,7 @@ MonoBehaviour:
   button: {fileID: 3712479729533518771}
   tooltipButton: {fileID: 5655755515390233218}
   itemSprite: {fileID: 2471945175498922835}
+  inventorySpriteManager: {fileID: 8213255032236538277}
 --- !u!1001 &7835802228024145042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,6 +147,30 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7835802228024145042}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8213255032236538277 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2109104593029958967, guid: a4059b5a2ccdc2a489d4132e5756209e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7835802228024145042}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca367e03b2725fe4a824358b4a9ac7d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2471945175498922835 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5688118441908465601, guid: a4059b5a2ccdc2a489d4132e5756209e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7835802228024145042}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3712479729533518771 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6862144671418218273, guid: a4059b5a2ccdc2a489d4132e5756209e,
@@ -168,17 +193,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2471945175498922835 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5688118441908465601, guid: a4059b5a2ccdc2a489d4132e5756209e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7835802228024145042}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

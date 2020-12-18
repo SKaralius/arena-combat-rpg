@@ -21,7 +21,6 @@ namespace Inventory
             shop = GameObject.Find("ShopPanel");
             if (item != null)
             {
-                //itemName.text = item.Name;
                 SetUpTooltipButton(item);
                 SetUpSprite(item);
             }

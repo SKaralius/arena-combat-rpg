@@ -12,14 +12,13 @@ namespace Inventory
         [SerializeField] protected Button button;
         [SerializeField] protected Button tooltipButton;
         [SerializeField] protected Image itemSprite;
+        [SerializeField] protected InventorySpriteManager inventorySpriteManager;
         protected TooltipManager tooltipManager;
         protected void Awake()
         {
             GameObject UIGO = GameObject.Find("UI");
             tooltipManager = UIGO.GetComponent<TooltipManager>();
         }
-
-        // Start is called before the first frame update
         public abstract void RenderUI(EquippableItem item);
 
         protected virtual void RenameButton(string name)
@@ -44,10 +43,8 @@ namespace Inventory
         }
         protected void SetUpSprite(EquippableItem item)
         {
-            Color temp = itemSprite.color;
-            temp.a = 1;
-            itemSprite.color = temp;
-            itemSprite.sprite = ItemEquipGraphics.RetrieveSprite(item.SpriteCategoryLabel.Item1, item.SpriteCategoryLabel.Item2);
+            inventorySpriteManager.CreateAndDisplaySprite(item);
+
         }
         protected void SetUpTooltipButton(EquippableItem item)
         {
@@ -66,10 +63,8 @@ namespace Inventory
         }
         protected void SetSlotEmpty()
         {
-            Color temp = itemSprite.color;
-            temp.a = 0;
-            itemSprite.color = temp;
-            itemSprite.sprite = null;
+            inventorySpriteManager.HideSprite();
+
             tooltipButton.gameObject.SetActive(false);
             button.gameObject.SetActive(false);
         }
