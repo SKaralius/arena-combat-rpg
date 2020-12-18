@@ -40,6 +40,7 @@ namespace Inventory
                 tooltipManager.textComp.text += stat.ToString();
                 tooltipManager.textComp.text += "\n";
             }
+            tooltipManager.inventorySpriteManager.CreateAndDisplaySprite(item);
         }
         protected void SetUpSprite(EquippableItem item)
         {

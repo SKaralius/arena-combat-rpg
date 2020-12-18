@@ -2171,6 +2171,30 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3237394225616418760}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3237394225616418762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6370215882620466216, guid: 0c429bf9e16f43749b85750a74069f7e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3237394225616418760}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca367e03b2725fe4a824358b4a9ac7d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3237394225616418763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8748802010249482218, guid: 0c429bf9e16f43749b85750a74069f7e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3237394225616418760}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3770480745641216016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2333,7 +2357,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltip: {fileID: 3237394225616418761}
-  textComp: {fileID: 0}
+  textComp: {fileID: 3237394225616418763}
+  inventorySpriteManager: {fileID: 3237394225616418762}
 --- !u!223 &7113650572570987884
 Canvas:
   m_ObjectHideFlags: 0
