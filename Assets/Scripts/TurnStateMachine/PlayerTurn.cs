@@ -13,6 +13,7 @@ namespace TurnFSM
 
         public override IEnumerator Start()
         {
+            BattleSystem.skillsContainer.SetActive(true);
             BattleSystem.Player.GetComponent<CharacterActiveEffects>().TriggerEffects();
             // TODO: Check if player dead, set lost state if is
             BattleSystem.Player.characterCooldowns.ReduceAllCooldownsByOne();

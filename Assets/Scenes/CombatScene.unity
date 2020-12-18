@@ -337,6 +337,7 @@ MonoBehaviour:
   Enemy: {fileID: 946304667}
   healthBarPrefab: {fileID: 6092902497128669447, guid: 0da9cb2a41a90e54e91f9f54b96b6364,
     type: 3}
+  skillsContainer: {fileID: 1656346137}
 --- !u!4 &730842596
 Transform:
   m_ObjectHideFlags: 0

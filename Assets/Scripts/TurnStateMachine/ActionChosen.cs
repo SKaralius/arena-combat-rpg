@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEngine;
 
 namespace TurnFSM
 {
@@ -10,6 +11,7 @@ namespace TurnFSM
 
         public override IEnumerator Start()
         {
+            BattleSystem.skillsContainer.SetActive(false);
             MessageSystem.Print("Action chosen");
             return base.Start();
         }

@@ -7,6 +7,7 @@ public class BattleSystem : StateMachine
     public Controller Player;
     public Controller Enemy;
     public GameObject healthBarPrefab;
+    public GameObject skillsContainer;
 
     private void Awake()
     {

@@ -81,7 +81,7 @@ public class SkillManager : MonoBehaviour
             else
             {
                 skillSlots[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = Skills.instance.skillsList[skill].Name;
-                skillSlots[i].GetComponent<Image>().color = Color.black;
+                skillSlots[i].GetComponent<Image>().color = Color.white;
                 skillSlots[i].GetComponent<Button>().onClick.RemoveAllListeners();
                 skillSlots[i].GetComponent<Button>().onClick.AddListener(() => battleSystem.OnSkillButton(Skills.instance.skillsList[skill].Effect));
             }
