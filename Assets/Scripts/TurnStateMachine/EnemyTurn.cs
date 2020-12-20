@@ -32,23 +32,6 @@ namespace TurnFSM
             DecideNextState();
         }
 
-        public override IEnumerator Move(int i)
-        {
-            BattleSystem.SetState(new ActionChosen(BattleSystem));
-            BattleSystem.Enemy.GetComponent<Animator>().SetBool("isWalking", true);
-
-            yield return BattleSystem.StartCoroutine(BattleSystem.Enemy.GetComponent<UnitMovement>().MoveUnit(
-                (int)Mathf.Sign(BattleSystem.Enemy.transform.localScale.x) * i
-                ));
-            BattleSystem.Enemy.GetComponent<Animator>().SetBool("isWalking", false);
-            BattleSystem.SetState(new PlayerTurn(BattleSystem));
-        }
-
-        public override IEnumerator Attack()
-        {
-            yield return BattleSystem.StartCoroutine(Skills.instance.BasicAttack(BattleSystem, BattleSystem.Enemy, BattleSystem.Player));
-            BattleSystem.SetState(new PlayerTurn(BattleSystem));
-        }
         public override IEnumerator UseSkill(Skill.UseSkillHandler skill)
         {
             yield return BattleSystem.StartCoroutine(skill(BattleSystem, BattleSystem.Enemy, BattleSystem.Player));

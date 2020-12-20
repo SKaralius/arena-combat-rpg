@@ -5,7 +5,7 @@ namespace Unit
 {
     public class UnitMovement : MonoBehaviour
     {
-        private float lerpDuration = 1f;
+        private float lerpDuration = 0.1f;
 
         public IEnumerator MoveUnit(float positionX)
         {

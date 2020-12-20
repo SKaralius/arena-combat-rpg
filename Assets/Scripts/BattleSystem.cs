@@ -19,23 +19,6 @@ public class BattleSystem : StateMachine
         SetState(new Begin(this));
     }
 
-    public void OnAttackButton()
-    {
-        if (IsOpponentWithinAttackRange(Player))
-        {
-            StartCoroutine(State.Attack());
-        }
-        else
-        {
-            MessageSystem.Print("Out of range");
-        }
-    }
-
-    public void OnMoveButton(int i)
-    {
-        StartCoroutine(State.Move(i));
-    }
-
     public void OnSkillButton(Skill.UseSkillHandler skill)
     {
         StartCoroutine(State.UseSkill(skill));

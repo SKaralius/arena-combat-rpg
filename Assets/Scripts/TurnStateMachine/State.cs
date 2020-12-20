@@ -24,16 +24,6 @@ namespace TurnFSM
             yield break;
         }
 
-        public virtual IEnumerator Attack()
-        {
-            yield break;
-        }
-
-        public virtual IEnumerator Move(int i)
-        {
-            yield break;
-        }
-
         public virtual IEnumerator Equip(EquippableItem item)
         {
             // Base implementation reverts the actions, if it's not the player's turn.

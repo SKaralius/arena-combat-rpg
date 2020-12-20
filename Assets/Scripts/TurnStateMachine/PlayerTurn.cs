@@ -35,16 +35,6 @@ namespace TurnFSM
             DecideNextState();
         }
 
-        public override IEnumerator Attack()
-        {
-            yield break;
-            //BattleSystem.SetState(new ActionChosen(BattleSystem));
-
-            //yield return BattleSystem.StartCoroutine(Skills.instance.BasicAttack(BattleSystem, BattleSystem.Player, BattleSystem.Enemy, 0));
-
-            //DecideNextState();
-        }
-
         public override IEnumerator Equip(EquippableItem equipable)
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
