@@ -18,10 +18,10 @@ namespace TurnFSM
             // TODO: Check if player dead, set lost state if is
             BattleSystem.Player.characterCooldowns.ReduceAllCooldownsByOne();
             BattleSystem.Enemy.characterCooldowns.ReduceAllCooldownsByOne();
-            BattleSystem.Player.GetComponent<SkillManager>().RenderSkillCooldowns();
+            BattleSystem.GetComponent<SkillManager>().RenderSkillCooldowns();
             if (!BattleSystem.IsOpponentWithinAttackRange(BattleSystem.Player))
             { 
-                BattleSystem.Player.GetComponent<SkillManager>().DisableOutOfRangeSkills();
+                BattleSystem.GetComponent<SkillManager>().DisableOutOfRangeSkills();
             }
             MessageSystem.Print("Player Turn");
             yield break;

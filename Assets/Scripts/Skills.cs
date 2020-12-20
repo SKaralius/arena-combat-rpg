@@ -121,7 +121,7 @@ public class Skills : MonoBehaviour
     public IEnumerator BuffEvasion(BattleSystem battleSystem, Controller current, Controller opponent)
     {
         current.characterCooldowns.AddCooldownToSkill(ESkills.BuffEvasion, 2);
-                SkillManager skillManager = current.GetComponent<SkillManager>();
+        SkillManager skillManager = current.GetComponent<SkillManager>();
         if (skillManager != null)
             skillManager.RenderSkillCooldowns();
         current.GetComponent<CharacterActiveEffects>().AddEffect(new StatChangeEffect(2, EStats.Evasion, 80));
@@ -136,13 +136,4 @@ public class Skills : MonoBehaviour
         }
         return evaded;
     }
-
-    //public void SetOnFire()
-    //{
-    //    MessageSystem.Print("On Fire");
-    //}
-    //public void Jump()
-    //{
-    //    MessageSystem.Print("Jump");
-    //}
 }

@@ -7,7 +7,7 @@ namespace Unit
     {
         public List<ESkills> characterSkills = new List<ESkills>();
 
-        private void Start()
+        private void Awake()
         {
             // Add default skills that should be available to all characters.
             characterSkills.Add(ESkills.MoveBackwards);

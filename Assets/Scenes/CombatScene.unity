@@ -314,6 +314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 730842596}
   - component: {fileID: 730842595}
+  - component: {fileID: 730842597}
   m_Layer: 0
   m_Name: BattleSystem
   m_TagString: Untagged
@@ -352,6 +353,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &730842597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730842594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1262fd4eae1f74a8d962267397313c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillPrefab: {fileID: 4008483197195791302, guid: f6a002815d577da43ad680bd4d9633c2,
+    type: 3}
 --- !u!1 &845906850
 GameObject:
   m_ObjectHideFlags: 0

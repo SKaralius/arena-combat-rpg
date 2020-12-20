@@ -37,24 +37,17 @@ namespace Unit
                 inventoryManager.inventory[inventoryManager.inventory.IndexOf(item)] = previouslyEquippedItem;
             }
 
-            #region BattleSystem Turn Skip
+            #region BattleSystem Turn Skip And Skill Manager Update
 
             GameObject battleSystemGO = GameObject.Find("BattleSystem");
             if (battleSystemGO)
             {
                 BattleSystem battleSystem = battleSystemGO.GetComponent<BattleSystem>();
+                SkillManager skillManager = battleSystemGO.GetComponent<SkillManager>();
+                skillManager.RenderSkillSlots();
                 battleSystem.OnItemEquipButton(item);
             }
-
-            #endregion BattleSystem Turn Skip
-
-            #region Skill Manager Update
-
-            SkillManager skillManager = GetComponent<SkillManager>();
-            if (skillManager.enabled == true)
-                skillManager.RenderSkillSlots();
-
-            #endregion Skill Manager Update
+            #endregion BattleSystem Turn Skip And Skill Manager Update
             inventoryUIManager.UpdateUI();
             equippedItemsUI.UpdateUI(item.Slot);
         }
@@ -86,11 +79,14 @@ namespace Unit
 
             #region Skill Manager Update
 
-            SkillManager skillManager = GetComponent<SkillManager>();
-            if (skillManager.enabled == true)
+            GameObject battleSystemGO = GameObject.Find("BattleSystem");
+            if (battleSystemGO)
+            {
+                SkillManager skillManager = battleSystemGO.GetComponent<SkillManager>();
                 skillManager.RenderSkillSlots();
-
+            }
             #endregion Skill Manager Update
+
             equippedItemsUI.UpdateUI(Slot);
         }
     }

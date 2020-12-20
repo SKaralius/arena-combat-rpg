@@ -12,7 +12,6 @@ public class BattleSystem : StateMachine
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
-        Player.gameObject.GetComponent<SkillManager>().enabled = true;
     }
     // Start is called before the first frame update
     private void Start()
@@ -57,10 +56,4 @@ public class BattleSystem : StateMachine
         float distance = GetDistanceBetweenFighters();
         return distance < current.GetComponent<UnitStats>().GetStat(EStats.AttackRange);
     }
-    private void OnDestroy()
-    {
-        if (Player)
-            Player.gameObject.GetComponent<SkillManager>().enabled = false;
-    }
-
 }

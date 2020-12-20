@@ -11,11 +11,15 @@ public class SkillManager : MonoBehaviour
     private GameObject[] skillSlots = new GameObject[7];
     private GameObject skillsContainer;
 
-    private void OnEnable()
+    private void Awake()
     {
         characterSkills = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterSkills>();
-        battleSystem = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+        battleSystem = GetComponent<BattleSystem>();
         skillsContainer = GameObject.Find("Skills");
+    }
+
+    private void Start()
+    {
         int i = 0;
         foreach (Transform skillLocation in skillsContainer.transform)
         {
@@ -88,19 +92,4 @@ public class SkillManager : MonoBehaviour
             i++;
         }
     }
-
-    //public void EnableAllSkills()
-    //{
-    //    int i = 0;
-    //    foreach (ESkills skill in characterSkills.characterSkills)
-    //    {
-    //        if (Skills.instance.skillsList[skill].IsAffectedByRange)
-    //        {
-    //            skillSlots[i].GetComponent<Image>().color = Color.black;
-    //            skillSlots[i].GetComponent<Button>().onClick.RemoveAllListeners();
-    //            skillSlots[i].GetComponent<Button>().onClick.AddListener(() => battleSystem.OnSkillButton(Skills.instance.skillsList[skill].Effect));
-    //        }
-    //        i++;
-    //    }
-    //}
 }
