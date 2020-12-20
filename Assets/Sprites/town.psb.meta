@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4083d9ea94404db4c934110a76257272
+guid: 7ec9d882dea341543a58b9cf658c3831
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -26,12 +26,12 @@ ScriptedImporter:
     streamingMipmapsPriority: 0
     nPOTScale: 1
     sRGBTexture: 1
-    spriteMode: 1
+    spriteMode: 2
     spriteExtrude: 1
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 20
+    spritePixelsToUnits: 50
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -63,18 +63,18 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   spriteImportData:
-  - name: bg_1
+  - name: 
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1786
-      height: 633
-    spriteID: bdb175d555a54b04ebefa3d88240e649
+      width: 0
+      height: 0
+    spriteID: 
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -87,7 +87,7 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
-  - name: Layer 1
+  - name: Grass
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -95,10 +95,10 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 645
-      width: 1786
-      height: 629
-    spriteID: f59f853ef294b5c40bb323c20c78a452
+      y: 6863
+      width: 5000
+      height: 758
+    spriteID: d4f55769ad90dcd49be482626bb3f6df
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -108,7 +108,73 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 4, y: 645}
+    uvTransform: {x: 4, y: 6863}
+  - name: House
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 5012
+      y: 2512
+      width: 2143
+      height: 1708
+    spriteID: 63c0bca32d58d784aadbf2af986bfc1d
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4655, y: 2382}
+  - name: Base
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 5858
+      width: 5000
+      height: 997
+    spriteID: e0d26a6a49e12b1449d28295e8f793db
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 5858}
+  - name: mid0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4600
+      width: 5000
+      height: 1250
+    spriteID: bbd1258e0382adf4fabc10ece79bca32
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 4600}
   - name: bg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -117,10 +183,10 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 1913
-      width: 1676
-      height: 571
-    spriteID: d394635380e7b354190c3445c4d163f6
+      y: 2512
+      width: 5000
+      height: 2080
+    spriteID: fd2da968e6b96ff4193054ee1ea11fd6
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -130,29 +196,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 4, y: 1913}
-  - name: wall
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 1282
-      width: 1786
-      height: 623
-    spriteID: 3c99587cf0e04d34ca8dfd4c29bd5dfd
-    internalID: 0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 4, y: 1272}
+    uvTransform: {x: 4, y: 2092}
   - name: Background
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -162,9 +206,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 1786
-      height: 633
-    spriteID: b5a33f30fff759a469f7521b616f380f
+      width: 5000
+      height: 2500
+    spriteID: 699b4a00efe858342a152ff8f28d12ad
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -192,46 +236,67 @@ ScriptedImporter:
   documentAlignment: 7
   importHiddenLayers: 0
   importedTextureWidth: 1024
-  importedTextureHeight: 2048
-  documentSize: {x: 1786, y: 633}
+  importedTextureHeight: 1024
+  documentSize: {x: 5000, y: 2500}
   paperDollMode: 0
   keepDupilcateSpriteName: 0
   spriteCategoryList:
     categories: []
-  textureActualWidth: 1786
-  textureActualHeight: 633
+  textureActualWidth: 8192
+  textureActualHeight: 8192
   spritePackingTag: 
   resliceFromLayer: 0
   characterMode: 1
   mosaicPSDLayers: []
   rigPSDLayers:
-  - name: Layer 1
-    spriteName: Layer 1
+  - name: Middleground2
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 00000000000000000000000000000000
+    layerID: 5
+    mosaicPosition: {x: 0, y: 0}
+  - name: Grass
+    spriteName: Grass
+    isGroup: 0
+    parentIndex: 0
+    spriteID: d4f55769ad90dcd49be482626bb3f6df
+    layerID: 4
+    mosaicPosition: {x: 4, y: 6863}
+  - name: House
+    spriteName: House
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 63c0bca32d58d784aadbf2af986bfc1d
+    layerID: 19
+    mosaicPosition: {x: 5012, y: 2512}
+  - name: Base
+    spriteName: Base
+    isGroup: 0
+    parentIndex: 0
+    spriteID: e0d26a6a49e12b1449d28295e8f793db
+    layerID: 3
+    mosaicPosition: {x: 4, y: 5858}
+  - name: mid0
+    spriteName: mid0
     isGroup: 0
     parentIndex: -1
-    spriteID: f59f853ef294b5c40bb323c20c78a452
-    layerID: 5
-    mosaicPosition: {x: 4, y: 645}
+    spriteID: bbd1258e0382adf4fabc10ece79bca32
+    layerID: 8
+    mosaicPosition: {x: 4, y: 4600}
   - name: bg
     spriteName: bg
     isGroup: 0
     parentIndex: -1
-    spriteID: d394635380e7b354190c3445c4d163f6
-    layerID: 4
-    mosaicPosition: {x: 4, y: 1913}
-  - name: wall
-    spriteName: wall
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 3c99587cf0e04d34ca8dfd4c29bd5dfd
-    layerID: 3
-    mosaicPosition: {x: 4, y: 1282}
+    spriteID: fd2da968e6b96ff4193054ee1ea11fd6
+    layerID: 35
+    mosaicPosition: {x: 4, y: 2512}
   - name: Background
     spriteName: Background
     isGroup: 0
     parentIndex: -1
-    spriteID: b5a33f30fff759a469f7521b616f380f
-    layerID: 2
+    spriteID: 699b4a00efe858342a152ff8f28d12ad
+    layerID: 1
     mosaicPosition: {x: 4, y: 4}
   characterData:
     bones: []
@@ -239,7 +304,7 @@ ScriptedImporter:
     dimension: {x: 0, y: 0}
     characterGroups: []
   generateGOHierarchy: 0
-  textureAssetName: bg Texture
-  prefabAssetName: bg Prefab
-  spriteLibAssetName: bg Sprite Lib
+  textureAssetName: town Texture
+  prefabAssetName: town Prefab
+  spriteLibAssetName: town Sprite Lib
   secondarySpriteTextures: []
