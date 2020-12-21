@@ -6,25 +6,37 @@ namespace Unit
 {
     public class Controller : MonoBehaviour
     {
-        public HealthBar healthBar;
         public float Health { get; private set; }
-        private UnitStats myStats;
+
+        public UnitStats UnitStats { get; private set; }
+        public UnitMovement UnitMovement { get; private set; }
+        public Animator Animator { get; private set; }
+        public AnimationDurations AnimationDurations { get; private set; }
+        public CharacterActiveEffects CharacterActiveEffects { get; private set; }
+
+
+
+        public HealthBar healthBar;
         public Cooldowns characterCooldowns;
 
         private void Awake()
         {
-            myStats = GetComponent<UnitStats>();
+            UnitStats = GetComponent<UnitStats>();
+            UnitMovement = GetComponent<UnitMovement>();
+            Animator = GetComponentInChildren<Animator>();
+            AnimationDurations = GetComponentInChildren<AnimationDurations>();
+            CharacterActiveEffects = GetComponent<CharacterActiveEffects>();
         }
 
         private void Start()
         {
             characterCooldowns = new Cooldowns();
-            Health = myStats.GetStat(EStats.Health);
+            Health = UnitStats.GetStat(EStats.Health);
         }
 
         public void TakeDamage(float _damage)
         {
-            Health -= Mathf.Clamp((_damage - myStats.GetStat(EStats.Armor)), 0, 999);
+            Health -= Mathf.Clamp((_damage - UnitStats.GetStat(EStats.Armor)), 0, 999);
             if (Health <= 0)
             {
                 Health = 0;
@@ -35,7 +47,7 @@ namespace Unit
 
         public void ResetHealth()
         {
-            Health = myStats.GetStat(EStats.Health);
+            Health = UnitStats.GetStat(EStats.Health);
         }
 
         private void Die()

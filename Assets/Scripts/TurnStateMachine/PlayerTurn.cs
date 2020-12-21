@@ -30,7 +30,7 @@ namespace TurnFSM
         public override IEnumerator UseSkill(Skill.UseSkillHandler skill)
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
-            yield return BattleSystem.StartCoroutine(skill(BattleSystem, BattleSystem.Player, BattleSystem.Enemy));
+            yield return BattleSystem.StartCoroutine(skill(BattleSystem.Player, BattleSystem.Enemy));
 
             DecideNextState();
         }

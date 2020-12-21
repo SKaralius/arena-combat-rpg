@@ -3,7 +3,7 @@ using Unit;
 
 public class Skill
 {
-    public delegate IEnumerator UseSkillHandler(BattleSystem battleSystem, Controller current, Controller opponent = null);
+    public delegate IEnumerator UseSkillHandler(Controller current, Controller opponent = null);
 
     public string Name { get; }
     public UseSkillHandler Effect { get; }

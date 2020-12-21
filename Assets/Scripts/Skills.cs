@@ -30,29 +30,27 @@ public class Skills : MonoBehaviour
         skillsList[ESkills.BuffEvasion] = new Skill(_effect: BuffEvasion, _name: "Evade");
     }
 
-    public IEnumerator BasicAttack(BattleSystem battleSystem, Controller current, Controller opponent)
+
+    public IEnumerator BasicAttack(Controller current, Controller opponent)
     {
-        Animator currentAnimator = current.GetComponentInChildren<Animator>();
         if(!EvadeCheck(opponent))
-            opponent.TakeDamage(current.GetComponent<UnitStats>().GetStat(EStats.Damage));
-        currentAnimator.SetTrigger("Slash");
-        yield return new WaitForSeconds(current.GetComponent<AnimationDurations>().SlashTime);
+            opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
+        current.Animator.SetTrigger("Slash");
+        yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
     }
 
-    public IEnumerator MoveBackwards(BattleSystem battleSystem, Controller current, Controller opponent)
+    public IEnumerator MoveBackwards(Controller current, Controller opponent)
     {
-        Animator currentAnimator = current.GetComponentInChildren<Animator>();
-        currentAnimator.SetTrigger("Walk");
-        float positionX = current.transform.position.x + (current.GetComponent<UnitStats>().GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x) * -1);
-        yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit(positionX));
+        current.Animator.SetTrigger("Walk");
+        float positionX = current.transform.position.x + (current.UnitStats.GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x) * -1);
+        yield return StartCoroutine(current.UnitMovement.MoveUnit(positionX, current.AnimationDurations.WalkTime));
     }
 
-    public IEnumerator MoveForwards(BattleSystem battleSystem, Controller current, Controller opponent)
+    public IEnumerator MoveForwards(Controller current, Controller opponent)
     {
-        Animator currentAnimator = current.GetComponentInChildren<Animator>();
         float margin = 5f;
-        currentAnimator.SetTrigger("Walk");
-        float moveDistanceAndDirection = (current.GetComponent<UnitStats>().GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x));
+        current.Animator.SetTrigger("Walk");
+        float moveDistanceAndDirection = (current.UnitStats.GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x));
         float distanceToOpponent = Mathf.Abs(current.transform.position.x - opponent.transform.position.x);
         float finalPositionX;
         if ((distanceToOpponent - margin) < Mathf.Abs(moveDistanceAndDirection))
@@ -66,56 +64,53 @@ public class Skills : MonoBehaviour
         {
             finalPositionX = current.transform.position.x + moveDistanceAndDirection;
         }
-        yield return StartCoroutine(current.GetComponent<UnitMovement>().MoveUnit(finalPositionX));
+        yield return StartCoroutine(current.UnitMovement.MoveUnit(finalPositionX, current.AnimationDurations.WalkTime));
     }
 
-    public IEnumerator HitTwice(BattleSystem battleSystem, Controller current, Controller opponent)
+    public IEnumerator HitTwice(Controller current, Controller opponent)
     {
-        AddSkillCooldown(current, 2);
-        yield return StartCoroutine(BasicAttack(battleSystem, current, opponent));
-        yield return StartCoroutine(BasicAttack(battleSystem, current, opponent));
+        AddSkillCooldown(current,ESkills.HitTwice, 2);
+        yield return StartCoroutine(BasicAttack(current, opponent));
+        yield return StartCoroutine(BasicAttack(current, opponent));
     }
 
-    public IEnumerator Knockback(BattleSystem battleSystem, Controller current, Controller opponent)
+    public IEnumerator Knockback(Controller current, Controller opponent)
     {
-        Animator currentAnimator = current.GetComponentInChildren<Animator>();
-        AddSkillCooldown(current, 4);
+        AddSkillCooldown(current, ESkills.Knockback, 4);
         bool evaded = EvadeCheck(opponent);
 
         if(!evaded)
-            opponent.TakeDamage(current.GetComponent<UnitStats>().GetStat(EStats.Damage));
-        currentAnimator.SetBool("isAttacking", true);
-        yield return new WaitForSeconds(0.3f);
-        currentAnimator.SetBool("isAttacking", false);
-        if(!evaded)
-            yield return StartCoroutine(opponent.GetComponent<UnitMovement>().MoveUnit(((int)Mathf.Sign(opponent.transform.localScale.x) * -1 * 5f) + opponent.transform.position.x));
+            opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
+        current.Animator.SetTrigger("Slash");
+        yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
+        int direction = (int)Mathf.Sign(opponent.transform.localScale.x) * -1;
+        float distanceMultiplier = 5f;
+        if (!evaded)
+            yield return StartCoroutine(opponent.UnitMovement.MoveUnit((direction * distanceMultiplier) + opponent.transform.position.x, current.AnimationDurations.WalkTime));
     }
-    public IEnumerator DamageOverTime(BattleSystem battleSystem, Controller current, Controller opponent)
+    public IEnumerator DamageOverTime(Controller current, Controller opponent)
     {
-        Animator currentAnimator = current.GetComponentInChildren<Animator>();
-        AddSkillCooldown(current, 2);
+        AddSkillCooldown(current, ESkills.DamageOverTime, 2);
         bool evaded = EvadeCheck(opponent);
 
         if (!evaded)
         {
-            opponent.TakeDamage(current.GetComponent<UnitStats>().GetStat(EStats.Damage));
-            opponent.GetComponent<CharacterActiveEffects>().AddEffect(new CurrentHealthEffect(2, 20));
+            opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
+            opponent.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(2, 20));
         }
-        currentAnimator.SetBool("isAttacking", true);
-        float animationLength = currentAnimator.GetCurrentAnimatorClipInfo(0).Length;
-        yield return new WaitForSeconds(animationLength);
-        currentAnimator.SetBool("isAttacking", false);
+        current.Animator.SetTrigger("Slash");
+        yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
     }
-    public IEnumerator BuffEvasion(BattleSystem battleSystem, Controller current, Controller opponent)
+    public IEnumerator BuffEvasion(Controller current, Controller opponent)
     {
-        AddSkillCooldown(current, 2);
-        current.GetComponent<CharacterActiveEffects>().AddEffect(new StatChangeEffect(2, EStats.Evasion, 80));
+        AddSkillCooldown(current,ESkills.BuffEvasion , 2);
+        current.CharacterActiveEffects.AddEffect(new StatChangeEffect(2, EStats.Evasion, 80));
         yield break;
     }
 
-    private static void AddSkillCooldown(Controller current, int cooldownLength)
+    private static void AddSkillCooldown(Controller current, ESkills skill, int cooldownLength)
     {
-        current.characterCooldowns.AddCooldownToSkill(ESkills.BuffEvasion, cooldownLength);
+        current.characterCooldowns.AddCooldownToSkill(skill, cooldownLength);
         SkillManager skillManager = current.GetComponent<SkillManager>();
         if (skillManager != null)
             skillManager.RenderSkillCooldowns();
@@ -123,7 +118,7 @@ public class Skills : MonoBehaviour
 
     private bool EvadeCheck(Controller opponent)
     {
-        bool evaded = Random.Range(0, 100) < opponent.GetComponent<UnitStats>().GetStat(EStats.Evasion);
+        bool evaded = Random.Range(0, 100) < opponent.UnitStats.GetStat(EStats.Evasion);
         if (evaded)
         {
             MessageSystem.Print("Attack was evaded");

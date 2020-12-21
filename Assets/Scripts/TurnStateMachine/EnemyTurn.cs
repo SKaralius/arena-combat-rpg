@@ -28,13 +28,13 @@ namespace TurnFSM
                 yield break;
             }
             Skill.UseSkillHandler order = BattleSystem.Enemy.GetComponent<EnemyAI>().DecideOrder(BattleSystem);
-            yield return order(BattleSystem, BattleSystem.Enemy, BattleSystem.Player);
+            yield return order(BattleSystem.Enemy, BattleSystem.Player);
             DecideNextState();
         }
 
         public override IEnumerator UseSkill(Skill.UseSkillHandler skill)
         {
-            yield return BattleSystem.StartCoroutine(skill(BattleSystem, BattleSystem.Enemy, BattleSystem.Player));
+            yield return BattleSystem.StartCoroutine(skill(BattleSystem.Enemy, BattleSystem.Player));
 
             DecideNextState();
         }

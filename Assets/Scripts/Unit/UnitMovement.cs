@@ -5,12 +5,8 @@ namespace Unit
 {
     public class UnitMovement : MonoBehaviour
     {
-        private float lerpDuration = 0.1f;
-
-        public IEnumerator MoveUnit(float positionX)
+        public IEnumerator MoveUnit(float positionX, float lerpDuration)
         {
-            lerpDuration = GetComponentInChildren<AnimationDurations>().WalkTime;
-            Debug.Log(lerpDuration);
             float timeElapsed = 0;
             Vector2 startValue = transform.position;
             Vector2 endValue = new Vector2(positionX, transform.position.y);
