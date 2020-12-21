@@ -8,10 +8,13 @@ public class BattleSystem : StateMachine
     public Controller Enemy;
     public GameObject healthBarPrefab;
     public GameObject skillsContainer;
+    public SpriteRenderer Background { get; private set; }
 
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
+        Background = GameObject.Find("BG").GetComponent<SpriteRenderer>();
+        GameObject.Find("GameManager").GetComponent<Skills>().battleSystem = this;
     }
     // Start is called before the first frame update
     private void Start()

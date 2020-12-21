@@ -6,6 +6,7 @@ using UnityEngine;
 public class Skills : MonoBehaviour
 {
     public Dictionary<ESkills, Skill> skillsList = new Dictionary<ESkills, Skill>();
+    public BattleSystem battleSystem;
     // Awake
 
     #region Singleton logic
@@ -21,6 +22,7 @@ public class Skills : MonoBehaviour
 
         #endregion Singleton logic
 
+        #region Register Skills
         skillsList[ESkills.HitTwice] = new Skill(_effect: HitTwice, _name: "Double Hit", _isAffectedByRange: true);
         skillsList[ESkills.Knockback] = new Skill(_effect: Knockback, _name: "Knockback", _isAffectedByRange: true);
         skillsList[ESkills.MoveBackwards] = new Skill(_effect: MoveBackwards, _name: "Back");
@@ -28,24 +30,16 @@ public class Skills : MonoBehaviour
         skillsList[ESkills.BasicAttack] = new Skill(_effect: BasicAttack, _name: "Attack", _isAffectedByRange: true);
         skillsList[ESkills.DamageOverTime] = new Skill(_effect: DamageOverTime, _name: "Damage Over Time");
         skillsList[ESkills.BuffEvasion] = new Skill(_effect: BuffEvasion, _name: "Evade");
+        #endregion Register Skills
     }
 
-
-    public IEnumerator BasicAttack(Controller current, Controller opponent)
-    {
-        if(!EvadeCheck(opponent))
-        {
-            opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
-            opponent.Animator.SetTrigger("Defend");
-        }
-        current.Animator.SetTrigger("Slash");
-        yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
-    }
-
+    #region Movement
     public IEnumerator MoveBackwards(Controller current, Controller opponent)
     {
+        MessageSystem.Print(battleSystem.Background.bounds.min);
         current.Animator.SetTrigger("Walk");
         float positionX = current.transform.position.x + (current.UnitStats.GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x) * -1);
+        positionX = ConstrainXMovement(positionX);
         yield return StartCoroutine(current.UnitMovement.MoveUnit(positionX, current.AnimationDurations.WalkTime));
     }
 
@@ -67,9 +61,20 @@ public class Skills : MonoBehaviour
         {
             finalPositionX = current.transform.position.x + moveDistanceAndDirection;
         }
+        finalPositionX = ConstrainXMovement(finalPositionX);
         yield return StartCoroutine(current.UnitMovement.MoveUnit(finalPositionX, current.AnimationDurations.WalkTime));
     }
-
+    #endregion Movement
+    #region Offensive
+    public IEnumerator BasicAttack(Controller current, Controller opponent)
+    {
+        current.Animator.SetTrigger("Slash");
+        if (!EvadeCheck(opponent))
+        {
+            GetAttacked(current, opponent);
+        }
+        yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
+    }
     public IEnumerator HitTwice(Controller current, Controller opponent)
     {
         AddSkillCooldown(current,ESkills.HitTwice, 2);
@@ -80,11 +85,11 @@ public class Skills : MonoBehaviour
     public IEnumerator Knockback(Controller current, Controller opponent)
     {
         AddSkillCooldown(current, ESkills.Knockback, 4);
-        bool evaded = EvadeCheck(opponent);
 
-        if(!evaded)
-            opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
         current.Animator.SetTrigger("Slash");
+        bool evaded = EvadeCheck(opponent);
+        if(!evaded)
+            GetAttacked(current, opponent);
         yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
         int direction = (int)Mathf.Sign(opponent.transform.localScale.x) * -1;
         float distanceMultiplier = 5f;
@@ -94,23 +99,24 @@ public class Skills : MonoBehaviour
     public IEnumerator DamageOverTime(Controller current, Controller opponent)
     {
         AddSkillCooldown(current, ESkills.DamageOverTime, 2);
-        bool evaded = EvadeCheck(opponent);
-
-        if (!evaded)
+        current.Animator.SetTrigger("Slash");
+        if (!EvadeCheck(opponent))
         {
-            opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
+            GetAttacked(current, opponent);
             opponent.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(2, 20));
         }
-        current.Animator.SetTrigger("Slash");
         yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
     }
+    #endregion Offensive
+    #region Buffs
     public IEnumerator BuffEvasion(Controller current, Controller opponent)
     {
         AddSkillCooldown(current,ESkills.BuffEvasion , 2);
         current.CharacterActiveEffects.AddEffect(new StatChangeEffect(2, EStats.Evasion, 80));
         yield break;
     }
-
+    #endregion Buffs
+    #region Helper Methods
     private static void AddSkillCooldown(Controller current, ESkills skill, int cooldownLength)
     {
         current.characterCooldowns.AddCooldownToSkill(skill, cooldownLength);
@@ -129,4 +135,22 @@ public class Skills : MonoBehaviour
         }
         return evaded;
     }
+    private void GetAttacked(Controller current, Controller opponent)
+    {
+        opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
+        opponent.Animator.SetTrigger("Defend");
+    }
+    private float ConstrainXMovement(float posX)
+    {
+        float leftMargin = 20f;
+        float rightMargin = 40f;
+        float minPossiblePosX = battleSystem.Background.bounds.min.x + leftMargin;
+        float maxPossiblePosX = battleSystem.Background.bounds.max.x - rightMargin;
+        if (posX < minPossiblePosX)
+            posX = minPossiblePosX;
+        if (posX > maxPossiblePosX)
+            posX = maxPossiblePosX;
+        return posX;
+    }
+    #endregion Helper Methods
 }
