@@ -2033,8 +2033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26f1566afab47f46be99b27928b2108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarPrefab: {fileID: 6092902497128669447, guid: 0da9cb2a41a90e54e91f9f54b96b6364,
-    type: 3}
+  healthBar: {fileID: 0}
 --- !u!114 &5980360860607718828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3233,6 +3232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5632886514071491578}
   - component: {fileID: 4061202459697121820}
+  - component: {fileID: 8825781108102517448}
   m_Layer: 0
   m_Name: HumanCharacter
   m_TagString: Untagged
@@ -3276,6 +3276,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8825781108102517448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7344271117130080382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c59c13dc26049b4e810bd6f1e8bbc6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7557204821533202150
 GameObject:
   m_ObjectHideFlags: 0
