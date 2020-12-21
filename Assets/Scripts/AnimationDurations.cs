@@ -4,6 +4,8 @@ public class AnimationDurations : MonoBehaviour
 {
     public float SlashTime { get; private set; }
     public float WalkTime { get; private set; }
+    public float DefendTime { get; private set; }
+    public float EvadeTime { get; private set; }
 
     private Animator animator;
 
@@ -30,6 +32,12 @@ public class AnimationDurations : MonoBehaviour
                     break;
                 case "Walk":
                     WalkTime = clip.length;
+                    break;                
+                case "Defend":
+                    DefendTime = clip.length;
+                    break;
+                case "Evade":
+                    EvadeTime = clip.length;
                     break;
             }
         }

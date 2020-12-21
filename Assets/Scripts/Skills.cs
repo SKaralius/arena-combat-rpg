@@ -34,7 +34,10 @@ public class Skills : MonoBehaviour
     public IEnumerator BasicAttack(Controller current, Controller opponent)
     {
         if(!EvadeCheck(opponent))
+        {
             opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
+            opponent.Animator.SetTrigger("Defend");
+        }
         current.Animator.SetTrigger("Slash");
         yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
     }
@@ -122,6 +125,7 @@ public class Skills : MonoBehaviour
         if (evaded)
         {
             MessageSystem.Print("Attack was evaded");
+            opponent.Animator.SetTrigger("Evade");
         }
         return evaded;
     }
