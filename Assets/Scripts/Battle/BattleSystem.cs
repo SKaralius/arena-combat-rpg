@@ -39,11 +39,17 @@ namespace Battle
         {
             return Mathf.Abs(Player.gameObject.transform.position.x - Enemy.gameObject.transform.position.x);
         }
-
-        public bool IsOpponentWithinAttackRange(Controller current)
+        public float ConstrainXMovement(float posX)
         {
-            float distance = GetDistanceBetweenFighters();
-            return distance < current.GetComponent<UnitStats>().GetStat(EStats.AttackRange);
+            float leftMargin = 20f;
+            float rightMargin = 40f;
+            float minPossiblePosX = Background.bounds.min.x + leftMargin;
+            float maxPossiblePosX = Background.bounds.max.x - rightMargin;
+            if (posX < minPossiblePosX)
+                posX = minPossiblePosX;
+            if (posX > maxPossiblePosX)
+                posX = maxPossiblePosX;
+            return posX;
         }
     } 
 }

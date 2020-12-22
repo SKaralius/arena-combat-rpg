@@ -9,14 +9,16 @@ namespace Battle
 
         public string Name { get; }
         public UseSkillHandler Effect { get; }
-        public bool IsAffectedByRange { get; }
+        public float SkillRange{ get; }
+        public ESkillType SkillType { get; }
 
 
-        public Skill(UseSkillHandler _effect, string _name, bool _isAffectedByRange = false)
+        public Skill(UseSkillHandler effect, string name, float skillRange, ESkillType skillType)
         {
-            Effect = _effect;
-            Name = _name;
-            IsAffectedByRange = _isAffectedByRange;
+            Effect = effect;
+            Name = name;
+            SkillRange = skillRange;
+            SkillType = skillType;
         }
     } 
 }

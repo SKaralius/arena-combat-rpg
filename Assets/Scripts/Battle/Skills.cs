@@ -26,13 +26,13 @@ namespace Battle
             #endregion Singleton logic
 
             #region Register Skills
-            skillsList[ESkills.HitTwice] = new Skill(_effect: HitTwice, _name: "Double Hit", _isAffectedByRange: true);
-            skillsList[ESkills.Knockback] = new Skill(_effect: Knockback, _name: "Knockback", _isAffectedByRange: true);
-            skillsList[ESkills.MoveBackwards] = new Skill(_effect: MoveBackwards, _name: "Back");
-            skillsList[ESkills.MoveForwards] = new Skill(_effect: MoveForwards, _name: "Forwards");
-            skillsList[ESkills.BasicAttack] = new Skill(_effect: BasicAttack, _name: "Attack", _isAffectedByRange: true);
-            skillsList[ESkills.DamageOverTime] = new Skill(_effect: DamageOverTime, _name: "Damage Over Time");
-            skillsList[ESkills.BuffEvasion] = new Skill(_effect: BuffEvasion, _name: "Evade");
+            skillsList[ESkills.HitTwice] = new Skill(effect: HitTwice, name: "Double Hit", skillRange: 0, skillType: ESkillType.Offensive);
+            skillsList[ESkills.Knockback] = new Skill(effect: Knockback, name: "Knockback", skillRange: 0, skillType: ESkillType.Offensive);
+            skillsList[ESkills.MoveBackwards] = new Skill(effect: MoveBackwards, name: "Back", skillRange: 999, skillType: ESkillType.Stall);
+            skillsList[ESkills.MoveForwards] = new Skill(effect: MoveForwards, name: "Forwards", skillRange: 999, skillType: ESkillType.Offensive);
+            skillsList[ESkills.BasicAttack] = new Skill(effect: BasicAttack, name: "Attack", skillRange: 0, skillType: ESkillType.Offensive);
+            skillsList[ESkills.DamageOverTime] = new Skill(effect: DamageOverTime, name: "Damage Over Time", skillRange: 0, skillType: ESkillType.Offensive);
+            skillsList[ESkills.BuffEvasion] = new Skill(effect: BuffEvasion, name: "Evade", skillRange: 999, skillType: ESkillType.Defensive);
             #endregion Register Skills
         }
 
@@ -42,7 +42,7 @@ namespace Battle
             MessageSystem.Print(battleSystem.Background.bounds.min);
             current.Animator.SetTrigger("Walk");
             float positionX = current.transform.position.x + (current.UnitStats.GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x) * -1);
-            positionX = ConstrainXMovement(positionX);
+            positionX = battleSystem.ConstrainXMovement(positionX);
             yield return StartCoroutine(current.UnitMovement.MoveUnit(positionX, current.AnimationDurations.WalkTime));
         }
 
@@ -64,7 +64,7 @@ namespace Battle
             {
                 finalPositionX = current.transform.position.x + moveDistanceAndDirection;
             }
-            finalPositionX = ConstrainXMovement(finalPositionX);
+            finalPositionX = battleSystem.ConstrainXMovement(finalPositionX);
             yield return StartCoroutine(current.UnitMovement.MoveUnit(finalPositionX, current.AnimationDurations.WalkTime));
         }
         #endregion Movement
@@ -142,18 +142,6 @@ namespace Battle
         {
             opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
             opponent.Animator.SetTrigger("Defend");
-        }
-        private float ConstrainXMovement(float posX)
-        {
-            float leftMargin = 20f;
-            float rightMargin = 40f;
-            float minPossiblePosX = battleSystem.Background.bounds.min.x + leftMargin;
-            float maxPossiblePosX = battleSystem.Background.bounds.max.x - rightMargin;
-            if (posX < minPossiblePosX)
-                posX = minPossiblePosX;
-            if (posX > maxPossiblePosX)
-                posX = maxPossiblePosX;
-            return posX;
         }
         #endregion Helper Methods
     } 

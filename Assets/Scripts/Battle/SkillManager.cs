@@ -52,12 +52,13 @@ namespace Battle
             }
         }
 
-        public void DisableOutOfRangeSkills()
+        public void DisableOutOfRangeSkills(float distance, float unitAttackRange)
         {
             int i = 0;
             foreach (ESkills skill in characterSkills.characterSkills)
             {
-                if (Skills.instance.skillsList[skill].IsAffectedByRange)
+                // Disables out of range skill
+                if (distance > unitAttackRange + Skills.instance.skillsList[skill].SkillRange)
                 {
                     skillSlots[i].GetComponent<Image>().color = Color.red;
                     int cooldown = battleSystem.Player.characterCooldowns.cooldowns[skill];

@@ -20,10 +20,8 @@ namespace TurnFSM
             BattleSystem.Player.characterCooldowns.ReduceAllCooldownsByOne();
             BattleSystem.Enemy.characterCooldowns.ReduceAllCooldownsByOne();
             BattleSystem.GetComponent<SkillManager>().RenderSkillCooldowns();
-            if (!BattleSystem.IsOpponentWithinAttackRange(BattleSystem.Player))
-            { 
-                BattleSystem.GetComponent<SkillManager>().DisableOutOfRangeSkills();
-            }
+            float playerAttackRange = BattleSystem.Player.UnitStats.GetStat(EStats.AttackRange);
+            BattleSystem.GetComponent<SkillManager>().DisableOutOfRangeSkills(BattleSystem.GetDistanceBetweenFighters(), playerAttackRange);
             MessageSystem.Print("Player Turn");
             yield break;
         }

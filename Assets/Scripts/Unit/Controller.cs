@@ -14,8 +14,6 @@ namespace Unit
         public AnimationDurations AnimationDurations { get; private set; }
         public CharacterActiveEffects CharacterActiveEffects { get; private set; }
 
-
-
         public HealthBar healthBar;
         public Cooldowns characterCooldowns;
 
