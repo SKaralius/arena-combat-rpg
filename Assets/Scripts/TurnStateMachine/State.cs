@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Unit;
 using UnityEngine;
+using Battle;
 
 namespace TurnFSM
 {
@@ -19,7 +20,7 @@ namespace TurnFSM
             yield break;
         }
 
-        public virtual IEnumerator UseSkill(Skill.UseSkillHandler skill)
+        public virtual IEnumerator UseSkill(UseSkillHandler skill)
         {
             yield break;
         }

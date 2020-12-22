@@ -1,14 +1,15 @@
 ﻿using Inventory;
 using UnityEngine;
+using Battle;
 
 namespace Unit
 {
     public class PlayerEquippedItems : EquippedItems
     {
-        [SerializeField] private EquippedItemsUI equippedItemsUI;
+        [SerializeField] private EquippedItemsUI equippedItemsUI = null;
         protected InventoryManager inventoryManager;
         protected InventoryUIManager inventoryUIManager;
-        [SerializeField] private GameObject inventoryPanelGO;
+        [SerializeField] private GameObject inventoryPanelGO = null;
 
         new private void Awake()
         {

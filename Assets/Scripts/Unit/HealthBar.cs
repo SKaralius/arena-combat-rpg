@@ -6,10 +6,10 @@ namespace Unit
     public class HealthBar : MonoBehaviour
     {
         public UnitStats unitStats;
-        [SerializeField] Image healthFillImage;
-        [SerializeField] GameObject background;
-        [SerializeField] GameObject fill;
-        [SerializeField] GameObject outline;
+        [SerializeField] Image healthFillImage = null;
+        [SerializeField] GameObject background = null;
+        [SerializeField] GameObject fill = null;
+        [SerializeField] GameObject outline = null;
         private float maxHealth;
         private float heightOfFill;
 

@@ -4,9 +4,8 @@ namespace Inventory
 {
     public class ShopUI : PanelUI
     {
-        [SerializeField] private InventoryUIManager inventoryUIManager;
-        [SerializeField] private GameObject inventoryButtonGO;
-        [SerializeField] private GameObject equipmentPanel;
+        [SerializeField] private InventoryUIManager inventoryUIManager = null;
+        [SerializeField] private GameObject inventoryButtonGO = null;
         private void Awake()
         {
             CreateSlot(12);            

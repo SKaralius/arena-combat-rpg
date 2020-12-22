@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unit;
+using Battle;
 
 namespace TurnFSM
 {
@@ -27,12 +28,12 @@ namespace TurnFSM
                 BattleSystem.SetState(new Won(BattleSystem));
                 yield break;
             }
-            Skill.UseSkillHandler order = BattleSystem.Enemy.GetComponent<EnemyAI>().DecideOrder(BattleSystem);
+            UseSkillHandler order = BattleSystem.Enemy.GetComponent<EnemyAI>().DecideOrder(BattleSystem);
             yield return order(BattleSystem.Enemy, BattleSystem.Player);
             DecideNextState();
         }
 
-        public override IEnumerator UseSkill(Skill.UseSkillHandler skill)
+        public override IEnumerator UseSkill(UseSkillHandler skill)
         {
             yield return BattleSystem.StartCoroutine(skill(BattleSystem.Enemy, BattleSystem.Player));
 

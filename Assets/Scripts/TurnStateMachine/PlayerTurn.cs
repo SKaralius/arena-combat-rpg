@@ -2,6 +2,7 @@
 using Unit;
 using UnityEngine;
 using UnityEngine.UI;
+using Battle;
 
 namespace TurnFSM
 {
@@ -27,7 +28,7 @@ namespace TurnFSM
             yield break;
         }
 
-        public override IEnumerator UseSkill(Skill.UseSkillHandler skill)
+        public override IEnumerator UseSkill(UseSkillHandler skill)
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
             yield return BattleSystem.StartCoroutine(skill(BattleSystem.Player, BattleSystem.Enemy));

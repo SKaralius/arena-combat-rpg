@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using Unit;
+using Battle;
 
 namespace Inventory
 {

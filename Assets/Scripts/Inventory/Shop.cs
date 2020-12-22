@@ -11,7 +11,7 @@ namespace Inventory
         private Gold gold;
 
         private ShopUI shopUI;
-        [SerializeField] GameObject inventoryPanel;
+        [SerializeField] GameObject inventoryPanel = null;
 
         private void Awake()
         {
