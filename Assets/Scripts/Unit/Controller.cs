@@ -34,7 +34,7 @@ namespace Unit
 
         public void TakeDamage(float _damage)
         {
-            Health -= Mathf.Clamp((_damage - UnitStats.GetStat(EStats.Armor)), 0, 999);
+            Health -= _damage / 100 * (100 - UnitStats.GetStat(EStats.Armor));
             if (Health <= 0)
             {
                 Health = 0;

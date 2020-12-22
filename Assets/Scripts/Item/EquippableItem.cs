@@ -18,11 +18,11 @@ public class EquippableItem : IItem, IStats, IEquipable
 
     public float[] Stats { get; set; }
 
-    public EquippableItem(EquipSlot slot, string _name, (string, string) spriteCategoryLabel, int _sellPrice, float _attackRange = 0, float _damage = 0, float _armor = 0, float _moveSpeed = 0, float _health = 0, float _healthRegen = 0, float _evasion = 0, ESkills _skill = 0)
+    public EquippableItem(EquipSlot slot, string _name, (string, string) spriteCategoryLabel, int _sellPrice, float _attackRange = 0, float _damage = 0, float _armor = 0, float _moveSpeed = 0, float _health = 0, float _evasion = 0, ESkills _skill = 0)
     {
         Slot = slot;
         SpriteCategoryLabel = spriteCategoryLabel;
-        Stats = new float[7];
+        Stats = new float[6];
         Name = _name;
         SellPrice = _sellPrice;
         Skill = _skill;
@@ -30,7 +30,6 @@ public class EquippableItem : IItem, IStats, IEquipable
         Stats[(int)EStats.Armor] = _armor;
         Stats[(int)EStats.MoveSpeed] = _moveSpeed;
         Stats[(int)EStats.Health] = _health;
-        Stats[(int)EStats.HealthRegen] = _healthRegen;
         Stats[(int)EStats.Evasion] = _evasion;
         Stats[(int)EStats.AttackRange] = _attackRange;
     }

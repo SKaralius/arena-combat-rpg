@@ -27,8 +27,6 @@ namespace Unit
             {
                 target.GetComponent<UnitStats>().StatModifiers[(int)StatToChange] -= StatChangeAmount;
             }
-            if (target.CompareTag("Player"))
-                target.GetComponent<EquippedItemsUI>().RenderPlayerStats();
         }
     }
 
