@@ -39,7 +39,6 @@ namespace Battle
         #region Movement
         public IEnumerator MoveBackwards(Controller current, Controller opponent)
         {
-            MessageSystem.Print(battleSystem.Background.bounds.min);
             current.Animator.SetTrigger("Walk");
             float positionX = current.transform.position.x + (current.UnitStats.GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x) * -1);
             positionX = battleSystem.ConstrainXMovement(positionX);

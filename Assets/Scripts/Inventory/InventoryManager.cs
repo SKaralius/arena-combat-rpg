@@ -22,10 +22,10 @@ namespace Inventory
         }
         private void Start()
         {
-            //AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "DOT Sword", ("Weapon", "Sword"), _sellPrice: 50, _attackRange: 10, _damage: 30, _skill: ESkills.DamageOverTime));
-            //AddItemToInventory(new EquippableItem(EquipSlot.RightWeapon, "KB Staff", ("Weapon", "Staff"), _sellPrice: 69, _attackRange: 10, _damage: 5, _evasion: 5, _skill: ESkills.Knockback));
-            AddItemToInventory(new EquippableItem(EquipSlot.Legs, "Evasion Legs2", ("Pelvis", "First"), _sellPrice: 69, _evasion: 50));
-            //AddItemToInventory(new EquippableItem(EquipSlot.Chest, "Health Chest", ("Chest", "First"), _sellPrice: 69, _health: 500));
+            AddItemToInventory(ItemGenerator.GenerateItem(1));
+            AddItemToInventory(ItemGenerator.GenerateItem(1));
+            AddItemToInventory(ItemGenerator.GenerateItem(1));
+            AddItemToInventory(ItemGenerator.GenerateItem(1));
             gold.Wealth = 50;
         }
 

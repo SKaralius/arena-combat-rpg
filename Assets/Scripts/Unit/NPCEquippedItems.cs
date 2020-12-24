@@ -8,7 +8,8 @@ namespace Unit
     {
         private void Start()
         {
-            Equip(new EquippableItem(EquipSlot.Chest, "Health Chest", ("Chest", "First"), _sellPrice: 69, _health: 0));
+            Equip(ItemGenerator.GenerateItem(1, EquipSlot.RightWeapon));
+            Equip(ItemGenerator.GenerateItem(1, EquipSlot.LeftWeapon));
         }
     }
 

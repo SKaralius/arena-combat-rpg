@@ -1,5 +1,4 @@
 ﻿using Unit;
-using UnityEngine;
 
 [System.Serializable]
 public class EquippableItem : IItem, IStats, IEquipable
@@ -18,7 +17,7 @@ public class EquippableItem : IItem, IStats, IEquipable
 
     public float[] Stats { get; set; }
 
-    public EquippableItem(EquipSlot slot, string _name, (string, string) spriteCategoryLabel, int _sellPrice, float _attackRange = 0, float _damage = 0, float _armor = 0, float _moveSpeed = 0, float _health = 0, float _evasion = 0, ESkills _skill = 0)
+    public EquippableItem(EquipSlot slot, string _name, (string, string) spriteCategoryLabel, int _sellPrice, float _attackRange = 0, float _damage = 0, float _armor = 0, float _moveSpeed = 0, float _health = 0, float _evasion = 0, ESkills _skill = ESkills.None)
     {
         Slot = slot;
         SpriteCategoryLabel = spriteCategoryLabel;
@@ -32,6 +31,18 @@ public class EquippableItem : IItem, IStats, IEquipable
         Stats[(int)EStats.Health] = _health;
         Stats[(int)EStats.Evasion] = _evasion;
         Stats[(int)EStats.AttackRange] = _attackRange;
+    }
+
+    public float GetItemScore()
+    {
+        float itemScore = 0;
+        itemScore += Stats[(int)EStats.Evasion] * 3;
+        itemScore += Stats[(int)EStats.Armor] * 3;
+        itemScore += Stats[(int)EStats.Health];
+        itemScore += Stats[(int)EStats.Damage];
+        itemScore += Stats[(int)EStats.MoveSpeed];
+        itemScore += Stats[(int)EStats.AttackRange];
+        return itemScore;
     }
 
     // Parameterless constructor for XML serialization

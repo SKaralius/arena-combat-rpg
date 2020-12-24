@@ -19,8 +19,8 @@ MonoBehaviour:
     - m_Name: None
       m_Hash: -542986255
       m_Sprite: {fileID: 0}
-    - m_Name: Sword
-      m_Hash: 1529145355
+    - m_Name: First
+      m_Hash: 1404092755
       m_Sprite: {fileID: 3003036487046069908, guid: 4179c2f91026f644798f769c0d4779a7,
         type: 3}
     - m_Name: Staff
