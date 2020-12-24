@@ -13,6 +13,7 @@ namespace Unit
         public Animator Animator { get; private set; }
         public AnimationDurations AnimationDurations { get; private set; }
         public CharacterActiveEffects CharacterActiveEffects { get; private set; }
+        public ParticleSystems ParticleSystems { get; private set; }
 
         public HealthBar healthBar;
         public Cooldowns characterCooldowns;
@@ -24,6 +25,7 @@ namespace Unit
             Animator = GetComponentInChildren<Animator>();
             AnimationDurations = GetComponentInChildren<AnimationDurations>();
             CharacterActiveEffects = GetComponent<CharacterActiveEffects>();
+            ParticleSystems = GetComponentInChildren<ParticleSystems>();
         }
 
         private void Start()

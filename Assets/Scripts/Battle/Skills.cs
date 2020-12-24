@@ -141,6 +141,7 @@ namespace Battle
         {
             opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
             opponent.Animator.SetTrigger("Defend");
+            current.ParticleSystems.evaded = false;
         }
         #endregion Helper Methods
     } 

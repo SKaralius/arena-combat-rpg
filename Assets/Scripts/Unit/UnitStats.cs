@@ -6,7 +6,7 @@ namespace Unit
     public class UnitStats : MonoBehaviour, IStats
     {
         // { Damage, Armor, MoveSpeed, Health, Evasion, AttackRange }
-        public float[] Stats { get; set; } = { 5, 5, 5, 100, 15, 15 };
+        public float[] Stats { get; set; } = { 5, 5, 5, 100, 15, 7 };
         public float[] StatModifiers { get; set; } = { 0, 0, 0, 0, 0, 0, 0 };
         private EquippedItems eqItems;
 
