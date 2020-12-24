@@ -12,25 +12,19 @@ public static class ItemGenerator
         {
             slot = GetRandomEquipSlot();
         }
-        if (tier < 1)
-            tier = 1;
         float score = tier * 100;
-        // Get all item set names
-        // Define item tiers
-        // Compare score to tier, or replace score with tier
-        // Or add tier and generate score between those values
-        // Sprite category label
-        // Sell price is derived from score
 
-        // Attack range can be always 0 for now, and the basic attack range will be shared with all weapons.
-
-        // Need to generate stats and apply score formula
-        List<float> statRatios = DistributeSumBetweenNRandomNumbers(Enum.GetNames(typeof(EStats)).Length);
+        int numberOfStats = Enum.GetNames(typeof(EStats)).Length;
+        List<float> statRatios = DistributeSumBetweenNRandomNumbers(UnityEngine.Random.Range(1, numberOfStats));
         List<float> statRatiosXScore = new List<float>();
-        foreach (float stat in statRatios)
+        for (int i = 0; i < numberOfStats; i++)
         {
-            statRatiosXScore.Add(stat * score);
+            if (i >= statRatios.Count)
+                statRatiosXScore.Add(0);
+            else
+                statRatiosXScore.Add(Mathf.Floor(statRatios[i] * score));
         }
+        statRatiosXScore.Shuffle();
         int multiplicativeStatPenalty = 3;
 
         string category = EquipSlotToSpriteCategory((EquipSlot)slot);
@@ -44,7 +38,7 @@ public static class ItemGenerator
             _attackRange: 0,
             _damage: statRatiosXScore[(int)EStats.Damage],
             _armor: statRatiosXScore[(int)EStats.Armor] / multiplicativeStatPenalty,
-            _moveSpeed: statRatiosXScore[(int)EStats.MoveSpeed],
+            _moveSpeed: statRatiosXScore[(int)EStats.MoveSpeed] / multiplicativeStatPenalty,
             _health: statRatiosXScore[(int)EStats.Health],
             _evasion: statRatiosXScore[(int)EStats.Evasion] / multiplicativeStatPenalty,
             _skill: RollForSkill()
@@ -106,6 +100,19 @@ public static class ItemGenerator
         if (tier == 1)
             return "First";
         else
-            return "None";
+            return "First";
+    }
+    //  Fisher-Yates shuffle
+    public static void Shuffle<T>(this IList<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = UnityEngine.Random.Range(0, n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
     }
 }

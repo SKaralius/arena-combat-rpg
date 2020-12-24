@@ -47,9 +47,5 @@ namespace Unit
             if (healthBar)
                 healthBar.UpdateHealthBar(GetComponent<Controller>().Health);
         }
-        //public virtual void Unequip(EquipSlot slot)
-        //{
-        //    Debug.LogWarning("NPC is unequipping items. NPC doesn't have inventory, what's the point of unequipping an item?");
-        //}
     }
 }

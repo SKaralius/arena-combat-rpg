@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Battle;
+using Unit;
 
 namespace Inventory
 {
@@ -32,14 +33,16 @@ namespace Inventory
             tooltipManager.textComp.text += "\n";
             if (Skills.instance && item.Skill != ESkills.None)
             {
+                tooltipManager.textComp.text += "Skill: ";
                 tooltipManager.textComp.text += Skills.instance.skillsList[item.Skill].Name;
                 tooltipManager.textComp.text += "\n";
             }
-            foreach (float stat in item.Stats)
-            {
-                tooltipManager.textComp.text += stat.ToString();
-                tooltipManager.textComp.text += "\n";
-            }
+            AddStatLine("Damage", item.Stats[(int)EStats.Damage]);
+            AddStatLine("Armor", item.Stats[(int)EStats.Armor]);
+            AddStatLine("Speed", item.Stats[(int)EStats.MoveSpeed]);
+            AddStatLine("Health", item.Stats[(int)EStats.Health]);
+            AddStatLine("Evasion", item.Stats[(int)EStats.Evasion]);
+
             tooltipManager.inventorySpriteManager.CreateAndDisplaySprite(item);
         }
         protected void SetUpSprite(EquippableItem item)
@@ -68,6 +71,13 @@ namespace Inventory
 
             tooltipButton.gameObject.SetActive(false);
             button.gameObject.SetActive(false);
+        }
+        private void AddStatLine(string statName, float value)
+        {
+            tooltipManager.textComp.text += statName;
+            tooltipManager.textComp.text += ": ";
+            tooltipManager.textComp.text += Mathf.Floor(value).ToString();
+            tooltipManager.textComp.text += "\n";
         }
     } 
 }

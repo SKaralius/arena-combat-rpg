@@ -28,11 +28,12 @@ namespace Inventory
         public void RenderPlayerStats()
         {
             statDisplay.text = "";
-            foreach (EStats stat in System.Enum.GetValues(typeof(EStats)))
-            {
-                statDisplay.text += unitStats.GetStat(stat).ToString();
-                statDisplay.text += "\n";
-            }
+            AddStatLine("Damage", unitStats.GetStat(EStats.Damage));
+            AddStatLine("Armor", unitStats.GetStat(EStats.Armor));
+            AddStatLine("Speed", unitStats.GetStat(EStats.MoveSpeed));
+            AddStatLine("Health", unitStats.GetStat(EStats.Health));
+            AddStatLine("Evasion", unitStats.GetStat(EStats.Evasion));
+            AddStatLine("Attack Range", unitStats.GetStat(EStats.AttackRange));
         }
         protected override void CreateSlot(int numberOfSlots)
         {
@@ -44,6 +45,13 @@ namespace Inventory
                 UpdateUI((EquipSlot)i);
                 i++;
             }
+        }
+        private void AddStatLine(string statName, float value)
+        {
+            statDisplay.text += statName;
+            statDisplay.text += ": ";
+            statDisplay.text += Mathf.Floor(value).ToString();
+            statDisplay.text += "\n";
         }
     }
 }
