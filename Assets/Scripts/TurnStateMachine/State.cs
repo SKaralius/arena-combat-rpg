@@ -48,10 +48,13 @@ namespace TurnFSM
         }
         protected void ResetCharacters()
         {
-            BattleSystem.Player.GetComponent<UnitStats>().ResetModifiers();
-            BattleSystem.Player.GetComponent<CharacterActiveEffects>().Reset();
-            BattleSystem.Enemy.GetComponent<UnitStats>().ResetModifiers();
-            BattleSystem.Enemy.GetComponent<CharacterActiveEffects>().Reset();
+            BattleSystem.Player.UnitStats.ResetModifiers();
+            BattleSystem.Player.CharacterActiveEffects.Reset();
+            BattleSystem.Player.ResetPosition();
+
+            BattleSystem.Enemy.UnitStats.ResetModifiers();
+            BattleSystem.Enemy.CharacterActiveEffects.Reset();
+            BattleSystem.Enemy.ResetPosition();
         }
         protected void LoadTown()
         {

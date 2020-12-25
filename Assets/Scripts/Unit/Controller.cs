@@ -18,6 +18,8 @@ namespace Unit
         public HealthBar healthBar;
         public Cooldowns characterCooldowns;
 
+        private Vector2 originalPostion;
+
         private void Awake()
         {
             UnitStats = GetComponent<UnitStats>();
@@ -32,6 +34,7 @@ namespace Unit
         {
             characterCooldowns = new Cooldowns();
             Health = UnitStats.GetStat(EStats.Health);
+            originalPostion = transform.position;
         }
 
         public void TakeDamage(float _damage)
@@ -54,6 +57,10 @@ namespace Unit
         {
             MessageSystem.Print("Enemy is dead");
             //Destroy(gameObject);
+        }
+        public void ResetPosition()
+        {
+            transform.position = originalPostion;
         }
     }
 }
