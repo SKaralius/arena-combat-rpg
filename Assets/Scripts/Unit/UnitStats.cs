@@ -3,16 +3,22 @@ using System.Collections.Generic;
 
 namespace Unit
 {
-    public class UnitStats : MonoBehaviour, IStats
+    public class UnitStats : MonoBehaviour
     {
-        // { Damage, Armor, MoveSpeed, Health, Evasion, Critical, AttackRange }
-        public float[] Stats { get; set; } = { 5, 5, 5, 100, 15, 5, 7 };
-        public float[] StatModifiers { get; set; } = { 0, 0, 0, 0, 0, 0, 0 };
+        public Stats Stats { get; set; } = new Stats();
+        public Stats StatModifiers { get; set; } = new Stats();
         private EquippedItems eqItems;
 
         private void Awake()
         {
             eqItems = GetComponent<EquippedItems>();
+            Stats.SetStat(EStats.Damage, 5);
+            Stats.SetStat(EStats.Armor, 5);
+            Stats.SetStat(EStats.MoveSpeed, 2);
+            Stats.SetStat(EStats.Health, 100);
+            Stats.SetStat(EStats.Evasion, 15);
+            Stats.SetStat(EStats.Critical, 5);
+            Stats.SetStat(EStats.AttackRange, 7);
         }
 
         public float GetStat(EStats stat)
@@ -31,18 +37,18 @@ namespace Unit
         }
         public void ResetModifiers()
         {
-            StatModifiers = new float[] {0,0,0,0,0,0,0};
+            StatModifiers.ResetStats();
         }
         private float GetMultiplicativeStat(EStats stat)
         {
             List<float> allStatInstances = new List<float>();
-            foreach (IStats item in eqItems.EquippedItemsArray)
+            foreach (EquippableItem item in eqItems.EquippedItemsArray)
             {
                 if (item != null)
-                    allStatInstances.Add(item.Stats[(int)stat]);
+                    allStatInstances.Add(item.Stats.GetStat(stat));
             }
-            allStatInstances.Add(Stats[(int)stat]);
-            allStatInstances.Add(StatModifiers[(int)stat]);
+            allStatInstances.Add(Stats.GetStat(stat));
+            allStatInstances.Add(StatModifiers.GetStat(stat));
             float reverseStatProduct = 1;
             foreach (float statInstance in allStatInstances)
             {
@@ -53,13 +59,13 @@ namespace Unit
         }
         private float GetAdditiveStat(EStats stat)
         {
-            float tempStat = Stats[(int)stat];
-            foreach (IStats item in eqItems.EquippedItemsArray)
+            float tempStat = Stats.GetStat(stat);
+            foreach (EquippableItem item in eqItems.EquippedItemsArray)
             {
                 if (item != null)
-                    tempStat += item.Stats[(int)stat];
+                    tempStat += item.Stats.GetStat(stat);
             }
-            tempStat += StatModifiers[(int)stat];
+            tempStat += StatModifiers.GetStat(stat);
             return tempStat;
         }
     }

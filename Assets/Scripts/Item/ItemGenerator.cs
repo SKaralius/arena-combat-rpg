@@ -25,23 +25,24 @@ public static class ItemGenerator
                 statRatiosXScore.Add(Mathf.Floor(statRatios[i] * score));
         }
         statRatiosXScore.Shuffle();
-        int multiplicativeStatPenalty = 3;
 
         string category = EquipSlotToSpriteCategory((EquipSlot)slot);
         string label = GetLabelFromTier(tier);
+
+        Stats itemStats = new Stats();
+        itemStats.SetStat(EStats.Damage, statRatiosXScore[(int)EStats.Damage]);
+        itemStats.SetStat(EStats.Armor, statRatiosXScore[(int)EStats.Armor]);
+        itemStats.SetStat(EStats.MoveSpeed, statRatiosXScore[(int)EStats.MoveSpeed]);
+        itemStats.SetStat(EStats.Health, statRatiosXScore[(int)EStats.Health]);
+        itemStats.SetStat(EStats.Evasion, statRatiosXScore[(int)EStats.Evasion]);
+        itemStats.SetStat(EStats.Critical, statRatiosXScore[(int)EStats.Critical]);
 
         return new EquippableItem(
             slot: (EquipSlot)slot,
             _name: label,
             spriteCategoryLabel: (category, label),
             _sellPrice: 0,
-            _attackRange: 0,
-            _damage: statRatiosXScore[(int)EStats.Damage],
-            _armor: statRatiosXScore[(int)EStats.Armor] / multiplicativeStatPenalty,
-            _moveSpeed: statRatiosXScore[(int)EStats.MoveSpeed] / multiplicativeStatPenalty,
-            _health: statRatiosXScore[(int)EStats.Health],
-            _evasion: statRatiosXScore[(int)EStats.Evasion] / multiplicativeStatPenalty,
-            _critical: statRatiosXScore[(int)EStats.Critical] / multiplicativeStatPenalty,
+            itemStats,
             _skill: RollForSkill()
             );
 

@@ -7,6 +7,7 @@ namespace Inventory
     {
         [HideInInspector]
         public List<EquippableItem> inventory = new List<EquippableItem>();
+        private readonly int shopCapacity = 12;
         private InventoryManager inventoryManager;
         private Gold gold;
 
@@ -22,12 +23,13 @@ namespace Inventory
 
         private void Start()
         {
-            AddItemToShop(new EquippableItem(EquipSlot.RightWeapon, "Cool Sword", ("Weapon", "Sword"), 69, 50));
+            for (int i = 0; i < shopCapacity; i++)
+                AddItemToShop(ItemGenerator.GenerateItem(1));
         }
 
         public void AddItemToShop(EquippableItem item)
         {
-            if (inventory.Count < 12)
+            if (inventory.Count < shopCapacity)
             {
                 inventory.Add(item);
                 shopUI.UpdateUI();

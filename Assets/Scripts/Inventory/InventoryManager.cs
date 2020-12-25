@@ -17,7 +17,7 @@ namespace Inventory
             inventoryUIManager = GetComponent<InventoryUIManager>();
             gold = GetComponentInChildren<Gold>();
             player = GameObject.FindGameObjectWithTag("Player");
-            AddItemToInventory(new EquippableItem(EquipSlot.Head, "Twice Helmet", ("Helmet", "First"), _sellPrice: 69, _damage: 5, _evasion: 30, _critical: 50, _skill: ESkills.HitTwice));
+            //AddItemToInventory(new EquippableItem(EquipSlot.Head, "Twice Helmet", ("Helmet", "First"), _sellPrice: 69, _damage: 5, _evasion: 30, _critical: 50, _skill: ESkills.HitTwice));
             //AddItemToInventory(new EquippableItem(EquipSlot.Legs, "First Jump Legs", ("Legs", "First"), _sellPrice: 69, _damage: 5, _evasion: 30, _skill: ESkills.Jump),
         }
         private void Start()
