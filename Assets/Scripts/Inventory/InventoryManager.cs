@@ -26,7 +26,7 @@ namespace Inventory
             AddItemToInventory(ItemGenerator.GenerateItem(1));
             AddItemToInventory(ItemGenerator.GenerateItem(1));
             AddItemToInventory(ItemGenerator.GenerateItem(1));
-            gold.Wealth = 50;
+            gold.ChangeGold(0);
         }
 
         public void AddItemToInventory(EquippableItem item)
@@ -54,7 +54,7 @@ namespace Inventory
         public void SellItem(EquippableItem item)
         {
             RemoveItemFromInventory(item);
-            gold.Wealth = (int)item.SellPrice;
+            gold.ChangeGold(item.SellPrice);
         }
     }
 }

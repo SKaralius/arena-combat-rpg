@@ -6,25 +6,16 @@ namespace Inventory
     public class Gold : MonoBehaviour
     {
         private TextMeshProUGUI wealthText;
-        private int _wealth = 0;
-
-        public int Wealth
-        {
-            get => _wealth;
-            set
-            {
-                ChangeGold(value);
-            }
-        }
+        public int Wealth { get; private set; }
 
         private void Awake()
         {
             wealthText = GetComponent<TextMeshProUGUI>();
         }
 
-        private void ChangeGold(int amount)
+        public void ChangeGold(int amount)
         {
-            _wealth += amount;
+            Wealth += amount;
             if (wealthText)
                 wealthText.text = Wealth.ToString();
         }

@@ -14,11 +14,11 @@ namespace Inventory
         [SerializeField] protected Button tooltipButton;
         [SerializeField] protected Image itemSprite;
         [SerializeField] protected InventorySpriteManager inventorySpriteManager;
-        protected TooltipManager tooltipManager;
+        protected UIContainer tooltipManager;
         protected void Awake()
         {
             GameObject UIGO = GameObject.Find("UI");
-            tooltipManager = UIGO.GetComponent<TooltipManager>();
+            tooltipManager = UIGO.GetComponent<UIContainer>();
         }
         public abstract void RenderUI(EquippableItem item);
 

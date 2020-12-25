@@ -2,6 +2,7 @@
 using Unit;
 using UnityEngine;
 using Battle;
+using UnityEngine.SceneManagement;
 
 namespace TurnFSM
 {
@@ -44,6 +45,19 @@ namespace TurnFSM
             {
                 Object.Destroy(healthBar.transform.parent.gameObject);
             }
+        }
+        protected void ResetCharacters()
+        {
+            BattleSystem.Player.GetComponent<UnitStats>().ResetModifiers();
+            BattleSystem.Player.GetComponent<CharacterActiveEffects>().Reset();
+            BattleSystem.Enemy.GetComponent<UnitStats>().ResetModifiers();
+            BattleSystem.Enemy.GetComponent<CharacterActiveEffects>().Reset();
+        }
+        protected void LoadTown()
+        {
+            SaverLoader.instance.SaveInventory();
+            SceneManager.LoadSceneAsync("TownScene", LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync("CombatScene");
         }
     }
 }

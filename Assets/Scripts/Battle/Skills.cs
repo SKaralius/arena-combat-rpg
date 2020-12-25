@@ -66,7 +66,7 @@ namespace Battle
                     finalPositionX = current.transform.position.x;
                     opponentSlowValue = current.UnitStats.GetStat(EStats.MoveSpeed);
                 }
-                opponent.CharacterActiveEffects.AddEffect(new StatChangeEffect(2, EStats.MoveSpeed, -opponentSlowValue));
+                opponent.CharacterActiveEffects.AddEffect(new StatChangeEffect(3, EStats.MoveSpeed, -opponentSlowValue));
                 MessageSystem.Print("Opponent slowed");
             }
             else

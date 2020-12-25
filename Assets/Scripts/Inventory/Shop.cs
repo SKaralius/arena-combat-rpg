@@ -61,7 +61,7 @@ namespace Inventory
             if (gold.Wealth >= BuyPrice)
             {
                 RemoveItemFromShop(item);
-                gold.Wealth = -BuyPrice;
+                gold.ChangeGold(-BuyPrice);
                 inventoryManager.AddItemToInventory(item);
             }
             else

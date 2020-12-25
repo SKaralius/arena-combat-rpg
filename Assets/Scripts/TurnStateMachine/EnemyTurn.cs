@@ -43,8 +43,7 @@ namespace TurnFSM
         {
             if (BattleSystem.Player.GetComponent<Controller>().Health <= 0)
             {
-                // TODO: Implement a Lost State
-                //BattleSystem.SetState(new Lost(BattleSystem));
+                BattleSystem.SetState(new Lost(BattleSystem));
             }
             else
             {

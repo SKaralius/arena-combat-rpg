@@ -73,7 +73,7 @@ public class SaverLoader : MonoBehaviour
                     }
                 }
                 // Gold
-                gold.Wealth = (myFile.GetInt("gold", defaultValue: 0));
+                gold.ChangeGold(myFile.GetInt("gold", defaultValue: 0));
             }
             else
             {

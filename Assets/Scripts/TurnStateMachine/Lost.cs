@@ -3,23 +3,22 @@ using Battle;
 using UnityEngine;
 using Inventory;
 
-
 namespace TurnFSM
 {
-    public class Won : State
+    public class Lost : State
     {
-        public Won(BattleSystem battleSystem) : base(battleSystem)
+        public Lost(BattleSystem battleSystem) : base(battleSystem)
         {
         }
-
         public override IEnumerator Start()
         {
-            MessageSystem.Print("Player has won the match");
+            MessageSystem.Print("Player has lost the match");
             ResetCharacters();
             CleanScene();
-            GameObject.Find("UI").GetComponent<UIContainer>().gold.ChangeGold(100);
+            GameObject.Find("UI").GetComponent<UIContainer>().gold.ChangeGold(-500);
             LoadTown();
             return base.Start();
         }
     }
+
 }
