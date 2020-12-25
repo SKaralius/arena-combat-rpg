@@ -42,6 +42,7 @@ namespace Inventory
             AddStatLine("Speed", item.Stats[(int)EStats.MoveSpeed]);
             AddStatLine("Health", item.Stats[(int)EStats.Health]);
             AddStatLine("Evasion", item.Stats[(int)EStats.Evasion]);
+            AddStatLine("Critical", item.Stats[(int)EStats.Critical]);
 
             tooltipManager.inventorySpriteManager.CreateAndDisplaySprite(item);
         }

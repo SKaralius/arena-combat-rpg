@@ -147,12 +147,25 @@ namespace Battle
             }
             return evaded;
         }
+        private bool CriticalCheck(Controller current)
+        {
+            bool isCritical = Random.Range(0, 100) < current.UnitStats.GetStat(EStats.Critical);
+            if (isCritical)
+            {
+                MessageSystem.Print("Critical hit!");
+            }
+            return isCritical;
+        }
         private void GetAttacked(Controller current, Controller opponent)
         {
-            opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
+            if (CriticalCheck(current))
+                opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage) * 2);
+            else
+                opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
             opponent.Animator.SetTrigger("Defend");
             current.ParticleSystems.evaded = false;
         }
+
         #endregion Helper Methods
     } 
 }

@@ -5,9 +5,9 @@ namespace Unit
 {
     public class UnitStats : MonoBehaviour, IStats
     {
-        // { Damage, Armor, MoveSpeed, Health, Evasion, AttackRange }
-        public float[] Stats { get; set; } = { 5, 5, 5, 100, 15, 7 };
-        public float[] StatModifiers { get; set; } = { 0, 0, 0, 0, 0, 0 };
+        // { Damage, Armor, MoveSpeed, Health, Evasion, Critical, AttackRange }
+        public float[] Stats { get; set; } = { 5, 5, 5, 100, 15, 5, 7 };
+        public float[] StatModifiers { get; set; } = { 0, 0, 0, 0, 0, 0, 0 };
         private EquippedItems eqItems;
 
         private void Awake()
@@ -18,7 +18,7 @@ namespace Unit
         public float GetStat(EStats stat)
         {
             float retrievedStat;
-            if (stat == EStats.Armor || stat == EStats.Evasion)
+            if (stat == EStats.Armor || stat == EStats.Evasion || stat == EStats.Critical)
             {
                 retrievedStat = GetMultiplicativeStat(stat);
             } else
@@ -31,7 +31,7 @@ namespace Unit
         }
         public void ResetModifiers()
         {
-            StatModifiers = new float[] {0,0,0,0,0,0};
+            StatModifiers = new float[] {0,0,0,0,0,0,0};
         }
         private float GetMultiplicativeStat(EStats stat)
         {

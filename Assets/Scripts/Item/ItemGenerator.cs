@@ -41,6 +41,7 @@ public static class ItemGenerator
             _moveSpeed: statRatiosXScore[(int)EStats.MoveSpeed] / multiplicativeStatPenalty,
             _health: statRatiosXScore[(int)EStats.Health],
             _evasion: statRatiosXScore[(int)EStats.Evasion] / multiplicativeStatPenalty,
+            _critical: statRatiosXScore[(int)EStats.Critical] / multiplicativeStatPenalty,
             _skill: RollForSkill()
             );
 

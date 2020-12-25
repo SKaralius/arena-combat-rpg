@@ -33,6 +33,7 @@ namespace Inventory
             AddStatLine("Speed", unitStats.GetStat(EStats.MoveSpeed));
             AddStatLine("Health", unitStats.GetStat(EStats.Health));
             AddStatLine("Evasion", unitStats.GetStat(EStats.Evasion));
+            AddStatLine("Critical", unitStats.GetStat(EStats.Critical));
             AddStatLine("Attack Range", unitStats.GetStat(EStats.AttackRange));
         }
         protected override void CreateSlot(int numberOfSlots)

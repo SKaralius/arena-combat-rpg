@@ -17,11 +17,12 @@ public class EquippableItem : IItem, IStats, IEquipable
 
     public float[] Stats { get; set; }
 
-    public EquippableItem(EquipSlot slot, string _name, (string, string) spriteCategoryLabel, int _sellPrice, float _attackRange = 0, float _damage = 0, float _armor = 0, float _moveSpeed = 0, float _health = 0, float _evasion = 0, ESkills _skill = ESkills.None)
+    public EquippableItem(EquipSlot slot, string _name, (string, string) spriteCategoryLabel, int _sellPrice, float _attackRange = 0, float _damage = 0,
+        float _armor = 0, float _moveSpeed = 0, float _health = 0, float _critical = 0, float _evasion = 0, ESkills _skill = ESkills.None)
     {
         Slot = slot;
         SpriteCategoryLabel = spriteCategoryLabel;
-        Stats = new float[6];
+        Stats = new float[7];
         Name = _name;
         SellPrice = _sellPrice;
         Skill = _skill;
@@ -30,6 +31,7 @@ public class EquippableItem : IItem, IStats, IEquipable
         Stats[(int)EStats.MoveSpeed] = _moveSpeed;
         Stats[(int)EStats.Health] = _health;
         Stats[(int)EStats.Evasion] = _evasion;
+        Stats[(int)EStats.Critical] = _critical;
         Stats[(int)EStats.AttackRange] = _attackRange;
     }
 
@@ -38,6 +40,7 @@ public class EquippableItem : IItem, IStats, IEquipable
         float itemScore = 0;
         itemScore += Stats[(int)EStats.Evasion] * 3;
         itemScore += Stats[(int)EStats.Armor] * 3;
+        itemScore += Stats[(int)EStats.Critical] * 3;
         itemScore += Stats[(int)EStats.Health];
         itemScore += Stats[(int)EStats.Damage];
         itemScore += Stats[(int)EStats.MoveSpeed];
