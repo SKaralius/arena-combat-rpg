@@ -49,19 +49,29 @@ namespace Battle
         {
             float margin = 5f;
             current.Animator.SetTrigger("Walk");
-            float moveDistanceAndDirection = (current.UnitStats.GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x));
-            float distanceToOpponent = Mathf.Abs(current.transform.position.x - opponent.transform.position.x);
+            float maximumMovementAndDirection = (current.UnitStats.GetStat(EStats.MoveSpeed) * (int)Mathf.Sign(current.transform.localScale.x));
+            float distanceBetweenCharacters = Mathf.Abs(current.transform.position.x - opponent.transform.position.x);
             float finalPositionX;
-            if ((distanceToOpponent - margin) < Mathf.Abs(moveDistanceAndDirection))
+            float viableMovement = distanceBetweenCharacters - margin;
+            if (Mathf.Abs(maximumMovementAndDirection) > viableMovement)
             {
-                if (distanceToOpponent > margin)
-                    finalPositionX = current.transform.position.x + (distanceToOpponent - margin) * (int)Mathf.Sign(current.transform.localScale.x);
+                float opponentSlowValue;
+                if (distanceBetweenCharacters > margin)
+                {
+                    finalPositionX = current.transform.position.x + viableMovement * (int)Mathf.Sign(current.transform.localScale.x);
+                    opponentSlowValue = current.UnitStats.GetStat(EStats.MoveSpeed) - viableMovement;
+                }
                 else
+                {
                     finalPositionX = current.transform.position.x;
+                    opponentSlowValue = current.UnitStats.GetStat(EStats.MoveSpeed);
+                }
+                opponent.CharacterActiveEffects.AddEffect(new StatChangeEffect(2, EStats.MoveSpeed, -opponentSlowValue));
+                MessageSystem.Print("Opponent slowed");
             }
             else
             {
-                finalPositionX = current.transform.position.x + moveDistanceAndDirection;
+                finalPositionX = current.transform.position.x + maximumMovementAndDirection;
             }
             finalPositionX = battleSystem.ConstrainXMovement(finalPositionX);
             yield return StartCoroutine(current.UnitMovement.MoveUnit(finalPositionX, current.AnimationDurations.WalkTime));

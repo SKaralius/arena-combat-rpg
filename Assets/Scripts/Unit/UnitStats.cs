@@ -7,7 +7,7 @@ namespace Unit
     {
         // { Damage, Armor, MoveSpeed, Health, Evasion, AttackRange }
         public float[] Stats { get; set; } = { 5, 5, 5, 100, 15, 7 };
-        public float[] StatModifiers { get; set; } = { 0, 0, 0, 0, 0, 0, 0 };
+        public float[] StatModifiers { get; set; } = { 0, 0, 0, 0, 0, 0 };
         private EquippedItems eqItems;
 
         private void Awake()
@@ -17,13 +17,17 @@ namespace Unit
 
         public float GetStat(EStats stat)
         {
+            float retrievedStat;
             if (stat == EStats.Armor || stat == EStats.Evasion)
             {
-               return GetMultiplicativeStat(stat);
+                retrievedStat = GetMultiplicativeStat(stat);
             } else
             {
-                return GetAdditiveStat(stat);
+                retrievedStat = GetAdditiveStat(stat);
             }
+            if (retrievedStat < 0)
+                retrievedStat = 0;
+            return retrievedStat;
         }
         public void ResetModifiers()
         {
