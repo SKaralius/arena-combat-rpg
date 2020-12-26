@@ -26,7 +26,8 @@ namespace Unit
         {
             ResetStats();
         }
-
+        // TODO: Need this to be public for serializer, but stats shouldnt be retrieved directly from the array.
+        // Is the only solution to edit the library to use the methods?
         public float[] statsArray = new float[EStats.GetNames(typeof(EStats)).Length];
 
         public void ResetStats()
@@ -39,6 +40,7 @@ namespace Unit
         public float GetStat(EStats stat)
         {
             int statNumber = (int)stat;
+            float statValue;
             if (statNumber >= statsArray.Length)
             {
                 Array.Resize(ref statsArray, statNumber + 1);
@@ -46,8 +48,14 @@ namespace Unit
             }
             else
             {
-                return statsArray[statNumber];
+                statValue = statsArray[statNumber];
             }
+            if (stat == EStats.Armor || stat == EStats.Evasion || stat == EStats.Critical || stat == EStats.MoveSpeed)
+            {
+                float statPenalty = 3;
+                statValue /= statPenalty;
+            }
+            return statValue;
         }        
         public void SetStat(EStats stat, float value)
         {

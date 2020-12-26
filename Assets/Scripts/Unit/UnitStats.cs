@@ -5,8 +5,8 @@ namespace Unit
 {
     public class UnitStats : MonoBehaviour
     {
-        public Stats Stats { get; set; } = new Stats();
-        public Stats StatModifiers { get; set; } = new Stats();
+        private Stats Stats { get; set; } = new Stats();
+        public Stats StatModifiers { get; private set; } = new Stats();
         private EquippedItems eqItems;
 
         private void Awake()
