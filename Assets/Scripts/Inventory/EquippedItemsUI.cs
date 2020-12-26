@@ -30,7 +30,7 @@ namespace Inventory
             statDisplay.text = "";
             foreach(EStats stat in EStats.GetValues(typeof(EStats)))
             {
-                AddStatLine(Stats.StatNames[stat], unitStats.GetStat(stat));
+                AddStatLine(Stats.GetStatName(stat), unitStats.GetStat(stat));
             }
         }
         protected override void CreateSlot(int numberOfSlots)

@@ -76,7 +76,7 @@ namespace Inventory
         }
         private void AddStatLine(EStats stat, float value)
         {
-            tooltipManager.textComp.text += Stats.StatNames[stat];
+            tooltipManager.textComp.text += Stats.GetStatName(stat);
             tooltipManager.textComp.text += ": ";
             tooltipManager.textComp.text += Mathf.Floor(value).ToString();
             tooltipManager.textComp.text += "\n";

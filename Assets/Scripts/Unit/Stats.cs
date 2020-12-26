@@ -5,7 +5,7 @@ namespace Unit
 {
     public class Stats
     {
-        public static readonly Dictionary<EStats, string> StatNames
+        private static readonly Dictionary<EStats, string> StatNames
             = new Dictionary<EStats, string>
         {
             { EStats.Damage, "Damage" },
@@ -14,14 +14,20 @@ namespace Unit
             { EStats.Health, "Health" },
             { EStats.Evasion, "Evasion" },
             { EStats.Critical, "Critical" },
-            { EStats.AttackRange, "Attack Range" }
+            { EStats.AttackRange, "Attack Range" },
         };
+        public static string GetStatName(EStats stat)
+        {
+            string name = "";
+            StatNames.TryGetValue(stat, out name);
+            return name;
+        }
         public Stats()
         {
             ResetStats();
         }
 
-        private float[] statsArray = new float[EStats.GetNames(typeof(EStats)).Length];
+        public float[] statsArray = new float[EStats.GetNames(typeof(EStats)).Length];
 
         public void ResetStats()
         {
@@ -33,7 +39,7 @@ namespace Unit
         public float GetStat(EStats stat)
         {
             int statNumber = (int)stat;
-            if (statNumber > statsArray.Length)
+            if (statNumber >= statsArray.Length)
             {
                 Array.Resize(ref statsArray, statNumber + 1);
                 return 0;
