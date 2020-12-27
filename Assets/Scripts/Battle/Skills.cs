@@ -96,17 +96,23 @@ namespace Battle
 
         public IEnumerator Knockback(Controller current, Controller opponent)
         {
-            AddSkillCooldown(current, ESkills.Knockback, 4);
+            AddSkillCooldown(current, ESkills.Knockback, 0);
 
             current.Animator.SetTrigger("Slash");
             bool evaded = EvadeCheck(opponent);
             if (!evaded)
-                GetAttacked(current, opponent);
-            yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
+                GetAttacked(current, opponent, disableAnimation: false);
             int direction = (int)Mathf.Sign(opponent.transform.localScale.x) * -1;
             float distanceMultiplier = 5f;
             if (!evaded)
-                yield return StartCoroutine(opponent.UnitMovement.MoveUnit((direction * distanceMultiplier) + opponent.transform.position.x, current.AnimationDurations.WalkTime));
+            {
+               opponent.Animator.SetTrigger("Knockbacked");
+               //yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
+               yield return StartCoroutine(opponent.UnitMovement.MoveUnit((direction * distanceMultiplier) + opponent.transform.position.x, current.AnimationDurations.KnockbackedTime));
+            } else
+            {
+                yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
+            }
         }
         public IEnumerator DamageOverTime(Controller current, Controller opponent)
         {
@@ -156,13 +162,14 @@ namespace Battle
             }
             return isCritical;
         }
-        private void GetAttacked(Controller current, Controller opponent)
+        private void GetAttacked(Controller current, Controller opponent, bool disableAnimation = false)
         {
             if (CriticalCheck(current))
                 opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage) * 2);
             else
                 opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage));
-            opponent.Animator.SetTrigger("Defend");
+            if (!disableAnimation)
+                opponent.Animator.SetTrigger("Defend");
             current.ParticleSystems.evaded = false;
         }
 
