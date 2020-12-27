@@ -101,7 +101,10 @@ namespace Battle
             current.Animator.SetTrigger("Slash");
             bool evaded = EvadeCheck(opponent);
             if (!evaded)
+            {
                 GetAttacked(current, opponent, disableAnimation: false);
+                yield return new WaitForSeconds(0.1f);
+            }
             int direction = (int)Mathf.Sign(opponent.transform.localScale.x) * -1;
             float distanceMultiplier = 5f;
             if (!evaded)
@@ -109,6 +112,7 @@ namespace Battle
                opponent.Animator.SetTrigger("Knockbacked");
                //yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
                yield return StartCoroutine(opponent.UnitMovement.MoveUnit((direction * distanceMultiplier) + opponent.transform.position.x, current.AnimationDurations.KnockbackedTime));
+               yield return new WaitForSeconds(0.3f);
             } else
             {
                 yield return new WaitForSeconds(current.AnimationDurations.SlashTime);
