@@ -7,5 +7,15 @@
     HitTwice,
     Knockback,
     DamageOverTime,
-    BuffEvasion
+    BuffEvasion,
+    Execute,
+    Fireball,
+    Lightning,
+    AirBlast,
+    StrongHit,
+    Heal,
+    HealOverTime,
+    EarthStrike,
+    BuffDamage,
+    BuffArmor
 }

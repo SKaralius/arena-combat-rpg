@@ -15,7 +15,7 @@ namespace Unit
 
         public override void ResolveEffect(GameObject target)
         {
-            target.GetComponent<Controller>().TakeDamage(HealthChangePerTurn);
+            target.GetComponent<Controller>().TakeDamage(-HealthChangePerTurn);
             Duration -= 1;
         }
     }
