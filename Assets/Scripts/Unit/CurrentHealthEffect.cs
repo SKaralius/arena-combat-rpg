@@ -15,7 +15,10 @@ namespace Unit
 
         public override void ResolveEffect(GameObject target)
         {
-            target.GetComponent<Controller>().TakeDamage(-HealthChangePerTurn);
+            Controller controller = target.GetComponent<Controller>();
+            float maxHealth = controller.UnitStats.GetStat(EStats.Health);
+            if (maxHealth > controller.Health)
+                target.GetComponent<Controller>().TakeDamage(-HealthChangePerTurn);
             Duration -= 1;
         }
     }

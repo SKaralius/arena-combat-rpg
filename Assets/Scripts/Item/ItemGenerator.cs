@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class ItemGenerator
 {
-    public static EquippableItem GenerateItem(int tier, EquipSlot? slot = null)
+    public static EquippableItem GenerateItem(int tier, EquipSlot? slot = null, ESkills skill = ESkills.None)
     {
         if (slot == null)
         {
@@ -36,13 +36,16 @@ public static class ItemGenerator
             itemStats.SetStat(stat, statRatiosXScore[(int)stat]);
         }
 
+        if (skill == ESkills.None)
+            skill = RollForSkill();
+
         return new EquippableItem(
             slot: (EquipSlot)slot,
             _name: label,
             spriteCategoryLabel: (category, label),
             _sellPrice: 0,
             itemStats,
-            _skill: RollForSkill()
+            _skill: skill
             );
     }
 

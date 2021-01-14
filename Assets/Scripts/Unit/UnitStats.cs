@@ -63,7 +63,11 @@ namespace Unit
             foreach (EquippableItem item in eqItems.EquippedItemsArray)
             {
                 if (item != null)
-                    tempStat += item.Stats.GetStat(stat);
+                {
+                    Stats itemStats = item.Stats;
+                    float statOnItem = itemStats.GetStat(stat);
+                    tempStat += statOnItem;
+                }
             }
             tempStat += StatModifiers.GetStat(stat);
             return tempStat;

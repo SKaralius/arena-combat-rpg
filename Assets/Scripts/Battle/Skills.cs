@@ -168,7 +168,7 @@ namespace Battle
         public IEnumerator Fireball(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.Fireball, 3);
-            current.Animator.SetTrigger("Evade");
+            current.Animator.SetTrigger("Spellcast");
             if (!EvadeCheck(opponent))
             {
                 GetAttacked(current, opponent, skillMultiplier: 0.6f);
@@ -179,7 +179,7 @@ namespace Battle
         public IEnumerator Lightning(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.Lightning, 5);
-            current.Animator.SetTrigger("Evade");
+            current.Animator.SetTrigger("Spellcast");
             if (!EvadeCheck(opponent))
             {
                 GetAttacked(current, opponent, skillMultiplier: 1.4f);
@@ -191,7 +191,7 @@ namespace Battle
         public IEnumerator AirBlast(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.AirBlast, 5);
-            current.Animator.SetTrigger("Evade");
+            current.Animator.SetTrigger("Spellcast");
             if (!EvadeCheck(opponent))
             {
                 GetAttacked(current, opponent, skillMultiplier: 0.3f);
@@ -205,7 +205,7 @@ namespace Battle
         public IEnumerator EarthStrike(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.EarthStrike, 8);
-            current.Animator.SetTrigger("Evade");
+            current.Animator.SetTrigger("Spellcast");
             if (!EvadeCheck(opponent))
             {
                 GetAttacked(current, opponent, skillMultiplier: 0.8f);
@@ -237,16 +237,17 @@ namespace Battle
         public IEnumerator Heal(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.Heal, 5);
-            current.Animator.SetTrigger("Evade");
+            current.Animator.SetTrigger("Spellcast");
             float maxHealth = current.UnitStats.GetStat(EStats.Health);
-            current.TakeDamage(-maxHealth * 0.4f);
+            if (maxHealth > current.Health)
+                current.TakeDamage(-maxHealth * 0.4f);
             current.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(4, 5));
             yield return new WaitForSeconds(current.AnimationDurations.EvadeTime);
         }        
         public IEnumerator HealOverTime(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.HealOverTime, 5);
-            current.Animator.SetTrigger("Evade");
+            current.Animator.SetTrigger("Spellcast");
             float maxHealth = current.UnitStats.GetStat(EStats.Health);
             current.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(5, maxHealth * 0.1f));
             yield return new WaitForSeconds(current.AnimationDurations.EvadeTime);
@@ -254,7 +255,7 @@ namespace Battle
         public IEnumerator BuffDamage(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.BuffDamage, 2);
-            current.Animator.SetTrigger("Evade");
+            current.Animator.SetTrigger("Spellcast");
             float damage = current.UnitStats.GetStat(EStats.Damage);
             current.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(2, damage));
             yield return new WaitForSeconds(current.AnimationDurations.EvadeTime);
