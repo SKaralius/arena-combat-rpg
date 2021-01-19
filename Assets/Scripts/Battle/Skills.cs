@@ -15,6 +15,7 @@ namespace Battle
         #region Singleton logic
 
         public static Skills instance;
+        private readonly float animationDurationUntilCast = 1.05f;
 
         private void Awake()
         {
@@ -169,6 +170,7 @@ namespace Battle
         {
             AddSkillCooldown(current, ESkills.Fireball, 3);
             current.Animator.SetTrigger("Spellcast");
+            yield return new WaitForSeconds(ParticleSystems.projectileTravelDuration + animationDurationUntilCast);
             if (!EvadeCheck(opponent))
             {
                 GetAttacked(current, opponent, skillMultiplier: 0.6f);
@@ -180,6 +182,7 @@ namespace Battle
         {
             AddSkillCooldown(current, ESkills.Lightning, 5);
             current.Animator.SetTrigger("Spellcast");
+            yield return new WaitForSeconds(ParticleSystems.projectileTravelDuration + animationDurationUntilCast);
             if (!EvadeCheck(opponent))
             {
                 GetAttacked(current, opponent, skillMultiplier: 1.4f);
@@ -192,11 +195,12 @@ namespace Battle
         {
             AddSkillCooldown(current, ESkills.AirBlast, 5);
             current.Animator.SetTrigger("Spellcast");
+            yield return new WaitForSeconds(ParticleSystems.projectileTravelDuration + animationDurationUntilCast);
             if (!EvadeCheck(opponent))
             {
-                GetAttacked(current, opponent, skillMultiplier: 0.3f);
                 int direction = (int)Mathf.Sign(opponent.transform.localScale.x) * -1;
                 float distanceMultiplier = 30f;
+                GetAttacked(current, opponent, skillMultiplier: 0.3f);
                 opponent.Animator.SetTrigger("Knockbacked");
                 yield return StartCoroutine(opponent.UnitMovement.MoveUnit((direction * distanceMultiplier) + opponent.transform.position.x, current.AnimationDurations.KnockbackedTime));
             }
@@ -206,6 +210,7 @@ namespace Battle
         {
             AddSkillCooldown(current, ESkills.EarthStrike, 8);
             current.Animator.SetTrigger("Spellcast");
+            yield return new WaitForSeconds(ParticleSystems.projectileTravelDuration + animationDurationUntilCast);
             if (!EvadeCheck(opponent))
             {
                 GetAttacked(current, opponent, skillMultiplier: 0.8f);
