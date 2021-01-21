@@ -15,6 +15,7 @@ namespace Battle
         #region Singleton logic
 
         public static Skills instance;
+        // TODO: remove hard coded spellcast animation sync with defend and evade.
         private readonly float animationDurationUntilCast = 1.05f;
 
         private void Awake()
@@ -181,6 +182,8 @@ namespace Battle
         public IEnumerator Lightning(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.Lightning, 5);
+            current.ParticleSystems.nextSpellLoad = ParticleSystems.ESpellLoads.Lightning;
+            current.ParticleSystems.nextExplosion = ParticleSystems.EExplosions.Lightning;
             current.Animator.SetTrigger("Spellcast");
             yield return new WaitForSeconds(ParticleSystems.projectileTravelDuration + animationDurationUntilCast);
             if (!EvadeCheck(opponent))
@@ -194,6 +197,8 @@ namespace Battle
         public IEnumerator AirBlast(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.AirBlast, 5);
+            current.ParticleSystems.nextSpellLoad = ParticleSystems.ESpellLoads.Air;
+            current.ParticleSystems.nextExplosion = ParticleSystems.EExplosions.Air;
             current.Animator.SetTrigger("Spellcast");
             yield return new WaitForSeconds(ParticleSystems.projectileTravelDuration + animationDurationUntilCast);
             if (!EvadeCheck(opponent))
@@ -209,6 +214,8 @@ namespace Battle
         public IEnumerator EarthStrike(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.EarthStrike, 8);
+            current.ParticleSystems.nextSpellLoad = ParticleSystems.ESpellLoads.Earth;
+            current.ParticleSystems.nextExplosion = ParticleSystems.EExplosions.Earth;
             current.Animator.SetTrigger("Spellcast");
             yield return new WaitForSeconds(ParticleSystems.projectileTravelDuration + animationDurationUntilCast);
             if (!EvadeCheck(opponent))

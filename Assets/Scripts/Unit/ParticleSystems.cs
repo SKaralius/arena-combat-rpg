@@ -7,11 +7,30 @@ namespace Unit
 {
     public class ParticleSystems : MonoBehaviour
     {
+        public enum ESpellLoads
+        {
+            None,
+            Fire,
+            Air,
+            Earth,
+            Lightning
+        }
+        public enum EExplosions
+        {
+            None,
+            Fire,
+            Air,
+            Earth,
+            Lightning
+        }
         public bool evaded = true;
+        public ESpellLoads nextSpellLoad = ESpellLoads.None;
+        public EExplosions nextExplosion = EExplosions.None;
         public bool amPlayer;
 
         [SerializeField] private ParticleSystem[] particleSystemPrefabs;
         [SerializeField] private GameObject spellParticleLocation;
+
         private UnitMovement spellParticleMovement;
         private Transform spellParticleLocationParent;
         public static readonly float projectileTravelDuration = 0.2f;
@@ -39,7 +58,24 @@ namespace Unit
         }
         public void FireLoad()
         {
-            particleSystems[1].Play();
+            switch (nextSpellLoad)
+            {
+                case ESpellLoads.Fire:
+                    particleSystems[1].Play();
+                    break;
+                case ESpellLoads.Air:
+                    particleSystems[3].Play();
+                    break;
+                case ESpellLoads.Earth:
+                    particleSystems[6].Play();
+                    break;
+                case ESpellLoads.Lightning:
+                    particleSystems[5].Play();
+                    break;
+                default:
+                    break;
+            }
+            
         }
         public void ShootProjectile()
         {
@@ -64,13 +100,35 @@ namespace Unit
             }
             if (!evaded)
             {
-                // TODO: Explosion
+                PlayExplosion();
+                yield return new WaitForSeconds(0.1f);
             } else
             {
                 // Fail sound?
             }
             spellParticleLocation.transform.SetParent(spellParticleLocationParent);
             spellParticleLocation.transform.localPosition = Vector3.zero;
+            evaded = true;
+        }
+        private void PlayExplosion()
+        {
+            switch (nextExplosion)
+            {
+                case EExplosions.Fire:
+                    particleSystems[2].Play();
+                    break;
+                case EExplosions.Air:
+                    particleSystems[4].Play();
+                    break;
+                case EExplosions.Lightning:
+                    particleSystems[4].Play();
+                    break;
+                case EExplosions.Earth:
+                    particleSystems[7].Play();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

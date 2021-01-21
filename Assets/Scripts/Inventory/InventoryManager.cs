@@ -22,10 +22,9 @@ namespace Inventory
         }
         private void Start()
         {
-            AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.Heal));
-            AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.HealOverTime));
+            AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.Lightning));
             //AddItemToInventory(new EquippableItem(EquipSlot.Legs, "Execute Legs", ("Pelvis", "First"), _sellPrice: 69, _skill: ESkills.Execute, _stats: new Unit.Stats()));
-            gold.ChangeGold(0);
+            gold.ChangeGold(100000);
         }
 
         public void AddItemToInventory(EquippableItem item)
