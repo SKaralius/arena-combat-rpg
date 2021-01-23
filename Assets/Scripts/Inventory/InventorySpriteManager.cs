@@ -16,6 +16,36 @@ namespace Inventory
             ChestAndLegAdditionalSprites(item);
         }
 
+        private void ChestAndLegAdditionalSprites(EquippableItem item)
+        {
+            if (item.Slot == EquipSlot.Chest)
+            {
+                ShowSlot("Right_Arm", item.SpriteCategoryLabel.Item2, SpriteRenderSlots.ChestRightArm);
+                ShowSlot("Right_Hand", item.SpriteCategoryLabel.Item2, SpriteRenderSlots.ChestRightHand);
+                ShowSlot("Left_Arm", item.SpriteCategoryLabel.Item2, SpriteRenderSlots.ChestLeftArm);
+                ShowSlot("Left_Hand", item.SpriteCategoryLabel.Item2, SpriteRenderSlots.ChestLeftHand);
+            }
+            else if (item.Slot == EquipSlot.Legs)
+            {
+                ShowSlot("Right_Leg", item.SpriteCategoryLabel.Item2, SpriteRenderSlots.RightLeg);
+                ShowSlot("Right_Calf", item.SpriteCategoryLabel.Item2, SpriteRenderSlots.RightCalf);
+                ShowSlot("Left_Leg", item.SpriteCategoryLabel.Item2, SpriteRenderSlots.LeftLeg);
+                ShowSlot("Left_Calf", item.SpriteCategoryLabel.Item2, SpriteRenderSlots.LeftCalf);
+            }
+        }
+        private void ShowSlot(string nameOfSlot, string label, SpriteRenderSlots slot)
+        {
+            Sprite sprite = ItemEquipGraphics.RetrieveSprite(nameOfSlot, label);
+            if (sprite == null)
+                ChangeAlpha(spriteSlots[(int)slot], 0);
+            else
+            {
+                spriteSlots[(int)slot].sprite = sprite;
+                ChangeAlpha(spriteSlots[(int)slot], 1);
+            }
+
+        }
+
         public void HideSprite()
         {
             foreach (Image image in spriteSlots)
@@ -31,30 +61,5 @@ namespace Inventory
             image.color = tmp;
         }
 
-        private void ChestAndLegAdditionalSprites(EquippableItem item)
-        {
-            if (item.Slot == EquipSlot.Chest)
-            {
-                spriteSlots[(int)SpriteRenderSlots.ChestRightArm].sprite = ItemEquipGraphics.RetrieveSprite("Right_Arm", item.SpriteCategoryLabel.Item2);
-                ChangeAlpha(spriteSlots[(int)SpriteRenderSlots.ChestRightArm], 1);
-                spriteSlots[(int)SpriteRenderSlots.ChestRightHand].sprite = ItemEquipGraphics.RetrieveSprite("Right_Hand", item.SpriteCategoryLabel.Item2);
-                ChangeAlpha(spriteSlots[(int)SpriteRenderSlots.ChestRightHand], 1);
-                spriteSlots[(int)SpriteRenderSlots.ChestLeftArm].sprite = ItemEquipGraphics.RetrieveSprite("Left_Arm", item.SpriteCategoryLabel.Item2);
-                ChangeAlpha(spriteSlots[(int)SpriteRenderSlots.ChestLeftArm], 1);
-                spriteSlots[(int)SpriteRenderSlots.ChestLeftHand].sprite = ItemEquipGraphics.RetrieveSprite("Left_Hand", item.SpriteCategoryLabel.Item2);
-                ChangeAlpha(spriteSlots[(int)SpriteRenderSlots.ChestLeftHand], 1);
-            }
-            else if (item.Slot == EquipSlot.Legs)
-            {
-                spriteSlots[(int)SpriteRenderSlots.RightLeg].sprite = ItemEquipGraphics.RetrieveSprite("Right_Leg", item.SpriteCategoryLabel.Item2);
-                ChangeAlpha(spriteSlots[(int)SpriteRenderSlots.RightLeg], 1);
-                spriteSlots[(int)SpriteRenderSlots.RightFoot].sprite = ItemEquipGraphics.RetrieveSprite("Right_Foot", item.SpriteCategoryLabel.Item2);
-                ChangeAlpha(spriteSlots[(int)SpriteRenderSlots.RightFoot], 1);
-                spriteSlots[(int)SpriteRenderSlots.LeftLeg].sprite = ItemEquipGraphics.RetrieveSprite("Left_Leg", item.SpriteCategoryLabel.Item2);
-                ChangeAlpha(spriteSlots[(int)SpriteRenderSlots.LeftLeg], 1);
-                spriteSlots[(int)SpriteRenderSlots.LeftFoot].sprite = ItemEquipGraphics.RetrieveSprite("Left_Foot", item.SpriteCategoryLabel.Item2);
-                ChangeAlpha(spriteSlots[(int)SpriteRenderSlots.LeftFoot], 1);
-            }
-        }
     }
 }

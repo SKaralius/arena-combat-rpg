@@ -106,9 +106,9 @@ public static class ItemGenerator
     private static string GetLabelFromTier(int tier)
     {
         if (tier == 1)
-            return "First";
+            return "Rags";
         else
-            return "First";
+            return "Rags";
     }
 
     //  Fisher-Yates shuffle
