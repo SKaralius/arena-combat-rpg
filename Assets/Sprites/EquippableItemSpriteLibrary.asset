@@ -137,3 +137,13 @@ MonoBehaviour:
       m_Hash: 1404092755
       m_Sprite: {fileID: -6473511483031733441, guid: 01d035d61a16d4a4d8786587b38cbe9e,
         type: 3}
+  - m_Name: Facial_Features
+    m_Hash: -63151949
+    m_CategoryList:
+    - m_Name: None
+      m_Hash: -542986255
+      m_Sprite: {fileID: 0}
+    - m_Name: Black_Hair_And_Beard
+      m_Hash: -1371153741
+      m_Sprite: {fileID: -527782864366214829, guid: 0bae1bc6c932377448d2b416ba5d43de,
+        type: 3}
