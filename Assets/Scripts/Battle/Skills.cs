@@ -170,6 +170,8 @@ namespace Battle
         public IEnumerator Fireball(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.Fireball, 3);
+            current.ParticleSystems.nextSpellLoad = ParticleSystems.ESpellLoads.Fire;
+            current.ParticleSystems.nextExplosion = ParticleSystems.EExplosions.Fire;
             current.Animator.SetTrigger("Spellcast");
             yield return new WaitForSeconds(ParticleSystems.projectileTravelDuration + animationDurationUntilCast);
             if (!EvadeCheck(opponent))

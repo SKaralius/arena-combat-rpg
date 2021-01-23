@@ -108,7 +108,7 @@ namespace Unit
             }
             spellParticleLocation.transform.SetParent(spellParticleLocationParent);
             spellParticleLocation.transform.localPosition = Vector3.zero;
-            evaded = true;
+            Reset();
         }
         private void PlayExplosion()
         {
@@ -129,6 +129,12 @@ namespace Unit
                 default:
                     break;
             }
+        }
+        private void Reset()
+        {
+            nextExplosion = EExplosions.None;
+            nextSpellLoad = ESpellLoads.None;
+            evaded = true;
         }
     }
 
