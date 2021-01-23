@@ -18,6 +18,7 @@ namespace TurnFSM
             ResetCharacters();
             CleanScene();
             GameObject.Find("UI").GetComponent<UIContainer>().gold.ChangeGold(100);
+            GameObject.Find("GameManager").GetComponent<GameManager>().nextEncounterNumber += 1;
             LoadTown();
             return base.Start();
         }

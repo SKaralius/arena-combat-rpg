@@ -8,6 +8,7 @@ public class SaverLoader : MonoBehaviour
 {
     private EasyFileSave myFile;
     private GameObject Player;
+    private GameManager gameManager;
     [SerializeField] private InventoryManager inventoryManager = null;
     [SerializeField] private GameObject inventoryPanel = null;
     private Gold gold;
@@ -26,6 +27,7 @@ public class SaverLoader : MonoBehaviour
     #endregion Singleton logic
         gold = inventoryPanel.GetComponentInChildren<Gold>();
         Player = GameObject.FindGameObjectWithTag("Player");
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         myFile = new EasyFileSave("Items")
         {
             suppressWarning = false
@@ -41,7 +43,7 @@ public class SaverLoader : MonoBehaviour
         {
             if (myFile.Load())
             {
-                // Inventory items
+                #region Inventory Items
                 List<EquippableItem> itemToAdd = (List<EquippableItem>)myFile.GetDeserialized("inventory", typeof(List<EquippableItem>));
                 if (itemToAdd == null)
                 {
@@ -55,7 +57,8 @@ public class SaverLoader : MonoBehaviour
                 {
                     inventoryManager.AddItemToInventory(item);
                 }
-                // Equip items
+                #endregion Inventory Items
+                #region Equipped Items
                 EquippableItem[] eqItemsToAdd = (EquippableItem[])myFile.GetDeserialized("eqItems", typeof(EquippableItem[]));
                 if (eqItemsToAdd == null)
                 {
@@ -72,8 +75,11 @@ public class SaverLoader : MonoBehaviour
                         Player.GetComponent<PlayerEquippedItems>().ForceEquip(eqItem);
                     }
                 }
+                #endregion Equipped Items
                 // Gold
                 gold.ChangeGold(myFile.GetInt("gold", defaultValue: 0));
+                // Encounter
+                gameManager.nextEncounterNumber = myFile.GetInt("encounter", defaultValue: 1);
             }
             else
             {
@@ -88,6 +94,7 @@ public class SaverLoader : MonoBehaviour
         myFile.AddSerialized("inventory", inventoryManager.inventory);
         myFile.AddSerialized("eqItems", Player.GetComponent<PlayerEquippedItems>().EquippedItemsArray);
         myFile.Add("gold", gold.Wealth);
+        myFile.Add("encounter", gameManager.nextEncounterNumber);
         myFile.Save();
     }
 }

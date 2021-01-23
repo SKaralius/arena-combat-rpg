@@ -36,6 +36,7 @@ namespace Battle
 
         public void RenderSkillSlots()
         {
+            // TODO: What if more skills than skill slots?
             int i = 0;
             foreach (ESkills skill in characterSkills.characterSkills)
             {

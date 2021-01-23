@@ -28,12 +28,10 @@ namespace Inventory
         public void RenderPlayerStats()
         {
             statDisplay.text = "";
-            AddStatLine("Damage", unitStats.GetStat(EStats.Damage));
-            AddStatLine("Armor", unitStats.GetStat(EStats.Armor));
-            AddStatLine("Speed", unitStats.GetStat(EStats.MoveSpeed));
-            AddStatLine("Health", unitStats.GetStat(EStats.Health));
-            AddStatLine("Evasion", unitStats.GetStat(EStats.Evasion));
-            AddStatLine("Attack Range", unitStats.GetStat(EStats.AttackRange));
+            foreach(EStats stat in EStats.GetValues(typeof(EStats)))
+            {
+                AddStatLine(Stats.GetStatName(stat), unitStats.GetStat(stat));
+            }
         }
         protected override void CreateSlot(int numberOfSlots)
         {

@@ -17,16 +17,14 @@ namespace Inventory
             inventoryUIManager = GetComponent<InventoryUIManager>();
             gold = GetComponentInChildren<Gold>();
             player = GameObject.FindGameObjectWithTag("Player");
-            //AddItemToInventory(new EquippableItem(EquipSlot.Head, "Twice Helmet", ("Helmet", "First"), _sellPrice: 69, _damage: 5, _evasion: 30, _skill: ESkills.HitTwice));
+            //AddItemToInventory(new EquippableItem(EquipSlot.Head, "Twice Helmet", ("Helmet", "First"), _sellPrice: 69, _damage: 5, _evasion: 30, _critical: 50, _skill: ESkills.HitTwice));
             //AddItemToInventory(new EquippableItem(EquipSlot.Legs, "First Jump Legs", ("Legs", "First"), _sellPrice: 69, _damage: 5, _evasion: 30, _skill: ESkills.Jump),
         }
         private void Start()
         {
-            AddItemToInventory(ItemGenerator.GenerateItem(1));
-            AddItemToInventory(ItemGenerator.GenerateItem(1));
-            AddItemToInventory(ItemGenerator.GenerateItem(1));
-            AddItemToInventory(ItemGenerator.GenerateItem(1));
-            gold.ChangeGold(0);
+            AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.Execute));
+            //AddItemToInventory(new EquippableItem(EquipSlot.Legs, "Execute Legs", ("Pelvis", "First"), _sellPrice: 69, _skill: ESkills.Execute, _stats: new Unit.Stats()));
+            gold.ChangeGold(100000);
         }
 
         public void AddItemToInventory(EquippableItem item)

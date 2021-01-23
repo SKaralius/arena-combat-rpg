@@ -1,18 +1,17 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using Unit;
+using UnityEngine;
 
 public static class ItemGenerator
 {
-    public static EquippableItem GenerateItem(int tier, EquipSlot? slot = null)
+    public static EquippableItem GenerateItem(int tier, EquipSlot? slot = null, ESkills skill = ESkills.None)
     {
         if (slot == null)
         {
             slot = GetRandomEquipSlot();
         }
-        float score = tier * 100;
+        float score = tier * UnityEngine.Random.Range(50, 100);
 
         int numberOfStats = Enum.GetNames(typeof(EStats)).Length;
         List<float> statRatios = DistributeSumBetweenNRandomNumbers(UnityEngine.Random.Range(1, numberOfStats));
@@ -25,32 +24,38 @@ public static class ItemGenerator
                 statRatiosXScore.Add(Mathf.Floor(statRatios[i] * score));
         }
         statRatiosXScore.Shuffle();
-        int multiplicativeStatPenalty = 3;
 
         string category = EquipSlotToSpriteCategory((EquipSlot)slot);
         string label = GetLabelFromTier(tier);
+
+        Stats itemStats = new Stats();
+        foreach (EStats stat in EStats.GetValues(typeof(EStats)))
+        {
+            if (stat == EStats.AttackRange)
+                break;
+            itemStats.SetStat(stat, statRatiosXScore[(int)stat]);
+        }
+
+        if (skill == ESkills.None)
+            skill = RollForSkill();
 
         return new EquippableItem(
             slot: (EquipSlot)slot,
             _name: label,
             spriteCategoryLabel: (category, label),
             _sellPrice: 0,
-            _attackRange: 0,
-            _damage: statRatiosXScore[(int)EStats.Damage],
-            _armor: statRatiosXScore[(int)EStats.Armor] / multiplicativeStatPenalty,
-            _moveSpeed: statRatiosXScore[(int)EStats.MoveSpeed] / multiplicativeStatPenalty,
-            _health: statRatiosXScore[(int)EStats.Health],
-            _evasion: statRatiosXScore[(int)EStats.Evasion] / multiplicativeStatPenalty,
-            _skill: RollForSkill()
+            itemStats,
+            _skill: skill
             );
-
     }
+
     private static EquipSlot GetRandomEquipSlot()
     {
         int equipSlotCount = Enum.GetNames(typeof(EquipSlot)).Length;
         EquipSlot slot = (EquipSlot)UnityEngine.Random.Range(0, equipSlotCount);
         return slot;
     }
+
     private static List<float> DistributeSumBetweenNRandomNumbers(int dimensions)
     {
         List<float> randomNumberList = new List<float>
@@ -72,6 +77,7 @@ public static class ItemGenerator
         }
         return differences;
     }
+
     private static ESkills RollForSkill()
     {
         if (UnityEngine.Random.Range(0, 100) < 25)
@@ -83,6 +89,7 @@ public static class ItemGenerator
             return ESkills.None;
         }
     }
+
     private static string EquipSlotToSpriteCategory(EquipSlot slot)
     {
         if (slot == EquipSlot.Chest)
@@ -95,6 +102,7 @@ public static class ItemGenerator
             return "Pelvis";
         return "No such item";
     }
+
     private static string GetLabelFromTier(int tier)
     {
         if (tier == 1)
@@ -102,6 +110,7 @@ public static class ItemGenerator
         else
             return "First";
     }
+
     //  Fisher-Yates shuffle
     public static void Shuffle<T>(this IList<T> list)
     {

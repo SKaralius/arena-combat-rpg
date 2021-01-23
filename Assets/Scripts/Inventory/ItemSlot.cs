@@ -4,6 +4,8 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Battle;
 using Unit;
+using System.Collections.Generic;
+
 
 namespace Inventory
 {
@@ -37,11 +39,11 @@ namespace Inventory
                 tooltipManager.textComp.text += Skills.instance.skillsList[item.Skill].Name;
                 tooltipManager.textComp.text += "\n";
             }
-            AddStatLine("Damage", item.Stats[(int)EStats.Damage]);
-            AddStatLine("Armor", item.Stats[(int)EStats.Armor]);
-            AddStatLine("Speed", item.Stats[(int)EStats.MoveSpeed]);
-            AddStatLine("Health", item.Stats[(int)EStats.Health]);
-            AddStatLine("Evasion", item.Stats[(int)EStats.Evasion]);
+
+            foreach (EStats stat in EStats.GetValues(typeof(EStats)))
+            {
+                AddStatLine(stat, item.Stats.GetStat(stat));
+            }
 
             tooltipManager.inventorySpriteManager.CreateAndDisplaySprite(item);
         }
@@ -72,9 +74,9 @@ namespace Inventory
             tooltipButton.gameObject.SetActive(false);
             button.gameObject.SetActive(false);
         }
-        private void AddStatLine(string statName, float value)
+        private void AddStatLine(EStats stat, float value)
         {
-            tooltipManager.textComp.text += statName;
+            tooltipManager.textComp.text += Stats.GetStatName(stat);
             tooltipManager.textComp.text += ": ";
             tooltipManager.textComp.text += Mathf.Floor(value).ToString();
             tooltipManager.textComp.text += "\n";

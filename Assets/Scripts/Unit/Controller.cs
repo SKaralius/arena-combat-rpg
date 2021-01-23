@@ -39,11 +39,16 @@ namespace Unit
 
         public void TakeDamage(float _damage)
         {
+            float maxHealth = UnitStats.GetStat(EStats.Health);
             Health -= _damage / 100 * (100 - UnitStats.GetStat(EStats.Armor));
             if (Health <= 0)
             {
                 Health = 0;
                 Die();
+            }
+            if (Health > maxHealth)
+            {
+                Health = maxHealth;
             }
             healthBar.UpdateHealthBar(Health);
         }

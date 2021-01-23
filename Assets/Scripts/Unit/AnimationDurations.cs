@@ -9,6 +9,7 @@ namespace Unit
         public float WalkTime { get; private set; }
         public float DefendTime { get; private set; }
         public float EvadeTime { get; private set; }
+        public float KnockbackedTime { get; private set; }
 
         private Animator animator;
 
@@ -41,6 +42,9 @@ namespace Unit
                         break;
                     case "Evade":
                         EvadeTime = clip.length;
+                        break;
+                    case "Knockbacked":
+                        KnockbackedTime = clip.length;
                         break;
                 }
             }

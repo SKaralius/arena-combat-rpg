@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    public int nextEncounterNumber = 1;
+
     #region Singleton logic
 
     private void Awake()
