@@ -135,13 +135,13 @@ ScriptedImporter:
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 6}
     rect:
       serializedVersion: 2
       x: 4
       y: 5858
       width: 5000
-      height: 997
+      height: 903
     spriteID: b6c83c04c544aa3439159900fdbca741
     internalID: 0
     spriteBone: []
@@ -157,13 +157,13 @@ ScriptedImporter:
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 7}
     rect:
       serializedVersion: 2
       x: 4
-      y: 4600
+      y: 4946
       width: 5000
-      height: 1250
+      height: 877
     spriteID: da869c0caf47c8844a981c221d0fe71e
     internalID: 0
     spriteBone: []
@@ -205,9 +205,9 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 2512
+      y: 2571
       width: 5000
-      height: 2080
+      height: 2021
     spriteID: 8ac40455e07c6f64db43105b20ed7223
     internalID: 0
     spriteBone: []

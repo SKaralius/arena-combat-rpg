@@ -11,7 +11,8 @@ public static class ItemGenerator
         {
             slot = GetRandomEquipSlot();
         }
-        float score = tier * UnityEngine.Random.Range(50, 100);
+        (int, string) rollAndRarity = DecideRarity();
+        float score = tier * rollAndRarity.Item1;
 
         int numberOfStats = Enum.GetNames(typeof(EStats)).Length;
         List<float> statRatios = DistributeSumBetweenNRandomNumbers(UnityEngine.Random.Range(1, numberOfStats));
@@ -45,6 +46,8 @@ public static class ItemGenerator
             spriteCategoryLabel: (category, label),
             _sellPrice: 0,
             itemStats,
+            _itemScore: rollAndRarity.Item1,
+            _rarity: rollAndRarity.Item2,
             _skill: skill
             );
     }
@@ -109,6 +112,45 @@ public static class ItemGenerator
             return "Rags";
         else
             return "Rags";
+    }
+
+    private static (int, string) DecideRarity()
+    {
+        Dictionary<string, float> rarities = new Dictionary<string, float>
+        {
+            ["Common"] = 60,
+            ["Rare"] = 25,
+            ["Epic"] = 10,
+            ["Legendary"] = 5
+        };
+
+
+
+        float percentRoll = UnityEngine.Random.Range(0, 100);
+        int roll = 100;
+        string rarity = "Common";
+        if (percentRoll > rarities["Common"])
+        {
+            roll = UnityEngine.Random.Range(30, 50);
+            rarity = "Common";
+        }
+        if (percentRoll > rarities["Epic"] && percentRoll < rarities["Rare"])
+        {
+            roll = UnityEngine.Random.Range(50, 65);
+            rarity = "Rare";
+        }
+        if (percentRoll > rarities["Legendary"] && percentRoll < rarities["Epic"])
+        {
+            roll = UnityEngine.Random.Range(65, 80);
+            rarity = "Epic";
+        }
+        if (percentRoll <= rarities["Legendary"])
+        {
+            roll = UnityEngine.Random.Range(80, 101);
+            rarity = "Legendary";
+        }
+
+        return (roll, rarity);
     }
 
     //  Fisher-Yates shuffle
