@@ -42,7 +42,7 @@ ScriptedImporter:
     textureType: 8
     textureShape: 1
     singleChannelComponent: 0
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -266,7 +266,7 @@ ScriptedImporter:
   platformSettings:
   - name: Default
     overridden: 1
-    maxTextureSize: 512
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -279,8 +279,8 @@ ScriptedImporter:
   documentPivot: {x: 0, y: 0}
   documentAlignment: 7
   importHiddenLayers: 0
-  importedTextureWidth: 512
-  importedTextureHeight: 512
+  importedTextureWidth: 1024
+  importedTextureHeight: 1024
   documentSize: {x: 720, y: 1440}
   paperDollMode: 0
   keepDupilcateSpriteName: 0

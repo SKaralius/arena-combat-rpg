@@ -42,7 +42,8 @@ namespace Unit
         public void TakeDamage(float _damage)
         {
             float maxHealth = UnitStats.GetStat(EStats.Health);
-            Health -= _damage / 100 * (100 - UnitStats.GetStat(EStats.Armor));
+            float damageAfterArmor = _damage / 100 * (100 - UnitStats.GetStat(EStats.Armor));
+            Health -= damageAfterArmor;
             if (Health <= 0)
             {
                 Health = 0;
@@ -52,7 +53,7 @@ namespace Unit
             {
                 Health = maxHealth;
             }
-            DamageText.text = _damage.ToString();
+            ShowDamage(damageAfterArmor);
             healthBar.UpdateHealthBar(Health);
         }
 
@@ -69,6 +70,13 @@ namespace Unit
         public void ResetPosition()
         {
             transform.position = originalPostion;
+        }
+        private void ShowDamage(float damageAfterArmor)
+        {
+            if (damageAfterArmor > 0)
+                DamageText.text = "-" + Mathf.Ceil(damageAfterArmor).ToString();
+            else
+                DamageText.text = "+" + Mathf.Ceil((-1 * damageAfterArmor)).ToString();
         }
     }
 }

@@ -17,7 +17,8 @@ public static class ItemGenerator
         int numberOfStats = Enum.GetNames(typeof(EStats)).Length;
         List<float> statRatios = DistributeSumBetweenNRandomNumbers(UnityEngine.Random.Range(1, numberOfStats));
         List<float> statRatiosXScore = new List<float>();
-        for (int i = 0; i < numberOfStats; i++)
+        // -1 because attack range should not generate random values
+        for (int i = 0; i < numberOfStats - 1; i++)
         {
             if (i >= statRatios.Count)
                 statRatiosXScore.Add(0);
@@ -135,19 +136,19 @@ public static class ItemGenerator
             rarity = "Common";
             return (roll, rarity);
         }
-        if (percentRoll > rarities["Rare"] && percentRoll < rarities["Common"])
+        if (percentRoll > rarities["Rare"] && percentRoll <= rarities["Common"])
         {
             roll = UnityEngine.Random.Range(45, 60);
             rarity = "Uncommon";
             return (roll, rarity);
         }
-        if (percentRoll > rarities["Epic"] && percentRoll < rarities["Rare"])
+        if (percentRoll > rarities["Epic"] && percentRoll <= rarities["Rare"])
         {
             roll = UnityEngine.Random.Range(60, 75);
             rarity = "Rare";
             return (roll, rarity);
         }
-        if (percentRoll > rarities["Legendary"] && percentRoll < rarities["Epic"])
+        if (percentRoll > rarities["Legendary"] && percentRoll <= rarities["Epic"])
         {
             roll = UnityEngine.Random.Range(75, 90);
             rarity = "Epic";

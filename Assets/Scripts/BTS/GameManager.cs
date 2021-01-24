@@ -21,4 +21,10 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion Singleton logic
+
+    public int GetTier()
+    {
+        int tier = (int)Mathf.Ceil(nextEncounterNumber / 10f);
+        return tier;
+    }
 }
