@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace Unit
 {
@@ -17,6 +17,8 @@ namespace Unit
 
         public HealthBar healthBar;
         public Cooldowns characterCooldowns;
+
+        [SerializeField] private TMP_Text DamageText;
 
         private Vector2 originalPostion;
 
@@ -50,6 +52,7 @@ namespace Unit
             {
                 Health = maxHealth;
             }
+            DamageText.text = _damage.ToString();
             healthBar.UpdateHealthBar(Health);
         }
 
