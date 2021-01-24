@@ -44,7 +44,7 @@ public static class ItemGenerator
             slot: (EquipSlot)slot,
             _name: label,
             spriteCategoryLabel: (category, label),
-            _sellPrice: 0,
+            _sellPrice: (int)Mathf.Ceil(score * 3),
             itemStats,
             _itemScore: rollAndRarity.Item1,
             _rarity: rollAndRarity.Item2,
@@ -119,37 +119,46 @@ public static class ItemGenerator
         Dictionary<string, float> rarities = new Dictionary<string, float>
         {
             ["Common"] = 60,
-            ["Rare"] = 25,
-            ["Epic"] = 10,
+            ["Rare"] = 30,
+            ["Epic"] = 15,
             ["Legendary"] = 5
         };
 
 
 
         float percentRoll = UnityEngine.Random.Range(0, 100);
-        int roll = 100;
         string rarity = "Common";
+        int roll = 0;
         if (percentRoll > rarities["Common"])
         {
-            roll = UnityEngine.Random.Range(30, 50);
+            roll = UnityEngine.Random.Range(30, 45);
             rarity = "Common";
+            return (roll, rarity);
+        }
+        if (percentRoll > rarities["Rare"] && percentRoll < rarities["Common"])
+        {
+            roll = UnityEngine.Random.Range(45, 60);
+            rarity = "Uncommon";
+            return (roll, rarity);
         }
         if (percentRoll > rarities["Epic"] && percentRoll < rarities["Rare"])
         {
-            roll = UnityEngine.Random.Range(50, 65);
+            roll = UnityEngine.Random.Range(60, 75);
             rarity = "Rare";
+            return (roll, rarity);
         }
         if (percentRoll > rarities["Legendary"] && percentRoll < rarities["Epic"])
         {
-            roll = UnityEngine.Random.Range(65, 80);
+            roll = UnityEngine.Random.Range(75, 90);
             rarity = "Epic";
+            return (roll, rarity);
         }
         if (percentRoll <= rarities["Legendary"])
         {
-            roll = UnityEngine.Random.Range(80, 101);
+            roll = UnityEngine.Random.Range(90, 101);
             rarity = "Legendary";
+            return (roll, rarity);
         }
-
         return (roll, rarity);
     }
 

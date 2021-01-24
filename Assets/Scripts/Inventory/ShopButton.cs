@@ -23,7 +23,9 @@ namespace Inventory
         {
             shopContainer = GameObject.Find("Shop");
             GameObject shopPanelGO = shopContainer.transform.Find("ShopPanel").gameObject;
-            shopPanelGO.GetComponent<ShopUI>().TogglePanel();
+            ShopUI shopUI = shopPanelGO.GetComponent<ShopUI>();
+            shopUI.TogglePanel();
+            shopUI.UpdateUI();
         }
     }
 }

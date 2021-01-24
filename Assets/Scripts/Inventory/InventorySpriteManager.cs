@@ -58,6 +58,9 @@ namespace Inventory
         {
             switch (item.Rarity)
             {
+                case "Uncommon":
+                    backgroundImage.color = new Color(0.1176471f, 1, 0);
+                    break;
                 case "Rare":
                     backgroundImage.color = new Color(0, 0.4392157f, 0.8666667f);
                     break;

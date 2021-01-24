@@ -13,11 +13,11 @@ namespace Unit
         {
             eqItems = GetComponent<EquippedItems>();
             Stats.SetStat(EStats.Damage, 5);
-            Stats.SetStat(EStats.Armor, 5);
-            Stats.SetStat(EStats.MoveSpeed, 2);
+            Stats.SetStat(EStats.Armor, 15);
+            Stats.SetStat(EStats.MoveSpeed, 15);
             Stats.SetStat(EStats.Health, 100);
             Stats.SetStat(EStats.Evasion, 15);
-            Stats.SetStat(EStats.Critical, 5);
+            Stats.SetStat(EStats.Critical, 15);
             Stats.SetStat(EStats.AttackRange, 7);
         }
 
