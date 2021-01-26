@@ -5,9 +5,9 @@ using UnityEngine;
 
 public static class ItemGenerator
 {
+        public static int statScoreBaseValue = 99;
     public static EquippableItem GenerateItem(int encounterCount, EquipSlot? slot = null, ESkills skill = ESkills.None, bool guaranteeSkill = false)
     {
-        int baseValue = 99;
         float statRollDivisor = 100;
         if (slot == null)
         {
@@ -15,7 +15,7 @@ public static class ItemGenerator
         }
         (int, string) rollAndRarity = DecideRarity();
 
-        float score = (baseValue + encounterCount) * (rollAndRarity.Item1 / statRollDivisor);
+        float score = (statScoreBaseValue + encounterCount) * (rollAndRarity.Item1 / statRollDivisor);
 
         int numberOfStats = Enum.GetNames(typeof(EStats)).Length;
         List<float> statRatios = DistributeSumBetweenNRandomNumbers(UnityEngine.Random.Range(1, numberOfStats));

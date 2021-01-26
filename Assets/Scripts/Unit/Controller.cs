@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using TMPro;
+using System;
 
 namespace Unit
 {
@@ -39,15 +40,15 @@ namespace Unit
             originalPostion = transform.position;
         }
 
-        public void TakeDamage(float _damage)
+        public void TakeDamage(float damage)
         {
             float maxHealth = UnitStats.GetStat(EStats.Health);
-            float damageAfterArmor = _damage / 100 * (100 - UnitStats.GetStat(EStats.Armor));
-            float damageVariation = UnityEngine.Random.Range(0, damageAfterArmor * 0.2f);
-            damageAfterArmor += damageAfterArmor * 0.2f;
-            damageAfterArmor -= damageVariation * 2;
+            
+            float damageVariation = UnityEngine.Random.Range(0, damage * 0.2f);
+            damage += damage * 0.2f;
+            damage -= damageVariation * 2;
 
-            Health -= damageAfterArmor;
+            Health -= damage;
             if (Health <= 0)
             {
                 Health = 0;
@@ -57,8 +58,52 @@ namespace Unit
             {
                 Health = maxHealth;
             }
-            ShowDamage(damageAfterArmor);
+            ShowDamage(damage);
             healthBar.UpdateHealthBar(Health);
+        }
+        // Tries to evade an attack
+        // Compares evasion rating with opponent accuracy rating
+        // Evasion rating to percentage is dynamic, based on progression. More progression into the game, requires more rating to achieve
+        // same evasion percent.
+        public bool TryEvade(float opponentAccuracyRating)
+        {
+            float ratingForSinglePercent = GetSinglePercentRatingValue();
+
+            float accuracyBalanceRatio = 0.7f;
+            float difference = UnitStats.GetStat(EStats.Evasion) - (opponentAccuracyRating * accuracyBalanceRatio);
+            float evadePercentage = difference / ratingForSinglePercent;
+            Debug.Log($"Accuracy rating: {opponentAccuracyRating}, evasionPercentage: {evadePercentage}");
+            evadePercentage = Mathf.Clamp(evadePercentage, 0, 75);
+            float evadeRoll = UnityEngine.Random.Range(0, 100);
+            if (evadeRoll < evadePercentage)
+                return true;
+            else
+                return false;
+        }
+
+        public float ReduceDamageWithArmor(float damage)
+        {
+            float ratingForSinglePercent = GetSinglePercentRatingValue();
+
+            float armorRating = UnitStats.GetStat(EStats.Armor);
+            float armorDamageReductionPercentage = armorRating / ratingForSinglePercent;
+            armorDamageReductionPercentage = Mathf.Clamp(armorDamageReductionPercentage, 0, 75);
+            float reducedDamage = damage / 100 * (100 - armorDamageReductionPercentage);
+            return reducedDamage;
+        }
+
+        public bool TryCritical()
+        {
+            float ratingForSinglePercent = GetSinglePercentRatingValue();
+
+            float criticalRating = UnitStats.GetStat(EStats.Critical);
+            float criticalStrikePercentage = criticalRating / ratingForSinglePercent;
+            criticalStrikePercentage = Mathf.Clamp(criticalStrikePercentage, 0, 75);
+            float criticalRoll = UnityEngine.Random.Range(0, 100);
+            if (criticalRoll < criticalStrikePercentage)
+                return true;
+            else
+                return false;
         }
 
         public void ResetHealth()
@@ -68,8 +113,8 @@ namespace Unit
 
         private void Die()
         {
+            // TODO: Death animation, sound etc.
             MessageSystem.Print("Enemy is dead");
-            //Destroy(gameObject);
         }
         public void ResetPosition()
         {
@@ -77,10 +122,20 @@ namespace Unit
         }
         private void ShowDamage(float damageAfterArmor)
         {
+            // TODO: Fade out
             if (damageAfterArmor > 0)
                 DamageText.text = "-" + Mathf.Ceil(damageAfterArmor).ToString();
             else
                 DamageText.text = "+" + Mathf.Ceil((-1 * damageAfterArmor)).ToString();
+        }
+
+        private static float GetSinglePercentRatingValue()
+        {
+            float maxEquipmentStats = (ItemGenerator.statScoreBaseValue + GameManager.instance.nextEncounterNumber) * Enum.GetNames(typeof(EquipSlot)).Length;
+            float numberOfStatsThatCanBeMaxed = 3f;
+            float oneHundredPercentAtRating = maxEquipmentStats / numberOfStatsThatCanBeMaxed;
+            float ratingForSinglePercent = oneHundredPercentAtRating / 100;
+            return ratingForSinglePercent;
         }
     }
 }

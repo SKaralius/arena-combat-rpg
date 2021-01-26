@@ -19,8 +19,7 @@ namespace Unit
         };
         public static string GetStatName(EStats stat)
         {
-            string name = "";
-            StatNames.TryGetValue(stat, out name);
+            StatNames.TryGetValue(stat, out string name);
             return name;
         }
         public Stats()
@@ -50,12 +49,6 @@ namespace Unit
             else
             {
                 statValue = statsArray[statNumber];
-            }
-            // Stat formula
-            if (stat == EStats.Armor || stat == EStats.Evasion || stat == EStats.Critical || stat == EStats.MoveSpeed)
-            {
-                float statPenalty = 3;
-                statValue /= statPenalty;
             }
             return statValue;
         }        
