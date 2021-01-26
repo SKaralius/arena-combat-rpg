@@ -9,6 +9,7 @@ namespace Unit
             = new Dictionary<EStats, string>
         {
             { EStats.Damage, "Damage" },
+            { EStats.Accuracy, "Accuracy" },
             { EStats.Armor, "Armor" },
             { EStats.MoveSpeed, "Movement Speed" },
             { EStats.Health, "Health" },
