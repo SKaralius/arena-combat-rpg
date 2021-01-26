@@ -43,6 +43,10 @@ namespace Unit
         {
             float maxHealth = UnitStats.GetStat(EStats.Health);
             float damageAfterArmor = _damage / 100 * (100 - UnitStats.GetStat(EStats.Armor));
+            float damageVariation = UnityEngine.Random.Range(0, damageAfterArmor * 0.2f);
+            damageAfterArmor += damageAfterArmor * 0.2f;
+            damageAfterArmor -= damageVariation * 2;
+
             Health -= damageAfterArmor;
             if (Health <= 0)
             {

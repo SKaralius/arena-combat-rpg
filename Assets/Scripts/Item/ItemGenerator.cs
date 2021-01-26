@@ -5,14 +5,17 @@ using UnityEngine;
 
 public static class ItemGenerator
 {
-    public static EquippableItem GenerateItem(int tier, EquipSlot? slot = null, ESkills skill = ESkills.None)
+    public static EquippableItem GenerateItem(int encounterCount, EquipSlot? slot = null, ESkills skill = ESkills.None, bool guaranteeSkill = false)
     {
+        int baseValue = 99;
+        float statRollDivisor = 100;
         if (slot == null)
         {
             slot = GetRandomEquipSlot();
         }
         (int, string) rollAndRarity = DecideRarity();
-        float score = tier * rollAndRarity.Item1;
+
+        float score = (baseValue + encounterCount) * (rollAndRarity.Item1 / statRollDivisor);
 
         int numberOfStats = Enum.GetNames(typeof(EStats)).Length;
         List<float> statRatios = DistributeSumBetweenNRandomNumbers(UnityEngine.Random.Range(1, numberOfStats));
@@ -28,7 +31,7 @@ public static class ItemGenerator
         statRatiosXScore.Shuffle();
 
         string category = EquipSlotToSpriteCategory((EquipSlot)slot);
-        string label = GetLabelFromTier(tier);
+        string label = GetLabelFromTier(GameManager.instance.GetTier());
 
         Stats itemStats = new Stats();
         foreach (EStats stat in EStats.GetValues(typeof(EStats)))
@@ -39,7 +42,7 @@ public static class ItemGenerator
         }
 
         if (skill == ESkills.None)
-            skill = RollForSkill();
+            skill = RollForSkill(guaranteeSkill);
 
         return new EquippableItem(
             slot: (EquipSlot)slot,
@@ -82,9 +85,9 @@ public static class ItemGenerator
         return differences;
     }
 
-    private static ESkills RollForSkill()
+    private static ESkills RollForSkill(bool guaranteeSkill)
     {
-        if (UnityEngine.Random.Range(0, 100) < 25)
+        if (UnityEngine.Random.Range(0, 100) < 25 || guaranteeSkill)
         {
             return (ESkills)UnityEngine.Random.Range(4, Enum.GetNames(typeof(ESkills)).Length);
         }

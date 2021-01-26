@@ -24,7 +24,7 @@ namespace Inventory
         {
             //AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.Execute));
             //AddItemToInventory(new EquippableItem(EquipSlot.Legs, "Execute Legs", ("Pelvis", "First"), _sellPrice: 69, _skill: ESkills.Execute, _stats: new Unit.Stats()));
-            gold.ChangeGold(0);
+            gold.ChangeGold(1000000000);
         }
 
         public void AddItemToInventory(EquippableItem item)

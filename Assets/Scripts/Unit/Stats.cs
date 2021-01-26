@@ -50,6 +50,7 @@ namespace Unit
             {
                 statValue = statsArray[statNumber];
             }
+            // Stat formula
             if (stat == EStats.Armor || stat == EStats.Evasion || stat == EStats.Critical || stat == EStats.MoveSpeed)
             {
                 float statPenalty = 3;

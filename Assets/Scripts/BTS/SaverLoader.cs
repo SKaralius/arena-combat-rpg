@@ -39,7 +39,7 @@ public class SaverLoader : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        //myFile.Delete();
+        myFile.Delete();
         if (myFile.FileExists())
         {
             if (myFile.Load())

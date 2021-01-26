@@ -45,7 +45,7 @@ namespace Inventory
         {
             inventory.Clear();
             for (int i = 0; i < shopCapacity; i++)
-                AddItemToShop(ItemGenerator.GenerateItem(1));
+                AddItemToShop(ItemGenerator.GenerateItem(encounterCount: (GameManager.instance.nextEncounterNumber + UnityEngine.Random.Range(0,4) )));
         }
 
         public void BuyItem(EquippableItem item)
