@@ -11,7 +11,7 @@ namespace Battle
         private BattleSystem battleSystem;
         [SerializeField] private GameObject skillPrefab = default;
         private CharacterSkills characterSkills;
-        private GameObject[] skillSlots = new GameObject[7];
+        private GameObject[] skillSlots = new GameObject[8];
         private GameObject skillsContainer;
 
         private void Awake()
