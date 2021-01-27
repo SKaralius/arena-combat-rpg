@@ -12,7 +12,9 @@ namespace Unit
         }
         private void Start()
         {
-            int tier = GameManager.instance.nextEncounterNumber;
+            // TODO: This can be used to implement difficulty
+            int opponentStrengthModifier = 30;
+            int tier = GameManager.instance.nextEncounterNumber + opponentStrengthModifier;
             // Boss
             if (tier % 10 == 0)
             {

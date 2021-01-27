@@ -9,8 +9,8 @@ namespace Unit
         public Stats StatModifiers { get; private set; } = new Stats();
         private EquippedItems eqItems;
 
-        private readonly float healthBalanceRatio = 1.5f;
-        private readonly float damageBalanceRatio = 0.7f;
+        private readonly float healthBalanceRatio = 2f;
+        private readonly float damageBalanceRatio = 0.5f;
 
         private void Awake()
         {

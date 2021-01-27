@@ -58,7 +58,7 @@ namespace Unit
             {
                 Health = maxHealth;
             }
-            ShowDamage(damage);
+            StartCoroutine(ShowDamage(damage));
             healthBar.UpdateHealthBar(Health);
         }
         // Tries to evade an attack
@@ -120,13 +120,36 @@ namespace Unit
         {
             transform.position = originalPostion;
         }
-        private void ShowDamage(float damageAfterArmor)
+        private IEnumerator ShowDamage(float damageAfterArmor)
         {
-            // TODO: Fade out
+            // TODO: Fade outoveu
             if (damageAfterArmor > 0)
+            {
+                DamageText.alpha = 1;
                 DamageText.text = "-" + Mathf.Ceil(damageAfterArmor).ToString();
+                yield return new WaitForSeconds(0.5f);
+                StartCoroutine(FadeOutDamage());
+            }
             else
                 DamageText.text = "+" + Mathf.Ceil((-1 * damageAfterArmor)).ToString();
+        }
+
+        private IEnumerator FadeOutDamage()
+        {
+            float lerpDuration = 0.3f;
+            float timeElapsed = 0;
+            float startValue = DamageText.alpha;
+            float endValue = 0;
+
+            while (timeElapsed < lerpDuration)
+            {
+                DamageText.alpha = Mathf.Lerp(startValue, endValue, timeElapsed / lerpDuration);
+                timeElapsed += Time.deltaTime;
+
+                yield return null;
+            }
+
+            DamageText.alpha = endValue;
         }
 
         private static float GetSinglePercentRatingValue()
