@@ -51,5 +51,9 @@ namespace Battle
                 posX = maxPossiblePosX;
             return posX;
         }
+        public void Surrender()
+        {
+            SetState(new Lost(this));
+        }
     } 
 }
