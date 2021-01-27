@@ -21,11 +21,11 @@ namespace Unit
                 this.gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * 1.5f, gameObject.transform.localScale.y * 2f, gameObject.transform.localScale.z);
                 tier += 5;
             }
-            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.RightWeapon, guaranteeSkill: true));
-            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.LeftWeapon, guaranteeSkill: true));
-            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.Legs, guaranteeSkill: true));
-            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.Chest, guaranteeSkill: true));
-            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.Head, guaranteeSkill: false));
+            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.RightWeapon));
+            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.LeftWeapon));
+            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.Legs));
+            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.Chest));
+            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.Head));
         }
     }
 

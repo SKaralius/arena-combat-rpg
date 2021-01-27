@@ -16,6 +16,7 @@ namespace TurnFSM
         {
             BattleSystem.skillsContainer.SetActive(true);
             BattleSystem.Player.GetComponent<CharacterActiveEffects>().TriggerEffects();
+            BattleSystem.playerOverTimeEffectManager.RefreshOverTimeEffectUI();
             // TODO: Check if player dead, set lost state if is
             BattleSystem.Player.characterCooldowns.ReduceAllCooldownsByOne();
             BattleSystem.Enemy.characterCooldowns.ReduceAllCooldownsByOne();

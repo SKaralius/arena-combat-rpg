@@ -23,6 +23,7 @@ namespace TurnFSM
             //orderList[AIOrders.UseSkill] = UseSkill();
             MessageSystem.Print("Enemy Turn");
             BattleSystem.Enemy.GetComponent<CharacterActiveEffects>().TriggerEffects();
+            BattleSystem.enemyOverTimeEffectManager.RefreshOverTimeEffectUI();
             if (BattleSystem.Enemy.Health <= 0)
             {
                 BattleSystem.SetState(new Won(BattleSystem));

@@ -22,8 +22,11 @@ namespace Inventory
         }
         private void Start()
         {
-            //AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.Execute));
             //AddItemToInventory(new EquippableItem(EquipSlot.Legs, "Execute Legs", ("Pelvis", "First"), _sellPrice: 69, _skill: ESkills.Execute, _stats: new Unit.Stats()));
+            AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.Fireball));
+            AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.BuffArmor));
+            AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.BuffDamage));
+            AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.BuffEvasion));
             gold.ChangeGold(1000000000);
         }
 

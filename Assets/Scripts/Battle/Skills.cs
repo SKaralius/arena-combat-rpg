@@ -118,7 +118,7 @@ namespace Battle
 
         public IEnumerator Knockback(Controller current, Controller opponent)
         {
-            AddSkillCooldown(current, ESkills.Knockback, 0);
+            AddSkillCooldown(current, ESkills.Knockback, 4);
 
             current.Animator.SetTrigger("Slash");
             bool evaded = EvadeCheck(opponent, current.UnitStats.GetStat(EStats.Accuracy));

@@ -18,8 +18,16 @@ namespace Unit
             Controller controller = target.GetComponent<Controller>();
             float maxHealth = controller.UnitStats.GetStat(EStats.Health);
             if (maxHealth > controller.Health)
-                target.GetComponent<Controller>().TakeDamage(-HealthChangePerTurn);
+                controller.TakeDamage(-HealthChangePerTurn);
             Duration -= 1;
+        }
+
+        public override string GetEffectType()
+        {
+            if (HealthChangePerTurn > 0)
+                return "Health ▲";
+            else
+                return "Health ▼";
         }
     }
 

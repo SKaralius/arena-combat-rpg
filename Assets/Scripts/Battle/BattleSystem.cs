@@ -13,11 +13,17 @@ namespace Battle
         public GameObject skillsContainer;
         public SpriteRenderer Background { get; private set; }
 
+        public OverTimeEffectManager playerOverTimeEffectManager;
+        public OverTimeEffectManager enemyOverTimeEffectManager;
+
         private void Awake()
         {
             Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
             Background = GameObject.Find("BG").GetComponent<SpriteRenderer>();
             GameObject.Find("GameManager").GetComponent<Skills>().battleSystem = this;
+
+            playerOverTimeEffectManager = GameObject.Find("PlayerEffectPanel").GetComponent<OverTimeEffectManager>();
+            enemyOverTimeEffectManager = GameObject.Find("EnemyEffectPanel").GetComponent<OverTimeEffectManager>();
         }
         // Start is called before the first frame update
         private void Start()
