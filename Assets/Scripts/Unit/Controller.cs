@@ -122,16 +122,15 @@ namespace Unit
         }
         private IEnumerator ShowDamage(float damageAfterArmor)
         {
-            // TODO: Fade outoveu
+            DamageText.alpha = 1;
             if (damageAfterArmor > 0)
             {
-                DamageText.alpha = 1;
                 DamageText.text = "-" + Mathf.Ceil(damageAfterArmor).ToString();
-                yield return new WaitForSeconds(0.5f);
-                StartCoroutine(FadeOutDamage());
             }
             else
                 DamageText.text = "+" + Mathf.Ceil((-1 * damageAfterArmor)).ToString();
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(FadeOutDamage());
         }
 
         private IEnumerator FadeOutDamage()

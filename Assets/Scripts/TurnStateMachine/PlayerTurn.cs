@@ -15,8 +15,7 @@ namespace TurnFSM
         public override IEnumerator Start()
         {
             BattleSystem.skillsContainer.SetActive(true);
-            BattleSystem.Player.GetComponent<CharacterActiveEffects>().TriggerEffects();
-            BattleSystem.playerOverTimeEffectManager.RefreshOverTimeEffectUI();
+
             // TODO: Check if player dead, set lost state if is
             BattleSystem.Player.characterCooldowns.ReduceAllCooldownsByOne();
             BattleSystem.Enemy.characterCooldowns.ReduceAllCooldownsByOne();
@@ -32,7 +31,12 @@ namespace TurnFSM
             BattleSystem.SetState(new ActionChosen(BattleSystem));
             yield return BattleSystem.StartCoroutine(skill(BattleSystem.Player, BattleSystem.Enemy));
 
+
             DecideNextState();
+
+            BattleSystem.Enemy.GetComponent<CharacterActiveEffects>().TriggerEffects();
+            BattleSystem.enemyOverTimeEffectManager.RefreshOverTimeEffectUI();
+            BattleSystem.playerOverTimeEffectManager.RefreshOverTimeEffectUI();
         }
 
         public override IEnumerator Equip(EquippableItem equipable)
