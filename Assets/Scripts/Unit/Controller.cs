@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-using TMPro;
-using System;
+﻿using UnityEngine;
 
 namespace Unit
 {
@@ -15,13 +12,10 @@ namespace Unit
         public AnimationDurations AnimationDurations { get; private set; }
         public CharacterActiveEffects CharacterActiveEffects { get; private set; }
         public ParticleSystems ParticleSystems { get; private set; }
+        public DamageDisplay DamageDisplay { get; private set; }
 
         public HealthBar healthBar;
         public Cooldowns characterCooldowns;
-
-        [SerializeField] GameObject DamageTextLocation;
-        [SerializeField] GameObject DamageTextContainerPrefab;
-        float damageOffset = 0;
 
         private Vector2 originalPostion;
 
@@ -33,6 +27,7 @@ namespace Unit
             AnimationDurations = GetComponentInChildren<AnimationDurations>();
             CharacterActiveEffects = GetComponent<CharacterActiveEffects>();
             ParticleSystems = GetComponentInChildren<ParticleSystems>();
+            DamageDisplay = GetComponentInChildren<DamageDisplay>();
         }
 
         private void Start()
@@ -45,7 +40,7 @@ namespace Unit
         public void TakeDamage(float damage)
         {
             float maxHealth = UnitStats.GetStat(EStats.Health);
-            
+
             float damageVariation = UnityEngine.Random.Range(0, damage * 0.2f);
             damage += damage * 0.2f;
             damage -= damageVariation * 2;
@@ -60,9 +55,10 @@ namespace Unit
             {
                 Health = maxHealth;
             }
-            StartCoroutine(ShowDamage(damage));
+            DamageDisplay.ShowDamage(damage);
             healthBar.UpdateHealthBar(Health);
         }
+
         // Tries to evade an attack
         // Compares evasion rating with opponent accuracy rating
         // Evasion rating to percentage is dynamic, based on progression. More progression into the game, requires more rating to achieve
@@ -118,37 +114,15 @@ namespace Unit
             // TODO: Death animation, sound etc.
             MessageSystem.Print("Enemy is dead");
         }
+
         public void ResetPosition()
         {
             transform.position = originalPostion;
         }
-        private IEnumerator ShowDamage(float damageAfterArmor)
-        {
-            damageOffset += 2f;
-            if (damageOffset > 8)
-                damageOffset = 0;
-            string damageText = "";
-            if (damageAfterArmor > 0)
-            {
-                damageText = "-" + Mathf.Ceil(damageAfterArmor).ToString();
-            }
-            else
-                damageText = "+" + Mathf.Ceil((-1 * damageAfterArmor)).ToString();
-
-            GameObject damageContainer = Instantiate(DamageTextContainerPrefab, DamageTextLocation.transform);
-            damageContainer.transform.position = new Vector3(
-                damageContainer.transform.position.x + damageOffset,
-                damageContainer.transform.position.y + UnityEngine.Random.Range(-5f, 5f),
-                damageContainer.transform.position.z);
-            damageContainer.GetComponentInChildren<TMP_Text>().text = damageText;
-            float clipLength = damageContainer.GetComponentInChildren<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length;
-            yield return new WaitForSeconds(clipLength);
-            Destroy(damageContainer);
-        }
 
         private static float GetSinglePercentRatingValue()
         {
-            float maxEquipmentStats = (ItemGenerator.statScoreBaseValue + GameManager.instance.nextEncounterNumber) * Enum.GetNames(typeof(EquipSlot)).Length;
+            float maxEquipmentStats = (ItemGenerator.statScoreBaseValue + GameManager.instance.nextEncounterNumber) * EquipSlot.GetNames(typeof(EquipSlot)).Length;
             float numberOfStatsThatCanBeMaxed = 3f;
             float oneHundredPercentAtRating = maxEquipmentStats / numberOfStatsThatCanBeMaxed;
             float ratingForSinglePercent = oneHundredPercentAtRating / 100;
