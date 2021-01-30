@@ -19,7 +19,8 @@ namespace Unit
         public HealthBar healthBar;
         public Cooldowns characterCooldowns;
 
-        [SerializeField] private TMP_Text DamageText;
+        [SerializeField] GameObject DamageTextLocation;
+        [SerializeField] GameObject DamageTextContainerPrefab;
 
         private Vector2 originalPostion;
 
@@ -122,33 +123,23 @@ namespace Unit
         }
         private IEnumerator ShowDamage(float damageAfterArmor)
         {
-            DamageText.alpha = 1;
+            string damageText = "";
             if (damageAfterArmor > 0)
             {
-                DamageText.text = "-" + Mathf.Ceil(damageAfterArmor).ToString();
+                damageText = "-" + Mathf.Ceil(damageAfterArmor).ToString();
             }
             else
-                DamageText.text = "+" + Mathf.Ceil((-1 * damageAfterArmor)).ToString();
-            yield return new WaitForSeconds(0.5f);
-            StartCoroutine(FadeOutDamage());
-        }
+                damageText = "+" + Mathf.Ceil((-1 * damageAfterArmor)).ToString();
 
-        private IEnumerator FadeOutDamage()
-        {
-            float lerpDuration = 0.3f;
-            float timeElapsed = 0;
-            float startValue = DamageText.alpha;
-            float endValue = 0;
-
-            while (timeElapsed < lerpDuration)
-            {
-                DamageText.alpha = Mathf.Lerp(startValue, endValue, timeElapsed / lerpDuration);
-                timeElapsed += Time.deltaTime;
-
-                yield return null;
-            }
-
-            DamageText.alpha = endValue;
+            GameObject damageContainer = Instantiate(DamageTextContainerPrefab, DamageTextLocation.transform);
+            damageContainer.transform.position = new Vector3(
+                damageContainer.transform.position.x + UnityEngine.Random.Range(-1f, 1f),
+                damageContainer.transform.position.y + UnityEngine.Random.Range(-1f, 1f),
+                damageContainer.transform.position.z);
+            damageContainer.GetComponentInChildren<TMP_Text>().text = damageText;
+            float clipLength = damageContainer.GetComponentInChildren<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length;
+            yield return new WaitForSeconds(clipLength);
+            Destroy(damageContainer);
         }
 
         private static float GetSinglePercentRatingValue()

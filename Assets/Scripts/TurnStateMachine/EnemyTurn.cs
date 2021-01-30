@@ -27,13 +27,15 @@ namespace TurnFSM
                 BattleSystem.SetState(new Won(BattleSystem));
                 yield break;
             }
-            UseSkillHandler order = BattleSystem.Enemy.GetComponent<EnemyAI>().DecideOrder(BattleSystem);
-            yield return order(BattleSystem.Enemy, BattleSystem.Player);
-            DecideNextState();
 
             BattleSystem.Player.GetComponent<CharacterActiveEffects>().TriggerEffects();
             BattleSystem.playerOverTimeEffectManager.RefreshOverTimeEffectUI();
             BattleSystem.enemyOverTimeEffectManager.RefreshOverTimeEffectUI();
+
+            UseSkillHandler order = BattleSystem.Enemy.GetComponent<EnemyAI>().DecideOrder(BattleSystem);
+            yield return order(BattleSystem.Enemy, BattleSystem.Player);
+            DecideNextState();
+
         }
 
         protected override void DecideNextState()

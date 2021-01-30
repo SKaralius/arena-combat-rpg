@@ -726,6 +726,12 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: -0.17570248
       objectReference: {fileID: 0}
+    - target: {fileID: 2233592216532601485, guid: fb279dfd7a4c3ba4eb1879182df8883c,
+        type: 3}
+      propertyPath: DamageTextContainerPrefab
+      value: 
+      objectReference: {fileID: 3021499968178336764, guid: b777d9d3c318c9a4a98bb7135560c8e9,
+        type: 3}
     - target: {fileID: 2349289352640112411, guid: fb279dfd7a4c3ba4eb1879182df8883c,
         type: 3}
       propertyPath: m_LocalRotation.z

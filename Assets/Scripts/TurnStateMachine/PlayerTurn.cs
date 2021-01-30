@@ -29,14 +29,16 @@ namespace TurnFSM
         public override IEnumerator UseSkill(UseSkillHandler skill)
         {
             BattleSystem.SetState(new ActionChosen(BattleSystem));
+
+            BattleSystem.Enemy.GetComponent<CharacterActiveEffects>().TriggerEffects();
+            BattleSystem.enemyOverTimeEffectManager.RefreshOverTimeEffectUI();
+            BattleSystem.playerOverTimeEffectManager.RefreshOverTimeEffectUI();
+
             yield return BattleSystem.StartCoroutine(skill(BattleSystem.Player, BattleSystem.Enemy));
 
 
             DecideNextState();
 
-            BattleSystem.Enemy.GetComponent<CharacterActiveEffects>().TriggerEffects();
-            BattleSystem.enemyOverTimeEffectManager.RefreshOverTimeEffectUI();
-            BattleSystem.playerOverTimeEffectManager.RefreshOverTimeEffectUI();
         }
 
         public override IEnumerator Equip(EquippableItem equipable)
