@@ -21,6 +21,7 @@ namespace Unit
 
         [SerializeField] GameObject DamageTextLocation;
         [SerializeField] GameObject DamageTextContainerPrefab;
+        float damageOffset = 0;
 
         private Vector2 originalPostion;
 
@@ -123,6 +124,9 @@ namespace Unit
         }
         private IEnumerator ShowDamage(float damageAfterArmor)
         {
+            damageOffset += 2f;
+            if (damageOffset > 8)
+                damageOffset = 0;
             string damageText = "";
             if (damageAfterArmor > 0)
             {
@@ -133,8 +137,8 @@ namespace Unit
 
             GameObject damageContainer = Instantiate(DamageTextContainerPrefab, DamageTextLocation.transform);
             damageContainer.transform.position = new Vector3(
-                damageContainer.transform.position.x + UnityEngine.Random.Range(-1f, 1f),
-                damageContainer.transform.position.y + UnityEngine.Random.Range(-1f, 1f),
+                damageContainer.transform.position.x + damageOffset,
+                damageContainer.transform.position.y + UnityEngine.Random.Range(-5f, 5f),
                 damageContainer.transform.position.z);
             damageContainer.GetComponentInChildren<TMP_Text>().text = damageText;
             float clipLength = damageContainer.GetComponentInChildren<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length;
