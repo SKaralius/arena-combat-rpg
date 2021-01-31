@@ -36,7 +36,7 @@ public static class ItemGenerator
         Stats itemStats = new Stats();
         foreach (EStats stat in EStats.GetValues(typeof(EStats)))
         {
-            if (stat == EStats.AttackRange || stat == EStats.MoveSpeed)
+            if (stat == EStats.AttackRange)
                 break;
             itemStats.SetStat(stat, statRatiosXScore[(int)stat]);
         }

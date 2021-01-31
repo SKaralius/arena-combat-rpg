@@ -25,8 +25,8 @@ public class DamageDisplay : MonoBehaviour
 
     public void ShowDamage(float damage)
     {
-        damageOffset += 2f;
-        if (damageOffset > 8)
+        damageOffset += 4f;
+        if (damageOffset > 12)
             damageOffset = 0;
         if (transform.localScale.x > 0)
             damageOffset *= -1;

@@ -124,8 +124,7 @@ namespace Battle
             bool evaded = EvadeCheck(opponent, current.UnitStats.GetStat(EStats.Accuracy));
             if (!evaded)
             {
-                GetAttacked(current, opponent, disableAnimation: false);
-                yield return new WaitForSeconds(0.1f);
+                GetAttacked(current, opponent, disableAnimation: true);
             }
             int direction = (int)Mathf.Sign(opponent.transform.localScale.x) * -1;
             float distanceMultiplier = 5f;
@@ -207,7 +206,7 @@ namespace Battle
             {
                 int direction = (int)Mathf.Sign(opponent.transform.localScale.x) * -1;
                 float distanceMultiplier = 30f;
-                GetAttacked(current, opponent, skillMultiplier: 0.3f);
+                GetAttacked(current, opponent, skillMultiplier: 0.3f, disableAnimation: true);
                 opponent.Animator.SetTrigger("Knockbacked");
                 yield return StartCoroutine(opponent.UnitMovement.MoveUnit((direction * distanceMultiplier) + opponent.transform.position.x, current.AnimationDurations.KnockbackedTime));
             }

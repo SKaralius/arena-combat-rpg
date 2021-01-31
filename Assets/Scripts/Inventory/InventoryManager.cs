@@ -27,6 +27,8 @@ namespace Inventory
             AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.BuffArmor));
             AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.BuffDamage));
             AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.BuffEvasion));
+            AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.AirBlast));
+            AddItemToInventory(ItemGenerator.GenerateItem(1, skill: ESkills.Knockback));
             gold.ChangeGold(1000000000);
         }
 
