@@ -18,7 +18,10 @@ namespace Unit
             Controller controller = target.GetComponent<Controller>();
             float maxHealth = controller.UnitStats.GetStat(EStats.Health);
             if (maxHealth > controller.Health)
+            {
                 controller.TakeDamage(-HealthChangePerTurn);
+                controller.DamageDisplay.ShowDamage(-HealthChangePerTurn);
+            }
             Duration -= 1;
         }
 

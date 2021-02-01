@@ -250,17 +250,22 @@ namespace Battle
         public IEnumerator Heal(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.Heal, 5);
-            current.Animator.SetTrigger("Spellcast");
+            //current.Animator.SetTrigger("Spellcast");
             float maxHealth = current.UnitStats.GetStat(EStats.Health);
             if (maxHealth > current.Health)
-                current.TakeDamage(-maxHealth * 0.4f);
+            {
+                float healAmount = -maxHealth * 0.4f;
+                current.TakeDamage(healAmount);
+                current.DamageDisplay.ShowDamage(healAmount);
+            }
+
             current.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(4, 5));
             yield return new WaitForSeconds(current.AnimationDurations.EvadeTime);
         }        
         public IEnumerator HealOverTime(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.HealOverTime, 5);
-            current.Animator.SetTrigger("Spellcast");
+            //current.Animator.SetTrigger("Spellcast");
             float maxHealth = current.UnitStats.GetStat(EStats.Health);
             current.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(5, maxHealth * 0.1f));
             yield return new WaitForSeconds(current.AnimationDurations.EvadeTime);
@@ -268,7 +273,7 @@ namespace Battle
         public IEnumerator BuffDamage(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.BuffDamage, 2);
-            current.Animator.SetTrigger("Spellcast");
+            //current.Animator.SetTrigger("Spellcast");
             float damage = current.UnitStats.GetStat(EStats.Damage);
             current.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(2, damage));
             yield return new WaitForSeconds(current.AnimationDurations.EvadeTime);
@@ -296,10 +301,15 @@ namespace Battle
         private void GetAttacked(Controller current, Controller opponent, bool disableAnimation = false, float skillMultiplier = 1)
         {
             float damageToTake = current.UnitStats.GetStat(EStats.Damage) * skillMultiplier;
-            if (CriticalCheck(current))
+            bool isCritical = CriticalCheck(current);
+            if (isCritical)
+            {
                 damageToTake *= 2;
+                StartCoroutine(CameraShake.instance.Shake());
+            }
            damageToTake = opponent.ReduceDamageWithArmor(damageToTake);
            opponent.TakeDamage(damageToTake);
+           opponent.DamageDisplay.ShowDamage(damageToTake, isCritical);
 
             if (!disableAnimation)
                 opponent.Animator.SetTrigger("Defend");

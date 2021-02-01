@@ -23,7 +23,7 @@ public class DamageDisplay : MonoBehaviour
         }
     }
 
-    public void ShowDamage(float damage)
+    public void ShowDamage(float damage, bool isCritical = false)
     {
         damageOffset += 4f;
         if (damageOffset > 12)
@@ -31,28 +31,55 @@ public class DamageDisplay : MonoBehaviour
         if (transform.localScale.x > 0)
             damageOffset *= -1;
 
-        string damageText = GetDamageText(damage);
-
-        StartCoroutine(ActiveDamageDisplayInstance(damageText));
+        string damageText = GetDamageText(damage, isCritical);
+        int index = GetNextDisabledInstanceIndex();
+        if (index == -1)
+            MessageSystem.Print("Lack of damage display instances. Check DamageDisplay.cs");
+        ApplyTextEffects(damage, index, isCritical);
+        StartCoroutine(ActiveDamageDisplayInstance(damageText, index));
     }
 
-    private string GetDamageText(float damage)
+    private string GetDamageText(float damage, bool isCritical = false)
     {
-        string damageText = "";
+        string damageText;
         if (damage > 0)
         {
             damageText = "-" + Mathf.Ceil(damage).ToString();
         }
         else
             damageText = "+" + Mathf.Ceil((-1 * damage)).ToString();
+        if (isCritical)
+        {
+            damageText += "!";
+        }
         return damageText;
     }
 
-    private IEnumerator ActiveDamageDisplayInstance(string damageText)
+    private void ApplyTextEffects(float damage, int index, bool isCritical = false)
     {
-        int index = GetNextDisabledInstanceIndex();
-        if (index == -1)
-            MessageSystem.Print("Lack of damage display instances. Check DamageDisplay.cs");
+        Vector3 tmp = damageDisplaySlots[index].transform.rotation.eulerAngles;
+        tmp.z = UnityEngine.Random.Range(-10f, 10f);
+        damageDisplaySlots[index].transform.rotation = Quaternion.Euler(tmp);
+
+        TMP_Text textObject = textsAndAnimators[index].Item1;
+        if (damage < 0)
+            textObject.color = Color.green;
+        else
+            textObject.color = Color.red;
+
+        if (isCritical)
+        {
+            textObject.fontSize = 34;
+            textObject.fontStyle = FontStyles.Italic;
+        } else
+        {
+            textObject.fontSize = 24;
+            textObject.fontStyle = FontStyles.Normal;
+        }
+    }
+
+    private IEnumerator ActiveDamageDisplayInstance(string damageText, int index)
+    {
         damageDisplaySlots[index].SetActive(true);
 
         damageDisplaySlots[index].transform.localPosition = new Vector3(

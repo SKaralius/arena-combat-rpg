@@ -55,7 +55,6 @@ namespace Unit
             {
                 Health = maxHealth;
             }
-            DamageDisplay.ShowDamage(damage);
             healthBar.UpdateHealthBar(Health);
         }
 
