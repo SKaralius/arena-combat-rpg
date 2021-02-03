@@ -12,17 +12,20 @@ namespace Unit
         }
         private void Start()
         {
-            int tier = Mathf.CeilToInt((float)gameManager.nextEncounterNumber / 10);
-            if (gameManager.nextEncounterNumber % 10 == 0)
+            // TODO: This can be used to implement difficulty
+            int opponentStrengthModifier = 30;
+            int tier = GameManager.instance.nextEncounterNumber + opponentStrengthModifier;
+            // Boss
+            if (tier % 10 == 0)
             {
                 this.gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * 1.5f, gameObject.transform.localScale.y * 2f, gameObject.transform.localScale.z);
-                tier += 1;
+                tier += 5;
             }
             Equip(ItemGenerator.GenerateItem(tier, EquipSlot.RightWeapon));
             Equip(ItemGenerator.GenerateItem(tier, EquipSlot.LeftWeapon));
             Equip(ItemGenerator.GenerateItem(tier, EquipSlot.Legs));
-            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.Chest, ESkills.EarthStrike));
-            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.Head, ESkills.Lightning));
+            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.Chest));
+            Equip(ItemGenerator.GenerateItem(tier, EquipSlot.Head));
         }
     }
 

@@ -13,6 +13,7 @@ namespace Unit
             Duration = _duration;
         }
         public abstract void ResolveEffect(GameObject target);
+        public abstract string GetEffectType();
     }
 
 }

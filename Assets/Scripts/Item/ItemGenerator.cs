@@ -5,18 +5,23 @@ using UnityEngine;
 
 public static class ItemGenerator
 {
-    public static EquippableItem GenerateItem(int tier, EquipSlot? slot = null, ESkills skill = ESkills.None)
+        public static int statScoreBaseValue = 99;
+    public static EquippableItem GenerateItem(int encounterCount, EquipSlot? slot = null, ESkills skill = ESkills.None, bool guaranteeSkill = false)
     {
+        float statRollDivisor = 100;
         if (slot == null)
         {
             slot = GetRandomEquipSlot();
         }
-        float score = tier * UnityEngine.Random.Range(50, 100);
+        (int, string) rollAndRarity = DecideRarity();
+
+        float score = (statScoreBaseValue + encounterCount) * (rollAndRarity.Item1 / statRollDivisor);
 
         int numberOfStats = Enum.GetNames(typeof(EStats)).Length;
         List<float> statRatios = DistributeSumBetweenNRandomNumbers(UnityEngine.Random.Range(1, numberOfStats));
         List<float> statRatiosXScore = new List<float>();
-        for (int i = 0; i < numberOfStats; i++)
+        // -1 because attack range should not generate random values
+        for (int i = 0; i < numberOfStats - 1; i++)
         {
             if (i >= statRatios.Count)
                 statRatiosXScore.Add(0);
@@ -26,7 +31,7 @@ public static class ItemGenerator
         statRatiosXScore.Shuffle();
 
         string category = EquipSlotToSpriteCategory((EquipSlot)slot);
-        string label = GetLabelFromTier(tier);
+        string label = GetLabelFromTier(GameManager.instance.GetTier());
 
         Stats itemStats = new Stats();
         foreach (EStats stat in EStats.GetValues(typeof(EStats)))
@@ -37,14 +42,16 @@ public static class ItemGenerator
         }
 
         if (skill == ESkills.None)
-            skill = RollForSkill();
+            skill = RollForSkill(guaranteeSkill);
 
         return new EquippableItem(
             slot: (EquipSlot)slot,
             _name: label,
             spriteCategoryLabel: (category, label),
-            _sellPrice: 0,
+            _sellPrice: (int)Mathf.Ceil(score * 3),
             itemStats,
+            _itemScore: rollAndRarity.Item1,
+            _rarity: rollAndRarity.Item2,
             _skill: skill
             );
     }
@@ -78,9 +85,9 @@ public static class ItemGenerator
         return differences;
     }
 
-    private static ESkills RollForSkill()
+    private static ESkills RollForSkill(bool guaranteeSkill)
     {
-        if (UnityEngine.Random.Range(0, 100) < 25)
+        if (UnityEngine.Random.Range(0, 100) < 25 || guaranteeSkill)
         {
             return (ESkills)UnityEngine.Random.Range(4, Enum.GetNames(typeof(ESkills)).Length);
         }
@@ -106,9 +113,57 @@ public static class ItemGenerator
     private static string GetLabelFromTier(int tier)
     {
         if (tier == 1)
-            return "First";
+            return "Rags";
         else
-            return "First";
+            return "Rags";
+    }
+
+    private static (int, string) DecideRarity()
+    {
+        Dictionary<string, float> rarities = new Dictionary<string, float>
+        {
+            ["Common"] = 60,
+            ["Rare"] = 30,
+            ["Epic"] = 15,
+            ["Legendary"] = 5
+        };
+
+
+
+        float percentRoll = UnityEngine.Random.Range(0, 100);
+        string rarity = "Common";
+        int roll = 0;
+        if (percentRoll > rarities["Common"])
+        {
+            roll = UnityEngine.Random.Range(30, 45);
+            rarity = "Common";
+            return (roll, rarity);
+        }
+        if (percentRoll > rarities["Rare"] && percentRoll <= rarities["Common"])
+        {
+            roll = UnityEngine.Random.Range(45, 60);
+            rarity = "Uncommon";
+            return (roll, rarity);
+        }
+        if (percentRoll > rarities["Epic"] && percentRoll <= rarities["Rare"])
+        {
+            roll = UnityEngine.Random.Range(60, 75);
+            rarity = "Rare";
+            return (roll, rarity);
+        }
+        if (percentRoll > rarities["Legendary"] && percentRoll <= rarities["Epic"])
+        {
+            roll = UnityEngine.Random.Range(75, 90);
+            rarity = "Epic";
+            return (roll, rarity);
+        }
+        if (percentRoll <= rarities["Legendary"])
+        {
+            roll = UnityEngine.Random.Range(90, 101);
+            rarity = "Legendary";
+            return (roll, rarity);
+        }
+        return (roll, rarity);
     }
 
     //  Fisher-Yates shuffle

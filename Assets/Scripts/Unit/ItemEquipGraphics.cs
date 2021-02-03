@@ -14,13 +14,15 @@ namespace Unit
             ChestLeftArm,
             ChestLeftHand,
             RightLeg,
-            RightFoot,
+            RightCalf,
             LeftLeg,
-            LeftFoot
+            LeftCalf,
+            LeftFoot,
+            RightFoot
         }
     public class ItemEquipGraphics : MonoBehaviour
     {
-        public SpriteRenderer[] equipSlots = new SpriteRenderer[13];
+        public SpriteRenderer[] equipSlots = new SpriteRenderer[15];
 
         public void EquipItem(EquippableItem item)
         {
@@ -35,8 +37,10 @@ namespace Unit
             else if (item.Slot == EquipSlot.Legs)
             {
                 equipSlots[(int)SpriteRenderSlots.RightLeg].sprite = RetrieveSprite("Right_Leg", item.SpriteCategoryLabel.Item2);
+                equipSlots[(int)SpriteRenderSlots.RightCalf].sprite = RetrieveSprite("Right_Calf", item.SpriteCategoryLabel.Item2);
                 equipSlots[(int)SpriteRenderSlots.RightFoot].sprite = RetrieveSprite("Right_Foot", item.SpriteCategoryLabel.Item2);
                 equipSlots[(int)SpriteRenderSlots.LeftLeg].sprite = RetrieveSprite("Left_Leg", item.SpriteCategoryLabel.Item2);
+                equipSlots[(int)SpriteRenderSlots.LeftCalf].sprite = RetrieveSprite("Left_Calf", item.SpriteCategoryLabel.Item2);
                 equipSlots[(int)SpriteRenderSlots.LeftFoot].sprite = RetrieveSprite("Left_Foot", item.SpriteCategoryLabel.Item2);
             }
         }
@@ -54,9 +58,9 @@ namespace Unit
             else if (slot == EquipSlot.Legs)
             {
                 equipSlots[(int)SpriteRenderSlots.RightLeg].sprite = null;
-                equipSlots[(int)SpriteRenderSlots.RightFoot].sprite = null;
+                equipSlots[(int)SpriteRenderSlots.RightCalf].sprite = null;
                 equipSlots[(int)SpriteRenderSlots.LeftLeg].sprite = null;
-                equipSlots[(int)SpriteRenderSlots.LeftFoot].sprite = null;
+                equipSlots[(int)SpriteRenderSlots.LeftCalf].sprite = null;
             }
         }
 

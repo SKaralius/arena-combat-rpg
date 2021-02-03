@@ -40,6 +40,10 @@ namespace Inventory
                 tooltipManager.textComp.text += "\n";
             }
 
+            tooltipManager.textComp.text += item.Slot;
+            tooltipManager.textComp.text += "\n";
+
+
             foreach (EStats stat in EStats.GetValues(typeof(EStats)))
             {
                 AddStatLine(stat, item.Stats.GetStat(stat));

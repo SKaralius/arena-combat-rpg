@@ -17,7 +17,8 @@ namespace TurnFSM
             MessageSystem.Print("Player has won the match");
             ResetCharacters();
             CleanScene();
-            GameObject.Find("UI").GetComponent<UIContainer>().gold.ChangeGold(100);
+            GameObject.Find("UI").GetComponent<UIContainer>().gold.ChangeGold(500);
+            GameObject.Find("UI").transform.GetChild(0).GetComponent<InventoryManager>().AddItemToInventory(ItemGenerator.GenerateItem(GameManager.instance.GetTier()));
             GameObject.Find("GameManager").GetComponent<GameManager>().nextEncounterNumber += 1;
             LoadTown();
             return base.Start();

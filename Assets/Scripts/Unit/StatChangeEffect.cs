@@ -16,16 +16,27 @@ namespace Unit
 
         public override void ResolveEffect(GameObject target)
         {
+            Controller controller = target.GetComponent<Controller>();
             if (!effectApplied)
             {
-                target.GetComponent<Controller>().UnitStats.StatModifiers.SetStat(StatToChange, StatChangeAmount);
+                controller.UnitStats.StatModifiers.SetStat(StatToChange, StatChangeAmount);
                 effectApplied = true;
             }
             Duration--;
             if (Duration == 0)
             {
-                target.GetComponent<Controller>().UnitStats.StatModifiers.SetStat(StatToChange, -StatChangeAmount);
+                controller.UnitStats.StatModifiers.SetStat(StatToChange, -StatChangeAmount);
             }
+        }
+        public override string GetEffectType()
+        {
+            string upOrDownArrow;
+            if (StatChangeAmount > 0)
+                upOrDownArrow = "▲";
+            else
+                upOrDownArrow = "▼";
+            string message = $"{Stats.GetStatName(StatToChange)} {upOrDownArrow}";
+            return message;
         }
     }
 }

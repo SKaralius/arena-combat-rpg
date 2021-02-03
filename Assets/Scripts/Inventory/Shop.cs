@@ -21,18 +21,13 @@ namespace Inventory
             gold = inventoryPanel.GetComponentInChildren<Gold>();
         }
 
-        private void Start()
-        {
-            for (int i = 0; i < shopCapacity; i++)
-                AddItemToShop(ItemGenerator.GenerateItem(1));
-        }
-
         public void AddItemToShop(EquippableItem item)
         {
             if (inventory.Count < shopCapacity)
             {
                 inventory.Add(item);
-                shopUI.UpdateUI();
+                if (shopUI)
+                    shopUI.UpdateUI();
             }
             else
             {
@@ -48,7 +43,9 @@ namespace Inventory
 
         public void GenerateItems()
         {
-            MessageSystem.Print("Items generated");
+            inventory.Clear();
+            for (int i = 0; i < shopCapacity; i++)
+                AddItemToShop(ItemGenerator.GenerateItem(encounterCount: (GameManager.instance.nextEncounterNumber + UnityEngine.Random.Range(0,4) )));
         }
 
         public void BuyItem(EquippableItem item)
@@ -59,7 +56,7 @@ namespace Inventory
                 return;
             }
 
-            int BuyPrice = (int)item.SellPrice * 2;
+            int BuyPrice = (int)item.SellPrice * 5;
             if (gold.Wealth >= BuyPrice)
             {
                 RemoveItemFromShop(item);

@@ -93,7 +93,7 @@ namespace Battle
         public IEnumerator BasicAttack(Controller current, Controller opponent)
         {
             current.Animator.SetTrigger("Slash");
-            if (!EvadeCheck(opponent))
+            if (!EvadeCheck(opponent, current.UnitStats.GetStat(EStats.Accuracy)))
             {
                 GetAttacked(current, opponent);
             }
@@ -103,7 +103,7 @@ namespace Battle
         {
             AddSkillCooldown(current, ESkills.StrongHit, 4);
             current.Animator.SetTrigger("Slash");
-            if (!EvadeCheck(opponent))
+            if (!EvadeCheck(opponent, current.UnitStats.GetStat(EStats.Accuracy)))
             {
                 GetAttacked(current, opponent, skillMultiplier: 1.5f);
             }
@@ -118,14 +118,13 @@ namespace Battle
 
         public IEnumerator Knockback(Controller current, Controller opponent)
         {
-            AddSkillCooldown(current, ESkills.Knockback, 0);
+            AddSkillCooldown(current, ESkills.Knockback, 4);
 
             current.Animator.SetTrigger("Slash");
-            bool evaded = EvadeCheck(opponent);
+            bool evaded = EvadeCheck(opponent, current.UnitStats.GetStat(EStats.Accuracy));
             if (!evaded)
             {
-                GetAttacked(current, opponent, disableAnimation: false);
-                yield return new WaitForSeconds(0.1f);
+                GetAttacked(current, opponent, disableAnimation: true);
             }
             int direction = (int)Mathf.Sign(opponent.transform.localScale.x) * -1;
             float distanceMultiplier = 5f;
@@ -144,7 +143,7 @@ namespace Battle
         {
             AddSkillCooldown(current, ESkills.DamageOverTime, 2);
             current.Animator.SetTrigger("Slash");
-            if (!EvadeCheck(opponent))
+            if (!EvadeCheck(opponent, current.UnitStats.GetStat(EStats.Accuracy)))
             {
                 GetAttacked(current, opponent);
                 opponent.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(2, -20));
@@ -155,7 +154,7 @@ namespace Battle
         {
             AddSkillCooldown(current, ESkills.Execute, 9);
             current.Animator.SetTrigger("Slash");
-            if (!EvadeCheck(opponent))
+            if (!EvadeCheck(opponent, current.UnitStats.GetStat(EStats.Accuracy)))
             {
                 if (opponent.Health < opponent.UnitStats.GetStat(EStats.Health) / 100 * 50)
                 {
@@ -174,7 +173,7 @@ namespace Battle
             current.ParticleSystems.nextExplosion = ParticleSystems.EExplosions.Fire;
             current.Animator.SetTrigger("Spellcast");
             yield return new WaitForSeconds(ParticleSystems.projectileTravelDuration + animationDurationUntilCast);
-            if (!EvadeCheck(opponent))
+            if (!EvadeCheck(opponent, current.UnitStats.GetStat(EStats.Accuracy)))
             {
                 GetAttacked(current, opponent, skillMultiplier: 0.6f);
                 opponent.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(2, -5));
@@ -188,7 +187,7 @@ namespace Battle
             current.ParticleSystems.nextExplosion = ParticleSystems.EExplosions.Lightning;
             current.Animator.SetTrigger("Spellcast");
             yield return new WaitForSeconds(ParticleSystems.projectileTravelDuration + animationDurationUntilCast);
-            if (!EvadeCheck(opponent))
+            if (!EvadeCheck(opponent, current.UnitStats.GetStat(EStats.Accuracy)))
             {
                 GetAttacked(current, opponent, skillMultiplier: 1.4f);
                 opponent.CharacterActiveEffects.AddEffect(new StatChangeEffect(2, EStats.MoveSpeed, -5));
@@ -203,11 +202,11 @@ namespace Battle
             current.ParticleSystems.nextExplosion = ParticleSystems.EExplosions.Air;
             current.Animator.SetTrigger("Spellcast");
             yield return new WaitForSeconds(ParticleSystems.projectileTravelDuration + animationDurationUntilCast);
-            if (!EvadeCheck(opponent))
+            if (!EvadeCheck(opponent, current.UnitStats.GetStat(EStats.Accuracy)))
             {
                 int direction = (int)Mathf.Sign(opponent.transform.localScale.x) * -1;
                 float distanceMultiplier = 30f;
-                GetAttacked(current, opponent, skillMultiplier: 0.3f);
+                GetAttacked(current, opponent, skillMultiplier: 0.3f, disableAnimation: true);
                 opponent.Animator.SetTrigger("Knockbacked");
                 yield return StartCoroutine(opponent.UnitMovement.MoveUnit((direction * distanceMultiplier) + opponent.transform.position.x, current.AnimationDurations.KnockbackedTime));
             }
@@ -220,7 +219,7 @@ namespace Battle
             current.ParticleSystems.nextExplosion = ParticleSystems.EExplosions.Earth;
             current.Animator.SetTrigger("Spellcast");
             yield return new WaitForSeconds(ParticleSystems.projectileTravelDuration + animationDurationUntilCast);
-            if (!EvadeCheck(opponent))
+            if (!EvadeCheck(opponent, current.UnitStats.GetStat(EStats.Accuracy)))
             {
                 GetAttacked(current, opponent, skillMultiplier: 0.8f);
                 int direction = (int)Mathf.Sign(opponent.transform.localScale.x) * -1;
@@ -251,17 +250,22 @@ namespace Battle
         public IEnumerator Heal(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.Heal, 5);
-            current.Animator.SetTrigger("Spellcast");
+            //current.Animator.SetTrigger("Spellcast");
             float maxHealth = current.UnitStats.GetStat(EStats.Health);
             if (maxHealth > current.Health)
-                current.TakeDamage(-maxHealth * 0.4f);
+            {
+                float healAmount = -maxHealth * 0.4f;
+                current.TakeDamage(healAmount);
+                current.DamageDisplay.ShowDamage(healAmount);
+            }
+
             current.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(4, 5));
             yield return new WaitForSeconds(current.AnimationDurations.EvadeTime);
         }        
         public IEnumerator HealOverTime(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.HealOverTime, 5);
-            current.Animator.SetTrigger("Spellcast");
+            //current.Animator.SetTrigger("Spellcast");
             float maxHealth = current.UnitStats.GetStat(EStats.Health);
             current.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(5, maxHealth * 0.1f));
             yield return new WaitForSeconds(current.AnimationDurations.EvadeTime);
@@ -269,7 +273,7 @@ namespace Battle
         public IEnumerator BuffDamage(Controller current, Controller opponent)
         {
             AddSkillCooldown(current, ESkills.BuffDamage, 2);
-            current.Animator.SetTrigger("Spellcast");
+            //current.Animator.SetTrigger("Spellcast");
             float damage = current.UnitStats.GetStat(EStats.Damage);
             current.CharacterActiveEffects.AddEffect(new CurrentHealthEffect(2, damage));
             yield return new WaitForSeconds(current.AnimationDurations.EvadeTime);
@@ -284,9 +288,9 @@ namespace Battle
                 skillManager.RenderSkillCooldowns();
         }
 
-        private bool EvadeCheck(Controller opponent)
+        private bool EvadeCheck(Controller opponent, float currentAccuracy)
         {
-            bool evaded = Random.Range(0, 100) < opponent.UnitStats.GetStat(EStats.Evasion);
+            bool evaded = opponent.TryEvade(currentAccuracy);
             if (evaded)
             {
                 MessageSystem.Print("Attack was evaded");
@@ -296,17 +300,24 @@ namespace Battle
         }
         private void GetAttacked(Controller current, Controller opponent, bool disableAnimation = false, float skillMultiplier = 1)
         {
-            if (CriticalCheck(current))
-                opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage) * 2 * skillMultiplier);
-            else
-                opponent.TakeDamage(current.UnitStats.GetStat(EStats.Damage) * skillMultiplier);
+            float damageToTake = current.UnitStats.GetStat(EStats.Damage) * skillMultiplier;
+            bool isCritical = CriticalCheck(current);
+            if (isCritical)
+            {
+                damageToTake *= 2;
+                StartCoroutine(CameraShake.instance.Shake());
+            }
+           damageToTake = opponent.ReduceDamageWithArmor(damageToTake);
+           opponent.TakeDamage(damageToTake);
+           opponent.DamageDisplay.ShowDamage(damageToTake, isCritical);
+
             if (!disableAnimation)
                 opponent.Animator.SetTrigger("Defend");
             current.ParticleSystems.evaded = false;
         }
         private bool CriticalCheck(Controller current)
         {
-            bool isCritical = Random.Range(0, 100) < current.UnitStats.GetStat(EStats.Critical);
+            bool isCritical = current.TryCritical();
             if (isCritical)
             {
                 MessageSystem.Print("Critical hit!");

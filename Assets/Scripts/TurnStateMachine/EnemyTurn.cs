@@ -22,23 +22,22 @@ namespace TurnFSM
             //orderList[AIOrders.Attack] = Attack;
             //orderList[AIOrders.UseSkill] = UseSkill();
             MessageSystem.Print("Enemy Turn");
-            BattleSystem.Enemy.GetComponent<CharacterActiveEffects>().TriggerEffects();
             if (BattleSystem.Enemy.Health <= 0)
             {
                 BattleSystem.SetState(new Won(BattleSystem));
                 yield break;
             }
+
+            BattleSystem.Player.GetComponent<CharacterActiveEffects>().TriggerEffects();
+            BattleSystem.playerOverTimeEffectManager.RefreshOverTimeEffectUI();
+            BattleSystem.enemyOverTimeEffectManager.RefreshOverTimeEffectUI();
+
             UseSkillHandler order = BattleSystem.Enemy.GetComponent<EnemyAI>().DecideOrder(BattleSystem);
             yield return order(BattleSystem.Enemy, BattleSystem.Player);
             DecideNextState();
+
         }
 
-        public override IEnumerator UseSkill(UseSkillHandler skill)
-        {
-            yield return BattleSystem.StartCoroutine(skill(BattleSystem.Enemy, BattleSystem.Player));
-
-            DecideNextState();
-        }
         protected override void DecideNextState()
         {
             if (BattleSystem.Player.GetComponent<Controller>().Health <= 0)

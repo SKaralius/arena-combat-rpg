@@ -9,6 +9,7 @@ namespace Unit
             = new Dictionary<EStats, string>
         {
             { EStats.Damage, "Damage" },
+            { EStats.Accuracy, "Accuracy" },
             { EStats.Armor, "Armor" },
             { EStats.MoveSpeed, "Movement Speed" },
             { EStats.Health, "Health" },
@@ -18,8 +19,7 @@ namespace Unit
         };
         public static string GetStatName(EStats stat)
         {
-            string name = "";
-            StatNames.TryGetValue(stat, out name);
+            StatNames.TryGetValue(stat, out string name);
             return name;
         }
         public Stats()
@@ -49,11 +49,6 @@ namespace Unit
             else
             {
                 statValue = statsArray[statNumber];
-            }
-            if (stat == EStats.Armor || stat == EStats.Evasion || stat == EStats.Critical || stat == EStats.MoveSpeed)
-            {
-                float statPenalty = 3;
-                statValue /= statPenalty;
             }
             return statValue;
         }        

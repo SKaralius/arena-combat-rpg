@@ -2,6 +2,7 @@
 using Unit;
 using UnityEngine;
 using Battle;
+using Inventory;
 using UnityEngine.SceneManagement;
 
 namespace TurnFSM
@@ -58,6 +59,7 @@ namespace TurnFSM
         }
         protected void LoadTown()
         {
+            GameObject.Find("Shop").transform.GetChild(0).GetComponent<Shop>().GenerateItems();
             SaverLoader.instance.SaveInventory();
             SceneManager.LoadSceneAsync("TownScene", LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync("CombatScene");

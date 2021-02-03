@@ -16,18 +16,6 @@ MonoBehaviour:
   - m_Name: Head
     m_Hash: 130111906
     m_CategoryList:
-    - m_Name: Skeleton_White
-      m_Hash: 2044959302
-      m_Sprite: {fileID: -5916718999312741218, guid: 8280deec63dc38a4da67237961f369a5,
-        type: 3}
-    - m_Name: Skeleton_Red
-      m_Hash: 1070797734
-      m_Sprite: {fileID: 9029470547483281350, guid: 5c0efb5124e2d8f46a2645c881eb7f07,
-        type: 3}
-    - m_Name: None
-      m_Hash: -542986255
+    - m_Name: 
+      m_Hash: 0
       m_Sprite: {fileID: 0}
-    - m_Name: Human
-      m_Hash: 1688468209
-      m_Sprite: {fileID: -1629753221797395889, guid: cdc77ba850d32864bafe6bd2ad575245,
-        type: 3}

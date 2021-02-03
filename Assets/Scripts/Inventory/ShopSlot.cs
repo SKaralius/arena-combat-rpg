@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using TMPro;
 
 namespace Inventory
 {
     public class ShopSlot : ItemSlot
     {
         private Shop shop;
+        [SerializeField] private TextMeshProUGUI price;
+
         private new void Awake()
         {
             base.Awake();
@@ -19,10 +22,12 @@ namespace Inventory
                 SetUpTooltipButton(item);
                 SetUpSprite(item);
                 SetUpButton(() => shop.BuyItem(item));
+                price.text = (item.SellPrice * 5).ToString();
             }
             else
             {
                 SetSlotEmpty();
+                price.text = "";
             }
         }
     } 
